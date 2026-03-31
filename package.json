@@ -1,7 +1,7 @@
 {
-  "name": "nanoclaw",
-  "version": "1.2.43",
-  "description": "Personal Claude assistant. Lightweight, secure, customizable.",
+  "name": "orcabot",
+  "version": "0.1.0",
+  "description": "AI-powered construction budgeting on NanoClaw",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -22,16 +22,14 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
-    "@onecli-sh/sdk": "^0.2.0",
     "@supabase/supabase-js": "^2.101.0",
     "@types/ws": "^8.18.1",
-    "better-sqlite3": "11.10.0",
     "cron-parser": "5.5.0",
+    "pino": "^9.6.0",
     "ws": "^8.20.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
-    "@types/better-sqlite3": "^7.6.12",
     "@types/node": "^22.10.0",
     "eslint": "^9.35.0",
     "eslint-plugin-no-catch-all": "^1.1.0",

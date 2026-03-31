@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { OneCLI } from '@onecli-sh/sdk';
+import { OneCLI } from './onecli-stub.js';
 
 import {
   ASSISTANT_NAME,

@@ -60,7 +60,7 @@ vi.mock('./container-runtime.js', () => ({
 }));
 
 // Mock OneCLI SDK
-vi.mock('@onecli-sh/sdk', () => ({
+vi.mock('./onecli-stub.js', () => ({
   OneCLI: class {
     applyContainerConfig = vi.fn().mockResolvedValue(true);
     createAgent = vi.fn().mockResolvedValue({ id: 'test' });
