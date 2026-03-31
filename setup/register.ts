@@ -109,7 +109,7 @@ export async function run(args: string[]): Promise<void> {
     isMain: parsed.isMain,
   });
 
-  logger.info('Wrote registration to SQLite');
+  logger.info('Wrote registration to database');
 
   // Create group folders
   fs.mkdirSync(path.join(projectRoot, 'groups', parsed.folder, 'logs'), {

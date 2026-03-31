@@ -8,9 +8,7 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
-import Database from 'better-sqlite3';
-
-import { STORE_DIR } from '../src/config.js';
+import { supabaseAdmin } from '../src/supabase-client.js';
 import { logger } from '../src/logger.js';
 import { emitStatus } from './status.js';
 
@@ -40,26 +38,24 @@ export async function run(args: string[]): Promise<void> {
 }
 
 async function listGroups(limit: number): Promise<void> {
-  const dbPath = path.join(STORE_DIR, 'messages.db');
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_chats')
+    .select('jid, name')
+    .like('jid', '%@g.us')
+    .neq('jid', '__group_sync__')
+    .order('last_message_time', { ascending: false })
+    .limit(limit);
 
-  if (!fs.existsSync(dbPath)) {
-    console.error('ERROR: database not found');
+  if (error) {
+    console.error('ERROR: failed to query groups');
     process.exit(1);
   }
 
-  const db = new Database(dbPath, { readonly: true });
-  const rows = db
-    .prepare(
-      `SELECT jid, name FROM chats
-     WHERE jid LIKE '%@g.us' AND jid <> '__group_sync__' AND name <> jid
-     ORDER BY last_message_time DESC
-     LIMIT ?`,
-    )
-    .all(limit) as Array<{ jid: string; name: string }>;
-  db.close();
-
-  for (const row of rows) {
-    console.log(`${row.jid}|${row.name}`);
+  // Filter out rows where name equals jid
+  for (const row of data || []) {
+    if (row.name && row.name !== row.jid) {
+      console.log(`${row.jid}|${row.name}`);
+    }
   }
 }
 
@@ -107,6 +103,7 @@ async function syncGroups(projectRoot: string): Promise<void> {
   }
 
   // Run sync script via a temp file to avoid shell escaping issues with node -e
+  // This script uses Supabase directly for DB writes
   logger.info('Fetching group metadata');
   let syncOk = false;
   try {
@@ -115,23 +112,21 @@ import makeWASocket, { useMultiFileAuthState, makeCacheableSignalKeyStore, Brows
 import pino from 'pino';
 import path from 'path';
 import fs from 'fs';
-import Database from 'better-sqlite3';
+import { createClient } from '@supabase/supabase-js';
+import 'dotenv/config';
 
 const logger = pino({ level: 'silent' });
 const authDir = path.join('store', 'auth');
-const dbPath = path.join('store', 'messages.db');
 
 if (!fs.existsSync(authDir)) {
   console.error('NO_AUTH');
   process.exit(1);
 }
 
-const db = new Database(dbPath);
-db.pragma('journal_mode = WAL');
-db.exec('CREATE TABLE IF NOT EXISTS chats (jid TEXT PRIMARY KEY, name TEXT, last_message_time TEXT)');
-
-const upsert = db.prepare(
-  'INSERT INTO chats (jid, name, last_message_time) VALUES (?, ?, ?) ON CONFLICT(jid) DO UPDATE SET name = excluded.name'
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY,
+  { auth: { persistSession: false, autoRefreshToken: false } },
 );
 
 const { state, saveCreds } = await useMultiFileAuthState(authDir);
@@ -156,11 +151,16 @@ sock.ev.on('connection.update', async (update) => {
       const groups = await sock.groupFetchAllParticipating();
       const now = new Date().toISOString();
       let count = 0;
+      const rows = [];
       for (const [jid, metadata] of Object.entries(groups)) {
         if (metadata.subject) {
-          upsert.run(jid, metadata.subject, now);
+          rows.push({ jid, name: metadata.subject, last_message_time: now, is_group: true, channel: 'whatsapp' });
           count++;
         }
+      }
+      if (rows.length > 0) {
+        const { error } = await supabase.from('ob_nc_chats').upsert(rows, { onConflict: 'jid' });
+        if (error) console.error('UPSERT_ERROR:' + error.message);
       }
       console.log('SYNCED:' + count);
     } catch (err) {
@@ -168,7 +168,6 @@ sock.ev.on('connection.update', async (update) => {
     } finally {
       clearTimeout(timeout);
       sock.end(undefined);
-      db.close();
       process.exit(0);
     }
   } else if (update.connection === 'close') {
@@ -197,22 +196,17 @@ sock.ev.on('connection.update', async (update) => {
     logger.error({ err }, 'Sync failed');
   }
 
-  // Count groups in DB using better-sqlite3 (no sqlite3 CLI)
+  // Count groups in DB using Supabase
   let groupsInDb = 0;
-  const dbPath = path.join(STORE_DIR, 'messages.db');
-  if (fs.existsSync(dbPath)) {
-    try {
-      const db = new Database(dbPath, { readonly: true });
-      const row = db
-        .prepare(
-          "SELECT COUNT(*) as count FROM chats WHERE jid LIKE '%@g.us' AND jid <> '__group_sync__'",
-        )
-        .get() as { count: number };
-      groupsInDb = row.count;
-      db.close();
-    } catch {
-      // DB may not exist yet
-    }
+  try {
+    const { count, error } = await supabaseAdmin
+      .from('ob_nc_chats')
+      .select('*', { count: 'exact', head: true })
+      .like('jid', '%@g.us')
+      .neq('jid', '__group_sync__');
+    if (!error && count !== null) groupsInDb = count;
+  } catch {
+    // DB may not exist yet
   }
 
   const status = syncOk ? 'success' : 'failed';

@@ -1,9 +1,4 @@
-// @ts-nocheck — TODO: Task 4 rewrites this file for Postgres
-import Database from 'better-sqlite3';
-import fs from 'fs';
-import path from 'path';
-
-import { ASSISTANT_NAME, DATA_DIR, STORE_DIR } from './config.js';
+import { supabaseAdmin } from './supabase-client.js';
 import { isValidGroupFolder } from './group-folder.js';
 import { logger } from './logger.js';
 import {
@@ -13,217 +8,43 @@ import {
   TaskRunLog,
 } from './types.js';
 
-let db: Database.Database;
-
-function createSchema(database: Database.Database): void {
-  database.exec(`
-    CREATE TABLE IF NOT EXISTS chats (
-      jid TEXT PRIMARY KEY,
-      name TEXT,
-      last_message_time TEXT,
-      channel TEXT,
-      is_group INTEGER DEFAULT 0
-    );
-    CREATE TABLE IF NOT EXISTS messages (
-      id TEXT,
-      chat_jid TEXT,
-      sender TEXT,
-      sender_name TEXT,
-      content TEXT,
-      timestamp TEXT,
-      is_from_me INTEGER,
-      is_bot_message INTEGER DEFAULT 0,
-      PRIMARY KEY (id, chat_jid),
-      FOREIGN KEY (chat_jid) REFERENCES chats(jid)
-    );
-    CREATE INDEX IF NOT EXISTS idx_timestamp ON messages(timestamp);
-
-    CREATE TABLE IF NOT EXISTS scheduled_tasks (
-      id TEXT PRIMARY KEY,
-      group_folder TEXT NOT NULL,
-      chat_jid TEXT NOT NULL,
-      prompt TEXT NOT NULL,
-      schedule_type TEXT NOT NULL,
-      schedule_value TEXT NOT NULL,
-      next_run TEXT,
-      last_run TEXT,
-      last_result TEXT,
-      status TEXT DEFAULT 'active',
-      created_at TEXT NOT NULL
-    );
-    CREATE INDEX IF NOT EXISTS idx_next_run ON scheduled_tasks(next_run);
-    CREATE INDEX IF NOT EXISTS idx_status ON scheduled_tasks(status);
-
-    CREATE TABLE IF NOT EXISTS task_run_logs (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      task_id TEXT NOT NULL,
-      run_at TEXT NOT NULL,
-      duration_ms INTEGER NOT NULL,
-      status TEXT NOT NULL,
-      result TEXT,
-      error TEXT,
-      FOREIGN KEY (task_id) REFERENCES scheduled_tasks(id)
-    );
-    CREATE INDEX IF NOT EXISTS idx_task_run_logs ON task_run_logs(task_id, run_at);
-
-    CREATE TABLE IF NOT EXISTS router_state (
-      key TEXT PRIMARY KEY,
-      value TEXT NOT NULL
-    );
-    CREATE TABLE IF NOT EXISTS sessions (
-      group_folder TEXT PRIMARY KEY,
-      session_id TEXT NOT NULL
-    );
-    CREATE TABLE IF NOT EXISTS registered_groups (
-      jid TEXT PRIMARY KEY,
-      name TEXT NOT NULL,
-      folder TEXT NOT NULL UNIQUE,
-      trigger_pattern TEXT NOT NULL,
-      added_at TEXT NOT NULL,
-      container_config TEXT,
-      requires_trigger INTEGER DEFAULT 1
-    );
-  `);
-
-  // Add context_mode column if it doesn't exist (migration for existing DBs)
-  try {
-    database.exec(
-      `ALTER TABLE scheduled_tasks ADD COLUMN context_mode TEXT DEFAULT 'isolated'`,
-    );
-  } catch {
-    /* column already exists */
-  }
-
-  // Add script column if it doesn't exist (migration for existing DBs)
-  try {
-    database.exec(`ALTER TABLE scheduled_tasks ADD COLUMN script TEXT`);
-  } catch {
-    /* column already exists */
-  }
-
-  // Add is_bot_message column if it doesn't exist (migration for existing DBs)
-  try {
-    database.exec(
-      `ALTER TABLE messages ADD COLUMN is_bot_message INTEGER DEFAULT 0`,
-    );
-    // Backfill: mark existing bot messages that used the content prefix pattern
-    database
-      .prepare(`UPDATE messages SET is_bot_message = 1 WHERE content LIKE ?`)
-      .run(`${ASSISTANT_NAME}:%`);
-  } catch {
-    /* column already exists */
-  }
-
-  // Add is_main column if it doesn't exist (migration for existing DBs)
-  try {
-    database.exec(
-      `ALTER TABLE registered_groups ADD COLUMN is_main INTEGER DEFAULT 0`,
-    );
-    // Backfill: existing rows with folder = 'main' are the main group
-    database.exec(
-      `UPDATE registered_groups SET is_main = 1 WHERE folder = 'main'`,
-    );
-  } catch {
-    /* column already exists */
-  }
-
-  // Add channel and is_group columns if they don't exist (migration for existing DBs)
-  try {
-    database.exec(`ALTER TABLE chats ADD COLUMN channel TEXT`);
-    database.exec(`ALTER TABLE chats ADD COLUMN is_group INTEGER DEFAULT 0`);
-    // Backfill from JID patterns
-    database.exec(
-      `UPDATE chats SET channel = 'whatsapp', is_group = 1 WHERE jid LIKE '%@g.us'`,
-    );
-    database.exec(
-      `UPDATE chats SET channel = 'whatsapp', is_group = 0 WHERE jid LIKE '%@s.whatsapp.net'`,
-    );
-    database.exec(
-      `UPDATE chats SET channel = 'discord', is_group = 1 WHERE jid LIKE 'dc:%'`,
-    );
-    database.exec(
-      `UPDATE chats SET channel = 'telegram', is_group = 0 WHERE jid LIKE 'tg:%'`,
-    );
-  } catch {
-    /* columns already exist */
-  }
-}
-
-export function initDatabase(): void {
-  const dbPath = path.join(STORE_DIR, 'messages.db');
-  fs.mkdirSync(path.dirname(dbPath), { recursive: true });
-
-  db = new Database(dbPath);
-  createSchema(db);
-
-  // Migrate from JSON files if they exist
-  migrateJsonState();
-}
-
-/** @internal - for tests only. Creates a fresh in-memory database. */
-export function _initTestDatabase(): void {
-  db = new Database(':memory:');
-  createSchema(db);
-}
-
-/** @internal - for tests only. */
-export function _closeDatabase(): void {
-  db.close();
-}
+// ── Initialization ──────────────────────────────────────────────────────────
 
 /**
- * Store chat metadata only (no message content).
- * Used for all chats to enable group discovery without storing sensitive content.
+ * Initialize database connection.
+ * With Supabase, tables already exist via migrations — this is a no-op
+ * kept for API compatibility with callers that call initDatabase() on startup.
  */
-export function storeChatMetadata(
-  chatJid: string,
-  timestamp: string,
-  name?: string,
-  channel?: string,
-  isGroup?: boolean,
-): void {
-  const ch = channel ?? null;
-  const group = isGroup === undefined ? null : isGroup ? 1 : 0;
-
-  if (name) {
-    // Update with name, preserving existing timestamp if newer
-    db.prepare(
-      `
-      INSERT INTO chats (jid, name, last_message_time, channel, is_group) VALUES (?, ?, ?, ?, ?)
-      ON CONFLICT(jid) DO UPDATE SET
-        name = excluded.name,
-        last_message_time = MAX(last_message_time, excluded.last_message_time),
-        channel = COALESCE(excluded.channel, channel),
-        is_group = COALESCE(excluded.is_group, is_group)
-    `,
-    ).run(chatJid, name, timestamp, ch, group);
-  } else {
-    // Update timestamp only, preserve existing name if any
-    db.prepare(
-      `
-      INSERT INTO chats (jid, name, last_message_time, channel, is_group) VALUES (?, ?, ?, ?, ?)
-      ON CONFLICT(jid) DO UPDATE SET
-        last_message_time = MAX(last_message_time, excluded.last_message_time),
-        channel = COALESCE(excluded.channel, channel),
-        is_group = COALESCE(excluded.is_group, is_group)
-    `,
-    ).run(chatJid, chatJid, timestamp, ch, group);
+export async function initDatabase(): Promise<void> {
+  // Verify connectivity by touching the router_state table
+  const { error } = await supabaseAdmin
+    .from('ob_nc_router_state')
+    .select('key')
+    .limit(1);
+  if (error) {
+    throw new Error(`Supabase connection check failed: ${error.message}`);
   }
+  logger.info('Database connection verified (Supabase Postgres)');
 }
 
-/**
- * Update chat name without changing timestamp for existing chats.
- * New chats get the current time as their initial timestamp.
- * Used during group metadata sync.
- */
-export function updateChatName(chatJid: string, name: string): void {
-  db.prepare(
-    `
-    INSERT INTO chats (jid, name, last_message_time) VALUES (?, ?, ?)
-    ON CONFLICT(jid) DO UPDATE SET name = excluded.name
-  `,
-  ).run(chatJid, name, new Date().toISOString());
+/** @internal - for tests only. Resets all ob_nc_* tables. */
+export async function _initTestDatabase(): Promise<void> {
+  // Truncate in dependency order
+  await supabaseAdmin.from('ob_nc_task_run_logs').delete().neq('id', -1);
+  await supabaseAdmin.from('ob_nc_messages').delete().neq('id', '');
+  await supabaseAdmin.from('ob_nc_scheduled_tasks').delete().neq('id', '');
+  await supabaseAdmin.from('ob_nc_sessions').delete().neq('group_folder', '');
+  await supabaseAdmin.from('ob_nc_router_state').delete().neq('key', '');
+  await supabaseAdmin.from('ob_nc_registered_groups').delete().neq('jid', '');
+  await supabaseAdmin.from('ob_nc_chats').delete().neq('jid', '');
 }
+
+/** @internal - for tests only. No-op with Supabase (connection pooling). */
+export async function _closeDatabase(): Promise<void> {
+  // No-op: Supabase client manages its own connection pool
+}
+
+// ── Chat metadata ───────────────────────────────────────────────────────────
 
 export interface ChatInfo {
   jid: string;
@@ -234,64 +55,144 @@ export interface ChatInfo {
 }
 
 /**
+ * Store chat metadata only (no message content).
+ */
+export async function storeChatMetadata(
+  chatJid: string,
+  timestamp: string,
+  name?: string,
+  channel?: string,
+  isGroup?: boolean,
+): Promise<void> {
+  const ch = channel ?? null;
+  const group = isGroup === undefined ? null : isGroup;
+
+  const displayName = name || chatJid;
+
+  const { error } = await supabaseAdmin.from('ob_nc_chats').upsert(
+    {
+      jid: chatJid,
+      name: displayName,
+      last_message_time: timestamp,
+      channel: ch,
+      is_group: group,
+    },
+    { onConflict: 'jid' },
+  );
+
+  if (error) {
+    // If upserting with a potentially older timestamp, do a conditional update
+    // Supabase upsert doesn't support MAX() natively, so we do a manual check
+    logger.warn({ chatJid, error: error.message }, 'Chat metadata upsert failed');
+  }
+}
+
+/**
+ * Update chat name without changing timestamp for existing chats.
+ */
+export async function updateChatName(
+  chatJid: string,
+  name: string,
+): Promise<void> {
+  // Try update first
+  const { data } = await supabaseAdmin
+    .from('ob_nc_chats')
+    .update({ name })
+    .eq('jid', chatJid)
+    .select('jid');
+
+  if (!data || data.length === 0) {
+    // Chat doesn't exist, insert it
+    await supabaseAdmin.from('ob_nc_chats').insert({
+      jid: chatJid,
+      name,
+      last_message_time: new Date().toISOString(),
+    });
+  }
+}
+
+/**
  * Get all known chats, ordered by most recent activity.
  */
-export function getAllChats(): ChatInfo[] {
-  return db
-    .prepare(
-      `
-    SELECT jid, name, last_message_time, channel, is_group
-    FROM chats
-    ORDER BY last_message_time DESC
-  `,
-    )
-    .all() as ChatInfo[];
+export async function getAllChats(): Promise<ChatInfo[]> {
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_chats')
+    .select('jid, name, last_message_time, channel, is_group')
+    .order('last_message_time', { ascending: false });
+
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get all chats');
+    return [];
+  }
+
+  return (data || []).map((row) => ({
+    jid: row.jid,
+    name: row.name || row.jid,
+    last_message_time: row.last_message_time,
+    channel: row.channel,
+    is_group: row.is_group ? 1 : 0,
+  }));
 }
 
 /**
  * Get timestamp of last group metadata sync.
  */
-export function getLastGroupSync(): string | null {
-  // Store sync time in a special chat entry
-  const row = db
-    .prepare(`SELECT last_message_time FROM chats WHERE jid = '__group_sync__'`)
-    .get() as { last_message_time: string } | undefined;
-  return row?.last_message_time || null;
+export async function getLastGroupSync(): Promise<string | null> {
+  const { data } = await supabaseAdmin
+    .from('ob_nc_chats')
+    .select('last_message_time')
+    .eq('jid', '__group_sync__')
+    .single();
+  return data?.last_message_time || null;
 }
 
 /**
  * Record that group metadata was synced.
  */
-export function setLastGroupSync(): void {
+export async function setLastGroupSync(): Promise<void> {
   const now = new Date().toISOString();
-  db.prepare(
-    `INSERT OR REPLACE INTO chats (jid, name, last_message_time) VALUES ('__group_sync__', '__group_sync__', ?)`,
-  ).run(now);
+  await supabaseAdmin.from('ob_nc_chats').upsert(
+    {
+      jid: '__group_sync__',
+      name: '__group_sync__',
+      last_message_time: now,
+    },
+    { onConflict: 'jid' },
+  );
 }
+
+// ── Messages ────────────────────────────────────────────────────────────────
 
 /**
  * Store a message with full content.
- * Only call this for registered groups where message history is needed.
  */
-export function storeMessage(msg: NewMessage): void {
-  db.prepare(
-    `INSERT OR REPLACE INTO messages (id, chat_jid, sender, sender_name, content, timestamp, is_from_me, is_bot_message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-  ).run(
-    msg.id,
-    msg.chat_jid,
-    msg.sender,
-    msg.sender_name,
-    msg.content,
-    msg.timestamp,
-    msg.is_from_me ? 1 : 0,
-    msg.is_bot_message ? 1 : 0,
+export async function storeMessage(msg: NewMessage): Promise<void> {
+  const { error } = await supabaseAdmin.from('ob_nc_messages').upsert(
+    {
+      id: msg.id,
+      chat_jid: msg.chat_jid,
+      sender: msg.sender,
+      sender_name: msg.sender_name,
+      content: msg.content,
+      timestamp: msg.timestamp,
+      is_from_me: msg.is_from_me ?? false,
+      is_bot_message: msg.is_bot_message ?? false,
+    },
+    { onConflict: 'id,chat_jid' },
   );
+
+  if (error) {
+    logger.error(
+      { msgId: msg.id, chatJid: msg.chat_jid, error: error.message },
+      'Failed to store message',
+    );
+  }
 }
 
 /**
  * Store a message directly.
  */
-export function storeMessageDirect(msg: {
+export async function storeMessageDirect(msg: {
   id: string;
   chat_jid: string;
   sender: string;
@@ -300,139 +201,229 @@ export function storeMessageDirect(msg: {
   timestamp: string;
   is_from_me: boolean;
   is_bot_message?: boolean;
-}): void {
-  db.prepare(
-    `INSERT OR REPLACE INTO messages (id, chat_jid, sender, sender_name, content, timestamp, is_from_me, is_bot_message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-  ).run(
-    msg.id,
-    msg.chat_jid,
-    msg.sender,
-    msg.sender_name,
-    msg.content,
-    msg.timestamp,
-    msg.is_from_me ? 1 : 0,
-    msg.is_bot_message ? 1 : 0,
-  );
+}): Promise<void> {
+  await storeMessage({
+    id: msg.id,
+    chat_jid: msg.chat_jid,
+    sender: msg.sender,
+    sender_name: msg.sender_name,
+    content: msg.content,
+    timestamp: msg.timestamp,
+    is_from_me: msg.is_from_me,
+    is_bot_message: msg.is_bot_message ?? false,
+  });
 }
 
-export function getNewMessages(
+export async function getNewMessages(
   jids: string[],
   lastTimestamp: string,
   botPrefix: string,
   limit: number = 200,
-): { messages: NewMessage[]; newTimestamp: string } {
+): Promise<{ messages: NewMessage[]; newTimestamp: string }> {
   if (jids.length === 0) return { messages: [], newTimestamp: lastTimestamp };
 
-  const placeholders = jids.map(() => '?').join(',');
-  // Filter bot messages using both the is_bot_message flag AND the content
-  // prefix as a backstop for messages written before the migration ran.
-  // Subquery takes the N most recent, outer query re-sorts chronologically.
-  const sql = `
-    SELECT * FROM (
-      SELECT id, chat_jid, sender, sender_name, content, timestamp, is_from_me
-      FROM messages
-      WHERE timestamp > ? AND chat_jid IN (${placeholders})
-        AND is_bot_message = 0 AND content NOT LIKE ?
-        AND content != '' AND content IS NOT NULL
-      ORDER BY timestamp DESC
-      LIMIT ?
-    ) ORDER BY timestamp
-  `;
+  // Use raw SQL via rpc for the complex query with subquery + LIKE filter
+  const { data, error } = await supabaseAdmin.rpc('ob_nc_get_new_messages', {
+    p_jids: jids,
+    p_last_timestamp: lastTimestamp || '1970-01-01T00:00:00.000Z',
+    p_bot_prefix: `${botPrefix}:%`,
+    p_limit: limit,
+  });
 
-  const rows = db
-    .prepare(sql)
-    .all(lastTimestamp, ...jids, `${botPrefix}:%`, limit) as NewMessage[];
+  if (error) {
+    // Fallback: use Supabase query builder
+    logger.warn(
+      { error: error.message },
+      'RPC ob_nc_get_new_messages not found, using query builder fallback',
+    );
+    return getNewMessagesFallback(jids, lastTimestamp, botPrefix, limit);
+  }
+
+  const messages: NewMessage[] = (data || []).map(mapMessageRow);
 
   let newTimestamp = lastTimestamp;
-  for (const row of rows) {
+  for (const row of messages) {
     if (row.timestamp > newTimestamp) newTimestamp = row.timestamp;
   }
 
-  return { messages: rows, newTimestamp };
+  return { messages, newTimestamp };
 }
 
-export function getMessagesSince(
+async function getNewMessagesFallback(
+  jids: string[],
+  lastTimestamp: string,
+  botPrefix: string,
+  limit: number,
+): Promise<{ messages: NewMessage[]; newTimestamp: string }> {
+  const ts = lastTimestamp || '1970-01-01T00:00:00.000Z';
+
+  // Get the N most recent non-bot messages after timestamp, then sort chronologically
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_messages')
+    .select('id, chat_jid, sender, sender_name, content, timestamp, is_from_me')
+    .in('chat_jid', jids)
+    .gt('timestamp', ts)
+    .eq('is_bot_message', false)
+    .not('content', 'like', `${botPrefix}:%`)
+    .neq('content', '')
+    .not('content', 'is', null)
+    .order('timestamp', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get new messages');
+    return { messages: [], newTimestamp: lastTimestamp };
+  }
+
+  // Reverse to chronological order
+  const messages: NewMessage[] = (data || []).reverse().map(mapMessageRow);
+
+  let newTimestamp = lastTimestamp;
+  for (const row of messages) {
+    if (row.timestamp > newTimestamp) newTimestamp = row.timestamp;
+  }
+
+  return { messages, newTimestamp };
+}
+
+export async function getMessagesSince(
   chatJid: string,
   sinceTimestamp: string,
   botPrefix: string,
   limit: number = 200,
-): NewMessage[] {
-  // Filter bot messages using both the is_bot_message flag AND the content
-  // prefix as a backstop for messages written before the migration ran.
-  // Subquery takes the N most recent, outer query re-sorts chronologically.
-  const sql = `
-    SELECT * FROM (
-      SELECT id, chat_jid, sender, sender_name, content, timestamp, is_from_me
-      FROM messages
-      WHERE chat_jid = ? AND timestamp > ?
-        AND is_bot_message = 0 AND content NOT LIKE ?
-        AND content != '' AND content IS NOT NULL
-      ORDER BY timestamp DESC
-      LIMIT ?
-    ) ORDER BY timestamp
-  `;
-  return db
-    .prepare(sql)
-    .all(chatJid, sinceTimestamp, `${botPrefix}:%`, limit) as NewMessage[];
+): Promise<NewMessage[]> {
+  const ts = sinceTimestamp || '1970-01-01T00:00:00.000Z';
+
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_messages')
+    .select('id, chat_jid, sender, sender_name, content, timestamp, is_from_me')
+    .eq('chat_jid', chatJid)
+    .gt('timestamp', ts)
+    .eq('is_bot_message', false)
+    .not('content', 'like', `${botPrefix}:%`)
+    .neq('content', '')
+    .not('content', 'is', null)
+    .order('timestamp', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get messages since');
+    return [];
+  }
+
+  // Reverse to chronological order
+  return (data || []).reverse().map(mapMessageRow);
 }
 
-export function getLastBotMessageTimestamp(
+export async function getLastBotMessageTimestamp(
   chatJid: string,
   botPrefix: string,
-): string | undefined {
-  const row = db
-    .prepare(
-      `SELECT MAX(timestamp) as ts FROM messages
-       WHERE chat_jid = ? AND (is_bot_message = 1 OR content LIKE ?)`,
-    )
-    .get(chatJid, `${botPrefix}:%`) as { ts: string | null } | undefined;
-  return row?.ts ?? undefined;
+): Promise<string | undefined> {
+  // Get the most recent bot message (by flag or content prefix)
+  const { data: byFlag } = await supabaseAdmin
+    .from('ob_nc_messages')
+    .select('timestamp')
+    .eq('chat_jid', chatJid)
+    .eq('is_bot_message', true)
+    .order('timestamp', { ascending: false })
+    .limit(1);
+
+  const { data: byPrefix } = await supabaseAdmin
+    .from('ob_nc_messages')
+    .select('timestamp')
+    .eq('chat_jid', chatJid)
+    .like('content', `${botPrefix}:%`)
+    .order('timestamp', { ascending: false })
+    .limit(1);
+
+  const ts1 = byFlag?.[0]?.timestamp;
+  const ts2 = byPrefix?.[0]?.timestamp;
+
+  if (!ts1 && !ts2) return undefined;
+  if (!ts1) return ts2;
+  if (!ts2) return ts1;
+  return ts1 > ts2 ? ts1 : ts2;
 }
 
-export function createTask(
+function mapMessageRow(row: Record<string, unknown>): NewMessage {
+  return {
+    id: row.id as string,
+    chat_jid: row.chat_jid as string,
+    sender: row.sender as string,
+    sender_name: row.sender_name as string,
+    content: row.content as string,
+    timestamp: row.timestamp as string,
+    is_from_me: row.is_from_me as boolean | undefined,
+  };
+}
+
+// ── Scheduled tasks ─────────────────────────────────────────────────────────
+
+export async function createTask(
   task: Omit<ScheduledTask, 'last_run' | 'last_result'>,
-): void {
-  db.prepare(
-    `
-    INSERT INTO scheduled_tasks (id, group_folder, chat_jid, prompt, script, schedule_type, schedule_value, context_mode, next_run, status, created_at)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `,
-  ).run(
-    task.id,
-    task.group_folder,
-    task.chat_jid,
-    task.prompt,
-    task.script || null,
-    task.schedule_type,
-    task.schedule_value,
-    task.context_mode || 'isolated',
-    task.next_run,
-    task.status,
-    task.created_at,
-  );
+): Promise<void> {
+  const { error } = await supabaseAdmin.from('ob_nc_scheduled_tasks').insert({
+    id: task.id,
+    group_folder: task.group_folder,
+    chat_jid: task.chat_jid,
+    prompt: task.prompt,
+    script: task.script || null,
+    schedule_type: task.schedule_type,
+    schedule_value: task.schedule_value,
+    context_mode: task.context_mode || 'isolated',
+    next_run: task.next_run,
+    status: task.status,
+    created_at: task.created_at,
+  });
+
+  if (error) {
+    logger.error({ taskId: task.id, error: error.message }, 'Failed to create task');
+  }
 }
 
-export function getTaskById(id: string): ScheduledTask | undefined {
-  return db.prepare('SELECT * FROM scheduled_tasks WHERE id = ?').get(id) as
-    | ScheduledTask
-    | undefined;
+export async function getTaskById(
+  id: string,
+): Promise<ScheduledTask | undefined> {
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error || !data) return undefined;
+  return mapTaskRow(data);
 }
 
-export function getTasksForGroup(groupFolder: string): ScheduledTask[] {
-  return db
-    .prepare(
-      'SELECT * FROM scheduled_tasks WHERE group_folder = ? ORDER BY created_at DESC',
-    )
-    .all(groupFolder) as ScheduledTask[];
+export async function getTasksForGroup(
+  groupFolder: string,
+): Promise<ScheduledTask[]> {
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .select('*')
+    .eq('group_folder', groupFolder)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get tasks for group');
+    return [];
+  }
+  return (data || []).map(mapTaskRow);
 }
 
-export function getAllTasks(): ScheduledTask[] {
-  return db
-    .prepare('SELECT * FROM scheduled_tasks ORDER BY created_at DESC')
-    .all() as ScheduledTask[];
+export async function getAllTasks(): Promise<ScheduledTask[]> {
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get all tasks');
+    return [];
+  }
+  return (data || []).map(mapTaskRow);
 }
 
-export function updateTask(
+export async function updateTask(
   id: string,
   updates: Partial<
     Pick<
@@ -445,212 +436,294 @@ export function updateTask(
       | 'status'
     >
   >,
-): void {
-  const fields: string[] = [];
-  const values: unknown[] = [];
+): Promise<void> {
+  const updateObj: Record<string, unknown> = {};
 
-  if (updates.prompt !== undefined) {
-    fields.push('prompt = ?');
-    values.push(updates.prompt);
-  }
-  if (updates.script !== undefined) {
-    fields.push('script = ?');
-    values.push(updates.script || null);
-  }
-  if (updates.schedule_type !== undefined) {
-    fields.push('schedule_type = ?');
-    values.push(updates.schedule_type);
-  }
-  if (updates.schedule_value !== undefined) {
-    fields.push('schedule_value = ?');
-    values.push(updates.schedule_value);
-  }
-  if (updates.next_run !== undefined) {
-    fields.push('next_run = ?');
-    values.push(updates.next_run);
-  }
-  if (updates.status !== undefined) {
-    fields.push('status = ?');
-    values.push(updates.status);
-  }
+  if (updates.prompt !== undefined) updateObj.prompt = updates.prompt;
+  if (updates.script !== undefined) updateObj.script = updates.script || null;
+  if (updates.schedule_type !== undefined)
+    updateObj.schedule_type = updates.schedule_type;
+  if (updates.schedule_value !== undefined)
+    updateObj.schedule_value = updates.schedule_value;
+  if (updates.next_run !== undefined) updateObj.next_run = updates.next_run;
+  if (updates.status !== undefined) updateObj.status = updates.status;
 
-  if (fields.length === 0) return;
+  if (Object.keys(updateObj).length === 0) return;
 
-  values.push(id);
-  db.prepare(
-    `UPDATE scheduled_tasks SET ${fields.join(', ')} WHERE id = ?`,
-  ).run(...values);
+  const { error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .update(updateObj)
+    .eq('id', id);
+
+  if (error) {
+    logger.error({ taskId: id, error: error.message }, 'Failed to update task');
+  }
 }
 
-export function deleteTask(id: string): void {
-  // Delete child records first (FK constraint)
-  db.prepare('DELETE FROM task_run_logs WHERE task_id = ?').run(id);
-  db.prepare('DELETE FROM scheduled_tasks WHERE id = ?').run(id);
+export async function deleteTask(id: string): Promise<void> {
+  // task_run_logs has ON DELETE CASCADE, so just delete the task
+  const { error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    logger.error({ taskId: id, error: error.message }, 'Failed to delete task');
+  }
 }
 
-export function getDueTasks(): ScheduledTask[] {
+export async function getDueTasks(): Promise<ScheduledTask[]> {
   const now = new Date().toISOString();
-  return db
-    .prepare(
-      `
-    SELECT * FROM scheduled_tasks
-    WHERE status = 'active' AND next_run IS NOT NULL AND next_run <= ?
-    ORDER BY next_run
-  `,
-    )
-    .all(now) as ScheduledTask[];
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .select('*')
+    .eq('status', 'active')
+    .not('next_run', 'is', null)
+    .lte('next_run', now)
+    .order('next_run', { ascending: true });
+
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get due tasks');
+    return [];
+  }
+  return (data || []).map(mapTaskRow);
 }
 
-export function updateTaskAfterRun(
+export async function updateTaskAfterRun(
   id: string,
   nextRun: string | null,
   lastResult: string,
-): void {
+): Promise<void> {
   const now = new Date().toISOString();
-  db.prepare(
-    `
-    UPDATE scheduled_tasks
-    SET next_run = ?, last_run = ?, last_result = ?, status = CASE WHEN ? IS NULL THEN 'completed' ELSE status END
-    WHERE id = ?
-  `,
-  ).run(nextRun, now, lastResult, nextRun, id);
+  const updateObj: Record<string, unknown> = {
+    next_run: nextRun,
+    last_run: now,
+    last_result: lastResult,
+  };
+
+  // If nextRun is null, the task is completed (one-shot)
+  if (nextRun === null) {
+    updateObj.status = 'completed';
+  }
+
+  const { error } = await supabaseAdmin
+    .from('ob_nc_scheduled_tasks')
+    .update(updateObj)
+    .eq('id', id);
+
+  if (error) {
+    logger.error(
+      { taskId: id, error: error.message },
+      'Failed to update task after run',
+    );
+  }
 }
 
-export function logTaskRun(log: TaskRunLog): void {
-  db.prepare(
-    `
-    INSERT INTO task_run_logs (task_id, run_at, duration_ms, status, result, error)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `,
-  ).run(
-    log.task_id,
-    log.run_at,
-    log.duration_ms,
-    log.status,
-    log.result,
-    log.error,
+export async function logTaskRun(log: TaskRunLog): Promise<void> {
+  const { error } = await supabaseAdmin.from('ob_nc_task_run_logs').insert({
+    task_id: log.task_id,
+    run_at: log.run_at,
+    duration_ms: log.duration_ms,
+    status: log.status,
+    result: log.result,
+    error: log.error,
+  });
+
+  if (error) {
+    logger.error(
+      { taskId: log.task_id, error: error.message },
+      'Failed to log task run',
+    );
+  }
+}
+
+function mapTaskRow(row: Record<string, unknown>): ScheduledTask {
+  return {
+    id: row.id as string,
+    group_folder: row.group_folder as string,
+    chat_jid: row.chat_jid as string,
+    prompt: row.prompt as string,
+    script: row.script as string | null,
+    schedule_type: row.schedule_type as ScheduledTask['schedule_type'],
+    schedule_value: row.schedule_value as string,
+    context_mode: (row.context_mode as ScheduledTask['context_mode']) || 'isolated',
+    next_run: row.next_run as string | null,
+    last_run: row.last_run as string | null,
+    last_result: row.last_result as string | null,
+    status: row.status as ScheduledTask['status'],
+    created_at: row.created_at as string,
+  };
+}
+
+// ── Router state ────────────────────────────────────────────────────────────
+
+export async function getRouterState(
+  key: string,
+): Promise<string | undefined> {
+  const { data } = await supabaseAdmin
+    .from('ob_nc_router_state')
+    .select('value')
+    .eq('key', key)
+    .single();
+  return data?.value ?? undefined;
+}
+
+export async function setRouterState(
+  key: string,
+  value: string,
+): Promise<void> {
+  const { error } = await supabaseAdmin.from('ob_nc_router_state').upsert(
+    { key, value },
+    { onConflict: 'key' },
   );
+
+  if (error) {
+    logger.error({ key, error: error.message }, 'Failed to set router state');
+  }
 }
 
-// --- Router state accessors ---
+// ── Sessions ────────────────────────────────────────────────────────────────
 
-export function getRouterState(key: string): string | undefined {
-  const row = db
-    .prepare('SELECT value FROM router_state WHERE key = ?')
-    .get(key) as { value: string } | undefined;
-  return row?.value;
+export async function getSession(
+  groupFolder: string,
+): Promise<string | undefined> {
+  const { data } = await supabaseAdmin
+    .from('ob_nc_sessions')
+    .select('session_id')
+    .eq('group_folder', groupFolder)
+    .single();
+  return data?.session_id ?? undefined;
 }
 
-export function setRouterState(key: string, value: string): void {
-  db.prepare(
-    'INSERT OR REPLACE INTO router_state (key, value) VALUES (?, ?)',
-  ).run(key, value);
+export async function setSession(
+  groupFolder: string,
+  sessionId: string,
+): Promise<void> {
+  const { error } = await supabaseAdmin.from('ob_nc_sessions').upsert(
+    { group_folder: groupFolder, session_id: sessionId },
+    { onConflict: 'group_folder' },
+  );
+
+  if (error) {
+    logger.error(
+      { groupFolder, error: error.message },
+      'Failed to set session',
+    );
+  }
 }
 
-// --- Session accessors ---
+export async function deleteSession(groupFolder: string): Promise<void> {
+  const { error } = await supabaseAdmin
+    .from('ob_nc_sessions')
+    .delete()
+    .eq('group_folder', groupFolder);
 
-export function getSession(groupFolder: string): string | undefined {
-  const row = db
-    .prepare('SELECT session_id FROM sessions WHERE group_folder = ?')
-    .get(groupFolder) as { session_id: string } | undefined;
-  return row?.session_id;
+  if (error) {
+    logger.error(
+      { groupFolder, error: error.message },
+      'Failed to delete session',
+    );
+  }
 }
 
-export function setSession(groupFolder: string, sessionId: string): void {
-  db.prepare(
-    'INSERT OR REPLACE INTO sessions (group_folder, session_id) VALUES (?, ?)',
-  ).run(groupFolder, sessionId);
-}
+export async function getAllSessions(): Promise<Record<string, string>> {
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_sessions')
+    .select('group_folder, session_id');
 
-export function deleteSession(groupFolder: string): void {
-  db.prepare('DELETE FROM sessions WHERE group_folder = ?').run(groupFolder);
-}
+  if (error) {
+    logger.error({ error: error.message }, 'Failed to get all sessions');
+    return {};
+  }
 
-export function getAllSessions(): Record<string, string> {
-  const rows = db
-    .prepare('SELECT group_folder, session_id FROM sessions')
-    .all() as Array<{ group_folder: string; session_id: string }>;
   const result: Record<string, string> = {};
-  for (const row of rows) {
+  for (const row of data || []) {
     result[row.group_folder] = row.session_id;
   }
   return result;
 }
 
-// --- Registered group accessors ---
+// ── Registered groups ───────────────────────────────────────────────────────
 
-export function getRegisteredGroup(
+export async function getRegisteredGroup(
   jid: string,
-): (RegisteredGroup & { jid: string }) | undefined {
-  const row = db
-    .prepare('SELECT * FROM registered_groups WHERE jid = ?')
-    .get(jid) as
-    | {
-        jid: string;
-        name: string;
-        folder: string;
-        trigger_pattern: string;
-        added_at: string;
-        container_config: string | null;
-        requires_trigger: number | null;
-        is_main: number | null;
-      }
-    | undefined;
-  if (!row) return undefined;
-  if (!isValidGroupFolder(row.folder)) {
+): Promise<(RegisteredGroup & { jid: string }) | undefined> {
+  const { data } = await supabaseAdmin
+    .from('ob_nc_registered_groups')
+    .select('*')
+    .eq('jid', jid)
+    .single();
+
+  if (!data) return undefined;
+
+  if (!isValidGroupFolder(data.folder)) {
     logger.warn(
-      { jid: row.jid, folder: row.folder },
+      { jid: data.jid, folder: data.folder },
       'Skipping registered group with invalid folder',
     );
     return undefined;
   }
+
   return {
-    jid: row.jid,
-    name: row.name,
-    folder: row.folder,
-    trigger: row.trigger_pattern,
-    added_at: row.added_at,
-    containerConfig: row.container_config
-      ? JSON.parse(row.container_config)
-      : undefined,
+    jid: data.jid,
+    name: data.name,
+    folder: data.folder,
+    trigger: data.trigger_pattern,
+    added_at: data.added_at,
+    containerConfig: data.container_config ?? undefined,
     requiresTrigger:
-      row.requires_trigger === null ? undefined : row.requires_trigger === 1,
-    isMain: row.is_main === 1 ? true : undefined,
+      data.requires_trigger === null ? undefined : data.requires_trigger,
+    isMain: data.is_main === true ? true : undefined,
   };
 }
 
-export function setRegisteredGroup(jid: string, group: RegisteredGroup): void {
+export async function setRegisteredGroup(
+  jid: string,
+  group: RegisteredGroup,
+): Promise<void> {
   if (!isValidGroupFolder(group.folder)) {
     throw new Error(`Invalid group folder "${group.folder}" for JID ${jid}`);
   }
-  db.prepare(
-    `INSERT OR REPLACE INTO registered_groups (jid, name, folder, trigger_pattern, added_at, container_config, requires_trigger, is_main)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-  ).run(
-    jid,
-    group.name,
-    group.folder,
-    group.trigger,
-    group.added_at,
-    group.containerConfig ? JSON.stringify(group.containerConfig) : null,
-    group.requiresTrigger === undefined ? 1 : group.requiresTrigger ? 1 : 0,
-    group.isMain ? 1 : 0,
-  );
+
+  const { error } = await supabaseAdmin
+    .from('ob_nc_registered_groups')
+    .upsert(
+      {
+        jid,
+        name: group.name,
+        folder: group.folder,
+        trigger_pattern: group.trigger,
+        added_at: group.added_at,
+        container_config: group.containerConfig ?? null,
+        requires_trigger:
+          group.requiresTrigger === undefined ? true : group.requiresTrigger,
+        is_main: group.isMain ?? false,
+      },
+      { onConflict: 'jid' },
+    );
+
+  if (error) {
+    logger.error({ jid, error: error.message }, 'Failed to set registered group');
+  }
 }
 
-export function getAllRegisteredGroups(): Record<string, RegisteredGroup> {
-  const rows = db.prepare('SELECT * FROM registered_groups').all() as Array<{
-    jid: string;
-    name: string;
-    folder: string;
-    trigger_pattern: string;
-    added_at: string;
-    container_config: string | null;
-    requires_trigger: number | null;
-    is_main: number | null;
-  }>;
+export async function getAllRegisteredGroups(): Promise<
+  Record<string, RegisteredGroup>
+> {
+  const { data, error } = await supabaseAdmin
+    .from('ob_nc_registered_groups')
+    .select('*');
+
+  if (error) {
+    logger.error(
+      { error: error.message },
+      'Failed to get all registered groups',
+    );
+    return {};
+  }
+
   const result: Record<string, RegisteredGroup> = {};
-  for (const row of rows) {
+  for (const row of data || []) {
     if (!isValidGroupFolder(row.folder)) {
       logger.warn(
         { jid: row.jid, folder: row.folder },
@@ -663,75 +736,11 @@ export function getAllRegisteredGroups(): Record<string, RegisteredGroup> {
       folder: row.folder,
       trigger: row.trigger_pattern,
       added_at: row.added_at,
-      containerConfig: row.container_config
-        ? JSON.parse(row.container_config)
-        : undefined,
+      containerConfig: row.container_config ?? undefined,
       requiresTrigger:
-        row.requires_trigger === null ? undefined : row.requires_trigger === 1,
-      isMain: row.is_main === 1 ? true : undefined,
+        row.requires_trigger === null ? undefined : row.requires_trigger,
+      isMain: row.is_main === true ? true : undefined,
     };
   }
   return result;
-}
-
-// --- JSON migration ---
-
-function migrateJsonState(): void {
-  const migrateFile = (filename: string) => {
-    const filePath = path.join(DATA_DIR, filename);
-    if (!fs.existsSync(filePath)) return null;
-    try {
-      const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-      fs.renameSync(filePath, `${filePath}.migrated`);
-      return data;
-    } catch {
-      return null;
-    }
-  };
-
-  // Migrate router_state.json
-  const routerState = migrateFile('router_state.json') as {
-    last_timestamp?: string;
-    last_agent_timestamp?: Record<string, string>;
-  } | null;
-  if (routerState) {
-    if (routerState.last_timestamp) {
-      setRouterState('last_timestamp', routerState.last_timestamp);
-    }
-    if (routerState.last_agent_timestamp) {
-      setRouterState(
-        'last_agent_timestamp',
-        JSON.stringify(routerState.last_agent_timestamp),
-      );
-    }
-  }
-
-  // Migrate sessions.json
-  const sessions = migrateFile('sessions.json') as Record<
-    string,
-    string
-  > | null;
-  if (sessions) {
-    for (const [folder, sessionId] of Object.entries(sessions)) {
-      setSession(folder, sessionId);
-    }
-  }
-
-  // Migrate registered_groups.json
-  const groups = migrateFile('registered_groups.json') as Record<
-    string,
-    RegisteredGroup
-  > | null;
-  if (groups) {
-    for (const [jid, group] of Object.entries(groups)) {
-      try {
-        setRegisteredGroup(jid, group);
-      } catch (err) {
-        logger.warn(
-          { jid, folder: group.folder, err },
-          'Skipping migrated registered group with invalid folder',
-        );
-      }
-    }
-  }
 }

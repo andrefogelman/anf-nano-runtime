@@ -15,7 +15,7 @@ export interface IpcDeps {
   registeredGroups: () => Record<string, RegisteredGroup>;
   registerGroup: (jid: string, group: RegisteredGroup) => void;
   syncGroups: (force: boolean) => Promise<void>;
-  getAvailableGroups: () => AvailableGroup[];
+  getAvailableGroups: () => AvailableGroup[] | Promise<AvailableGroup[]>;
   writeGroupsSnapshot: (
     groupFolder: string,
     isMain: boolean,
@@ -256,7 +256,7 @@ export async function processTaskIpc(
           data.context_mode === 'group' || data.context_mode === 'isolated'
             ? data.context_mode
             : 'isolated';
-        createTask({
+        await createTask({
           id: taskId,
           group_folder: targetFolder,
           chat_jid: targetJid,
@@ -279,9 +279,9 @@ export async function processTaskIpc(
 
     case 'pause_task':
       if (data.taskId) {
-        const task = getTaskById(data.taskId);
+        const task = await getTaskById(data.taskId);
         if (task && (isMain || task.group_folder === sourceGroup)) {
-          updateTask(data.taskId, { status: 'paused' });
+          await updateTask(data.taskId, { status: 'paused' });
           logger.info(
             { taskId: data.taskId, sourceGroup },
             'Task paused via IPC',
@@ -298,9 +298,9 @@ export async function processTaskIpc(
 
     case 'resume_task':
       if (data.taskId) {
-        const task = getTaskById(data.taskId);
+        const task = await getTaskById(data.taskId);
         if (task && (isMain || task.group_folder === sourceGroup)) {
-          updateTask(data.taskId, { status: 'active' });
+          await updateTask(data.taskId, { status: 'active' });
           logger.info(
             { taskId: data.taskId, sourceGroup },
             'Task resumed via IPC',
@@ -317,9 +317,9 @@ export async function processTaskIpc(
 
     case 'cancel_task':
       if (data.taskId) {
-        const task = getTaskById(data.taskId);
+        const task = await getTaskById(data.taskId);
         if (task && (isMain || task.group_folder === sourceGroup)) {
-          deleteTask(data.taskId);
+          await deleteTask(data.taskId);
           logger.info(
             { taskId: data.taskId, sourceGroup },
             'Task cancelled via IPC',
@@ -336,7 +336,7 @@ export async function processTaskIpc(
 
     case 'update_task':
       if (data.taskId) {
-        const task = getTaskById(data.taskId);
+        const task = await getTaskById(data.taskId);
         if (!task) {
           logger.warn(
             { taskId: data.taskId, sourceGroup },
@@ -391,7 +391,7 @@ export async function processTaskIpc(
           }
         }
 
-        updateTask(data.taskId, updates);
+        await updateTask(data.taskId, updates);
         logger.info(
           { taskId: data.taskId, sourceGroup, updates },
           'Task updated via IPC',
@@ -409,7 +409,7 @@ export async function processTaskIpc(
         );
         await deps.syncGroups(true);
         // Write updated snapshot immediately
-        const availableGroups = deps.getAvailableGroups();
+        const availableGroups = await deps.getAvailableGroups();
         deps.writeGroupsSnapshot(
           sourceGroup,
           true,
@@ -441,9 +441,9 @@ export async function processTaskIpc(
           );
           break;
         }
-        // Defense in depth: agent cannot set isMain via IPC.                                                                                                                                    
-        // Preserve isMain from the existing registration so IPC config                                                                                                                          
-        // updates (e.g. adding additionalMounts) don't strip the flag.                                                                                                                          
+        // Defense in depth: agent cannot set isMain via IPC.
+        // Preserve isMain from the existing registration so IPC config
+        // updates (e.g. adding additionalMounts) don't strip the flag.
         const existingGroup = registeredGroups[data.jid];
         deps.registerGroup(data.jid, {
           name: data.name,

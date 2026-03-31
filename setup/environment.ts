@@ -5,9 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import Database from 'better-sqlite3';
-
-import { STORE_DIR } from '../src/config.js';
+import { supabaseAdmin } from '../src/supabase-client.js';
 import { logger } from '../src/logger.js';
 import { commandExists, getPlatform, isHeadless, isWSL } from './platform.js';
 import { emitStatus } from './status.js';
@@ -46,24 +44,14 @@ export async function run(_args: string[]): Promise<void> {
   const hasAuth = fs.existsSync(authDir) && fs.readdirSync(authDir).length > 0;
 
   let hasRegisteredGroups = false;
-  // Check JSON file first (pre-migration)
-  if (fs.existsSync(path.join(projectRoot, 'data', 'registered_groups.json'))) {
-    hasRegisteredGroups = true;
-  } else {
-    // Check SQLite directly using better-sqlite3 (no sqlite3 CLI needed)
-    const dbPath = path.join(STORE_DIR, 'messages.db');
-    if (fs.existsSync(dbPath)) {
-      try {
-        const db = new Database(dbPath, { readonly: true });
-        const row = db
-          .prepare('SELECT COUNT(*) as count FROM registered_groups')
-          .get() as { count: number };
-        if (row.count > 0) hasRegisteredGroups = true;
-        db.close();
-      } catch {
-        // Table might not exist yet
-      }
-    }
+  // Check Supabase Postgres for registered groups
+  try {
+    const { count, error } = await supabaseAdmin
+      .from('ob_nc_registered_groups')
+      .select('*', { count: 'exact', head: true });
+    if (!error && count && count > 0) hasRegisteredGroups = true;
+  } catch {
+    // Table might not exist yet or Supabase not configured
   }
 
   logger.info(

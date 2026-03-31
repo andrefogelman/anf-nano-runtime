@@ -2,22 +2,19 @@
  * Step: verify — End-to-end health check of the full installation.
  * Replaces 09-verify.sh
  *
- * Uses better-sqlite3 directly (no sqlite3 CLI), platform-aware service checks.
+ * Uses Supabase Postgres for group count, platform-aware service checks.
  */
 import { execSync } from 'child_process';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-import Database from 'better-sqlite3';
-
-import { STORE_DIR } from '../src/config.js';
+import { supabaseAdmin } from '../src/supabase-client.js';
 import { readEnvFile } from '../src/env.js';
 import { logger } from '../src/logger.js';
 import {
   getPlatform,
   getServiceManager,
-  hasSystemd,
   isRoot,
 } from './platform.js';
 import { emitStatus } from './status.js';
@@ -139,20 +136,15 @@ export async function run(_args: string[]): Promise<void> {
   const configuredChannels = Object.keys(channelAuth);
   const anyChannelConfigured = configuredChannels.length > 0;
 
-  // 5. Check registered groups (using better-sqlite3, not sqlite3 CLI)
+  // 5. Check registered groups (Supabase Postgres)
   let registeredGroups = 0;
-  const dbPath = path.join(STORE_DIR, 'messages.db');
-  if (fs.existsSync(dbPath)) {
-    try {
-      const db = new Database(dbPath, { readonly: true });
-      const row = db
-        .prepare('SELECT COUNT(*) as count FROM registered_groups')
-        .get() as { count: number };
-      registeredGroups = row.count;
-      db.close();
-    } catch {
-      // Table might not exist
-    }
+  try {
+    const { count, error } = await supabaseAdmin
+      .from('ob_nc_registered_groups')
+      .select('*', { count: 'exact', head: true });
+    if (!error && count !== null) registeredGroups = count;
+  } catch {
+    // Supabase not configured or table doesn't exist
   }
 
   // 6. Check mount allowlist
