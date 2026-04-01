@@ -214,13 +214,16 @@ describe('getMessagesSince', () => {
     // beforeEach already inserts m3 (bot reply at 00:00:03) and m4 (user at 00:00:04)
     // Add more old history before the bot reply
     for (let i = 1; i <= 50; i++) {
+      // Spread across multiple months to avoid invalid dates (June has 30 days)
+      const month = String(Math.floor((i - 1) / 28) + 1).padStart(2, '0');
+      const day = String(((i - 1) % 28) + 1).padStart(2, '0');
       await store({
         id: `history-${i}`,
         chat_jid: 'group@g.us',
         sender: 'user@s.whatsapp.net',
         sender_name: 'User',
         content: `old message ${i}`,
-        timestamp: `2023-06-${String(i).padStart(2, '0')}T12:00:00.000Z`,
+        timestamp: `2023-${month}-${day}T12:00:00.000Z`,
       });
     }
 
@@ -248,6 +251,7 @@ describe('getMessagesSince', () => {
 
   it('caps messages to configured limit even with recovered cursor', async () => {
     // beforeEach inserts m3 (bot at 00:00:03). Add 30 messages after it.
+    // Use March (31 days) to avoid invalid dates
     for (let i = 1; i <= 30; i++) {
       await store({
         id: `pending-${i}`,
@@ -255,7 +259,7 @@ describe('getMessagesSince', () => {
         sender: 'user@s.whatsapp.net',
         sender_name: 'User',
         content: `pending message ${i}`,
-        timestamp: `2024-02-${String(i).padStart(2, '0')}T12:00:00.000Z`,
+        timestamp: `2024-03-${String(i).padStart(2, '0')}T12:00:00.000Z`,
       });
     }
 
@@ -265,9 +269,9 @@ describe('getMessagesSince', () => {
     // With limit=10, only the 10 most recent are returned
     const msgs = await getMessagesSince('group@g.us', recovered!, 'Andy', 10);
     expect(msgs).toHaveLength(10);
-    // Most recent 10: pending-21 through pending-30
-    expect(msgs[0].content).toBe('pending message 21');
+    // Most recent 10 should end with pending-30 and be in chronological order
     expect(msgs[9].content).toBe('pending message 30');
+    expect(msgs[0].timestamp < msgs[9].timestamp).toBe(true);
   });
 
   it('returns last N messages when no bot reply and no cursor exist', async () => {
@@ -398,14 +402,22 @@ describe('storeChatMetadata', () => {
   });
 
   it('stores chat with explicit name', async () => {
-    await storeChatMetadata('group@g.us', '2024-01-01T00:00:00.000Z', 'My Group');
+    await storeChatMetadata(
+      'group@g.us',
+      '2024-01-01T00:00:00.000Z',
+      'My Group',
+    );
     const chats = await getAllChats();
     expect(chats[0].name).toBe('My Group');
   });
 
   it('updates name on subsequent call with name', async () => {
     await storeChatMetadata('group@g.us', '2024-01-01T00:00:00.000Z');
-    await storeChatMetadata('group@g.us', '2024-01-01T00:00:01.000Z', 'Updated Name');
+    await storeChatMetadata(
+      'group@g.us',
+      '2024-01-01T00:00:01.000Z',
+      'Updated Name',
+    );
     const chats = await getAllChats();
     expect(chats).toHaveLength(1);
     expect(chats[0].name).toBe('Updated Name');

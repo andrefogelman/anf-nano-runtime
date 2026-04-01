@@ -54,9 +54,9 @@ beforeEach(async () => {
   deps = {
     sendMessage: async () => {},
     registeredGroups: () => groups,
-    registerGroup: (jid, group) => {
+    registerGroup: async (jid, group) => {
       groups[jid] = group;
-      setRegisteredGroup(jid, group);
+      await setRegisteredGroup(jid, group);
       // Mock the fs.mkdirSync that registerGroup does
     },
     syncGroups: async () => {},

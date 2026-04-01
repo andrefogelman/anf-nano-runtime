@@ -33,5 +33,8 @@ loadDotEnv();
 export default defineConfig({
   test: {
     include: ['src/**/*.test.ts', 'setup/**/*.test.ts', 'tests/**/*.test.ts'],
+    // Tests share a single remote Supabase instance — run sequentially to avoid
+    // _initTestDatabase() truncations from colliding across files.
+    fileParallelism: false,
   },
 });

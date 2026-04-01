@@ -83,7 +83,10 @@ export async function storeChatMetadata(
   if (error) {
     // If upserting with a potentially older timestamp, do a conditional update
     // Supabase upsert doesn't support MAX() natively, so we do a manual check
-    logger.warn({ chatJid, error: error.message }, 'Chat metadata upsert failed');
+    logger.warn(
+      { chatJid, error: error.message },
+      'Chat metadata upsert failed',
+    );
   }
 }
 
@@ -336,13 +339,30 @@ export async function getLastBotMessageTimestamp(
     .order('timestamp', { ascending: false })
     .limit(1);
 
-  const ts1 = byFlag?.[0]?.timestamp;
-  const ts2 = byPrefix?.[0]?.timestamp;
+  const ts1 = byFlag?.[0]?.timestamp
+    ? normalizeTimestamp(byFlag[0].timestamp)
+    : undefined;
+  const ts2 = byPrefix?.[0]?.timestamp
+    ? normalizeTimestamp(byPrefix[0].timestamp)
+    : undefined;
 
   if (!ts1 && !ts2) return undefined;
   if (!ts1) return ts2;
   if (!ts2) return ts1;
   return ts1 > ts2 ? ts1 : ts2;
+}
+
+/**
+ * Normalize a Postgres timestamptz string (e.g. "2024-01-01T00:00:03+00:00")
+ * to standard ISO 8601 with Z suffix ("2024-01-01T00:00:03.000Z").
+ */
+function normalizeTimestamp(ts: unknown): string {
+  if (typeof ts !== 'string') return '';
+  // If already ends with Z, return as-is
+  if (ts.endsWith('Z')) return ts;
+  // Convert offset format to Z by parsing through Date
+  const d = new Date(ts);
+  return isNaN(d.getTime()) ? (ts as string) : d.toISOString();
 }
 
 function mapMessageRow(row: Record<string, unknown>): NewMessage {
@@ -352,7 +372,7 @@ function mapMessageRow(row: Record<string, unknown>): NewMessage {
     sender: row.sender as string,
     sender_name: row.sender_name as string,
     content: row.content as string,
-    timestamp: row.timestamp as string,
+    timestamp: normalizeTimestamp(row.timestamp),
     is_from_me: row.is_from_me as boolean | undefined,
   };
 }
@@ -377,7 +397,10 @@ export async function createTask(
   });
 
   if (error) {
-    logger.error({ taskId: task.id, error: error.message }, 'Failed to create task');
+    logger.error(
+      { taskId: task.id, error: error.message },
+      'Failed to create task',
+    );
   }
 }
 
@@ -546,7 +569,8 @@ function mapTaskRow(row: Record<string, unknown>): ScheduledTask {
     script: row.script as string | null,
     schedule_type: row.schedule_type as ScheduledTask['schedule_type'],
     schedule_value: row.schedule_value as string,
-    context_mode: (row.context_mode as ScheduledTask['context_mode']) || 'isolated',
+    context_mode:
+      (row.context_mode as ScheduledTask['context_mode']) || 'isolated',
     next_run: row.next_run as string | null,
     last_run: row.last_run as string | null,
     last_result: row.last_result as string | null,
@@ -557,9 +581,7 @@ function mapTaskRow(row: Record<string, unknown>): ScheduledTask {
 
 // ── Router state ────────────────────────────────────────────────────────────
 
-export async function getRouterState(
-  key: string,
-): Promise<string | undefined> {
+export async function getRouterState(key: string): Promise<string | undefined> {
   const { data } = await supabaseAdmin
     .from('ob_nc_router_state')
     .select('value')
@@ -572,10 +594,9 @@ export async function setRouterState(
   key: string,
   value: string,
 ): Promise<void> {
-  const { error } = await supabaseAdmin.from('ob_nc_router_state').upsert(
-    { key, value },
-    { onConflict: 'key' },
-  );
+  const { error } = await supabaseAdmin
+    .from('ob_nc_router_state')
+    .upsert({ key, value }, { onConflict: 'key' });
 
   if (error) {
     logger.error({ key, error: error.message }, 'Failed to set router state');
@@ -599,10 +620,12 @@ export async function setSession(
   groupFolder: string,
   sessionId: string,
 ): Promise<void> {
-  const { error } = await supabaseAdmin.from('ob_nc_sessions').upsert(
-    { group_folder: groupFolder, session_id: sessionId },
-    { onConflict: 'group_folder' },
-  );
+  const { error } = await supabaseAdmin
+    .from('ob_nc_sessions')
+    .upsert(
+      { group_folder: groupFolder, session_id: sessionId },
+      { onConflict: 'group_folder' },
+    );
 
   if (error) {
     logger.error(
@@ -685,25 +708,26 @@ export async function setRegisteredGroup(
     throw new Error(`Invalid group folder "${group.folder}" for JID ${jid}`);
   }
 
-  const { error } = await supabaseAdmin
-    .from('ob_nc_registered_groups')
-    .upsert(
-      {
-        jid,
-        name: group.name,
-        folder: group.folder,
-        trigger_pattern: group.trigger,
-        added_at: group.added_at,
-        container_config: group.containerConfig ?? null,
-        requires_trigger:
-          group.requiresTrigger === undefined ? true : group.requiresTrigger,
-        is_main: group.isMain ?? false,
-      },
-      { onConflict: 'jid' },
-    );
+  const { error } = await supabaseAdmin.from('ob_nc_registered_groups').upsert(
+    {
+      jid,
+      name: group.name,
+      folder: group.folder,
+      trigger_pattern: group.trigger,
+      added_at: group.added_at,
+      container_config: group.containerConfig ?? null,
+      requires_trigger:
+        group.requiresTrigger === undefined ? true : group.requiresTrigger,
+      is_main: group.isMain ?? false,
+    },
+    { onConflict: 'jid' },
+  );
 
   if (error) {
-    logger.error({ jid, error: error.message }, 'Failed to set registered group');
+    logger.error(
+      { jid, error: error.message },
+      'Failed to set registered group',
+    );
   }
 }
 

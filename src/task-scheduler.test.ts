@@ -48,6 +48,10 @@ describe('task scheduler', () => {
 
     await vi.advanceTimersByTimeAsync(10);
 
+    // Allow the async runTask chain (Supabase updateTask) to settle
+    vi.useRealTimers();
+    await new Promise((r) => setTimeout(r, 2000));
+
     const task = await getTaskById('task-invalid-folder');
     expect(task?.status).toBe('paused');
   });
