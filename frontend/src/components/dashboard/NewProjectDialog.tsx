@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Dialog,
@@ -22,6 +22,7 @@ import {
 import { Plus } from "lucide-react";
 import { useCreateProject } from "@/hooks/useProjects";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabase";
 
 const TIPOS_OBRA = [
   "Residencial Unifamiliar",
@@ -50,12 +51,27 @@ export function NewProjectDialog() {
   const navigate = useNavigate();
   const createProject = useCreateProject();
   const { user } = useAuth();
+  const [orgId, setOrgId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!user) return;
+    supabase
+      .from("ob_org_members")
+      .select("org_id")
+      .eq("user_id", user.id)
+      .limit(1)
+      .single()
+      .then(({ data }) => {
+        if (data) setOrgId(data.org_id);
+      });
+  }, [user]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!orgId) return;
 
     const result = await createProject.mutateAsync({
-      org_id: user?.user_metadata?.org_id ?? "default",
+      org_id: orgId,
       name,
       description: null,
       tipo_obra: tipoObra,
