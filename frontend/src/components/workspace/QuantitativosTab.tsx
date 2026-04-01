@@ -22,7 +22,7 @@ export function QuantitativosTab() {
     queryKey: ["quantitativos", project?.id],
     queryFn: async (): Promise<Quantitativo[]> => {
       const { data, error } = await supabase
-        .from("quantitativos")
+        .from("ob_quantitativos")
         .select("*")
         .eq("project_id", project!.id)
         .order("disciplina", { ascending: true })

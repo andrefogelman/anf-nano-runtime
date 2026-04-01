@@ -14,7 +14,7 @@ export function useOrcamentoItems(projectId: string) {
     queryKey: ["orcamento", projectId],
     queryFn: async (): Promise<OrcamentoItem[]> => {
       const { data, error } = await supabase
-        .from("orcamento_items")
+        .from("ob_orcamento_items")
         .select("*")
         .eq("project_id", projectId)
         .order("eap_code", { ascending: true });
@@ -124,7 +124,7 @@ export function useUpdateOrcamentoItem() {
   return useMutation({
     mutationFn: async ({ id, projectId, ...updates }: { id: string; projectId: string } & OrcamentoUpdate) => {
       const { data, error } = await supabase
-        .from("orcamento_items")
+        .from("ob_orcamento_items")
         .update(updates)
         .eq("id", id)
         .select()
@@ -145,7 +145,7 @@ export function useCreateOrcamentoItem() {
   return useMutation({
     mutationFn: async (item: OrcamentoInsert) => {
       const { data, error } = await supabase
-        .from("orcamento_items")
+        .from("ob_orcamento_items")
         .insert(item)
         .select()
         .single();
@@ -165,7 +165,7 @@ export function useDeleteOrcamentoItem() {
   return useMutation({
     mutationFn: async ({ id, projectId }: { id: string; projectId: string }) => {
       const { error } = await supabase
-        .from("orcamento_items")
+        .from("ob_orcamento_items")
         .delete()
         .eq("id", id);
 

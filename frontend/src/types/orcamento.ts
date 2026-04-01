@@ -1,20 +1,20 @@
 import type { Database } from "./database";
 
-export type OrcamentoItem = Database["public"]["Tables"]["orcamento_items"]["Row"];
-export type OrcamentoInsert = Database["public"]["Tables"]["orcamento_items"]["Insert"];
-export type OrcamentoUpdate = Database["public"]["Tables"]["orcamento_items"]["Update"];
+export type OrcamentoItem = Database["public"]["Tables"]["ob_orcamento_items"]["Row"];
+export type OrcamentoInsert = Database["public"]["Tables"]["ob_orcamento_items"]["Insert"];
+export type OrcamentoUpdate = Database["public"]["Tables"]["ob_orcamento_items"]["Update"];
 
-export type Project = Database["public"]["Tables"]["projects"]["Row"];
-export type ProjectInsert = Database["public"]["Tables"]["projects"]["Insert"];
-export type ProjectUpdate = Database["public"]["Tables"]["projects"]["Update"];
+export type Project = Database["public"]["Tables"]["ob_projects"]["Row"];
+export type ProjectInsert = Database["public"]["Tables"]["ob_projects"]["Insert"];
+export type ProjectUpdate = Database["public"]["Tables"]["ob_projects"]["Update"];
 
-export type ProjectFile = Database["public"]["Tables"]["project_files"]["Row"];
-export type PdfPage = Database["public"]["Tables"]["pdf_pages"]["Row"];
-export type PdfJob = Database["public"]["Tables"]["pdf_jobs"]["Row"];
-export type Quantitativo = Database["public"]["Tables"]["quantitativos"]["Row"];
-export type AgentConversation = Database["public"]["Tables"]["agent_conversations"]["Row"];
-export type AgentActivityLog = Database["public"]["Tables"]["agent_activity_log"]["Row"];
-export type SinapiComposicao = Database["public"]["Tables"]["sinapi_composicoes"]["Row"];
+export type ProjectFile = Database["public"]["Tables"]["ob_project_files"]["Row"];
+export type PdfPage = Database["public"]["Tables"]["ob_pdf_pages"]["Row"];
+export type PdfJob = Database["public"]["Tables"]["ob_pdf_jobs"]["Row"];
+export type Quantitativo = Database["public"]["Tables"]["ob_quantitativos"]["Row"];
+export type AgentConversation = Database["public"]["Tables"]["ob_agent_conversations"]["Row"];
+export type AgentActivityLog = Database["public"]["Tables"]["ob_agent_activity_log"]["Row"];
+export type SinapiComposicao = Database["public"]["Tables"]["ob_sinapi_composicoes"]["Row"];
 
 /** Hierarchical budget item for the spreadsheet view */
 export interface BudgetRow {

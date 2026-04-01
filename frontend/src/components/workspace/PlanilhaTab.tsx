@@ -6,7 +6,7 @@ export function PlanilhaTab() {
   const { project } = useProjectContext();
 
   useRealtimeSubscription({
-    table: "orcamento_items",
+    table: "ob_orcamento_items",
     filterColumn: "project_id",
     filterValue: project?.id,
     queryKeys: [["orcamento", project?.id ?? ""]],

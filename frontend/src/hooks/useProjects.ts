@@ -8,7 +8,7 @@ export function useProjects() {
     queryKey: ["projects"],
     queryFn: async (): Promise<Project[]> => {
       const { data, error } = await supabase
-        .from("projects")
+        .from("ob_projects")
         .select("*")
         .order("updated_at", { ascending: false });
 
@@ -23,7 +23,7 @@ export function useProject(projectId: string) {
     queryKey: ["projects", projectId],
     queryFn: async (): Promise<Project> => {
       const { data, error } = await supabase
-        .from("projects")
+        .from("ob_projects")
         .select("*")
         .eq("id", projectId)
         .single();
@@ -41,7 +41,7 @@ export function useCreateProject() {
   return useMutation({
     mutationFn: async (project: ProjectInsert) => {
       const { data, error } = await supabase
-        .from("projects")
+        .from("ob_projects")
         .insert(project)
         .select()
         .single();
@@ -65,7 +65,7 @@ export function useUpdateProject() {
   return useMutation({
     mutationFn: async ({ id, ...updates }: { id: string } & Partial<ProjectInsert>) => {
       const { data, error } = await supabase
-        .from("projects")
+        .from("ob_projects")
         .update(updates)
         .eq("id", id)
         .select()
@@ -86,7 +86,7 @@ export function useProjectStats() {
     queryKey: ["project-stats"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("projects")
+        .from("ob_projects")
         .select("status");
 
       if (error) throw error;

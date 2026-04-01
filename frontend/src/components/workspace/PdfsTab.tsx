@@ -14,7 +14,7 @@ export function PdfsTab() {
   const { data: files } = useProjectFiles(project?.id ?? "");
 
   useRealtimeSubscription({
-    table: "pdf_jobs",
+    table: "ob_pdf_jobs",
     queryKeys: [
       ["pdf-jobs", project?.id ?? ""],
       ["project-files", project?.id ?? ""],
@@ -24,7 +24,7 @@ export function PdfsTab() {
   });
 
   useRealtimeSubscription({
-    table: "project_files",
+    table: "ob_project_files",
     filterColumn: "project_id",
     filterValue: project?.id,
     queryKeys: [["project-files", project?.id ?? ""]],

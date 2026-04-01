@@ -7,7 +7,7 @@ export function useAgentChat(projectId: string, agentSlug = "orcamentista") {
   const queryClient = useQueryClient();
 
   useRealtimeSubscription({
-    table: "agent_conversations",
+    table: "ob_agent_conversations",
     filterColumn: "project_id",
     filterValue: projectId,
     queryKeys: [["agent-chat", projectId, agentSlug]],
@@ -18,7 +18,7 @@ export function useAgentChat(projectId: string, agentSlug = "orcamentista") {
     queryKey: ["agent-chat", projectId, agentSlug],
     queryFn: async (): Promise<AgentConversation[]> => {
       const { data, error } = await supabase
-        .from("agent_conversations")
+        .from("ob_agent_conversations")
         .select("*")
         .eq("project_id", projectId)
         .eq("agent_slug", agentSlug)
@@ -39,7 +39,7 @@ export function useAgentChat(projectId: string, agentSlug = "orcamentista") {
       context?: Record<string, unknown>;
     }) => {
       const { error: userMsgError } = await supabase
-        .from("agent_conversations")
+        .from("ob_agent_conversations")
         .insert({
           project_id: projectId,
           agent_slug: agentSlug,

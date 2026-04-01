@@ -163,62 +163,62 @@ type CotacaoMercadoRow = {
 export interface Database {
   public: {
     Tables: {
-      organizations: {
+      ob_organizations: {
         Row: OrganizationRow;
         Insert: Omit<OrganizationRow, "id" | "created_at">;
         Update: Partial<Omit<OrganizationRow, "id" | "created_at">>;
       };
-      org_members: {
+      ob_org_members: {
         Row: OrgMemberRow;
         Insert: Omit<OrgMemberRow, "created_at">;
         Update: Partial<Omit<OrgMemberRow, "created_at">>;
       };
-      projects: {
+      ob_projects: {
         Row: ProjectRow;
         Insert: Omit<ProjectRow, "id" | "created_at" | "updated_at">;
         Update: Partial<Omit<ProjectRow, "id" | "created_at" | "updated_at">>;
       };
-      project_files: {
+      ob_project_files: {
         Row: ProjectFileRow;
         Insert: Omit<ProjectFileRow, "id" | "created_at">;
         Update: Partial<Omit<ProjectFileRow, "id" | "created_at">>;
       };
-      pdf_pages: {
+      ob_pdf_pages: {
         Row: PdfPageRow;
         Insert: Omit<PdfPageRow, "id" | "created_at">;
         Update: Partial<Omit<PdfPageRow, "id" | "created_at">>;
       };
-      pdf_jobs: {
+      ob_pdf_jobs: {
         Row: PdfJobRow;
         Insert: Omit<PdfJobRow, "id" | "created_at">;
         Update: Partial<Omit<PdfJobRow, "id" | "created_at">>;
       };
-      quantitativos: {
+      ob_quantitativos: {
         Row: QuantitativoRow;
         Insert: Omit<QuantitativoRow, "id" | "created_at">;
         Update: Partial<Omit<QuantitativoRow, "id" | "created_at">>;
       };
-      orcamento_items: {
+      ob_orcamento_items: {
         Row: OrcamentoItemRow;
         Insert: Omit<OrcamentoItemRow, "id" | "created_at" | "updated_at">;
         Update: Partial<Omit<OrcamentoItemRow, "id" | "created_at" | "updated_at">>;
       };
-      agent_conversations: {
+      ob_agent_conversations: {
         Row: AgentConversationRow;
         Insert: Omit<AgentConversationRow, "id" | "created_at">;
         Update: Partial<Omit<AgentConversationRow, "id" | "created_at">>;
       };
-      agent_activity_log: {
+      ob_agent_activity_log: {
         Row: AgentActivityLogRow;
         Insert: Omit<AgentActivityLogRow, "id" | "created_at">;
         Update: Partial<Omit<AgentActivityLogRow, "id" | "created_at">>;
       };
-      sinapi_composicoes: {
+      ob_sinapi_composicoes: {
         Row: SinapiComposicaoRow;
         Insert: SinapiComposicaoRow;
         Update: Partial<SinapiComposicaoRow>;
       };
-      cotacoes_mercado: {
+      ob_cotacoes_mercado: {
         Row: CotacaoMercadoRow;
         Insert: Omit<CotacaoMercadoRow, "id" | "created_at">;
         Update: Partial<Omit<CotacaoMercadoRow, "id" | "created_at">>;

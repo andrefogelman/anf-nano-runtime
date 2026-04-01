@@ -7,7 +7,7 @@ export function useProjectFiles(projectId: string) {
     queryKey: ["project-files", projectId],
     queryFn: async (): Promise<ProjectFile[]> => {
       const { data, error } = await supabase
-        .from("project_files")
+        .from("ob_project_files")
         .select("*")
         .eq("project_id", projectId)
         .order("created_at", { ascending: false });
@@ -24,9 +24,9 @@ export function usePdfJobs(projectId: string) {
     queryKey: ["pdf-jobs", projectId],
     queryFn: async (): Promise<PdfJob[]> => {
       const { data, error } = await supabase
-        .from("pdf_jobs")
-        .select("*, project_files!inner(project_id)")
-        .eq("project_files.project_id", projectId)
+        .from("ob_pdf_jobs")
+        .select("*, ob_project_files!inner(project_id)")
+        .eq("ob_project_files.project_id", projectId)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
@@ -41,7 +41,7 @@ export function usePdfPages(fileId: string) {
     queryKey: ["pdf-pages", fileId],
     queryFn: async (): Promise<PdfPage[]> => {
       const { data, error } = await supabase
-        .from("pdf_pages")
+        .from("ob_pdf_pages")
         .select("*")
         .eq("file_id", fileId)
         .order("page_number", { ascending: true });
@@ -58,9 +58,9 @@ export function useReviewItems(projectId: string) {
     queryKey: ["review-items", projectId],
     queryFn: async (): Promise<PdfPage[]> => {
       const { data, error } = await supabase
-        .from("pdf_pages")
-        .select("*, project_files!inner(project_id)")
-        .eq("project_files.project_id", projectId)
+        .from("ob_pdf_pages")
+        .select("*, ob_project_files!inner(project_id)")
+        .eq("ob_project_files.project_id", projectId)
         .eq("needs_review", true)
         .order("confidence", { ascending: true });
 
@@ -94,7 +94,7 @@ export function useUploadPdf() {
       if (uploadError) throw uploadError;
 
       const { data: fileRecord, error: fileError } = await supabase
-        .from("project_files")
+        .from("ob_project_files")
         .insert({
           project_id: projectId,
           storage_path: storagePath,
@@ -109,7 +109,7 @@ export function useUploadPdf() {
       if (fileError) throw fileError;
 
       const { error: jobError } = await supabase
-        .from("pdf_jobs")
+        .from("ob_pdf_jobs")
         .insert({
           file_id: fileRecord.id,
           status: "pending" as const,
@@ -153,7 +153,7 @@ export function useResolveReview() {
       }
 
       const { data, error } = await supabase
-        .from("pdf_pages")
+        .from("ob_pdf_pages")
         .update(updates)
         .eq("id", pageId)
         .select()
