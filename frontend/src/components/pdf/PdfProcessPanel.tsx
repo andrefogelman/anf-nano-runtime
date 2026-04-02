@@ -78,8 +78,9 @@ function RunCard({
   };
   projectId: string;
   fileId: string;
+  defaultExpanded?: boolean;
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(defaultExpanded ?? false);
   const [items, setItems] = useState<ExtractedItem[]>(() =>
     (run.items || []).map((i: any) => ({ ...i, selected: true }))
   );
@@ -335,8 +336,8 @@ export function PdfProcessPanel({ file, projectId }: PdfProcessPanelProps) {
             </div>
           )}
 
-          {runs?.map((run) => (
-            <RunCard key={run.id} run={run as any} projectId={projectId} fileId={file.id} />
+          {runs?.map((run, idx) => (
+            <RunCard key={run.id} run={run as any} projectId={projectId} fileId={file.id} defaultExpanded={idx === 0} />
           ))}
         </div>
       </ScrollArea>
