@@ -105,7 +105,7 @@ export function PdfUploader({ projectId }: PdfUploaderProps) {
       >
         <Upload className="mb-4 h-10 w-10 text-muted-foreground" />
         <p className="text-sm font-medium">
-          Arraste PDFs, DWGs ou DXFs aqui ou clique para selecionar
+          Arraste arquivos aqui ou clique para selecionar
         </p>
         <p className="mt-1 text-xs text-muted-foreground">
           Plantas, cortes, detalhes, memoriais

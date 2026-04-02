@@ -53,7 +53,7 @@ export function QuantitativosTab() {
         ) : !quantitativos || quantitativos.length === 0 ? (
           <div className="text-center py-12 text-muted-foreground">
             <p>Nenhum quantitativo extraído ainda.</p>
-            <p className="text-sm mt-1">Envie PDFs para que os agentes processem.</p>
+            <p className="text-sm mt-1">Envie arquivos para que os agentes processem.</p>
           </div>
         ) : (
           <Table>
