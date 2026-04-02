@@ -4,6 +4,7 @@ import {
   useCreateInsumo,
   useUpdateInsumo,
   useDeleteInsumo,
+  useUpdateComposicao,
   type TcpoComposicao,
   type TcpoInsumo,
 } from "@/hooks/useTcpo";
@@ -228,8 +229,16 @@ export function TcpoComposicaoDetail({ composicao }: Props) {
   const { data: insumos, isLoading } = useTcpoInsumos(composicao.id);
   const updateInsumo = useUpdateInsumo();
   const deleteInsumo = useDeleteInsumo();
+  const updateComposicao = useUpdateComposicao();
   const [showNewRow, setShowNewRow] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<TcpoInsumo | null>(null);
+
+  const saveCompField = (field: string, rawValue: string) => {
+    const numericFields = ["ls_percentual", "bdi_percentual", "custo_sem_taxas", "custo_com_taxas"];
+    const value = numericFields.includes(field) ? parseBRNumber(rawValue) : rawValue;
+    if (value === (composicao as unknown as Record<string, unknown>)[field]) return;
+    updateComposicao.mutate({ id: composicao.id, [field]: value });
+  };
 
   const totals = useMemo(() => {
     if (!insumos) return { mod: 0, mat: 0, eqh: 0, total: 0 };
@@ -270,41 +279,46 @@ export function TcpoComposicaoDetail({ composicao }: Props) {
 
   return (
     <div className="space-y-4 bg-muted/30 p-4 rounded-b-lg border-x border-b">
-      {/* Composition header info */}
+      {/* Composition header info — all fields editable (double-click) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
         <div>
-          <span className="text-muted-foreground">Código:</span>{" "}
-          <span className="font-medium">{composicao.codigo}</span>
+          <span className="text-muted-foreground text-xs">Código:</span>{" "}
+          <InsumoEditableCell value={composicao.codigo} onSave={(v) => saveCompField("codigo", v)} className="font-medium font-mono" />
         </div>
         <div>
-          <span className="text-muted-foreground">Unidade:</span>{" "}
-          <span className="font-medium">{composicao.unidade}</span>
+          <span className="text-muted-foreground text-xs">Unidade:</span>{" "}
+          <InsumoEditableCell value={composicao.unidade} onSave={(v) => saveCompField("unidade", v)} className="font-medium" />
         </div>
         <div>
-          <span className="text-muted-foreground">Região:</span>{" "}
-          <span className="font-medium">{composicao.regiao}</span>
+          <span className="text-muted-foreground text-xs">Categoria:</span>{" "}
+          <InsumoEditableCell value={composicao.categoria || ""} onSave={(v) => saveCompField("categoria", v)} className="font-medium" />
         </div>
         <div>
-          <span className="text-muted-foreground">Data preços:</span>{" "}
-          <span className="font-medium">{composicao.data_precos}</span>
+          <span className="text-muted-foreground text-xs">Região:</span>{" "}
+          <InsumoEditableCell value={composicao.regiao || ""} onSave={(v) => saveCompField("regiao", v)} className="font-medium" />
         </div>
         <div>
-          <span className="text-muted-foreground">LS:</span>{" "}
-          <span className="font-medium">{formatPercent(composicao.ls_percentual)}</span>
+          <span className="text-muted-foreground text-xs">Data preços:</span>{" "}
+          <InsumoEditableCell value={composicao.data_precos || ""} onSave={(v) => saveCompField("data_precos", v)} className="font-medium" />
         </div>
         <div>
-          <span className="text-muted-foreground">BDI:</span>{" "}
-          <span className="font-medium">{formatPercent(composicao.bdi_percentual)}</span>
+          <span className="text-muted-foreground text-xs">LS %:</span>{" "}
+          <InsumoEditableCell value={String(composicao.ls_percentual)} onSave={(v) => saveCompField("ls_percentual", v)} type="number" className="font-medium" />
         </div>
         <div>
-          <span className="text-muted-foreground">Sem taxas:</span>{" "}
-          <span className="font-semibold">{formatBRL(composicao.custo_sem_taxas)}</span>
+          <span className="text-muted-foreground text-xs">BDI %:</span>{" "}
+          <InsumoEditableCell value={String(composicao.bdi_percentual)} onSave={(v) => saveCompField("bdi_percentual", v)} type="number" className="font-medium" />
         </div>
         <div>
-          <span className="text-muted-foreground">Com taxas:</span>{" "}
-          <span className="font-semibold text-primary">{formatBRL(composicao.custo_com_taxas)}</span>
+          <span className="text-muted-foreground text-xs">Sem taxas:</span>{" "}
+          <InsumoEditableCell value={String(composicao.custo_sem_taxas)} onSave={(v) => saveCompField("custo_sem_taxas", v)} type="number" className="font-semibold" />
+        </div>
+        <div>
+          <span className="text-muted-foreground text-xs">Com taxas:</span>{" "}
+          <InsumoEditableCell value={String(composicao.custo_com_taxas)} onSave={(v) => saveCompField("custo_com_taxas", v)} type="number" className="font-semibold text-primary" />
         </div>
       </div>
+      <p className="text-[10px] text-muted-foreground">Duplo clique em qualquer campo para editar</p>
 
       {/* Insumos table */}
       {isLoading ? (
@@ -352,7 +366,11 @@ export function TcpoComposicaoDetail({ composicao }: Props) {
                     />
                   </TableCell>
                   <TableCell>
-                    <ClasseBadge classe={insumo.classe} />
+                    <InsumoEditableCell
+                      value={insumo.classe}
+                      onSave={(v) => saveInsumoField(insumo, "classe", v)}
+                      className="font-mono text-xs"
+                    />
                   </TableCell>
                   <TableCell className="text-right">
                     <InsumoEditableCell

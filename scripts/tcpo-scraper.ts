@@ -23,9 +23,83 @@ const OUTPUT_FILE = join(OUTPUT_DIR, "tcpo-composicoes.json");
 const CHECKPOINT_FILE = join(OUTPUT_DIR, "tcpo-checkpoint.json");
 
 const SEARCH_TERMS = [
+  // 02. Serviços Iniciais
+  { term: "canteiro de obras", cat: "02. Serviços Iniciais" },
+  { term: "demolicao", cat: "02. Serviços Iniciais" },
+  { term: "limpeza terreno", cat: "02. Serviços Iniciais" },
+  { term: "locacao de obra", cat: "02. Serviços Iniciais" },
+  { term: "movimento de terra", cat: "02. Serviços Iniciais" },
+  { term: "escavacao", cat: "02. Serviços Iniciais" },
+  { term: "aterro", cat: "02. Serviços Iniciais" },
+  { term: "sondagem", cat: "02. Serviços Iniciais" },
+  // 04. Infraestrutura
+  { term: "fundacao", cat: "04. Infraestrutura" },
+  { term: "estaca", cat: "04. Infraestrutura" },
+  { term: "sapata", cat: "04. Infraestrutura" },
+  { term: "baldrame", cat: "04. Infraestrutura" },
+  { term: "radier", cat: "04. Infraestrutura" },
+  { term: "bloco de coroamento", cat: "04. Infraestrutura" },
+  // 05. Superestrutura
+  { term: "concreto armado", cat: "05. Superestrutura" },
+  { term: "forma madeira", cat: "05. Superestrutura" },
+  { term: "forma metalica", cat: "05. Superestrutura" },
+  { term: "armacao aco", cat: "05. Superestrutura" },
+  { term: "laje", cat: "05. Superestrutura" },
+  { term: "pilar concreto", cat: "05. Superestrutura" },
+  { term: "viga concreto", cat: "05. Superestrutura" },
+  // 06. Alvenarias (já feito — checkpoint vai pular)
   { term: "alvenaria", cat: "06. Alvenarias" },
   { term: "bloco ceramico", cat: "06. Alvenarias" },
   { term: "divisoria", cat: "06. Alvenarias" },
+  // 09. Coberturas
+  { term: "telhado", cat: "09. Coberturas" },
+  { term: "telha ceramica", cat: "09. Coberturas" },
+  { term: "telha fibrocimento", cat: "09. Coberturas" },
+  { term: "telha metalica", cat: "09. Coberturas" },
+  { term: "estrutura madeira telhado", cat: "09. Coberturas" },
+  { term: "cumeeira", cat: "09. Coberturas" },
+  { term: "calha", cat: "09. Coberturas" },
+  // 10. Impermeabilização
+  { term: "impermeabilizacao", cat: "10. Impermeabilização" },
+  { term: "manta asfaltica", cat: "10. Impermeabilização" },
+  { term: "argamassa polimerica", cat: "10. Impermeabilização" },
+  // 11. Isolamento
+  { term: "isolamento termico", cat: "11. Isolamento" },
+  { term: "isolamento acustico", cat: "11. Isolamento" },
+  { term: "la de vidro", cat: "11. Isolamento" },
+  // 12. Esquadrias
+  { term: "porta madeira", cat: "12. Esquadrias" },
+  { term: "porta aluminio", cat: "12. Esquadrias" },
+  { term: "janela aluminio", cat: "12. Esquadrias" },
+  { term: "janela madeira", cat: "12. Esquadrias" },
+  { term: "porta correr", cat: "12. Esquadrias" },
+  { term: "fechadura", cat: "12. Esquadrias" },
+  // 13. Sistemas hidráulicos
+  { term: "tubo pvc esgoto", cat: "13. Sist. Hidráulicos" },
+  { term: "tubo pvc agua", cat: "13. Sist. Hidráulicos" },
+  { term: "registro gaveta", cat: "13. Sist. Hidráulicos" },
+  { term: "registro pressao", cat: "13. Sist. Hidráulicos" },
+  { term: "caixa sifonada", cat: "13. Sist. Hidráulicos" },
+  { term: "ralo sifonado", cat: "13. Sist. Hidráulicos" },
+  { term: "vaso sanitario", cat: "13. Sist. Hidráulicos" },
+  { term: "torneira", cat: "13. Sist. Hidráulicos" },
+  { term: "caixa dagua", cat: "13. Sist. Hidráulicos" },
+  // 15. Prevenção incêndio
+  { term: "hidrante", cat: "15. Prev. Incêndio" },
+  { term: "extintor", cat: "15. Prev. Incêndio" },
+  { term: "sprinkler", cat: "15. Prev. Incêndio" },
+  // 16. Sistemas elétricos
+  { term: "eletroduto", cat: "16. Sist. Elétricos" },
+  { term: "cabo eletrico", cat: "16. Sist. Elétricos" },
+  { term: "disjuntor", cat: "16. Sist. Elétricos" },
+  { term: "tomada eletrica", cat: "16. Sist. Elétricos" },
+  { term: "interruptor eletrico", cat: "16. Sist. Elétricos" },
+  { term: "quadro distribuicao", cat: "16. Sist. Elétricos" },
+  { term: "luminaria", cat: "16. Sist. Elétricos" },
+  // 19. Ar condicionado
+  { term: "ar condicionado", cat: "19. Ar Condicionado" },
+  { term: "duto ar condicionado", cat: "19. Ar Condicionado" },
+  // 20-24 (já feito — checkpoint vai pular)
   { term: "chapisco", cat: "20. Revestimentos" },
   { term: "emboco", cat: "20. Revestimentos" },
   { term: "reboco", cat: "20. Revestimentos" },
@@ -49,6 +123,23 @@ const SEARCH_TERMS = [
   { term: "textura parede", cat: "24. Pinturas" },
   { term: "verniz", cat: "24. Pinturas" },
   { term: "massa pva", cat: "24. Pinturas" },
+  // 26. Louças e metais
+  { term: "lavatorio", cat: "26. Louças e Metais" },
+  { term: "bacia sanitaria", cat: "26. Louças e Metais" },
+  { term: "pia cozinha", cat: "26. Louças e Metais" },
+  { term: "tanque lavar", cat: "26. Louças e Metais" },
+  { term: "chuveiro", cat: "26. Louças e Metais" },
+  { term: "misturador", cat: "26. Louças e Metais" },
+  // 27. Vidros
+  { term: "vidro temperado", cat: "27. Vidros" },
+  { term: "vidro laminado", cat: "27. Vidros" },
+  { term: "espelho", cat: "27. Vidros" },
+  // 30. Urbanização
+  { term: "meio fio", cat: "30. Urbanização" },
+  { term: "pavimentacao asfalto", cat: "30. Urbanização" },
+  { term: "calcada", cat: "30. Urbanização" },
+  { term: "muro", cat: "30. Urbanização" },
+  { term: "gradil", cat: "30. Urbanização" },
 ];
 
 interface Insumo {
