@@ -131,6 +131,41 @@ export function useUploadPdf() {
   });
 }
 
+export function useProcessingRuns(fileId: string) {
+  return useQuery({
+    queryKey: ["processing-runs", fileId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("ob_processing_runs")
+        .select("*")
+        .eq("file_id", fileId)
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+      return data as Array<{
+        id: string;
+        prompt: string;
+        summary: string | null;
+        items: Array<{
+          descricao: string;
+          quantidade: number;
+          unidade: string;
+          memorial_calculo?: string;
+          ambiente?: string;
+          disciplina?: string;
+          confidence?: number;
+        }>;
+        needs_review: Array<{ item: string; motivo: string }>;
+        pages_processed: number;
+        status: string;
+        error_message: string | null;
+        created_at: string;
+      }>;
+    },
+    enabled: !!fileId,
+  });
+}
+
 export function useDeleteFile() {
   const queryClient = useQueryClient();
 

@@ -4,16 +4,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/lib/supabase";
-import { usePdfPages } from "@/hooks/usePdfJobs";
+import { useProcessingRuns } from "@/hooks/usePdfJobs";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Send,
   Loader2,
   FileText,
-  CheckCircle2,
-  AlertTriangle,
   TableProperties,
-  Trash2,
+  ChevronDown,
+  ChevronUp,
+  Clock,
+  AlertTriangle,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { ProjectFile } from "@/types/orcamento";
@@ -32,13 +33,6 @@ interface ExtractedItem {
   disciplina?: string;
   confidence?: number;
   selected: boolean;
-}
-
-interface Message {
-  role: "user" | "assistant" | "system";
-  content: string;
-  timestamp: Date;
-  items?: ExtractedItem[];
 }
 
 const SUGGESTED_PROMPTS: Record<string, string> = {
@@ -60,33 +54,227 @@ function getSuggestedPrompt(filename: string): string | null {
   return null;
 }
 
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleString("pt-BR", {
+    day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit",
+  });
+}
+
+// --- Run History Item ---
+function RunCard({
+  run,
+  projectId,
+  fileId,
+}: {
+  run: {
+    id: string;
+    prompt: string;
+    summary: string | null;
+    items: ExtractedItem[];
+    needs_review: Array<{ item: string; motivo: string }>;
+    status: string;
+    error_message: string | null;
+    created_at: string;
+  };
+  projectId: string;
+  fileId: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [items, setItems] = useState<ExtractedItem[]>(() =>
+    (run.items || []).map((i: any) => ({ ...i, selected: true }))
+  );
+  const [saving, setSaving] = useState(false);
+  const queryClient = useQueryClient();
+
+  const selectedCount = items.filter((i) => i.selected).length;
+
+  function toggleItem(idx: number) {
+    setItems((prev) => prev.map((item, i) =>
+      i === idx ? { ...item, selected: !item.selected } : item
+    ));
+  }
+
+  function toggleAll(selected: boolean) {
+    setItems((prev) => prev.map((i) => ({ ...i, selected })));
+  }
+
+  async function saveToSpreadsheet() {
+    const toSave = items.filter((i) => i.selected);
+    if (toSave.length === 0) { toast.error("Selecione ao menos um item"); return; }
+    setSaving(true);
+    try {
+      const rows = toSave.map((item, idx) => ({
+        project_id: projectId,
+        disciplina: item.disciplina || "arquitetonico",
+        item_code: String(idx + 1).padStart(2, "0"),
+        descricao: item.descricao,
+        unidade: item.unidade,
+        quantidade: item.quantidade,
+        calculo_memorial: item.memorial_calculo || "",
+        origem_prancha: fileId,
+        origem_ambiente: item.ambiente || "",
+        confidence: item.confidence ?? 0.7,
+        needs_review: (item.confidence ?? 0.7) < 0.7,
+        created_by: "usuario",
+      }));
+      const { error } = await supabase.from("ob_quantitativos").insert(rows);
+      if (error) throw error;
+      toast.success(`${rows.length} itens salvos na planilha`);
+      queryClient.invalidateQueries({ queryKey: ["quantitativos", projectId] });
+    } catch (err: any) {
+      toast.error(`Erro ao salvar: ${err.message}`);
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  const isError = run.status === "error";
+
+  return (
+    <div className="rounded-lg border bg-card overflow-hidden">
+      {/* Run header */}
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-muted/30 transition-colors"
+      >
+        <Clock className="h-3 w-3 text-muted-foreground flex-shrink-0" />
+        <span className="text-xs text-muted-foreground">{formatDate(run.created_at)}</span>
+        {isError ? (
+          <Badge variant="destructive" className="text-[10px] px-1 py-0">erro</Badge>
+        ) : (
+          <Badge variant="outline" className="text-[10px] px-1 py-0">
+            {items.length} itens
+          </Badge>
+        )}
+        {run.needs_review?.length > 0 && (
+          <AlertTriangle className="h-3 w-3 text-orange-500" />
+        )}
+        <span className="flex-1 text-xs truncate text-muted-foreground italic">
+          {run.prompt.slice(0, 60)}...
+        </span>
+        {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+      </button>
+
+      {expanded && (
+        <div className="border-t">
+          {/* Prompt */}
+          <div className="px-3 py-2 bg-primary/5">
+            <p className="text-xs font-medium text-muted-foreground mb-1">Prompt:</p>
+            <p className="text-xs">{run.prompt}</p>
+          </div>
+
+          {/* Error */}
+          {isError && (
+            <div className="px-3 py-2 bg-red-50 text-red-700 text-xs">
+              {run.error_message}
+            </div>
+          )}
+
+          {/* Summary */}
+          {run.summary && (
+            <div className="px-3 py-2 border-t">
+              <p className="text-xs font-medium text-muted-foreground mb-1">Resumo:</p>
+              <p className="text-xs whitespace-pre-wrap">{run.summary}</p>
+            </div>
+          )}
+
+          {/* Needs review */}
+          {run.needs_review?.length > 0 && (
+            <div className="px-3 py-2 border-t bg-orange-50">
+              <p className="text-xs font-medium text-orange-700 mb-1">
+                Itens para revisão ({run.needs_review.length}):
+              </p>
+              {run.needs_review.map((r, i) => (
+                <p key={i} className="text-xs text-orange-600">
+                  • {r.item}: {r.motivo}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Items table */}
+          {items.length > 0 && (
+            <>
+              <div className="flex items-center justify-between px-3 py-1.5 border-t bg-muted/30">
+                <div className="flex gap-1">
+                  <Button variant="ghost" size="sm" className="h-5 text-[10px] px-1.5" onClick={() => toggleAll(true)}>
+                    Todos
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-5 text-[10px] px-1.5" onClick={() => toggleAll(false)}>
+                    Nenhum
+                  </Button>
+                </div>
+                <Button
+                  size="sm"
+                  className="h-6 text-xs"
+                  onClick={saveToSpreadsheet}
+                  disabled={selectedCount === 0 || saving}
+                >
+                  {saving ? (
+                    <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                  ) : (
+                    <TableProperties className="mr-1 h-3 w-3" />
+                  )}
+                  Salvar {selectedCount} na Planilha
+                </Button>
+              </div>
+              <div className="max-h-[250px] overflow-auto">
+                <table className="w-full text-xs">
+                  <thead className="sticky top-0 bg-muted/80">
+                    <tr>
+                      <th className="w-6 p-1"></th>
+                      <th className="text-left p-1">Descrição</th>
+                      <th className="text-right p-1 w-14">Qtd</th>
+                      <th className="text-left p-1 w-10">Und</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {items.map((item, idx) => (
+                      <tr
+                        key={idx}
+                        className={`border-t cursor-pointer hover:bg-muted/30 ${!item.selected ? "opacity-40" : ""}`}
+                        onClick={() => toggleItem(idx)}
+                      >
+                        <td className="p-1 text-center">
+                          <input type="checkbox" checked={item.selected} readOnly className="rounded" />
+                        </td>
+                        <td className="p-1">
+                          <div className="truncate" title={item.descricao}>{item.descricao}</div>
+                          {item.memorial_calculo && (
+                            <div className="text-[10px] text-muted-foreground truncate" title={item.memorial_calculo}>
+                              {item.memorial_calculo}
+                            </div>
+                          )}
+                        </td>
+                        <td className="p-1 text-right font-mono">
+                          {item.quantidade?.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                        </td>
+                        <td className="p-1">{item.unidade}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// --- Main Panel ---
 export function PdfProcessPanel({ file, projectId }: PdfProcessPanelProps) {
-  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
-  const { data: pages } = usePdfPages(file?.id ?? "");
+  const { data: runs } = useProcessingRuns(file?.id ?? "");
 
-  // Reset when file changes
+  // Set suggested prompt when file changes
   useEffect(() => {
     if (!file) return;
-    const suggested = getSuggestedPrompt(file.filename);
-    setMessages([
-      {
-        role: "system",
-        content: `PDF selecionado: **${file.filename}**${file.disciplina ? ` (${file.disciplina})` : ""}. Descreva o que levantar deste arquivo.`,
-        timestamp: new Date(),
-      },
-    ]);
-    setInput(suggested ?? "");
+    setInput(getSuggestedPrompt(file.filename) ?? "");
   }, [file?.id]);
-
-  // Auto-scroll
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   if (!file) {
     return (
@@ -99,336 +287,59 @@ export function PdfProcessPanel({ file, projectId }: PdfProcessPanelProps) {
     );
   }
 
-  // Get the latest message that has items
-  const latestItemsMsg = [...messages].reverse().find((m) => m.items && m.items.length > 0);
-  const extractedItems = latestItemsMsg?.items ?? [];
-  const selectedCount = extractedItems.filter((i) => i.selected).length;
-
-  function toggleItem(idx: number) {
-    setMessages((prev) =>
-      prev.map((msg) => {
-        if (msg !== latestItemsMsg || !msg.items) return msg;
-        const newItems = [...msg.items];
-        newItems[idx] = { ...newItems[idx], selected: !newItems[idx].selected };
-        return { ...msg, items: newItems };
-      })
-    );
-  }
-
-  function toggleAll(selected: boolean) {
-    setMessages((prev) =>
-      prev.map((msg) => {
-        if (msg !== latestItemsMsg || !msg.items) return msg;
-        return { ...msg, items: msg.items.map((i) => ({ ...i, selected })) };
-      })
-    );
-  }
-
   async function handleSubmit() {
     if (!input.trim() || !file || processing) return;
-
-    const userMsg: Message = {
-      role: "user",
-      content: input.trim(),
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
-    setInput("");
     setProcessing(true);
-
     try {
-      const { data, error } = await supabase.functions.invoke(
-        "process-single-pdf",
-        {
-          body: {
-            project_id: projectId,
-            file_id: file.id,
-            prompt: userMsg.content,
-          },
-        }
-      );
-
+      const { data, error } = await supabase.functions.invoke("process-single-pdf", {
+        body: { project_id: projectId, file_id: file.id, prompt: input.trim() },
+      });
       if (error) throw error;
-
-      // Parse items from structured_data
-      const rawItems: ExtractedItem[] = (data.structured_data?.itens || []).map(
-        (item: any) => ({
-          descricao: item.descricao || "",
-          quantidade: item.quantidade || 0,
-          unidade: item.unidade || "un",
-          memorial_calculo: item.memorial_calculo || "",
-          ambiente: item.ambiente || "",
-          disciplina: item.disciplina || file.disciplina || "",
-          confidence: item.confidence ?? 0.7,
-          selected: true,
-        })
-      );
-
-      const assistantMsg: Message = {
-        role: "assistant",
-        content: data.summary || "Processamento concluído.",
-        timestamp: new Date(),
-        items: rawItems,
-      };
-      setMessages((prev) => [...prev, assistantMsg]);
-
-      // Refresh queries
-      queryClient.invalidateQueries({ queryKey: ["pdf-pages", file.id] });
+      toast.success(`${data.items_count} itens extraídos`);
+      setInput("");
+      queryClient.invalidateQueries({ queryKey: ["processing-runs", file.id] });
       queryClient.invalidateQueries({ queryKey: ["project-files", projectId] });
     } catch (err: any) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: `Erro: ${err.message || "Falha no processamento"}`,
-          timestamp: new Date(),
-        },
-      ]);
+      toast.error(`Erro: ${err.message || "Falha no processamento"}`);
     } finally {
       setProcessing(false);
     }
   }
 
-  async function saveToSpreadsheet() {
-    if (!file || saving) return;
-    const itemsToSave = extractedItems.filter((i) => i.selected);
-    if (itemsToSave.length === 0) {
-      toast.error("Selecione ao menos um item");
-      return;
-    }
-
-    setSaving(true);
-    try {
-      const rows = itemsToSave.map((item, idx) => ({
-        project_id: projectId,
-        disciplina: item.disciplina || "arquitetonico",
-        item_code: String(idx + 1).padStart(2, "0"),
-        descricao: item.descricao,
-        unidade: item.unidade,
-        quantidade: item.quantidade,
-        calculo_memorial: item.memorial_calculo || "",
-        origem_prancha: file.id,
-        origem_ambiente: item.ambiente || "",
-        confidence: item.confidence ?? 0.7,
-        needs_review: (item.confidence ?? 0.7) < 0.7,
-        created_by: "usuario",
-      }));
-
-      const { error } = await supabase
-        .from("ob_quantitativos")
-        .insert(rows);
-
-      if (error) throw error;
-
-      toast.success(`${rows.length} itens salvos na planilha`);
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "system",
-          content: `${rows.length} itens salvos em Quantitativos. Veja na aba Planilha.`,
-          timestamp: new Date(),
-        },
-      ]);
-
-      queryClient.invalidateQueries({ queryKey: ["quantitativos", projectId] });
-      queryClient.invalidateQueries({ queryKey: ["orcamento", projectId] });
-    } catch (err: any) {
-      toast.error(`Erro ao salvar: ${err.message}`);
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  const hasResults = pages && pages.length > 0;
-
   return (
     <div className="flex h-full flex-col">
       {/* Header */}
       <div className="border-b px-4 py-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium truncate">{file.filename}</h3>
-          <Badge
-            variant="outline"
-            className={
-              file.status === "done"
-                ? "text-green-600 border-green-600"
-                : file.status === "processing"
-                  ? "text-yellow-600 border-yellow-600"
-                  : "text-muted-foreground"
-            }
-          >
-            {file.status === "done"
-              ? "Processado"
-              : file.status === "processing"
-                ? "Processando"
-                : "Aguardando"}
-          </Badge>
-        </div>
+        <h3 className="text-sm font-medium truncate">{file.filename}</h3>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          {runs?.length ? `${runs.length} processamento(s)` : "Nenhum processamento ainda"}
+        </p>
       </div>
 
-      {/* Results summary */}
-      {hasResults && (
-        <div className="border-b px-4 py-2 bg-muted/50">
-          <p className="text-xs font-medium text-muted-foreground mb-1">
-            Resultados extraídos:
-          </p>
-          {pages.map((page) => (
-            <div key={page.id} className="flex items-center gap-2 text-xs">
-              {page.needs_review ? (
-                <AlertTriangle className="h-3 w-3 text-orange-500" />
-              ) : (
-                <CheckCircle2 className="h-3 w-3 text-green-500" />
-              )}
-              <span>
-                Pág. {page.page_number} — {page.tipo ?? "classificando..."}{" "}
-                {page.prancha_id && `(${page.prancha_id})`}
-              </span>
-              {page.confidence != null && (
-                <Badge variant="outline" className="text-[10px] px-1 py-0">
-                  {Math.round(page.confidence * 100)}%
-                </Badge>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Chat messages + extracted items */}
-      <ScrollArea className="flex-1 px-4 py-3">
-        <div className="space-y-3">
-          {messages.map((msg, i) => (
-            <div key={i}>
-              <div
-                className={
-                  msg.role === "user"
-                    ? "flex justify-end"
-                    : msg.role === "system"
-                      ? "flex justify-center"
-                      : "flex justify-start"
-                }
-              >
-                <div
-                  className={
-                    msg.role === "user"
-                      ? "max-w-[85%] rounded-lg bg-primary px-3 py-2 text-primary-foreground text-sm"
-                      : msg.role === "system"
-                        ? "max-w-[90%] rounded-lg bg-muted px-3 py-2 text-xs text-muted-foreground text-center"
-                        : "max-w-[95%] rounded-lg border bg-card px-3 py-2 text-sm whitespace-pre-wrap"
-                  }
-                >
-                  {msg.content}
-                </div>
-              </div>
-
-              {/* Extracted items table */}
-              {msg.items && msg.items.length > 0 && (
-                <div className="mt-2 rounded-lg border bg-card overflow-hidden">
-                  <div className="flex items-center justify-between px-3 py-2 bg-muted/50 border-b">
-                    <span className="text-xs font-medium">
-                      {msg.items.length} itens encontrados
-                    </span>
-                    <div className="flex gap-1">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 text-xs px-2"
-                        onClick={() => toggleAll(true)}
-                      >
-                        Todos
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-6 text-xs px-2"
-                        onClick={() => toggleAll(false)}
-                      >
-                        Nenhum
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="max-h-[300px] overflow-auto">
-                    <table className="w-full text-xs">
-                      <thead className="sticky top-0 bg-muted/80">
-                        <tr>
-                          <th className="w-8 p-1.5"></th>
-                          <th className="text-left p-1.5">Descrição</th>
-                          <th className="text-right p-1.5 w-16">Qtd</th>
-                          <th className="text-left p-1.5 w-12">Und</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {msg.items.map((item, idx) => (
-                          <tr
-                            key={idx}
-                            className={`border-t cursor-pointer hover:bg-muted/30 ${
-                              !item.selected ? "opacity-40" : ""
-                            }`}
-                            onClick={() => toggleItem(idx)}
-                          >
-                            <td className="p-1.5 text-center">
-                              <input
-                                type="checkbox"
-                                checked={item.selected}
-                                onChange={() => toggleItem(idx)}
-                                className="rounded"
-                              />
-                            </td>
-                            <td className="p-1.5">
-                              <div>{item.descricao}</div>
-                              {item.ambiente && (
-                                <div className="text-[10px] text-muted-foreground">
-                                  {item.ambiente}
-                                </div>
-                              )}
-                            </td>
-                            <td className="p-1.5 text-right font-mono">
-                              {item.quantidade.toLocaleString("pt-BR", {
-                                minimumFractionDigits: 2,
-                              })}
-                            </td>
-                            <td className="p-1.5">{item.unidade}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-          {processing && (
-            <div className="flex justify-start">
-              <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2 text-sm text-muted-foreground">
-                <Loader2 className="h-3 w-3 animate-spin" />
-                Processando PDF...
-              </div>
+      {/* Processing history */}
+      <ScrollArea className="flex-1 px-3 py-3">
+        <div className="space-y-2">
+          {(!runs || runs.length === 0) && !processing && (
+            <div className="text-center py-8">
+              <FileText className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
+              <p className="text-xs text-muted-foreground">
+                Descreva o que levantar e clique enviar
+              </p>
             </div>
           )}
-          <div ref={scrollRef} />
+
+          {processing && (
+            <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-3 text-sm text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Processando PDF com IA...
+            </div>
+          )}
+
+          {runs?.map((run) => (
+            <RunCard key={run.id} run={run as any} projectId={projectId} fileId={file.id} />
+          ))}
         </div>
       </ScrollArea>
-
-      {/* Save to spreadsheet bar */}
-      {extractedItems.length > 0 && (
-        <div className="border-t px-3 py-2 bg-muted/30 flex items-center justify-between">
-          <span className="text-xs text-muted-foreground">
-            {selectedCount} de {extractedItems.length} itens selecionados
-          </span>
-          <Button
-            size="sm"
-            onClick={saveToSpreadsheet}
-            disabled={selectedCount === 0 || saving}
-          >
-            {saving ? (
-              <Loader2 className="mr-2 h-3 w-3 animate-spin" />
-            ) : (
-              <TableProperties className="mr-2 h-3 w-3" />
-            )}
-            Salvar na Planilha
-          </Button>
-        </div>
-      )}
 
       {/* Input */}
       <div className="border-t p-3">
