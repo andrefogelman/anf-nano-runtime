@@ -1,18 +1,34 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
-import { useReviewItems, useResolveReview } from "@/hooks/usePdfJobs";
+import {
+  useReviewItems,
+  useResolveReview,
+  useUnmappedBlocks,
+  useUnclassifiedLayers,
+  useConfirmBlockMapping,
+  useConfirmLayerMapping,
+} from "@/hooks/usePdfJobs";
 import { confidenceLabel } from "@/lib/format";
 import type { PdfPage } from "@/types/orcamento";
 
 interface ReviewPanelProps {
   projectId: string;
+  orgId?: string;
 }
 
-export function ReviewPanel({ projectId }: ReviewPanelProps) {
+export function ReviewPanel({ projectId, orgId }: ReviewPanelProps) {
   const { data: reviewItems, isLoading } = useReviewItems(projectId);
   const resolveReview = useResolveReview();
 
@@ -46,6 +62,9 @@ export function ReviewPanel({ projectId }: ReviewPanelProps) {
             }
           />
         ))}
+
+        {orgId && <UnmappedBlocksSection orgId={orgId} />}
+        {orgId && <UnclassifiedLayersSection orgId={orgId} />}
       </div>
     </ScrollArea>
   );
@@ -115,6 +134,161 @@ function ReviewItemCard({
         >
           <XCircle className="mr-1 h-3 w-3" />
           Corrigir
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// --- Unmapped Blocks Section ---
+
+function UnmappedBlocksSection({ orgId }: { orgId: string }) {
+  const { data: blocks } = useUnmappedBlocks(orgId);
+  const confirmBlock = useConfirmBlockMapping();
+
+  if (!blocks || blocks.length === 0) return null;
+
+  return (
+    <div className="space-y-3">
+      <h3 className="text-sm font-medium flex items-center gap-2">
+        <AlertTriangle className="h-4 w-4 text-blue-600" />
+        Blocos nao reconhecidos ({blocks.length})
+      </h3>
+
+      {blocks.map((block: { id: string; block_name: string; componente: string; disciplina: string; unidade: string }) => (
+        <UnmappedBlockCard
+          key={block.id}
+          block={block}
+          onConfirm={(componente, disciplina, unidade) =>
+            confirmBlock.mutate({ id: block.id, componente, disciplina, unidade })
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
+function UnmappedBlockCard({
+  block,
+  onConfirm,
+}: {
+  block: { id: string; block_name: string; componente: string; disciplina: string; unidade: string };
+  onConfirm: (componente: string, disciplina: string, unidade: string) => void;
+}) {
+  const [componente, setComponente] = useState(block.componente);
+  const [disciplina, setDisciplina] = useState(block.disciplina);
+  const [unidade, setUnidade] = useState(block.unidade);
+
+  return (
+    <div className="rounded-lg border p-3 space-y-2">
+      <p className="text-sm font-medium">Bloco: {block.block_name}</p>
+      <div className="grid grid-cols-3 gap-2">
+        <Input
+          placeholder="Componente"
+          value={componente}
+          onChange={(e) => setComponente(e.target.value)}
+          className="text-xs h-8"
+        />
+        <Select value={disciplina} onValueChange={setDisciplina}>
+          <SelectTrigger className="h-8 text-xs">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="arq">Arquitetonico</SelectItem>
+            <SelectItem value="est">Estrutural</SelectItem>
+            <SelectItem value="hid">Hidraulico</SelectItem>
+            <SelectItem value="ele">Eletrico</SelectItem>
+            <SelectItem value="geral">Geral</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={unidade} onValueChange={setUnidade}>
+          <SelectTrigger className="h-8 text-xs">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="un">un</SelectItem>
+            <SelectItem value="pt">pt</SelectItem>
+            <SelectItem value="m">m</SelectItem>
+            <SelectItem value="m2">m2</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <Button
+        size="sm"
+        variant="outline"
+        className="w-full"
+        onClick={() => onConfirm(componente, disciplina, unidade)}
+      >
+        <CheckCircle2 className="mr-1 h-3 w-3" />
+        Confirmar Mapeamento
+      </Button>
+    </div>
+  );
+}
+
+// --- Unclassified Layers Section ---
+
+function UnclassifiedLayersSection({ orgId }: { orgId: string }) {
+  const { data: layers } = useUnclassifiedLayers(orgId);
+  const confirmLayer = useConfirmLayerMapping();
+
+  if (!layers || layers.length === 0) return null;
+
+  return (
+    <div className="space-y-3">
+      <h3 className="text-sm font-medium flex items-center gap-2">
+        <AlertTriangle className="h-4 w-4 text-purple-600" />
+        Layers nao classificados ({layers.length})
+      </h3>
+
+      {layers.map((layer: { id: string; layer_name: string; disciplina: string }) => (
+        <UnclassifiedLayerCard
+          key={layer.id}
+          layer={layer}
+          onConfirm={(disciplina) =>
+            confirmLayer.mutate({ id: layer.id, disciplina })
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
+function UnclassifiedLayerCard({
+  layer,
+  onConfirm,
+}: {
+  layer: { id: string; layer_name: string; disciplina: string };
+  onConfirm: (disciplina: string) => void;
+}) {
+  const [disciplina, setDisciplina] = useState(layer.disciplina);
+
+  return (
+    <div className="rounded-lg border p-3 space-y-2">
+      <p className="text-sm font-medium">Layer: {layer.layer_name}</p>
+      <p className="text-xs text-muted-foreground">Sugestao: {layer.disciplina}</p>
+      <div className="flex gap-2">
+        <Select value={disciplina} onValueChange={setDisciplina}>
+          <SelectTrigger className="h-8 text-xs flex-1">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="arq">Arquitetonico</SelectItem>
+            <SelectItem value="est">Estrutural</SelectItem>
+            <SelectItem value="hid">Hidraulico</SelectItem>
+            <SelectItem value="ele">Eletrico</SelectItem>
+            <SelectItem value="cotas">Cotas</SelectItem>
+            <SelectItem value="anotacoes">Anotacoes</SelectItem>
+            <SelectItem value="ignorar">Ignorar</SelectItem>
+          </SelectContent>
+        </Select>
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => onConfirm(disciplina)}
+        >
+          <CheckCircle2 className="mr-1 h-3 w-3" />
+          Confirmar
         </Button>
       </div>
     </div>

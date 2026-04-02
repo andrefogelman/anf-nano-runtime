@@ -1,0 +1,107 @@
+import { describe, it, expect, vi } from "vitest";
+import type { ExtractedDxfData, ClassifiedLayer, MappedBlock } from "../src/types.js";
+
+// Mock the extractor to avoid Python dependency in tests
+vi.mock("../src/extractor.js", () => ({
+  associateTextsToRooms: vi.fn().mockResolvedValue({}),
+}));
+
+describe("assembleOutput", () => {
+  it("produces valid DwgPageOutput from extraction data", async () => {
+    const { assembleOutput } = await import("../src/structured-output.js");
+    const { DwgPageOutputSchema } = await import("../src/types.js");
+
+    const data: ExtractedDxfData = {
+      filename: "test.dxf",
+      units: "mm",
+      layers: [
+        { name: "ARQ-PAREDE", color: 7, is_on: true, is_frozen: false, entity_counts: { LINE: 20 } },
+        { name: "ELE-TOMADA", color: 3, is_on: true, is_frozen: false, entity_counts: { INSERT: 5 } },
+        { name: "HID-TUB-AF", color: 1, is_on: true, is_frozen: false, entity_counts: { LINE: 10 } },
+      ],
+      entities: [
+        {
+          type: "LWPOLYLINE",
+          layer: "ARQ-PAREDE",
+          vertices: [[0, 0], [5000, 0], [5000, 3700], [0, 3700]],
+          is_closed: true,
+          length: 17400,
+          area: 18500000,
+        },
+        {
+          type: "LINE",
+          layer: "HID-TUB-AF",
+          start: [0, 0],
+          end: [5000, 0],
+          length: 5000,
+        },
+      ],
+      blocks: [
+        {
+          name: "TOMADA_2P",
+          position: [100, 200],
+          rotation: 0,
+          scale_x: 1,
+          scale_y: 1,
+          layer: "ELE-TOMADA",
+          count: 15,
+        },
+      ],
+      dimensions: [],
+      texts: [
+        { type: "TEXT", content: "Sala", position: [2500, 1850], height: 200, rotation: 0, layer: "ARQ-PAREDE" },
+      ],
+      stats: {
+        total_layers: 3,
+        total_entities: 2,
+        total_blocks: 1,
+        total_dimensions: 0,
+        total_texts: 1,
+      },
+    };
+
+    const classifiedLayers: ClassifiedLayer[] = [
+      { name: "ARQ-PAREDE", disciplina: "arq", confidence: 0.95, method: "regex" },
+      { name: "ELE-TOMADA", disciplina: "ele", confidence: 0.95, method: "regex" },
+      { name: "HID-TUB-AF", disciplina: "hid", confidence: 0.95, method: "regex" },
+    ];
+
+    const mappedBlocks: MappedBlock[] = [
+      { name: "TOMADA_2P", componente: "tomada", disciplina: "ele", unidade: "pt", contagem: 15, confidence: 0.95, needs_review: false },
+    ];
+
+    const output = await assembleOutput(data, classifiedLayers, mappedBlocks);
+
+    expect(output.source).toBe("dwg");
+    expect(output.blocos).toHaveLength(1);
+    expect(output.blocos[0].nome).toBe("TOMADA_2P");
+    expect(output.blocos[0].contagem).toBe(15);
+
+    // Validate against schema
+    const validation = DwgPageOutputSchema.safeParse(output);
+    expect(validation.success).toBe(true);
+  });
+
+  it("flags unknown blocks in needs_review", async () => {
+    const { assembleOutput } = await import("../src/structured-output.js");
+
+    const data: ExtractedDxfData = {
+      filename: "test.dxf",
+      units: "mm",
+      layers: [],
+      entities: [],
+      blocks: [],
+      dimensions: [],
+      texts: [],
+      stats: { total_layers: 0, total_entities: 0, total_blocks: 0, total_dimensions: 0, total_texts: 0 },
+    };
+
+    const classifiedLayers: ClassifiedLayer[] = [];
+    const mappedBlocks: MappedBlock[] = [
+      { name: "Block1", componente: "desconhecido", disciplina: "geral", unidade: "un", contagem: 8, confidence: 0, needs_review: true },
+    ];
+
+    const output = await assembleOutput(data, classifiedLayers, mappedBlocks);
+    expect(output.needs_review).toContain("Block1");
+  });
+});

@@ -137,7 +137,13 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
     opts.onMessage(chatJid, message);
 
     // Also store metadata for the chat
-    opts.onChatMetadata(chatJid, now, `Project ${body.project_id}`, 'api', false);
+    opts.onChatMetadata(
+      chatJid,
+      now,
+      `Project ${body.project_id}`,
+      'api',
+      false,
+    );
 
     logger.info(
       { project_id: body.project_id, agent: body.agent, msgId },
@@ -170,10 +176,25 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
       return;
     }
 
+    // Detect file type to determine which pipeline to use
+    const { data: fileData, error: fileError } = await supabaseAdmin
+      .from('ob_project_files')
+      .select('file_type')
+      .eq('id', body.file_id)
+      .single();
+
+    if (fileError || !fileData) {
+      json(res, 404, { error: 'File not found' });
+      return;
+    }
+
+    const pipeline = fileData.file_type === 'dwg' || fileData.file_type === 'dxf'
+      ? 'dwg-pipeline'
+      : 'pdf-pipeline';
+
     const jobId = crypto.randomUUID();
     const now = new Date().toISOString();
 
-    // Insert job into Supabase (ob_pdf_jobs table)
     const { error } = await supabaseAdmin.from('ob_pdf_jobs').insert({
       id: jobId,
       project_id: body.project_id,
@@ -184,19 +205,23 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
 
     if (error) {
       logger.error(
-        { project_id: body.project_id, file_id: body.file_id, error: error.message },
-        'Failed to create PDF job',
+        {
+          project_id: body.project_id,
+          file_id: body.file_id,
+          error: error.message,
+        },
+        'Failed to create job',
       );
       json(res, 500, { error: 'Failed to create job' });
       return;
     }
 
     logger.info(
-      { jobId, project_id: body.project_id, file_id: body.file_id },
-      'PDF job created',
+      { jobId, project_id: body.project_id, file_id: body.file_id, pipeline },
+      `${pipeline} job created`,
     );
 
-    json(res, 202, { ok: true, job_id: jobId });
+    json(res, 202, { ok: true, job_id: jobId, pipeline });
   }
 
   async function handleStatus(

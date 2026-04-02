@@ -1,4 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { ProjectFile } from "@/types/orcamento";
 import {
@@ -11,6 +12,12 @@ import {
 } from "lucide-react";
 import { useDeleteFile } from "@/hooks/usePdfJobs";
 import { toast } from "sonner";
+
+const FILE_TYPE_BADGE: Record<string, { label: string; className: string }> = {
+  pdf: { label: "PDF", className: "bg-red-100 text-red-700 border-red-200" },
+  dwg: { label: "DWG", className: "bg-blue-100 text-blue-700 border-blue-200" },
+  dxf: { label: "DXF", className: "bg-purple-100 text-purple-700 border-purple-200" },
+};
 
 interface PranchaListProps {
   files: ProjectFile[];
@@ -69,6 +76,14 @@ export function PranchaList({ files, activeFileId, onSelectFile }: PranchaListPr
                 >
                   <FileText className="h-3.5 w-3.5 flex-shrink-0" />
                   <span className="flex-1 truncate">{file.filename}</span>
+                  {(() => {
+                    const badge = FILE_TYPE_BADGE[file.file_type] ?? FILE_TYPE_BADGE.pdf;
+                    return (
+                      <Badge variant="outline" className={cn("text-[10px] px-1 py-0 h-4", badge.className)}>
+                        {badge.label}
+                      </Badge>
+                    );
+                  })()}
                   <StatusIcon
                     className={cn(
                       "h-3.5 w-3.5 flex-shrink-0",
@@ -104,7 +119,7 @@ export function PranchaList({ files, activeFileId, onSelectFile }: PranchaListPr
 
         {files.length === 0 && (
           <p className="text-xs text-muted-foreground text-center py-4">
-            Nenhum PDF enviado
+            Nenhum arquivo enviado
           </p>
         )}
       </div>

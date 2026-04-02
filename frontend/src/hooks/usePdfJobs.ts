@@ -79,16 +79,25 @@ export function useUploadPdf() {
       projectId,
       file,
       disciplina,
+      fileType = "pdf",
     }: {
       projectId: string;
       file: File;
       disciplina: string | null;
+      fileType?: "pdf" | "dwg" | "dxf";
     }) => {
       const storagePath = `projects/${projectId}/${Date.now()}-${file.name}`;
+
+      const contentTypeMap: Record<string, string> = {
+        pdf: "application/pdf",
+        dwg: "application/octet-stream",
+        dxf: "application/dxf",
+      };
+
       const { error: uploadError } = await supabase.storage
         .from("project-pdfs")
         .upload(storagePath, file, {
-          contentType: "application/pdf",
+          contentType: contentTypeMap[fileType] ?? "application/octet-stream",
         });
 
       if (uploadError) throw uploadError;
@@ -99,7 +108,7 @@ export function useUploadPdf() {
           project_id: projectId,
           storage_path: storagePath,
           filename: file.name,
-          file_type: "pdf" as const,
+          file_type: fileType,
           disciplina: disciplina as ProjectFile["disciplina"],
           status: "uploaded" as const,
         })
@@ -229,6 +238,77 @@ export function useResolveReview() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["review-items"] });
       queryClient.invalidateQueries({ queryKey: ["pdf-pages"] });
+    },
+  });
+}
+
+// ── DWG/DXF Block & Layer Review Hooks ──────────────────────────────────────
+
+export function useUnmappedBlocks(orgId: string) {
+  return useQuery({
+    queryKey: ["unmapped-blocks", orgId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("ob_block_mappings")
+        .select("*")
+        .eq("org_id", orgId)
+        .eq("confirmed", false);
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!orgId,
+  });
+}
+
+export function useUnclassifiedLayers(orgId: string) {
+  return useQuery({
+    queryKey: ["unclassified-layers", orgId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("ob_layer_mappings")
+        .select("*")
+        .eq("org_id", orgId)
+        .eq("confirmed", false);
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!orgId,
+  });
+}
+
+export function useConfirmBlockMapping() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, componente, disciplina, unidade }: {
+      id: string;
+      componente: string;
+      disciplina: string;
+      unidade: string;
+    }) => {
+      const { error } = await supabase
+        .from("ob_block_mappings")
+        .update({ componente, disciplina, unidade, confirmed: true })
+        .eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["unmapped-blocks"] });
+    },
+  });
+}
+
+export function useConfirmLayerMapping() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, disciplina }: { id: string; disciplina: string }) => {
+      const { error } = await supabase
+        .from("ob_layer_mappings")
+        .update({ disciplina, confirmed: true })
+        .eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["unclassified-layers"] });
     },
   });
 }

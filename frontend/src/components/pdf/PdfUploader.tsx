@@ -23,21 +23,31 @@ export function PdfUploader({ projectId }: PdfUploaderProps) {
 
   const handleFiles = useCallback(
     async (files: FileList) => {
-      const pdfFiles = Array.from(files).filter(
-        (f) => f.type === "application/pdf"
+      const getFileType = (f: File): "pdf" | "dwg" | "dxf" | null => {
+        const ext = f.name.toLowerCase().split(".").pop();
+        if (ext === "pdf") return "pdf";
+        if (ext === "dwg") return "dwg";
+        if (ext === "dxf") return "dxf";
+        return null;
+      };
+
+      const validFiles = Array.from(files).filter(
+        (f) => getFileType(f) !== null
       );
 
-      if (pdfFiles.length === 0) {
-        toast.error("Selecione arquivos PDF");
+      if (validFiles.length === 0) {
+        toast.error("Selecione arquivos PDF, DWG ou DXF");
         return;
       }
 
-      for (const file of pdfFiles) {
+      for (const file of validFiles) {
+        const fileType = getFileType(file)!;
         try {
           await uploadPdf.mutateAsync({
             projectId,
             file,
             disciplina: disciplina === "auto" ? null : disciplina,
+            fileType,
           });
           toast.success(`${file.name} enviado com sucesso`);
         } catch {
@@ -95,14 +105,14 @@ export function PdfUploader({ projectId }: PdfUploaderProps) {
       >
         <Upload className="mb-4 h-10 w-10 text-muted-foreground" />
         <p className="text-sm font-medium">
-          Arraste PDFs aqui ou clique para selecionar
+          Arraste PDFs, DWGs ou DXFs aqui ou clique para selecionar
         </p>
         <p className="mt-1 text-xs text-muted-foreground">
           Plantas, cortes, detalhes, memoriais
         </p>
         <input
           type="file"
-          accept=".pdf"
+          accept=".pdf,.dwg,.dxf"
           multiple
           className="hidden"
           id="pdf-upload-input"
