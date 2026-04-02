@@ -1,11 +1,12 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, LogOut, HardHat } from "lucide-react";
+import { LayoutDashboard, LogOut, HardHat, Database } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { to: "/", label: "Projetos", icon: LayoutDashboard },
+  { to: "/tcpo", label: "Base TCPO", icon: Database },
 ];
 
 export function AppShell() {

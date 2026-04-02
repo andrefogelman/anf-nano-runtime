@@ -42,20 +42,29 @@ async function processNextJob(): Promise<boolean> {
       .single();
 
     const fileType = fileData?.file_type || 'pdf';
-    const pipeline = (fileType === 'dwg' || fileType === 'dxf') ? 'dwg-pipeline' : 'pdf-pipeline';
+    const pipeline =
+      fileType === 'dwg' || fileType === 'dxf'
+        ? 'dwg-pipeline'
+        : 'pdf-pipeline';
 
     // Mark job as processing
     await supabaseAdmin
       .from('ob_pdf_jobs')
-      .update({ status: 'processing', stage: 'ingestion', progress: 5, started_at: new Date().toISOString() })
+      .update({
+        status: 'processing',
+        stage: 'ingestion',
+        progress: 5,
+        started_at: new Date().toISOString(),
+      })
       .eq('id', job.id);
 
-    console.log(`[pdf-job-poller] Job ${job.id} dispatched to ${pipeline} (file_type: ${fileType})`);
+    console.log(
+      `[pdf-job-poller] Job ${job.id} dispatched to ${pipeline} (file_type: ${fileType})`,
+    );
 
     // TODO: Actually dispatch to container skill
     // For now the pipeline runs when the container is spawned for the group
     // The container skill picks up the job by polling ob_pdf_jobs
-
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error(`[pdf-job-poller] Job ${job.id} failed:`, msg);
@@ -80,7 +89,9 @@ async function processNextJob(): Promise<boolean> {
  * Start the PDF/DWG job poller.
  */
 export function startPdfJobPoller(): NodeJS.Timeout {
-  console.log(`[pdf-job-poller] Poller started (interval: ${POLL_INTERVAL_MS}ms)`);
+  console.log(
+    `[pdf-job-poller] Poller started (interval: ${POLL_INTERVAL_MS}ms)`,
+  );
 
   return setInterval(async () => {
     try {

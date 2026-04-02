@@ -98,60 +98,72 @@ function saveState(): void {
 
 async function login(page: Page): Promise<void> {
   console.log("Logging in...");
-  await page.goto(HOME_URL, { waitUntil: "networkidle", timeout: 20000 });
 
-  // Check if already on authenticated page
+  // Auto-dismiss any dialogs (session conflict alerts)
+  page.on("dialog", async (dialog) => {
+    console.log(`  Dialog: ${dialog.message()}`);
+    await dialog.dismiss().catch(() => {});
+  });
+
+  // Go to home
+  await page.goto(HOME_URL, { waitUntil: "networkidle", timeout: 20000 });
+  await page.waitForTimeout(1000);
+
+  // Check if already logged in
   const hasSair = await page.$('a[href*="Logout"]');
   if (hasSair) {
     console.log("Already logged in");
     return;
   }
 
-  // First, force logout any existing session by hitting logout URL
-  await page.goto("https://tcpoweb.pini.com.br/Logout.aspx", { waitUntil: "networkidle", timeout: 10000 }).catch(() => {});
-  await page.waitForTimeout(2000);
+  // Fill login and submit
+  await page.fill('input[placeholder="Usuário"]', EMAIL);
+  await page.fill('input[placeholder="Senha"]', PASSWORD);
+  await page.click('input[value="Entrar"]');
+  await page.waitForLoadState("networkidle").catch(() => {});
+  await page.waitForTimeout(3000);
 
-  // Now go to home and login fresh
-  await page.goto(HOME_URL, { waitUntil: "networkidle", timeout: 20000 });
-  await page.waitForTimeout(1000);
+  // Retry login with increasing backoff until session is free
+  for (let attempt = 1; attempt <= 10; attempt++) {
+    const bodyText = await page.evaluate(() => document.body.innerText.substring(0, 500));
 
-  await page.fill("#ctl00_header1_txtUsuario", EMAIL);
-  await page.fill("#ctl00_header1_txtSenha", PASSWORD);
-  await page.click("#ctl00_header1_btnAcessar");
-  await page.waitForLoadState("networkidle");
-  await page.waitForTimeout(2000);
-
-  // Check for "session already active" dialog — wait longer and retry
-  const aviso = await page.$("text=Acesso negado");
-  if (aviso) {
-    console.log("Session conflict — waiting 60s for old session to expire...");
-    await page.screenshot({ path: join(OUTPUT_DIR, "debug-conflict.png") });
-    await page.click("text=OK").catch(() => {});
-    await page.waitForTimeout(60000); // Wait 1 full minute
-    // Navigate completely fresh
-    await page.goto(HOME_URL, { waitUntil: "networkidle", timeout: 20000 });
-    await page.waitForTimeout(2000);
-    await page.fill("#ctl00_header1_txtUsuario", EMAIL);
-    await page.fill("#ctl00_header1_txtSenha", PASSWORD);
-    await page.click("#ctl00_header1_btnAcessar");
-    await page.waitForLoadState("networkidle");
-    await page.waitForTimeout(3000);
-    await page.screenshot({ path: join(OUTPUT_DIR, "debug-after-retry.png") });
-
-    // Second conflict check
-    const aviso2 = await page.$("text=Acesso negado");
-    if (aviso2) {
-      console.log("Still conflicting — waiting another 60s...");
-      await page.click("text=OK").catch(() => {});
-      await page.waitForTimeout(60000);
-      await page.goto(HOME_URL, { waitUntil: "networkidle", timeout: 20000 });
-      await page.fill("#ctl00_header1_txtUsuario", EMAIL);
-      await page.fill("#ctl00_header1_txtSenha", PASSWORD);
-      await page.click("#ctl00_header1_btnAcessar");
-      await page.waitForLoadState("networkidle");
-      await page.waitForTimeout(3000);
+    if (page.url().includes("Menu.aspx") || bodyText.includes("Sair")) {
+      console.log("Login successful!");
+      return;
     }
+
+    if (bodyText.includes("Acesso negado")) {
+      const waitSec = attempt * 30; // 30s, 60s, 90s, ...
+      console.log(`Session conflict (attempt ${attempt}/10) — waiting ${waitSec}s...`);
+      await page.click("text=OK").catch(() => {});
+      await page.waitForTimeout(waitSec * 1000);
+      // Retry
+      await page.goto(HOME_URL, { waitUntil: "networkidle", timeout: 20000 });
+      await page.waitForTimeout(1000);
+      await page.fill('input[placeholder="Usuário"]', EMAIL);
+      await page.fill('input[placeholder="Senha"]', PASSWORD);
+      await page.click('input[value="Entrar"]');
+      await page.waitForLoadState("networkidle").catch(() => {});
+      await page.waitForTimeout(3000);
+      continue;
+    }
+
+    // Check if logged in
+    if (page.url().includes("Menu.aspx")) {
+      console.log("Login successful!");
+      return;
+    }
+
+    const hasSairNow = await page.$('a[href*="Logout"]');
+    if (hasSairNow) {
+      console.log("Login successful (Sair link found)");
+      return;
+    }
+
+    throw new Error(`Login failed unexpectedly. URL: ${page.url()}`);
   }
+
+  throw new Error("Login failed after 10 attempts — session never freed");
 
   // Verify we're actually logged in by checking for "Sair" link
   const loggedIn = await page.$('a[href*="Logout"]');
@@ -213,25 +225,33 @@ async function goToSearch(page: Page): Promise<void> {
 async function search(page: Page, term: string): Promise<string[]> {
   await goToSearch(page);
 
-  // Fill search box and submit
-  const searchInput = await page.$('input[id*="txtBuscaGeral"], input[placeholder*="Digite"]');
-  if (!searchInput) throw new Error("Search input not found");
-
-  await searchInput.fill(term);
-  await page.click('input[id*="imgBtBuscaGeral"], input[type="image"][title*="Buscar"]');
+  // Fill search box using Playwright fill (triggers ASP.NET events)
+  await page.fill('#ctl00_MainContent_txtBusca', term);
+  await page.click('#ctl00_MainContent_imgBtnPesquisaServico');
   await page.waitForLoadState("networkidle");
   await page.waitForTimeout(2000);
 
+  // If we got redirected to home (session expired), re-login
+  if (page.url().includes("home.aspx") || page.url().includes("Login")) {
+    console.log("  Session expired during search — re-logging in...");
+    await login(page);
+    await goToSearch(page);
+    await page.fill('#ctl00_MainContent_txtBusca', term);
+    await page.click('#ctl00_MainContent_imgBtnPesquisaServico');
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(2000);
+  }
+
   // Extract all composition codes from search results
+  // The results table has columns: Base | Item (link) | Descrição | Unidade
   const codes = await page.evaluate(() => {
     const results: string[] = [];
-    // Search results appear in a table with links
     const links = document.querySelectorAll("a");
     for (const link of links) {
       const href = link.getAttribute("href") || "";
       const text = (link as HTMLElement).innerText?.trim() || "";
-      // Composition codes look like: 3R 05 12 00 00 00 05 27 or similar
-      if (text.match(/^\d+[A-Z]?\s*[\.\s]\s*\d+/) && href.includes("__doPostBack")) {
+      // Composition codes: "3R 05 12 00 00 00 05 27" or "02.105.000085.SER" etc
+      if (text.match(/^[\dA-Z][\dA-Z\.\s]+[\dA-Z]$/) && text.length > 5 && href.includes("__doPostBack")) {
         results.push(text);
       }
     }
@@ -243,130 +263,92 @@ async function search(page: Page, term: string): Promise<string[]> {
 }
 
 async function extractDetail(page: Page): Promise<Omit<Composicao, "categoria" | "search_term"> | null> {
-  return page.evaluate(() => {
-    const body = document.body.innerText;
-
-    // Must be on a composition detail page
-    if (!body.includes("Código:") || !body.includes("Composição")) return null;
-
-    // Parse header block
-    const headerBlock = document.querySelector('[id*="pnlServico"], [id*="pnlComposicao"]')?.parentElement;
-    const headerText = headerBlock?.innerText || body.substring(0, 2000);
-
-    const codigoMatch = headerText.match(/Código:\s*([\w\.]+)/);
-    const unidadeMatch = headerText.match(/Unidade:\s*(\S+)/);
-    const descLines = headerText.match(/Descrição:\s*(.+)/);
-
-    const codigo = codigoMatch?.[1] || "";
-    const unidade = unidadeMatch?.[1] || "";
-
-    let descricao = descLines?.[1]?.trim() || "";
-    if (!descricao) {
-      // Try second line of header
-      const lines = headerText.split("\n").map((l: string) => l.trim()).filter(Boolean);
-      for (const line of lines) {
-        if (line.length > 20 && !line.startsWith("Código") && !line.startsWith("Voltar")) {
-          descricao = line;
-          break;
-        }
-      }
-    }
-
+  const EXTRACT_SCRIPT = `(() => {
+    var body = document.body.innerText;
+    function parseBR(s) { if (!s) return 0; return parseFloat(s.replace(/\\./g, "").replace(",", ".")) || 0; }
+    if (!body.includes("Código:")) return null;
+    var headerMatch = body.match(/Código:\\s*(.+?)(?:\\n|$)/);
+    if (!headerMatch) return null;
+    var headerLine = headerMatch[1];
+    var codMatch = headerLine.match(/^([\\w\\s\\.]+?)\\s+-\\s+/);
+    var unidMatch = headerLine.match(/Unidade:\\s*(\\S+)/);
+    var codigo = codMatch && codMatch[1] ? codMatch[1].trim() : "";
+    var unidade = unidMatch && unidMatch[1] ? unidMatch[1] : "";
     if (!codigo) return null;
+    var descMatch = body.match(/Descrição:\\s*(.+?)(?:\\n|$)/);
+    var descricao = descMatch && descMatch[1] ? descMatch[1].trim() : "";
+    var regiaoEl = document.querySelector('select[id*="ddlRegiao"]');
+    var regiao = regiaoEl && regiaoEl.selectedOptions && regiaoEl.selectedOptions[0] ? regiaoEl.selectedOptions[0].text.trim() : "São Paulo";
+    var dataEl = document.querySelector('select[id*="ddlDataPrecos"]');
+    var dataPrecos = dataEl && dataEl.selectedOptions && dataEl.selectedOptions[0] ? dataEl.selectedOptions[0].text.trim() : "";
+    var lsMatch = body.match(/LS:\\s*([\\d\\.,]+)/);
+    var bdiMatch = body.match(/BDI:\\s*([\\d\\.,]+)/);
+    var ls = parseBR(lsMatch ? lsMatch[1] : "");
+    var bdi = parseBR(bdiMatch ? bdiMatch[1] : "");
+    var semMatch = body.match(/Sem taxas:\\s*([\\d\\.,]+)/);
+    var comMatch = body.match(/Com taxas:\\s*([\\d\\.,]+)/);
+    var semTaxas = parseBR(semMatch ? semMatch[1] : "");
+    var comTaxas = parseBR(comMatch ? comMatch[1] : "");
 
-    // Region & date
-    const regiaoEl = document.querySelector('select[id*="ddlRegiao"]') as HTMLSelectElement;
-    const regiao = regiaoEl?.selectedOptions?.[0]?.text || "São Paulo";
-    const dataEl = document.querySelector('select[id*="ddlDataPrecos"]') as HTMLSelectElement;
-    const dataPrecos = dataEl?.selectedOptions?.[0]?.text || "";
+    // Parse insumos from HTML table (not innerText — tabs get lost in headless)
+    var insumos = [];
+    var tables = document.querySelectorAll("table");
+    for (var t = 0; t < tables.length; t++) {
+      var headerRow = tables[t].querySelector("tr");
+      if (!headerRow) continue;
+      var headerCells = headerRow.querySelectorAll("td, th");
+      var headerTexts = [];
+      for (var h = 0; h < headerCells.length; h++) headerTexts.push((headerCells[h].innerText || "").trim());
+      var headerJoined = headerTexts.join(" ");
+      // Insumos table header contains: Código Descrição Un Class Coef Preço
+      if (headerJoined.indexOf("Código") < 0 || headerJoined.indexOf("Class") < 0) continue;
+      if (headerJoined.indexOf("Coef") < 0 && headerJoined.indexOf("Consumo") < 0) continue;
 
-    // Taxes
-    const lsEl = document.querySelector('input[id*="txtLS"]') as HTMLInputElement;
-    const bdiEl = document.querySelector('input[id*="txtBDI"]') as HTMLInputElement;
-    const ls = parseFloat(lsEl?.value?.replace(",", ".") || "0");
-    const bdi = parseFloat(bdiEl?.value?.replace(",", ".") || "0");
+      var rows = tables[t].querySelectorAll("tr");
+      for (var r = 1; r < rows.length; r++) {
+        var cells = rows[r].querySelectorAll("td");
+        if (cells.length < 5) continue;
+        var c0 = (cells[0].innerText || "").trim();
+        if (!c0 || !c0.match(/[0-9A-Z]/)) continue;
+        // Skip "Total" summary rows
+        if (c0.indexOf("Total") >= 0) continue;
 
-    // Totals — look for "Sem taxas:" and "Com taxas:" anywhere
-    const parseBR = (s: string) => {
-      if (!s) return 0;
-      return parseFloat(s.replace(/\./g, "").replace(",", ".")) || 0;
-    };
-    const semMatch = body.match(/Sem taxas:\s*([\d\.,]+)/);
-    const comMatch = body.match(/Com taxas:\s*([\d\.,]+)/);
-    const semTaxas = parseBR(semMatch?.[1] || "");
-    const comTaxas = parseBR(comMatch?.[1] || "");
+        var precoCell = cells.length > 5 ? cells[5] : null;
+        var precoInput = precoCell ? precoCell.querySelector("input") : null;
+        var precoVal = precoInput ? precoInput.value : (precoCell ? (precoCell.innerText || "").trim() : "");
 
-    // Insumos table — find the table with columns Código | Descrição | Un | Class | Coef | Preço
-    const insumos: {
-      codigo: string; descricao: string; unidade: string; classe: string;
-      coeficiente: number; preco_unitario: number; total: number; consumo: number;
-    }[] = [];
-
-    const tables = document.querySelectorAll("table");
-    for (const table of tables) {
-      const firstRow = table.querySelector("tr");
-      const headerText = firstRow?.innerText || "";
-      if (headerText.includes("Código") && headerText.includes("Descrição") && (headerText.includes("Coef") || headerText.includes("Class"))) {
-        // This is the insumos table
-        const rows = table.querySelectorAll("tr");
-        for (let i = 1; i < rows.length; i++) {
-          const cells = rows[i].querySelectorAll("td");
-          if (cells.length < 6) continue;
-          const cod = cells[0]?.innerText?.trim() || "";
-          if (!cod || !cod.match(/\d/)) continue; // skip non-data rows
-
-          // Handle variable column layouts
-          // Common: Código | Descrição | Un | Class | Coef | Preço unitário | Total | Consumo
-          const desc = cells[1]?.innerText?.trim() || "";
-          const un = cells[2]?.innerText?.trim() || "";
-          const classe = cells[3]?.innerText?.trim() || "";
-          const coef = parseBR(cells[4]?.innerText?.trim() || "");
-
-          // Preço might be in an input field (editable)
-          const precoCell = cells[5];
-          const precoInput = precoCell?.querySelector("input") as HTMLInputElement;
-          const preco = precoInput ? parseBR(precoInput.value) : parseBR(precoCell?.innerText?.trim() || "");
-
-          const totalVal = cells.length > 6 ? parseBR(cells[6]?.innerText?.trim() || "") : 0;
-          const consumo = cells.length > 7 ? parseBR(cells[7]?.innerText?.trim() || "") : 0;
-
-          insumos.push({ codigo: cod, descricao: desc, unidade: un, classe, coeficiente: coef, preco_unitario: preco, total: totalVal, consumo });
-        }
-        break; // found the table
+        insumos.push({
+          codigo: c0,
+          descricao: cells.length > 1 ? (cells[1].innerText || "").trim() : "",
+          unidade: cells.length > 2 ? (cells[2].innerText || "").trim() : "",
+          classe: cells.length > 3 ? (cells[3].innerText || "").trim() : "",
+          coeficiente: cells.length > 4 ? parseBR((cells[4].innerText || "").trim()) : 0,
+          preco_unitario: parseBR(precoVal),
+          total: cells.length > 6 ? parseBR((cells[6].innerText || "").trim()) : 0,
+          consumo: cells.length > 7 ? parseBR((cells[7].innerText || "").trim()) : 0
+        });
       }
+      if (insumos.length > 0) break;
     }
 
-    return {
-      codigo, descricao, unidade, regiao, data_precos: dataPrecos,
-      ls_percentual: ls, bdi_percentual: bdi,
-      custo_sem_taxas: semTaxas, custo_com_taxas: comTaxas, insumos,
-    };
-  });
+    return { codigo: codigo, descricao: descricao, unidade: unidade, regiao: regiao, data_precos: dataPrecos, ls_percentual: ls, bdi_percentual: bdi, custo_sem_taxas: semTaxas, custo_com_taxas: comTaxas, insumos: insumos };
+  })()`;
+  return page.evaluate(EXTRACT_SCRIPT) as Promise<Omit<Composicao, "categoria" | "search_term"> | null>;
 }
 
-async function clickResultByIndex(page: Page, index: number): Promise<boolean> {
-  // Click the Nth result link in the search results grid
-  const clicked = await page.evaluate((idx) => {
-    // Find all links that look like composition codes in the results table
-    const allLinks: HTMLAnchorElement[] = [];
-    document.querySelectorAll("td a").forEach((a) => {
-      const text = (a as HTMLElement).innerText?.trim() || "";
-      if (text.match(/^\d+[A-Z]?\s*[\.\s]\s*\d+/)) {
-        allLinks.push(a as HTMLAnchorElement);
-      }
-    });
-    if (idx < allLinks.length) {
-      allLinks[idx].click();
-      return true;
-    }
-    return false;
-  }, index);
-
-  if (clicked) {
+async function clickResultByCode(page: Page, code: string): Promise<boolean> {
+  try {
+    // Use Playwright's locator to click the link with the exact code text
+    const link = page.locator("a", { hasText: code }).first();
+    const count = await link.count();
+    if (count === 0) return false;
+    await link.click();
     await page.waitForLoadState("networkidle").catch(() => {});
     await page.waitForTimeout(2000);
+    return true;
+  } catch {
+    return false;
   }
-  return clicked;
 }
 
 async function goBackFromDetail(page: Page): Promise<void> {
@@ -411,14 +393,14 @@ async function processSearchTerm(page: Page, term: string, cat: string): Promise
   for (let i = 0; i < codes.length; i++) {
     const code = codes[i];
     // Skip if already scraped
-    if (allComposicoes.some((c) => c.codigo === code.replace(/\s+/g, "."))) {
+    if (allComposicoes.some((c) => c.codigo === code)) {
       console.log(`  ⏭️  ${code} (already have)`);
       continue;
     }
 
-    const clicked = await clickResultByIndex(page, i);
+    const clicked = await clickResultByCode(page, code);
     if (!clicked) {
-      console.log(`  ❌ Could not click result ${i}: ${code}`);
+      console.log(`  ❌ Could not click: ${code}`);
       continue;
     }
 
@@ -431,7 +413,23 @@ async function processSearchTerm(page: Page, term: string, cat: string): Promise
       console.log(`  ⚠️  No detail extracted for result ${i}`);
     }
 
-    await goBackFromDetail(page);
+    // Go back to search results by re-searching
+    await goToSearch(page);
+    await page.fill('#ctl00_MainContent_txtBusca', term);
+    await page.click('#ctl00_MainContent_imgBtnPesquisaServico');
+    await page.waitForLoadState("networkidle").catch(() => {});
+    await page.waitForTimeout(2000);
+
+    // Check if session expired during navigation
+    if (page.url().includes("home.aspx")) {
+      console.log("  Session expired — re-logging in...");
+      await login(page);
+      await goToSearch(page);
+      await page.fill('#ctl00_MainContent_txtBusca', term);
+      await page.click('#ctl00_MainContent_imgBtnPesquisaServico');
+      await page.waitForLoadState("networkidle").catch(() => {});
+      await page.waitForTimeout(2000);
+    }
   }
 
   completedSearches.push(term);
@@ -446,8 +444,8 @@ async function main(): Promise<void> {
   console.log(`${SEARCH_TERMS.length} search terms, output: ${OUTPUT_FILE}\n`);
 
   const browser = await chromium.launch({
-    headless: false,
-    slowMo: 300,
+    headless: true,
+    slowMo: 100,
   });
 
   const context = await browser.newContext({ viewport: { width: 1400, height: 900 } });
@@ -474,6 +472,12 @@ async function main(): Promise<void> {
     console.error("Fatal:", err);
     saveState();
   } finally {
+    // ALWAYS logout before closing to free server session
+    try {
+      await page.goto("https://tcpoweb.pini.com.br/Logout.aspx", { timeout: 10000 });
+      await page.waitForTimeout(1000);
+      console.log("Logged out successfully");
+    } catch { /* ignore */ }
     await browser.close();
   }
 }

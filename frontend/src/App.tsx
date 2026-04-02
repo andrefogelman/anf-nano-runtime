@@ -4,6 +4,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import LoginPage from "@/pages/LoginPage";
 import DashboardPage from "@/pages/DashboardPage";
 import ProjectPage from "@/pages/ProjectPage";
+import TcpoPage from "@/pages/TcpoPage";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
       >
         <Route index element={<DashboardPage />} />
         <Route path="projetos/:projectId" element={<ProjectPage />} />
+        <Route path="tcpo" element={<TcpoPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
