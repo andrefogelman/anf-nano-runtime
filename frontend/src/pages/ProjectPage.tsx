@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useProject } from "@/hooks/useProjects";
 import { useOrcamentoItems, calculateFooterTotals } from "@/hooks/useOrcamento";
@@ -18,8 +18,11 @@ import {
   ArrowLeft,
   Download,
   MessageSquare,
+  Play,
+  Loader2,
 } from "lucide-react";
 import { formatNumber } from "@/lib/format";
+import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 
 function ProjectPageInner() {
@@ -27,6 +30,23 @@ function ProjectPageInner() {
   const { data: project, isLoading } = useProject(projectId!);
   const { data: orcamentoItems } = useOrcamentoItems(projectId!);
   const { setProject, activeTab, chatOpen, setChatOpen } = useProjectContext();
+  const [processingBudget, setProcessingBudget] = useState(false);
+
+  const startBudget = async () => {
+    if (!projectId) return;
+    setProcessingBudget(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("process-project", {
+        body: { project_id: projectId },
+      });
+      if (error) throw error;
+      toast.success(data.message || "Processamento iniciado");
+    } catch (err: any) {
+      toast.error(`Erro: ${err.message || "Falha ao iniciar processamento"}`);
+    } finally {
+      setProcessingBudget(false);
+    }
+  };
 
   useEffect(() => {
     if (project) setProject(project);
@@ -91,6 +111,18 @@ function ProjectPageInner() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Button
+              size="sm"
+              onClick={startBudget}
+              disabled={processingBudget || project.status === "processing"}
+            >
+              {processingBudget ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <Play className="mr-2 h-4 w-4" />
+              )}
+              {processingBudget ? "Processando..." : "Iniciar Orçamento"}
+            </Button>
             <Button
               variant="outline"
               size="sm"

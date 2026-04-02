@@ -1,5 +1,14 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
+vi.mock('../orcabot-agent-runner.js', () => ({
+  runOrcabotAgent: vi.fn().mockResolvedValue({
+    response: 'Processamento concluído',
+    tokens_used: 100,
+    tool_calls: [],
+    duration_ms: 500,
+  }),
+}));
+
 vi.mock('../../src/supabase-client.js', () => ({
   supabase: {
     from: vi.fn(() => ({
@@ -8,17 +17,39 @@ vi.mock('../../src/supabase-client.js', () => ({
       update: vi.fn().mockReturnThis(),
       eq: vi.fn().mockReturnThis(),
       in: vi.fn().mockReturnThis(),
-      single: vi.fn().mockResolvedValue({ data: { id: 'task-1', to_agent: 'estrutural', status: 'pending', pranchas: ['p1'], context: {}, project_id: 'proj-1' }, error: null }),
+      single: vi.fn().mockResolvedValue({
+        data: {
+          id: 'task-1',
+          to_agent: 'estrutural',
+          status: 'pending',
+          pranchas: ['p1'],
+          context: {},
+          project_id: 'proj-1',
+        },
+        error: null,
+      }),
       order: vi.fn().mockReturnThis(),
       limit: vi.fn().mockResolvedValue({
-        data: [{ id: 'task-1', to_agent: 'estrutural', status: 'pending', pranchas: ['p1'], context: {}, project_id: 'proj-1' }],
+        data: [
+          {
+            id: 'task-1',
+            to_agent: 'estrutural',
+            status: 'pending',
+            pranchas: ['p1'],
+            context: {},
+            project_id: 'proj-1',
+          },
+        ],
         error: null,
       }),
     })),
   },
 }));
 
-import { processPendingDelegations, processOneTask } from '../delegation-engine.js';
+import {
+  processPendingDelegations,
+  processOneTask,
+} from '../delegation-engine.js';
 
 describe('delegation-engine', () => {
   it('processPendingDelegations fetches pending tasks', async () => {

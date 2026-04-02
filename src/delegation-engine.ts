@@ -1,5 +1,6 @@
 import { supabase } from './supabase-client.js';
 import { getAgentTools } from './agent-registry.js';
+import { runOrcabotAgent } from './orcabot-agent-runner.js';
 import type { DelegationTask } from '../agents/shared/types.js';
 
 const POLL_INTERVAL_MS = 5000;
@@ -48,7 +49,9 @@ export async function processPendingDelegations(): Promise<number> {
  * 4. Mark as completed with result summary
  */
 export async function processOneTask(task: DelegationTask): Promise<void> {
-  console.log(`[delegation-engine] Processing task ${task.id} -> ${task.to_agent}`);
+  console.log(
+    `[delegation-engine] Processing task ${task.id} -> ${task.to_agent}`,
+  );
 
   // 1. Mark in_progress
   await supabase
@@ -69,7 +72,10 @@ export async function processOneTask(task: DelegationTask): Promise<void> {
     .in('id', task.pranchas);
 
   const pranchasSummary = (pages || [])
-    .map((p: any) => `- Prancha ${p.prancha_id} (${p.tipo}): confidence ${p.confidence}`)
+    .map(
+      (p: any) =>
+        `- Prancha ${p.prancha_id} (${p.tipo}): confidence ${p.confidence}`,
+    )
     .join('\n');
 
   const contextStr = Object.entries(task.context)
@@ -93,10 +99,21 @@ Dados estruturados das pranchas:
 ${JSON.stringify(pages, null, 2)}
 `.trim();
 
-  // 4. TODO: Run the specialist agent via container runner
-  // const result = await runAgent(task.to_agent, taskDescription, tools.definitions, tools.handlers);
-  // For now, mark as completed with placeholder
-  console.log(`[delegation-engine] Task ${task.id}: agent ${task.to_agent} would process ${task.pranchas.length} pranchas`);
+  // 4. Run the specialist agent via OrcaBot agent runner
+  console.log(
+    `[delegation-engine] Running agent ${task.to_agent} for ${task.pranchas.length} pranchas`,
+  );
+
+  const result = await runOrcabotAgent(
+    task.to_agent,
+    _taskDescription,
+    tools.definitions,
+    tools.handlers,
+  );
+
+  console.log(
+    `[delegation-engine] Agent ${task.to_agent} finished: ${result.tool_calls.length} tool calls, ${result.tokens_used} tokens, ${result.duration_ms}ms`,
+  );
 
   // 5. Count quantitativos created by this agent for this project
   const { data: quantitativos } = await supabase
@@ -126,14 +143,18 @@ ${JSON.stringify(pages, null, 2)}
     })
     .eq('id', task.id);
 
-  console.log(`[delegation-engine] Task ${task.id} completed: ${quantIds.length} quantitativos created`);
+  console.log(
+    `[delegation-engine] Task ${task.id} completed: ${quantIds.length} quantitativos created`,
+  );
 }
 
 /**
  * Start the delegation poller. Runs every POLL_INTERVAL_MS.
  */
 export function startDelegationPoller(): NodeJS.Timeout {
-  console.log(`[delegation-engine] Poller started (interval: ${POLL_INTERVAL_MS}ms)`);
+  console.log(
+    `[delegation-engine] Poller started (interval: ${POLL_INTERVAL_MS}ms)`,
+  );
 
   return setInterval(async () => {
     try {

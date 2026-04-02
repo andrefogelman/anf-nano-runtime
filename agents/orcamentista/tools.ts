@@ -11,6 +11,7 @@ import {
   flagForReview,
 } from '../shared/supabase-helpers.js';
 import { supabase } from '../../src/supabase-client.js';
+import { exportBudgetToStorage, setSupabase as setExcelSupabase } from '../../container/skills/excel-export/index.js';
 import type { Quantitativo, OrcamentoItem, DelegationTask } from '../shared/types.js';
 
 const AGENT_SLUG = 'orcamentista';
@@ -289,6 +290,26 @@ async function flag_for_review_handler(params: {
   return { flagged: true, table: params.table, id: params.id, notes: params.notes };
 }
 
+async function export_budget(params: {
+  project_id: string;
+}): Promise<unknown> {
+  setExcelSupabase(supabase);
+  const storagePath = await exportBudgetToStorage(params.project_id);
+
+  await logAgentActivity({
+    project_id: params.project_id,
+    agent_slug: AGENT_SLUG,
+    action: 'export_budget',
+    description: `Exportou planilha orcamentaria para ${storagePath}`,
+    output: { storage_path: storagePath },
+  });
+
+  return {
+    storage_path: storagePath,
+    message: `Planilha XLSX exportada com sucesso para storage: ${storagePath}`,
+  };
+}
+
 async function get_project_context_handler(params: {
   project_id: string;
 }): Promise<unknown> {
@@ -416,6 +437,17 @@ export const toolDefinitions = [
       required: ['project_id'],
     },
   },
+  {
+    name: 'export_budget',
+    description: 'Exporta a planilha orcamentaria completa em formato XLSX para o Supabase Storage. Gera 3 abas: Capa, Planilha Orcamentaria (com EAP, custos, Curva ABC), e Quantitativos. Usar apos calculate_subtotals.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        project_id: { type: 'string' },
+      },
+      required: ['project_id'],
+    },
+  },
 ] as const;
 
 export const toolHandlers: Record<string, (params: any) => Promise<unknown>> = {
@@ -427,4 +459,5 @@ export const toolHandlers: Record<string, (params: any) => Promise<unknown>> = {
   calculate_subtotals,
   flag_for_review: flag_for_review_handler,
   get_project_context: get_project_context_handler,
+  export_budget,
 };

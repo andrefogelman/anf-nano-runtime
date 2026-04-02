@@ -6,7 +6,9 @@ vi.mock('../../src/supabase-client.js', () => ({
       select: vi.fn().mockReturnThis(),
       insert: vi.fn().mockReturnThis(),
       eq: vi.fn().mockReturnThis(),
-      single: vi.fn().mockResolvedValue({ data: { id: 'test-id' }, error: null }),
+      single: vi
+        .fn()
+        .mockResolvedValue({ data: { id: 'test-id' }, error: null }),
       limit: vi.fn().mockResolvedValue({ data: [], error: null }),
       order: vi.fn().mockReturnThis(),
     })),
@@ -19,7 +21,7 @@ describe('OrcaBot agent registry', () => {
   it('registers orcamentista agent', () => {
     const tools = getAgentTools('orcamentista');
     expect(tools).not.toBeNull();
-    expect(tools!.definitions.length).toBe(8);
+    expect(tools!.definitions.length).toBe(9);
   });
 
   it('registers estrutural agent', () => {

@@ -7,7 +7,7 @@ let client: SupabaseClient | null = null;
 export function getSupabase(): SupabaseClient {
   if (client) return client;
   const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
   if (!url || !key) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
   }
@@ -15,11 +15,17 @@ export function getSupabase(): SupabaseClient {
   return client;
 }
 
+/** Allow injecting an existing Supabase client (used when running in-process) */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function setSupabase(sb: any): void {
+  client = sb as SupabaseClient;
+}
+
 /** Fetch a pending job by ID */
 export async function getJob(jobId: string): Promise<PdfJob> {
   const sb = getSupabase();
   const { data, error } = await sb
-    .from("pdf_jobs")
+    .from("ob_pdf_jobs")
     .select("*")
     .eq("id", jobId)
     .single();
@@ -33,7 +39,7 @@ export async function updateJob(
   updates: Partial<Pick<PdfJob, "status" | "stage" | "progress" | "error_message" | "started_at" | "completed_at">>
 ): Promise<void> {
   const sb = getSupabase();
-  const { error } = await sb.from("pdf_jobs").update(updates).eq("id", jobId);
+  const { error } = await sb.from("ob_pdf_jobs").update(updates).eq("id", jobId);
   if (error) throw new Error(`Failed to update job ${jobId}: ${error.message}`);
 }
 
@@ -41,7 +47,7 @@ export async function updateJob(
 export async function downloadPdf(storagePath: string, localPath: string): Promise<void> {
   const sb = getSupabase();
   const { data, error } = await sb.storage
-    .from("project-files")
+    .from("project-pdfs")
     .download(storagePath);
   if (error) throw new Error(`Failed to download ${storagePath}: ${error.message}`);
 
@@ -54,7 +60,7 @@ export async function downloadPdf(storagePath: string, localPath: string): Promi
 export async function getFileStoragePath(fileId: string): Promise<string> {
   const sb = getSupabase();
   const { data, error } = await sb
-    .from("project_files")
+    .from("ob_project_files")
     .select("storage_path")
     .eq("id", fileId)
     .single();
@@ -72,7 +78,7 @@ export async function uploadPageImage(
   const sb = getSupabase();
   const path = `renders/${projectId}/${fileId}/page-${pageNumber}.png`;
   const { error } = await sb.storage
-    .from("project-files")
+    .from("project-pdfs")
     .upload(path, imageBuffer, {
       contentType: "image/png",
       upsert: true,
@@ -98,7 +104,7 @@ export async function upsertPageResult(
   }
 ): Promise<void> {
   const sb = getSupabase();
-  const { error } = await sb.from("pdf_pages").upsert(
+  const { error } = await sb.from("ob_pdf_pages").upsert(
     {
       file_id: fileId,
       page_number: pageNumber,

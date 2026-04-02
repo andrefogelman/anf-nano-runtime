@@ -55,6 +55,8 @@ import {
   startRemoteControl,
   stopRemoteControl,
 } from './remote-control.js';
+import { startPdfJobPoller } from './pdf-job-poller.js';
+import { startDelegationPoller } from './delegation-engine.js';
 import {
   isSenderAllowed,
   isTriggerAllowed,
@@ -782,6 +784,10 @@ async function main(): Promise<void> {
       'ANF modules failed to start — continuing without agents',
     );
   });
+
+  // Start OrcaBot PDF job poller and delegation engine
+  startPdfJobPoller();
+  startDelegationPoller();
 
   if (channels.length > 0) {
     queue.setProcessMessagesFn(processGroupMessages);

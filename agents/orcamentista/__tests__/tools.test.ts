@@ -20,7 +20,7 @@ vi.mock('../../../src/supabase-client.js', () => ({
 import { toolHandlers, toolDefinitions } from '../tools.js';
 
 describe('orcamentista tools', () => {
-  it('exports all 8 tool definitions', () => {
+  it('exports all 9 tool definitions', () => {
     const names = toolDefinitions.map((t) => t.name);
     expect(names).toContain('process_pdf_results');
     expect(names).toContain('create_quantitativo');
@@ -30,7 +30,8 @@ describe('orcamentista tools', () => {
     expect(names).toContain('calculate_subtotals');
     expect(names).toContain('flag_for_review');
     expect(names).toContain('get_project_context');
-    expect(toolDefinitions.length).toBe(8);
+    expect(names).toContain('export_budget');
+    expect(toolDefinitions.length).toBe(9);
   });
 
   it('every definition has a matching handler', () => {

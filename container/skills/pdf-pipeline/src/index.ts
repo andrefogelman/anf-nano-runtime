@@ -100,7 +100,7 @@ export async function runPipeline(jobId: string): Promise<void> {
     // Persist results to Supabase
     const sb = getSupabase();
     const { data: fileData } = await sb
-      .from("project_files")
+      .from("ob_project_files")
       .select("project_id")
       .eq("id", job.file_id)
       .single();

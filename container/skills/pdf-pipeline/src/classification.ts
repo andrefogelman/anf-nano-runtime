@@ -72,23 +72,41 @@ export async function classifyPage(page: ExtractedPage): Promise<ClassifiedPage>
 
   const userPrompt = buildClassificationPrompt(page);
 
-  const response = await fetch(`${baseUrl}/v1/messages`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": authToken,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 256,
-      system: CLASSIFICATION_SYSTEM_PROMPT,
-      messages: [{ role: "user", content: userPrompt }],
-    }),
+  const body = JSON.stringify({
+    model: "claude-haiku-4-5-20251001",
+    max_tokens: 256,
+    system: CLASSIFICATION_SYSTEM_PROMPT,
+    messages: [{ role: "user", content: userPrompt }],
   });
+  const headers = {
+    "Content-Type": "application/json",
+    "x-api-key": authToken,
+    "anthropic-version": "2023-06-01",
+  };
 
-  if (!response.ok) {
-    throw new Error(`Classification API error: ${response.status} ${await response.text()}`);
+  // Retry with backoff for rate limits
+  const MAX_RETRIES = 3;
+  const RETRY_DELAYS = [10_000, 30_000, 60_000];
+  let response: Response | undefined;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    response = await fetch(`${baseUrl}/v1/messages`, {
+      method: "POST",
+      headers,
+      body,
+    });
+
+    if (response.status === 429 && attempt < MAX_RETRIES) {
+      const delay = RETRY_DELAYS[attempt];
+      console.log(`[classification] Rate limited on page ${page.page_number}, retrying in ${delay / 1000}s...`);
+      await new Promise((r) => setTimeout(r, delay));
+      continue;
+    }
+    break;
+  }
+
+  if (!response!.ok) {
+    throw new Error(`Classification API error: ${response!.status} ${await response!.text()}`);
   }
 
   const data = await response.json() as any;
