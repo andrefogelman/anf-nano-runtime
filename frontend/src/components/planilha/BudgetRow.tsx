@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BudgetCell } from "./BudgetCell";
 import { useProjectContext } from "@/contexts/ProjectContext";
@@ -10,9 +10,19 @@ interface BudgetRowProps {
   hasChildren: boolean;
   onToggle: () => void;
   onUpdate: (field: keyof OrcamentoItem, value: string | number) => void;
+  onDelete: (item: OrcamentoItem) => void;
+  onContextMenu: (e: React.MouseEvent, item: OrcamentoItem) => void;
 }
 
-export function BudgetRow({ item, isExpanded, hasChildren, onToggle, onUpdate }: BudgetRowProps) {
+export function BudgetRow({
+  item,
+  isExpanded,
+  hasChildren,
+  onToggle,
+  onUpdate,
+  onDelete,
+  onContextMenu,
+}: BudgetRowProps) {
   const { setActiveItemId } = useProjectContext();
   const isLevel1 = item.eap_level === 1;
   const isLevel3 = item.eap_level === 3;
@@ -20,12 +30,13 @@ export function BudgetRow({ item, isExpanded, hasChildren, onToggle, onUpdate }:
   return (
     <tr
       className={cn(
-        "border-b transition-colors hover:bg-accent/20",
+        "group border-b transition-colors hover:bg-accent/20",
         isLevel1 && "budget-row-level1 bg-primary/5",
         !isLevel1 && !isLevel3 && "budget-row-level2",
         isLevel3 && "budget-row-level3"
       )}
       onClick={() => setActiveItemId(item.id)}
+      onContextMenu={(e) => onContextMenu(e, item)}
     >
       {/* Item code */}
       <td className="w-20 border-r px-2 py-1">
@@ -108,13 +119,25 @@ export function BudgetRow({ item, isExpanded, hasChildren, onToggle, onUpdate }:
 
       {/* Adm% */}
       <td className="w-16 text-right">
-        <BudgetCell
-          value={item.adm_percentual}
-          type={isLevel1 ? "readonly-number" : "percent"}
-          onChange={(v) => onUpdate("adm_percentual", v)}
-          className="text-right"
-          readOnly={isLevel1}
-        />
+        <div className="flex items-center justify-end gap-1">
+          <BudgetCell
+            value={item.adm_percentual}
+            type={isLevel1 ? "readonly-number" : "percent"}
+            onChange={(v) => onUpdate("adm_percentual", v)}
+            className="text-right"
+            readOnly={isLevel1}
+          />
+          <button
+            className="invisible p-0.5 rounded hover:bg-destructive/10 group-hover:visible"
+            title="Excluir"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete(item);
+            }}
+          >
+            <Trash2 className="h-3.5 w-3.5 text-destructive/70 hover:text-destructive" />
+          </button>
+        </div>
       </td>
     </tr>
   );

@@ -177,3 +177,60 @@ export function useDeleteOrcamentoItem() {
     },
   });
 }
+
+export function useBulkDeleteOrcamentoItems() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ ids, projectId }: { ids: string[]; projectId: string }) => {
+      const { error } = await supabase
+        .from("ob_orcamento_items")
+        .delete()
+        .in("id", ids);
+
+      if (error) throw error;
+      return { projectId };
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["orcamento", data.projectId] });
+    },
+  });
+}
+
+export function useBulkCreateOrcamentoItems() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ items }: { items: OrcamentoInsert[] }) => {
+      const { data, error } = await supabase
+        .from("ob_orcamento_items")
+        .insert(items)
+        .select();
+
+      if (error) throw error;
+      return data as OrcamentoItem[];
+    },
+    onSuccess: (data) => {
+      if (data.length > 0) {
+        queryClient.invalidateQueries({ queryKey: ["orcamento", data[0].project_id] });
+      }
+    },
+  });
+}
+
+export function useQuantitativos(projectId: string) {
+  return useQuery({
+    queryKey: ["quantitativos", projectId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("ob_quantitativos")
+        .select("*")
+        .eq("project_id", projectId)
+        .order("disciplina", { ascending: true });
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!projectId,
+  });
+}

@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Plus, Download, Filter, Search } from "lucide-react";
+import { Plus, Download, Filter, Search, Upload, Undo2 } from "lucide-react";
 import { useState } from "react";
 
 interface BudgetToolbarProps {
@@ -16,6 +16,8 @@ interface BudgetToolbarProps {
   onSearch: (query: string) => void;
   filterDisciplina: string | null;
   onFilterDisciplina: (disciplina: string | null) => void;
+  onImportQuantitativos?: () => void;
+  onUndo?: () => void;
 }
 
 export function BudgetToolbar({
@@ -24,6 +26,8 @@ export function BudgetToolbar({
   onSearch,
   filterDisciplina,
   onFilterDisciplina,
+  onImportQuantitativos,
+  onUndo,
 }: BudgetToolbarProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -79,6 +83,21 @@ export function BudgetToolbar({
           <SelectItem value="ele">Elétrico</SelectItem>
         </SelectContent>
       </Select>
+
+      {/* Import Quantitativos */}
+      {onImportQuantitativos && (
+        <Button variant="outline" size="sm" onClick={onImportQuantitativos}>
+          <Upload className="mr-1 h-3 w-3" />
+          Importar Quantitativos
+        </Button>
+      )}
+
+      {/* Undo */}
+      {onUndo && (
+        <Button variant="ghost" size="sm" onClick={onUndo} title="Desfazer (Ctrl+Z)">
+          <Undo2 className="h-3.5 w-3.5" />
+        </Button>
+      )}
 
       {/* Export */}
       <Button variant="outline" size="sm" onClick={onExportExcel}>
