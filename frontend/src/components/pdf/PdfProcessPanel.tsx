@@ -217,14 +217,6 @@ function RunCard({
           {items.length > 0 && (
             <>
               <div className="flex items-center justify-between px-3 py-1.5 border-t bg-muted/30">
-                <div className="flex gap-1">
-                  <Button variant="ghost" size="sm" className="h-5 text-[10px] px-1.5" onClick={() => toggleAll(true)}>
-                    Todos
-                  </Button>
-                  <Button variant="ghost" size="sm" className="h-5 text-[10px] px-1.5" onClick={() => toggleAll(false)}>
-                    Nenhum
-                  </Button>
-                </div>
                 <Button
                   size="sm"
                   className="h-6 text-xs"
@@ -238,6 +230,14 @@ function RunCard({
                   )}
                   Salvar {selectedCount} na Planilha
                 </Button>
+                <div className="flex gap-1">
+                  <Button variant="ghost" size="sm" className="h-5 text-[10px] px-1.5" onClick={() => toggleAll(true)}>
+                    Todos
+                  </Button>
+                  <Button variant="ghost" size="sm" className="h-5 text-[10px] px-1.5" onClick={() => toggleAll(false)}>
+                    Nenhum
+                  </Button>
+                </div>
               </div>
               <div className="max-h-[250px] overflow-auto">
                 <table className="w-full text-xs">
