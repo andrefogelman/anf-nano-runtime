@@ -175,6 +175,24 @@ export function useProcessingRuns(fileId: string) {
   });
 }
 
+export function useDeleteProcessingRun() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ runId, fileId }: { runId: string; fileId: string }) => {
+      const { error } = await supabase
+        .from("ob_processing_runs")
+        .delete()
+        .eq("id", runId);
+      if (error) throw error;
+      return { fileId };
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["processing-runs", data.fileId] });
+    },
+  });
+}
+
 export function useDeleteFile() {
   const queryClient = useQueryClient();
 

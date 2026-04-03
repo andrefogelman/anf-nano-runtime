@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/lib/supabase";
-import { useProcessingRuns } from "@/hooks/usePdfJobs";
+import { useProcessingRuns, useDeleteProcessingRun } from "@/hooks/usePdfJobs";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Send,
@@ -15,6 +15,7 @@ import {
   ChevronUp,
   Clock,
   AlertTriangle,
+  Trash2,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { ProjectFile } from "@/types/orcamento";
@@ -96,6 +97,7 @@ function RunCard({
     }));
   });
   const [saving, setSaving] = useState(false);
+  const deleteRun = useDeleteProcessingRun();
   const queryClient = useQueryClient();
 
   const selectedCount = items.filter((i) => i.selected).length;
@@ -181,6 +183,19 @@ function RunCard({
         )}
         <span className="flex-1 text-xs truncate text-muted-foreground italic">
           {run.prompt.slice(0, 60)}...
+        </span>
+        <span
+          role="button"
+          className="h-5 w-5 flex items-center justify-center rounded hover:bg-destructive/10 transition-colors"
+          title="Excluir processamento"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (confirm("Excluir este processamento?")) {
+              deleteRun.mutate({ runId: run.id, fileId });
+            }
+          }}
+        >
+          <Trash2 className="h-3 w-3 text-destructive" />
         </span>
         {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
       </button>

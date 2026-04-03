@@ -418,7 +418,11 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
           let dwgConverted = false;
           try {
             const { execFileSync } = await import('node:child_process');
-            const { mkdtempSync, readFileSync: readFs, unlinkSync } = await import('node:fs');
+            const {
+              mkdtempSync,
+              readFileSync: readFs,
+              unlinkSync,
+            } = await import('node:fs');
             const { join: pathJoin } = await import('node:path');
             const tmpDir = mkdtempSync('/tmp/dwg-');
             const dxfPath = pathJoin(tmpDir, 'converted.dxf');
@@ -426,8 +430,13 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
             const { writeFileSync: writeFs } = await import('node:fs');
             writeFs(dwgPath, Buffer.from(buffer));
             try {
-              execFileSync('dwg2dxf', [dwgPath, '-o', dxfPath], { timeout: 30000, stdio: 'pipe' });
-            } catch { /* dwg2dxf may crash but still produce partial output */ }
+              execFileSync('dwg2dxf', [dwgPath, '-o', dxfPath], {
+                timeout: 30000,
+                stdio: 'pipe',
+              });
+            } catch {
+              /* dwg2dxf may crash but still produce partial output */
+            }
             try {
               const dxfText = readFs(dxfPath, 'utf-8');
               if (dxfText.includes('SECTION') && dxfText.includes('ENTITIES')) {
@@ -436,42 +445,77 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
                 const convTexts: string[] = [];
                 const convBlocks: Map<string, number> = new Map();
                 const dxfLines = dxfText.split('\n');
-                let ent = '', lay = '0';
+                let ent = '',
+                  lay = '0';
                 for (let i = 0; i < dxfLines.length; i++) {
                   const c = dxfLines[i].trim();
-                  const v = (dxfLines[i+1] || '').trim();
+                  const v = (dxfLines[i + 1] || '').trim();
                   if (c === '0') ent = v;
-                  if (c === '8') { lay = v; if (!convLayers.includes(v)) convLayers.push(v); }
-                  if (c === '1' && (ent === 'TEXT' || ent === 'MTEXT')) convTexts.push(`[${lay}] ${v}`);
-                  if (c === '42' && ent === 'DIMENSION') convTexts.push(`[COTA] ${v}`);
-                  if (c === '2' && ent === 'INSERT') convBlocks.set(v, (convBlocks.get(v) || 0) + 1);
+                  if (c === '8') {
+                    lay = v;
+                    if (!convLayers.includes(v)) convLayers.push(v);
+                  }
+                  if (c === '1' && (ent === 'TEXT' || ent === 'MTEXT'))
+                    convTexts.push(`[${lay}] ${v}`);
+                  if (c === '42' && ent === 'DIMENSION')
+                    convTexts.push(`[COTA] ${v}`);
+                  if (c === '2' && ent === 'INSERT')
+                    convBlocks.set(v, (convBlocks.get(v) || 0) + 1);
                 }
-                const bl = Array.from(convBlocks.entries()).sort((a, b) => b[1] - a[1]).map(([n, c]) => `${n}: ${c}x`);
+                const bl = Array.from(convBlocks.entries())
+                  .sort((a, b) => b[1] - a[1])
+                  .map(([n, c]) => `${n}: ${c}x`);
                 extractedText = `LAYERS (${convLayers.length}): ${convLayers.join(', ')}\n\nTEXTOS (${convTexts.length}):\n${convTexts.slice(0, 100).join('\n')}\n\nBLOCOS (${bl.length}):\n${bl.slice(0, 50).join('\n')}`;
                 fileInfo = `DWG convertido para DXF: ${convLayers.length} layers, ${convTexts.length} textos, ${bl.length} blocos`;
                 dwgConverted = true;
               }
-            } catch { /* partial DXF not readable */ }
+            } catch {
+              /* partial DXF not readable */
+            }
             // Cleanup
-            try { unlinkSync(dwgPath); unlinkSync(dxfPath); } catch { /* */ }
-          } catch { /* dwg2dxf not available */ }
+            try {
+              unlinkSync(dwgPath);
+              unlinkSync(dxfPath);
+            } catch {
+              /* */
+            }
+          } catch {
+            /* dwg2dxf not available */
+          }
 
           if (!dwgConverted) {
             // Fallback: extract readable strings from binary
             const strings = text.match(/[\x20-\x7E]{4,}/g) || [];
-            const layerLike = strings.filter(s => s.match(/^(ARQ|EST|HID|ELE|COT|PAR|TUB|ILU)/i)).slice(0, 50);
-            const textLike = strings.filter(s => s.match(/[A-Za-z]{2,}/) && s.length > 3 && s.length < 100).slice(0, 100);
-            const dimLike = strings.filter(s => s.match(/^\d+[\.,]\d+$/)).slice(0, 50);
+            const layerLike = strings
+              .filter((s) => s.match(/^(ARQ|EST|HID|ELE|COT|PAR|TUB|ILU)/i))
+              .slice(0, 50);
+            const textLike = strings
+              .filter(
+                (s) =>
+                  s.match(/[A-Za-z]{2,}/) && s.length > 3 && s.length < 100,
+              )
+              .slice(0, 100);
+            const dimLike = strings
+              .filter((s) => s.match(/^\d+[\.,]\d+$/))
+              .slice(0, 50);
 
             // Check if we got almost nothing useful
-            const useful = layerLike.length + textLike.filter(s => !s.match(/IHDR|PLTE|IDAT|IEND|PNG|zlib/i)).length + dimLike.length;
+            const useful =
+              layerLike.length +
+              textLike.filter((s) => !s.match(/IHDR|PLTE|IDAT|IEND|PNG|zlib/i))
+                .length +
+              dimLike.length;
             if (useful < 10) {
               // Not enough data — recommend conversion
-              extractedText = 'EXTRAÇÃO INSUFICIENTE — DWG em formato binário complexo (dynamic blocks, 2018+). Dados legíveis insuficientes para levantamento confiável.';
+              extractedText =
+                'EXTRAÇÃO INSUFICIENTE — DWG em formato binário complexo (dynamic blocks, 2018+). Dados legíveis insuficientes para levantamento confiável.';
               fileInfo = `DWG binário complexo — recomenda-se converter para DXF no AutoCAD`;
 
               // Still try to send to LLM but with clear warning
-              extractedText += `\n\nSTRINGS ENCONTRADAS (baixa qualidade):\n${textLike.filter(s => !s.match(/IHDR|PLTE|IDAT|IEND|PNG|zlib/i)).slice(0, 30).join(', ')}`;
+              extractedText += `\n\nSTRINGS ENCONTRADAS (baixa qualidade):\n${textLike
+                .filter((s) => !s.match(/IHDR|PLTE|IDAT|IEND|PNG|zlib/i))
+                .slice(0, 30)
+                .join(', ')}`;
             } else {
               extractedText = `DWG BINÁRIO (extração parcial)\n\nLAYERS: ${layerLike.join(', ')}\n\nTEXTOS: ${textLike.join(', ')}\n\nCOTAS: ${dimLike.join(', ')}`;
               fileInfo = `DWG binário: ${layerLike.length} layers, ${textLike.length} textos, ${dimLike.length} cotas`;
