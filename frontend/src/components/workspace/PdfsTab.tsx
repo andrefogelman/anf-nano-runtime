@@ -51,7 +51,7 @@ export function PdfsTab() {
 
       {files && files.length > 0 && (
         <ResizablePanelGroup orientation="horizontal" className="flex-1">
-          <ResizablePanel defaultSize={20} minSize={15}>
+          <ResizablePanel defaultSize={30} minSize={20}>
             <div className="flex h-full flex-col">
               <div className="border-b p-3">
                 <PdfUploader projectId={project.id} />
@@ -66,7 +66,7 @@ export function PdfsTab() {
 
           <ResizableHandle />
 
-          <ResizablePanel defaultSize={55}>
+          <ResizablePanel defaultSize={40}>
             {activeFile ? (
               activeFile.file_type === "pdf" ? (
                 <PdfViewer storagePath={activeFile.storage_path} />

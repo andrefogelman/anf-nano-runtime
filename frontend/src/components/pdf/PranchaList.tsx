@@ -87,10 +87,10 @@ function FileRow({ file, isActive, onSelect, onDelete }: { file: ProjectFile; is
       ) : (
         <button
           onClick={() => setConfirming(true)}
-          className="h-5 w-5 flex items-center justify-center rounded opacity-0 group-hover:opacity-100 hover:bg-destructive/10 transition-opacity flex-shrink-0"
+          className="h-5 w-5 flex items-center justify-center rounded hover:bg-destructive/10 flex-shrink-0"
           title="Excluir arquivo"
         >
-          <Trash2 className="h-3 w-3 text-destructive" />
+          <Trash2 className="h-3 w-3 text-muted-foreground hover:text-destructive" />
         </button>
       )}
     </div>
@@ -107,7 +107,7 @@ export function PranchaList({ files, activeFileId, onSelectFile }: PranchaListPr
   }, {});
 
   return (
-    <ScrollArea className="h-full w-64 border-r">
+    <ScrollArea className="h-full w-full">
       <div className="p-3 space-y-4">
         <h3 className="text-sm font-medium text-muted-foreground">Pranchas</h3>
 
