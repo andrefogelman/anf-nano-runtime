@@ -8,6 +8,7 @@ import TcpoPage from "@/pages/TcpoPage";
 import SinapiPage from "@/pages/SinapiPage";
 import CadernosPage from "@/pages/CadernosPage";
 import TcpoInsumosPage from "@/pages/TcpoInsumosPage";
+import AssistenteSinapiPage from "@/pages/AssistenteSinapiPage";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="tcpo-insumos" element={<TcpoInsumosPage />} />
         <Route path="sinapi" element={<SinapiPage />} />
         <Route path="cadernos" element={<CadernosPage />} />
+        <Route path="assistente-sinapi" element={<AssistenteSinapiPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

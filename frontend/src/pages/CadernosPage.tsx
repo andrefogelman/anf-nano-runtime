@@ -11,7 +11,6 @@ import {
   Search,
 } from "lucide-react";
 import { useCadernoList, type CadernoSummary } from "@/hooks/useCadernos";
-import { CadernoChat } from "@/components/cadernos/CadernoChat";
 import { PdfViewerModal } from "@/components/cadernos/PdfViewerModal";
 
 const SUPABASE_STORAGE_BASE =
@@ -99,31 +98,9 @@ export default function CadernosPage() {
     [],
   );
 
-  const openPdfFromChat = useCallback(
-    (sourceFile: string, title: string) => {
-      if (!sourceFile && !title) return;
-      // Try to find matching caderno
-      const match = cadernos?.find(
-        (c) =>
-          c.source_file === sourceFile ||
-          c.source_title.toLowerCase() === title.toLowerCase(),
-      );
-      if (match) {
-        openPdfForCaderno(match);
-      } else {
-        // Fallback: build URL from title
-        const url = getPdfUrl(title, sourceFile);
-        setPdfModal({ open: true, url, title });
-      }
-    },
-    [cadernos, openPdfForCaderno],
-  );
-
   return (
     <>
-      <div className="flex h-full">
-        {/* LEFT PANEL: Cadernos list (40%) */}
-        <div className="w-[40%] border-r flex flex-col h-full">
+      <div className="flex flex-col h-full max-w-fit">
           {/* Header */}
           <div className="px-4 py-3 border-b bg-muted/20 space-y-3 shrink-0">
             <div className="flex items-center gap-2.5">
@@ -188,12 +165,6 @@ export default function CadernosPage() {
               )}
             </div>
           </ScrollArea>
-        </div>
-
-        {/* RIGHT PANEL: AI Chat (60%) */}
-        <div className="w-[60%] flex flex-col h-full">
-          <CadernoChat onOpenPdf={openPdfFromChat} />
-        </div>
       </div>
 
       {/* PDF Viewer Modal */}

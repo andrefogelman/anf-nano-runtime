@@ -11,6 +11,7 @@ import {
   FolderOpen,
   ChevronRight,
   ChevronDown,
+  MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTcpoCategoryCounts, TCPO_CATEGORIES } from "@/hooks/useTcpo";
@@ -240,6 +241,20 @@ export function AppShell() {
             >
               <BookOpen className="h-4 w-4" />
               Cadernos Técnicos
+            </Link>
+
+            {/* Assistente SINAPI */}
+            <Link
+              to="/assistente-sinapi"
+              className={cn(
+                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                location.pathname === "/assistente-sinapi"
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : "text-sidebar-foreground hover:bg-sidebar-accent/50"
+              )}
+            >
+              <MessageSquare className="h-4 w-4" />
+              Assistente SINAPI
             </Link>
           </nav>
         </ScrollArea>
