@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -26,6 +26,7 @@ interface PdfViewerModalProps {
   onClose: () => void;
   pdfUrl: string;
   title: string;
+  initialPage?: number;
 }
 
 export function PdfViewerModal({
@@ -33,17 +34,37 @@ export function PdfViewerModal({
   onClose,
   pdfUrl,
   title,
+  initialPage = 1,
 }: PdfViewerModalProps) {
   const [numPages, setNumPages] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const [scale, setScale] = useState(1.0);
-  const [pageInput, setPageInput] = useState("1");
+  const [pageInput, setPageInput] = useState(String(initialPage));
 
   const onLoadSuccess = useCallback(({ numPages: n }: { numPages: number }) => {
     setNumPages(n);
-    setCurrentPage(1);
-    setPageInput("1");
-  }, []);
+    const startPage = Math.max(1, Math.min(n, initialPage));
+    setCurrentPage(startPage);
+    setPageInput(String(startPage));
+  }, [initialPage]);
+
+  // Keyboard navigation: arrow left/right for pages
+  useEffect(() => {
+    if (!open) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        setCurrentPage((p) => { const next = Math.max(1, p - 1); setPageInput(String(next)); return next; });
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        setCurrentPage((p) => { const next = Math.min(numPages, p + 1); setPageInput(String(next)); return next; });
+      } else if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [open, numPages, onClose]);
 
   const goToPage = useCallback(
     (page: number) => {
@@ -70,7 +91,7 @@ export function PdfViewerModal({
 
   return (
     <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
-      <DialogContent className="max-w-[95vw] w-[95vw] h-[95vh] max-h-[95vh] flex flex-col p-0 gap-0">
+      <DialogContent className="max-w-fit w-auto h-[95vh] max-h-[95vh] flex flex-col p-0 gap-0">
         <DialogHeader className="px-4 py-3 border-b shrink-0">
           <div className="flex items-center justify-between gap-4">
             <DialogTitle className="truncate text-base">{title}</DialogTitle>

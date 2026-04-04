@@ -15,7 +15,7 @@ interface ChatMessage {
 }
 
 interface CadernoChatProps {
-  onOpenPdf?: (sourceFile: string, title: string) => void;
+  onOpenPdf?: (sourceFile: string, title: string, page?: number) => void;
 }
 
 const EXAMPLE_QUESTIONS = [
@@ -184,7 +184,7 @@ export function CadernoChat({ onOpenPdf }: CadernoChatProps) {
                           variant="secondary"
                           className="gap-1 cursor-pointer hover:bg-secondary/80 text-xs"
                           onClick={() =>
-                            onOpenPdf?.(src.source_file || "", src.title)
+                            onOpenPdf?.(src.source_file || "", src.title, src.page)
                           }
                         >
                           <FileText className="h-3 w-3" />

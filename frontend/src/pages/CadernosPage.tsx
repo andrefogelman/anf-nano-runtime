@@ -74,7 +74,8 @@ export default function CadernosPage() {
     open: boolean;
     url: string;
     title: string;
-  }>({ open: false, url: "", title: "" });
+    page: number;
+  }>({ open: false, url: "", title: "", page: 1 });
 
   const [filter, setFilter] = useState("");
 
@@ -93,7 +94,7 @@ export default function CadernosPage() {
   const openPdfForCaderno = useCallback(
     (caderno: CadernoSummary) => {
       const url = getPdfUrl(caderno.source_title, caderno.source_file);
-      setPdfModal({ open: true, url, title: caderno.source_title });
+      setPdfModal({ open: true, url, title: caderno.source_title, page: 1 });
     },
     [],
   );
@@ -170,9 +171,10 @@ export default function CadernosPage() {
       {/* PDF Viewer Modal */}
       <PdfViewerModal
         open={pdfModal.open}
-        onClose={() => setPdfModal({ open: false, url: "", title: "" })}
+        onClose={() => setPdfModal({ open: false, url: "", title: "", page: 1 })}
         pdfUrl={pdfModal.url}
         title={pdfModal.title}
+        initialPage={pdfModal.page}
       />
     </>
   );

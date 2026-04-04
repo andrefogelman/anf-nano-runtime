@@ -21,12 +21,12 @@ function getPdfUrl(sourceTitle: string, sourceFile: string): string {
 
 export default function AssistenteSinapiPage() {
   const { data: cadernos } = useCadernoList();
-  const [pdfModal, setPdfModal] = useState<{ open: boolean; url: string; title: string }>({
-    open: false, url: "", title: "",
+  const [pdfModal, setPdfModal] = useState<{ open: boolean; url: string; title: string; page: number }>({
+    open: false, url: "", title: "", page: 1,
   });
 
   const openPdfFromChat = useCallback(
-    (sourceFile: string, title: string) => {
+    (sourceFile: string, title: string, page?: number) => {
       if (!sourceFile && !title) return;
       const match = cadernos?.find(
         (c) => c.source_file === sourceFile || c.source_title.toLowerCase() === title.toLowerCase(),
@@ -34,7 +34,7 @@ export default function AssistenteSinapiPage() {
       const url = match
         ? getPdfUrl(match.source_title, match.source_file)
         : getPdfUrl(title, sourceFile);
-      setPdfModal({ open: true, url, title: match?.source_title || title });
+      setPdfModal({ open: true, url, title: match?.source_title || title, page: page || 1 });
     },
     [cadernos],
   );
@@ -47,9 +47,10 @@ export default function AssistenteSinapiPage() {
 
       <PdfViewerModal
         open={pdfModal.open}
-        onClose={() => setPdfModal({ open: false, url: "", title: "" })}
+        onClose={() => setPdfModal({ open: false, url: "", title: "", page: 1 })}
         pdfUrl={pdfModal.url}
         title={pdfModal.title}
+        initialPage={pdfModal.page}
       />
     </>
   );
