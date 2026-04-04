@@ -363,14 +363,30 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
       let fileInfo = '';
 
       if (fileType === 'pdf') {
-        // PDF: import lib directly to avoid pdf-parse's test-file auto-read bug
+        // PDF: supports both pdf-parse v1 (CJS) and v2 (ESM with PDFParse class)
         try {
-          // eslint-disable-next-line @typescript-eslint/no-require-imports
-          const pdfParseModule = await import('pdf-parse/lib/pdf-parse.js');
-          const pdfParse = (pdfParseModule as any).default || pdfParseModule;
-          const data = await pdfParse(Buffer.from(buffer));
-          extractedText = data.text || '';
-          fileInfo = `PDF: ${data.numpages} páginas, ${extractedText.length} chars`;
+          const pdfMod = await import('pdf-parse');
+          const pdfBuf = Buffer.from(buffer);
+
+          if (typeof (pdfMod as any).PDFParse === 'function') {
+            // v2 API: new PDFParse({}).load(buffer).getText()
+            const parser = new (pdfMod as any).PDFParse({});
+            await parser.load(pdfBuf);
+            const info = await parser.getInfo();
+            const pages: string[] = [];
+            for (let i = 1; i <= (info?.numPages ?? 0); i++) {
+              pages.push(await parser.getPageText(i));
+            }
+            extractedText = pages.join('\n');
+            fileInfo = `PDF: ${info?.numPages ?? '?'} páginas, ${extractedText.length} chars`;
+            parser.destroy();
+          } else {
+            // v1 API: pdfParse(buffer) → { text, numpages }
+            const pdfParse = (pdfMod as any).default || pdfMod;
+            const data = await pdfParse(pdfBuf);
+            extractedText = data.text || '';
+            fileInfo = `PDF: ${data.numpages} páginas, ${extractedText.length} chars`;
+          }
         } catch (e: unknown) {
           throw new Error(`Invalid PDF structure: ${(e as Error).message}`);
         }
