@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef, useMemo, type KeyboardEvent } from "react";
+import { useLocation } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,18 +19,13 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
-import {
-  ResizablePanelGroup,
-  ResizablePanel,
-  ResizableHandle,
-} from "@/components/ui/resizable";
+// ResizablePanel removed — tree is now in sidebar
 import { Skeleton } from "@/components/ui/skeleton";
 import { Search, ChevronDown, ChevronRight, Database, Pencil, Trash2, Plus, X, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatBRL, parseBRNumber } from "@/lib/format";
 import {
   useTcpoSearch,
-  useTcpoCategoryCounts,
   useCreateComposicao,
   useUpdateComposicao,
   useDeleteComposicao,
@@ -37,7 +33,7 @@ import {
   type TcpoComposicao,
 } from "@/hooks/useTcpo";
 import { TcpoComposicaoDetail } from "@/components/tcpo/TcpoComposicaoDetail";
-import { CategoryTree, type TreeNode } from "@/components/shared/CategoryTree";
+// CategoryTree removed — tree is in sidebar
 
 // ── Inline Editable Cell ────────────────────────────────────────
 function EditableCell({
@@ -183,9 +179,13 @@ function NewComposicaoRow({ onCancel }: { onCancel: () => void }) {
 
 // ── Main Page ───────────────────────────────────────────────────
 export default function TcpoPage() {
+  const location = useLocation();
   const [searchInput, setSearchInput] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // Read category from URL params (set by sidebar tree) — reactive via useLocation
+  const selectedCategory = useMemo(() => {
+    return new URLSearchParams(location.search).get("cat");
+  }, [location.search]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<TcpoComposicao | null>(null);
@@ -216,8 +216,6 @@ export default function TcpoPage() {
   }, []);
 
   const { data: composicoes, isLoading } = useTcpoSearch(debouncedQuery, selectedCategory);
-  const { data: categoryCounts } = useTcpoCategoryCounts();
-
   const toggleExpand = useCallback((id: string) => {
     setExpandedId((prev) => (prev === id ? null : id));
   }, []);
@@ -240,72 +238,10 @@ export default function TcpoPage() {
     });
   };
 
-  // Build tree
-  const tree: TreeNode[] = useMemo(() => {
-    const children: TreeNode[] = TCPO_CATEGORIES.map((cat) => ({
-      id: cat,
-      label: cat,
-      count: categoryCounts?.[cat] ?? 0,
-    }));
-
-    const totalCount = Object.values(categoryCounts ?? {}).reduce((a, b) => a + b, 0);
-
-    return [
-      {
-        id: "root",
-        label: "TCPO PINI",
-        count: totalCount,
-        children: [
-          {
-            id: "__servicos__",
-            label: "Servicos",
-            count: totalCount,
-            children,
-          },
-        ],
-      },
-    ];
-  }, [categoryCounts]);
-
-  const handleSelectNode = (id: string | null) => {
-    if (id === "root" || id === "__servicos__") {
-      setSelectedCategory(null);
-    } else {
-      setSelectedCategory(id);
-    }
-    setExpandedId(null);
-  };
-
-  // Header text
-  const headerText = useMemo(() => {
-    if (!selectedCategory) return "Todos os servicos";
-    return selectedCategory;
-  }, [selectedCategory]);
+  const headerText = selectedCategory || "Todos os serviços";
 
   return (
     <div className="flex flex-col h-full">
-      <ResizablePanelGroup direction="horizontal" className="flex-1">
-        {/* LEFT PANEL — Category tree */}
-        <ResizablePanel defaultSize={25} minSize={15} maxSize={40}>
-          <div className="h-full overflow-auto border-r bg-muted/20">
-            <div className="px-3 pt-4 pb-2">
-              <div className="flex items-center gap-2 mb-2">
-                <Database className="h-5 w-5 text-orange-600" />
-                <h2 className="text-sm font-bold">Base TCPO</h2>
-              </div>
-            </div>
-            <CategoryTree
-              tree={tree}
-              selectedId={selectedCategory}
-              onSelect={handleSelectNode}
-            />
-          </div>
-        </ResizablePanel>
-
-        <ResizableHandle withHandle />
-
-        {/* RIGHT PANEL — Results */}
-        <ResizablePanel defaultSize={75}>
           <div className="flex flex-col h-full">
             {/* Orange header bar */}
             <div className="bg-orange-500 text-white px-6 py-2.5 flex items-center gap-3">
@@ -495,8 +431,6 @@ export default function TcpoPage() {
               )}
             </div>
           </div>
-        </ResizablePanel>
-      </ResizablePanelGroup>
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
