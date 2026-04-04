@@ -275,7 +275,7 @@ function apiChannelFactory(opts: ChannelOpts): Channel | null {
       },
       body: JSON.stringify({
         model: LLM_MODEL,
-        max_tokens: 8192,
+        max_tokens: 16384,
         system,
         messages: [{ role: 'user', content: userContent }],
       }),
@@ -543,12 +543,14 @@ REGRAS:
 5. Quando incerto, estime com confidence baixo e explique em needs_review.
 6. Unidades: m², m³, m, kg, un, pt, vb.
 7. Se os dados extraídos forem insuficientes (DWG binário complexo), informe no resumo: "Recomenda-se converter o arquivo DWG para DXF no AutoCAD (Salvar Como → DXF) e reenviar. O formato DXF permite extração completa de layers, textos, blocos e cotas."
+8. O campo "resumo" deve ter NO MÁXIMO 3 frases curtas. Nunca incluir dados brutos, listas ou detalhes técnicos no resumo.
+9. O campo "memorial_calculo" em cada item deve conter o cálculo detalhado por ambiente. O resumo NÃO deve duplicar essas informações.
 
-FORMATO JSON OBRIGATÓRIO:
+FORMATO JSON OBRIGATÓRIO (responda APENAS com este JSON, sem texto antes ou depois):
 {
   "itens": [{"descricao":"...","quantidade":0,"unidade":"m²","memorial_calculo":"...","ambiente":"...","disciplina":"arquitetonico","confidence":0.85}],
   "needs_review": [{"item":"...","motivo":"..."}],
-  "resumo": "..."
+  "resumo": "Frase curta sobre o levantamento realizado."
 }`;
 
       const userMessage = `ARQUIVO: ${fileData.filename}\n${fileInfo}\nDISCIPLINA: ${fileData.disciplina || 'auto'}\n\nINSTRUÇÃO: ${body.prompt}\n\nDADOS EXTRAÍDOS:\n${extractedText.slice(0, 15000)}`;
