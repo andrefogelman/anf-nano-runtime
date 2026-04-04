@@ -625,7 +625,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full max-w-fit">
       <BudgetToolbar
         onAddItem={handleAddItem}
         onExportExcel={handleExportExcel}
@@ -637,7 +637,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
       />
 
       <ScrollArea className="flex-1">
-        <table className="w-full border-collapse">
+        <table className="border-collapse">
           <thead className="sticky top-0 z-10 bg-background">
             <tr className="border-b text-xs font-medium text-muted-foreground">
               <th className="w-20 border-r px-2 py-2 text-left">Item</th>

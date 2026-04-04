@@ -53,7 +53,7 @@ export default function TcpoInsumosPage() {
   const headerText = categoria || "Todos os insumos";
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full max-w-fit">
       {/* Orange header */}
       <div className="bg-orange-500 text-white px-6 py-2 flex items-center justify-between">
         <span className="text-sm font-medium">

@@ -241,7 +241,7 @@ export default function TcpoPage() {
   const headerText = selectedCategory || "Todos os serviços";
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full max-w-fit">
           <div className="flex flex-col h-full">
             {/* Orange header bar */}
             <div className="bg-orange-500 text-white px-6 py-2.5 flex items-center gap-3">

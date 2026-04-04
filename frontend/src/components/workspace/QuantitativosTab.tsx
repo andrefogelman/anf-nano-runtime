@@ -164,7 +164,7 @@ export function QuantitativosTab() {
 
   return (
     <ScrollArea className="h-full">
-      <div className="p-6">
+      <div className="p-6 max-w-fit">
         <div className="flex items-center gap-4 mb-4">
           <h2 className="text-lg font-bold">Quantitativos Extraídos</h2>
           <div className="relative w-64">

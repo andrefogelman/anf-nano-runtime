@@ -199,7 +199,7 @@ export default function SinapiPage() {
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full max-w-fit">
       {/* Orange header */}
       <div className="bg-orange-500 text-white px-6 py-2.5 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
@@ -217,9 +217,9 @@ export default function SinapiPage() {
         )}
       </div>
 
-      {/* Search + page size */}
+      {/* Search + page size + pagination — single row */}
       <div className="px-6 py-3 border-b flex items-center gap-4">
-        <div className="relative flex-1 max-w-lg">
+        <div className="relative max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Buscar por código ou descrição..."
@@ -229,7 +229,7 @@ export default function SinapiPage() {
           />
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted-foreground">Itens por página:</span>
+          <span className="text-xs text-muted-foreground whitespace-nowrap">Itens por página:</span>
           <Select
             value={String(pageSize)}
             onValueChange={(v) => setPageSize(Number(v))}
@@ -246,20 +246,31 @@ export default function SinapiPage() {
             </SelectContent>
           </Select>
         </div>
+        {count > 0 && (
+          <>
+            <span className="text-sm text-muted-foreground whitespace-nowrap">
+              Exibindo {(page - 1) * pageSize + 1}-{Math.min(page * pageSize, count)} de {count.toLocaleString("pt-BR")}
+            </span>
+            <div className="flex items-center gap-1">
+              <Button variant="outline" size="sm" onClick={() => handlePageChange(1)} disabled={page <= 1}>
+                <ChevronsLeft className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => handlePageChange(page - 1)} disabled={page <= 1}>
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <span className="text-sm px-2 py-1 whitespace-nowrap">
+                Página <strong>{page}</strong> de <strong>{totalPages}</strong>
+              </span>
+              <Button variant="outline" size="sm" onClick={() => handlePageChange(page + 1)} disabled={page >= totalPages}>
+                <ChevronRightIcon className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => handlePageChange(totalPages)} disabled={page >= totalPages}>
+                <ChevronsRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </>
+        )}
       </div>
-
-      {/* Top pagination */}
-      {count > 0 && (
-        <div className="px-6 py-2 border-b">
-          <PaginationControls
-            page={page}
-            totalPages={totalPages}
-            count={count}
-            pageSize={pageSize}
-            onPageChange={handlePageChange}
-          />
-        </div>
-      )}
 
       {/* Table */}
       <div ref={tableTopRef} className="flex-1 overflow-auto px-6 py-4">
