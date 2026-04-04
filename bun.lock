@@ -11,7 +11,7 @@
         "@xenova/transformers": "^2.17.2",
         "cron-parser": "5.5.0",
         "exceljs": "^4.4.0",
-        "pdf-parse": "^2.4.5",
+        "pdf-parse": "1.1.1",
         "pino": "^9.6.0",
         "ws": "^8.20.0",
       },
@@ -121,28 +121,6 @@
     "@humanwhocodes/retry": ["@humanwhocodes/retry@0.4.3", "", {}, "sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ=="],
 
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
-
-    "@napi-rs/canvas": ["@napi-rs/canvas@0.1.80", "", { "optionalDependencies": { "@napi-rs/canvas-android-arm64": "0.1.80", "@napi-rs/canvas-darwin-arm64": "0.1.80", "@napi-rs/canvas-darwin-x64": "0.1.80", "@napi-rs/canvas-linux-arm-gnueabihf": "0.1.80", "@napi-rs/canvas-linux-arm64-gnu": "0.1.80", "@napi-rs/canvas-linux-arm64-musl": "0.1.80", "@napi-rs/canvas-linux-riscv64-gnu": "0.1.80", "@napi-rs/canvas-linux-x64-gnu": "0.1.80", "@napi-rs/canvas-linux-x64-musl": "0.1.80", "@napi-rs/canvas-win32-x64-msvc": "0.1.80" } }, "sha512-DxuT1ClnIPts1kQx8FBmkk4BQDTfI5kIzywAaMjQSXfNnra5UFU9PwurXrl+Je3bJ6BGsp/zmshVVFbCmyI+ww=="],
-
-    "@napi-rs/canvas-android-arm64": ["@napi-rs/canvas-android-arm64@0.1.80", "", { "os": "android", "cpu": "arm64" }, "sha512-sk7xhN/MoXeuExlggf91pNziBxLPVUqF2CAVnB57KLG/pz7+U5TKG8eXdc3pm0d7Od0WreB6ZKLj37sX9muGOQ=="],
-
-    "@napi-rs/canvas-darwin-arm64": ["@napi-rs/canvas-darwin-arm64@0.1.80", "", { "os": "darwin", "cpu": "arm64" }, "sha512-O64APRTXRUiAz0P8gErkfEr3lipLJgM6pjATwavZ22ebhjYl/SUbpgM0xcWPQBNMP1n29afAC/Us5PX1vg+JNQ=="],
-
-    "@napi-rs/canvas-darwin-x64": ["@napi-rs/canvas-darwin-x64@0.1.80", "", { "os": "darwin", "cpu": "x64" }, "sha512-FqqSU7qFce0Cp3pwnTjVkKjjOtxMqRe6lmINxpIZYaZNnVI0H5FtsaraZJ36SiTHNjZlUB69/HhxNDT1Aaa9vA=="],
-
-    "@napi-rs/canvas-linux-arm-gnueabihf": ["@napi-rs/canvas-linux-arm-gnueabihf@0.1.80", "", { "os": "linux", "cpu": "arm" }, "sha512-eyWz0ddBDQc7/JbAtY4OtZ5SpK8tR4JsCYEZjCE3dI8pqoWUC8oMwYSBGCYfsx2w47cQgQCgMVRVTFiiO38hHQ=="],
-
-    "@napi-rs/canvas-linux-arm64-gnu": ["@napi-rs/canvas-linux-arm64-gnu@0.1.80", "", { "os": "linux", "cpu": "arm64" }, "sha512-qwA63t8A86bnxhuA/GwOkK3jvb+XTQaTiVML0vAWoHyoZYTjNs7BzoOONDgTnNtr8/yHrq64XXzUoLqDzU+Uuw=="],
-
-    "@napi-rs/canvas-linux-arm64-musl": ["@napi-rs/canvas-linux-arm64-musl@0.1.80", "", { "os": "linux", "cpu": "arm64" }, "sha512-1XbCOz/ymhj24lFaIXtWnwv/6eFHXDrjP0jYkc6iHQ9q8oXKzUX1Lc6bu+wuGiLhGh2GS/2JlfORC5ZcXimRcg=="],
-
-    "@napi-rs/canvas-linux-riscv64-gnu": ["@napi-rs/canvas-linux-riscv64-gnu@0.1.80", "", { "os": "linux", "cpu": "none" }, "sha512-XTzR125w5ZMs0lJcxRlS1K3P5RaZ9RmUsPtd1uGt+EfDyYMu4c6SEROYsxyatbbu/2+lPe7MPHOO/0a0x7L/gw=="],
-
-    "@napi-rs/canvas-linux-x64-gnu": ["@napi-rs/canvas-linux-x64-gnu@0.1.80", "", { "os": "linux", "cpu": "x64" }, "sha512-BeXAmhKg1kX3UCrJsYbdQd3hIMDH/K6HnP/pG2LuITaXhXBiNdh//TVVVVCBbJzVQaV5gK/4ZOCMrQW9mvuTqA=="],
-
-    "@napi-rs/canvas-linux-x64-musl": ["@napi-rs/canvas-linux-x64-musl@0.1.80", "", { "os": "linux", "cpu": "x64" }, "sha512-x0XvZWdHbkgdgucJsRxprX/4o4sEed7qo9rCQA9ugiS9qE2QvP0RIiEugtZhfLH3cyI+jIRFJHV4Fuz+1BHHMg=="],
-
-    "@napi-rs/canvas-win32-x64-msvc": ["@napi-rs/canvas-win32-x64-msvc@0.1.80", "", { "os": "win32", "cpu": "x64" }, "sha512-Z8jPsM6df5V8B1HrCHB05+bDiCxjE9QA//3YrkKIdVDEwn5RKaqOxCJDRJkl48cJbylcrJbW4HxZbTte8juuPg=="],
 
     "@pinojs/redact": ["@pinojs/redact@0.4.0", "", {}, "sha512-k2ENnmBugE/rzQfEcdWHcCY+/FM3VLzH9cYEsbdsoqrvzAKRhUZeRNhAZvB8OitQJ1TBed3yqWtdjzS6wJKBwg=="],
 
@@ -576,6 +554,8 @@
 
     "node-addon-api": ["node-addon-api@6.1.0", "", {}, "sha512-+eawOlIgy680F0kBzPUNFhMZGtJ1YmqM6l4+Crf4IkImjYrO/mqPwRMh352g23uIaQKFItcQ64I7KMaJxHgAVA=="],
 
+    "node-ensure": ["node-ensure@0.0.0", "", {}, "sha512-DRI60hzo2oKN1ma0ckc6nQWlHU69RH6xN0sjQTjMpChPfTYvKZdcQFfdYK2RWbJcKyUizSIy/l8OTGxMAM1QDw=="],
+
     "normalize-path": ["normalize-path@3.0.0", "", {}, "sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA=="],
 
     "obug": ["obug@2.1.1", "", {}, "sha512-uTqF9MuPraAQ+IsnPf366RG4cP9RtUi7MLO1N3KEc+wb0a6yKpeL0lmk2IB1jY5KHPAlTc6T/JRdC/YqxHNwkQ=="],
@@ -610,9 +590,7 @@
 
     "pathe": ["pathe@2.0.3", "", {}, "sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w=="],
 
-    "pdf-parse": ["pdf-parse@2.4.5", "", { "dependencies": { "@napi-rs/canvas": "0.1.80", "pdfjs-dist": "5.4.296" }, "bin": { "pdf-parse": "bin/cli.mjs" } }, "sha512-mHU89HGh7v+4u2ubfnevJ03lmPgQ5WU4CxAVmTSh/sxVTEDYd1er/dKS/A6vg77NX47KTEoihq8jZBLr8Cxuwg=="],
-
-    "pdfjs-dist": ["pdfjs-dist@5.4.296", "", { "optionalDependencies": { "@napi-rs/canvas": "^0.1.80" } }, "sha512-DlOzet0HO7OEnmUmB6wWGJrrdvbyJKftI1bhMitK7O2N8W2gc757yyYBbINy9IDafXAV9wmKr9t7xsTaNKRG5Q=="],
+    "pdf-parse": ["pdf-parse@1.1.1", "", { "dependencies": { "debug": "^3.1.0", "node-ensure": "^0.0.0" } }, "sha512-v6ZJ/efsBpGrGGknjtq9J/oC8tZWq0KWL5vQrk2GlzLEQPUDB1ex+13Rmidl1neNN358Jn9EHZw5y07FFtaC7A=="],
 
     "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
 
@@ -797,6 +775,8 @@
     "jszip/readable-stream": ["readable-stream@2.3.8", "", { "dependencies": { "core-util-is": "~1.0.0", "inherits": "~2.0.3", "isarray": "~1.0.0", "process-nextick-args": "~2.0.0", "safe-buffer": "~5.1.1", "string_decoder": "~1.1.1", "util-deprecate": "~1.0.1" } }, "sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA=="],
 
     "lazystream/readable-stream": ["readable-stream@2.3.8", "", { "dependencies": { "core-util-is": "~1.0.0", "inherits": "~2.0.3", "isarray": "~1.0.0", "process-nextick-args": "~2.0.0", "safe-buffer": "~5.1.1", "string_decoder": "~1.1.1", "util-deprecate": "~1.0.1" } }, "sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA=="],
+
+    "pdf-parse/debug": ["debug@3.2.7", "", { "dependencies": { "ms": "^2.1.1" } }, "sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ=="],
 
     "prebuild-install/tar-fs": ["tar-fs@2.1.4", "", { "dependencies": { "chownr": "^1.1.1", "mkdirp-classic": "^0.5.2", "pump": "^3.0.0", "tar-stream": "^2.1.4" } }, "sha512-mDAjwmZdh7LTT6pNleZ05Yt65HC3E+NiQzl672vQG38jIrehtJk/J3mNwIg+vShQPcLF/LV7CMnDW6vjj6sfYQ=="],
 

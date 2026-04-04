@@ -6,23 +6,22 @@ export interface SinapiComposicao {
   codigo: string;
   descricao: string;
   unidade: string;
-  tipo: string;        // "INSUMO" | "COMPOSICAO"
-  classe: string;      // "MATERIAIS" | "MAO DE OBRA" | "EQUIPAMENTOS" | etc
+  tipo: string;
+  classe: string;
   uf: string;
   data_base: string;
-  preco_desonerado: number;
-  preco_nao_desonerado: number;
+  custo_com_desoneracao: number;
+  custo_sem_desoneracao: number;
 }
 
 export interface SinapiCounts {
-  byTipo: Record<string, number>;
-  byClasse: Record<string, number>;
+  material: number;
+  mao_obra: number;
+  equipamento: number;
+  composicao: number;
   total: number;
 }
 
-/**
- * Search SINAPI composições with optional filters.
- */
 export function useSinapiSearch(query: string, tipo: string | null, classe: string | null) {
   return useQuery<SinapiComposicao[]>({
     queryKey: ["sinapi-composicoes", query, tipo, classe],
@@ -32,13 +31,8 @@ export function useSinapiSearch(query: string, tipo: string | null, classe: stri
         .select("*")
         .order("codigo", { ascending: true });
 
-      if (tipo) {
-        q = q.eq("tipo", tipo);
-      }
-
-      if (classe) {
-        q = q.eq("classe", classe);
-      }
+      if (tipo) q = q.eq("tipo", tipo);
+      if (classe) q = q.eq("classe", classe);
 
       if (query.trim()) {
         q = q.or(`descricao.ilike.%${query.trim()}%,codigo.ilike.%${query.trim()}%`);
@@ -52,9 +46,6 @@ export function useSinapiSearch(query: string, tipo: string | null, classe: stri
   });
 }
 
-/**
- * Get counts by tipo and classe for the tree badges.
- */
 export function useSinapiCounts() {
   return useQuery<SinapiCounts>({
     queryKey: ["sinapi-counts"],
@@ -64,17 +55,20 @@ export function useSinapiCounts() {
         .select("tipo, classe");
       if (error) throw error;
 
-      const byTipo: Record<string, number> = {};
-      const byClasse: Record<string, number> = {};
-      let total = 0;
+      const counts: SinapiCounts = { material: 0, mao_obra: 0, equipamento: 0, composicao: 0, total: 0 };
 
       for (const row of data ?? []) {
-        byTipo[row.tipo] = (byTipo[row.tipo] ?? 0) + 1;
-        byClasse[row.classe] = (byClasse[row.classe] ?? 0) + 1;
-        total++;
+        counts.total++;
+        if (row.tipo === "composicao") {
+          counts.composicao++;
+        } else if (row.tipo === "insumo") {
+          if (row.classe === "material") counts.material++;
+          else if (row.classe === "mao_obra") counts.mao_obra++;
+          else if (row.classe === "equipamento") counts.equipamento++;
+        }
       }
 
-      return { byTipo, byClasse, total };
+      return counts;
     },
     staleTime: 1000 * 60 * 5,
   });

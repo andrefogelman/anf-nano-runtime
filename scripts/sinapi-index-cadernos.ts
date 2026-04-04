@@ -157,8 +157,10 @@ async function main() {
     `⏩ ${checkpoint.completed.length} already done, ${remaining.length} remaining`,
   );
 
-  // Dynamic import pdf-parse (CJS module)
-  const pdfParse = (await import("pdf-parse")).default;
+  // pdf-parse v1.1.1 (CJS) — use createRequire for ESM compat
+  const { createRequire } = await import("node:module");
+  const require = createRequire(import.meta.url);
+  const pdfParse = require("pdf-parse");
 
   for (let fi = 0; fi < remaining.length; fi++) {
     const filePath = remaining[fi];

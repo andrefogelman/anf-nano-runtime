@@ -36,15 +36,10 @@ export default function SinapiPage() {
   const { tipo, classe } = useMemo(() => {
     const filter = new URLSearchParams(location.search).get("filter");
     if (!filter) return { tipo: null, classe: null };
-    if (filter === "composicao") return { tipo: "COMPOSICAO", classe: null };
+    if (filter === "composicao") return { tipo: "composicao", classe: null };
     if (filter.startsWith("insumo-")) {
       const rawClasse = filter.slice("insumo-".length);
-      const classeMap: Record<string, string> = {
-        material: "MATERIAIS",
-        mao_obra: "MAO DE OBRA",
-        equipamento: "EQUIPAMENTOS",
-      };
-      return { tipo: "INSUMO", classe: classeMap[rawClasse] ?? rawClasse.toUpperCase() };
+      return { tipo: "insumo", classe: rawClasse };
     }
     return { tipo: null, classe: null };
   }, [location.search]);
@@ -135,7 +130,7 @@ export default function SinapiPage() {
                         <span className="w-16 shrink-0 text-center text-sm text-muted-foreground">{comp.uf}</span>
                         <span className="w-28 shrink-0 text-center text-sm text-muted-foreground">{comp.data_base}</span>
                         <span className="w-36 shrink-0 text-right font-mono font-semibold text-primary">
-                          {formatBRL(comp.preco_desonerado)}
+                          {formatBRL(comp.custo_com_desoneracao)}
                         </span>
                       </div>
 
@@ -169,11 +164,11 @@ export default function SinapiPage() {
                             </div>
                             <div>
                               <span className="text-muted-foreground text-xs">Preco Desonerado:</span>{" "}
-                              <span className="font-semibold text-primary">{formatBRL(comp.preco_desonerado)}</span>
+                              <span className="font-semibold text-primary">{formatBRL(comp.custo_com_desoneracao)}</span>
                             </div>
                             <div>
                               <span className="text-muted-foreground text-xs">Preco Nao Desonerado:</span>{" "}
-                              <span className="font-semibold">{formatBRL(comp.preco_nao_desonerado)}</span>
+                              <span className="font-semibold">{formatBRL(comp.custo_sem_desoneracao)}</span>
                             </div>
                           </div>
                           <p className="text-sm">{comp.descricao}</p>
