@@ -32,8 +32,8 @@ export function BudgetRow({
   return (
     <tr
       className={cn(
-        "group border-b transition-colors hover:bg-accent/20",
-        isLevel1 && "budget-row-level1 bg-primary/5",
+        "group border-b transition-colors hover:bg-accent/50",
+        isLevel1 && "budget-row-level1 bg-primary/5 hover:bg-primary/15",
         !isLevel1 && !isLevel3 && "budget-row-level2",
         isLevel3 && "budget-row-level3"
       )}
