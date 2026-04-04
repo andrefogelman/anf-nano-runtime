@@ -93,6 +93,7 @@ export default function TcpoInsumosPage() {
                 <TableHead className="w-36">Código</TableHead>
                 <TableHead>Descrição</TableHead>
                 <TableHead className="w-16 text-center">Unidade</TableHead>
+                <TableHead className="w-32 text-right">Preço (R$)</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -102,6 +103,9 @@ export default function TcpoInsumosPage() {
                   <TableCell className="font-mono text-xs text-blue-700 font-medium">{ins.codigo}</TableCell>
                   <TableCell className="text-sm">{ins.descricao}</TableCell>
                   <TableCell className="text-center text-sm text-muted-foreground">{ins.unidade}</TableCell>
+                  <TableCell className="text-right font-mono text-sm font-semibold text-primary">
+                    {ins.preco > 0 ? `R$ ${ins.preco.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}` : "—"}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

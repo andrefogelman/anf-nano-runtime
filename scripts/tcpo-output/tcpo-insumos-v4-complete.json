@@ -1,0 +1,5382 @@
+[
+  {
+    "codigo": "01.001.000001.MOD",
+    "descricao": "Ajudante",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000011.MOD",
+    "descricao": "Ajudante de aplicador de impermeabilização",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000002.MOD",
+    "descricao": "Ajudante de armador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000003.MOD",
+    "descricao": "Ajudante de carpinteiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000004.MOD",
+    "descricao": "Ajudante de eletricista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000005.MOD",
+    "descricao": "Ajudante de encanador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000006.MOD",
+    "descricao": "Ajudante de graniteiro/marmorista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000007.MOD",
+    "descricao": "Ajudante de pintor",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000010.MOD",
+    "descricao": "Ajudante de serralheiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.001.000008.MOD",
+    "descricao": "Ajudante de telhadista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.002.000001.MOD",
+    "descricao": "Aplicador de impermeabilização",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.002.000002.MOD",
+    "descricao": "Aplicador de revestimento",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.011.000001.MOD",
+    "descricao": "Armador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "60.170.000002.MOD",
+    "descricao": "Auxiliar de topógrafo",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 11.44
+  },
+  {
+    "codigo": "01.003.000001.MOD",
+    "descricao": "Azulejista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.004.000001.MOD",
+    "descricao": "Cabo de fogo",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.005.000001.MOD",
+    "descricao": "Calafetador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.006.000001.MOD",
+    "descricao": "Calceteiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.007.000001.MOD",
+    "descricao": "Carpinteiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.008.000001.MOD",
+    "descricao": "Cavouqueiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.009.000001.MOD",
+    "descricao": "Eletricista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.009.000002.MOD",
+    "descricao": "Eletricista para alta tensão",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 18.03
+  },
+  {
+    "codigo": "60.130.000002.MOD",
+    "descricao": "Eletricista para média tensão",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.010.000001.MOD",
+    "descricao": "Encanador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.012.000001.MOD",
+    "descricao": "Gesseiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.013.000001.MOD",
+    "descricao": "Graniteiro / Marmorista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.014.000001.MOD",
+    "descricao": "Jardineiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.015.000001.MOD",
+    "descricao": "Jatista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.016.000001.MOD",
+    "descricao": "Ladrilhista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.018.000001.MOD",
+    "descricao": "Montador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.030.000001.MOD",
+    "descricao": "Motorista de caminhão",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.019.000001.MOD",
+    "descricao": "Operador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.019.000002.MOD",
+    "descricao": "Operador de equipamento",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.019.000004.MOD",
+    "descricao": "Operador de equipamentos",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.019.000003.MOD",
+    "descricao": "Operador de terraplenagem",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.020.000001.MOD",
+    "descricao": "Pastilheiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.021.000001.MOD",
+    "descricao": "Pedreiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.022.000001.MOD",
+    "descricao": "Pintor",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.023.000001.MOD",
+    "descricao": "Poceiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.024.000001.MOD",
+    "descricao": "Raspador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.025.000001.MOD",
+    "descricao": "Serralheiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.026.000001.MOD",
+    "descricao": "Servente",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9.95
+  },
+  {
+    "codigo": "01.027.000001.MOD",
+    "descricao": "Soldador",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.028.000001.MOD",
+    "descricao": "Taqueiro",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.029.000001.MOD",
+    "descricao": "Telhadista",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "60.170.000001.MOD",
+    "descricao": "Topógrafo",
+    "unidade": "h",
+    "tipo": "MÃO DE OBRA",
+    "categoria": "Mão de obra",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 17.91
+  },
+  {
+    "codigo": "03.006.000007.MOE",
+    "descricao": "Alvenaria com blocos de concreto 11,5 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000008.MOE",
+    "descricao": "Alvenaria com blocos de concreto 14 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000009.MOE",
+    "descricao": "Alvenaria com blocos de concreto 19 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000005.MOE",
+    "descricao": "Alvenaria com blocos de concreto 6,5 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000006.MOE",
+    "descricao": "Alvenaria com blocos de concreto 9 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000002.MOE",
+    "descricao": "Alvenaria com tijolo comum 6 x 9 x 19 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000001.MOE",
+    "descricao": "Alvenaria de vedação com blocos cerâmicos 9 x19 x19 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 62
+  },
+  {
+    "codigo": "03.006.000003.MOE",
+    "descricao": "Alvenaria estrutural com blocos cerâmicos 14 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000004.MOE",
+    "descricao": "Alvenaria estrutural com blocos cerâmicos 19 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000010.MOE",
+    "descricao": "Alvenaria estrutural com blocos de concreto 14 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.006.000011.MOE",
+    "descricao": "Alvenaria estrutural com blocos de concreto 19 x 19 x 39 cm, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.010.000002.MOE",
+    "descricao": "Aplicação de gesso em parede ou teto",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.010.000003.MOE",
+    "descricao": "Aplicação de massa corrida com duas demãos",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.011.000005.MOE",
+    "descricao": "Assentamento de azulejos",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.011.000003.MOE",
+    "descricao": "Assentamento de pastilhas",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.011.000004.MOE",
+    "descricao": "Assentamento de piso cerâmico",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.011.000002.MOE",
+    "descricao": "Assentamento de piso porcelanato",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.015.000003.MOE",
+    "descricao": "Chapisco em parede externa, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.015.000002.MOE",
+    "descricao": "Chapisco em parede interna, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.015.000004.MOE",
+    "descricao": "Chapisco em teto, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.002.000001.MOE",
+    "descricao": "Corte de perfil de aço \"I\" 10\" # 7,9 mm",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 151.5
+  },
+  {
+    "codigo": "03.002.000002.MOE",
+    "descricao": "Corte de perfil de aço \"I\" 12\" # 11,3 mm",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 207.5
+  },
+  {
+    "codigo": "03.002.000003.MOE",
+    "descricao": "Corte de perfil de aço duplo \"I\" 10\" # 7,9 mm",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 324.96
+  },
+  {
+    "codigo": "03.002.000004.MOE",
+    "descricao": "Corte de perfil de aço duplo \"I\" 12\" # 11,3 mm",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 394.45
+  },
+  {
+    "codigo": "03.023.000002.MOE",
+    "descricao": "Elevador de obra a tração por cabo de aço, altura 10 m - montagem",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1792.4
+  },
+  {
+    "codigo": "03.024.000002.MOE",
+    "descricao": "Elevador de obra com torre de 10 m de altura, tração a cabo de aço - desmontagem",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1979.37
+  },
+  {
+    "codigo": "03.024.000001.MOE",
+    "descricao": "Elevador de obra, sistema de cremalheira, altura 10 m - desmontagem",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1979.37
+  },
+  {
+    "codigo": "03.023.000001.MOE",
+    "descricao": "Elevador de obra, sistema de cremalheira, altura 10 m - montagem",
+    "unidade": "un",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1792.4
+  },
+  {
+    "codigo": "03.016.000003.MOE",
+    "descricao": "Emboço em parede externa, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.016.000002.MOE",
+    "descricao": "Emboço em parede interna, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.016.000004.MOE",
+    "descricao": "Emboço em teto, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.003.000001.MOE",
+    "descricao": "Estaca em perfil de aço \"I\" 10\", cravação",
+    "unidade": "m",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 78.78
+  },
+  {
+    "codigo": "03.003.000002.MOE",
+    "descricao": "Estaca em perfil de aço \"I\" 12\", cravação",
+    "unidade": "m",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 91.06
+  },
+  {
+    "codigo": "03.007.000001.MOE",
+    "descricao": "Impermeabilização com emulsão asfáltica, mão de obra para execução",
+    "unidade": "h",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.007.000002.MOE",
+    "descricao": "Impermeabilização com manta asfáltica, mão de obra para execução",
+    "unidade": "h",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000003.MOE",
+    "descricao": "Instalação de divisórias # 35 mm estruturadas em perfis de alumínio, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.012.000001.MOE",
+    "descricao": "Instalação de forro PVC, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000140.MOE",
+    "descricao": "Instalação de vidro incolor laminado # 10 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000145.MOE",
+    "descricao": "Instalação de vidro incolor laminado # 12 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000130.MOE",
+    "descricao": "Instalação de vidro incolor laminado # 6 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000135.MOE",
+    "descricao": "Instalação de vidro incolor laminado # 8 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000115.MOE",
+    "descricao": "Instalação de vidros # 10 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000102.MOE",
+    "descricao": "Instalação de vidros # 5 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000111.MOE",
+    "descricao": "Instalação de vidros # 6 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000113.MOE",
+    "descricao": "Instalação de vidros # 8 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000002.MOE",
+    "descricao": "Instalação de vidros em esquadrias com massa de vidraceiro, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000109.MOE",
+    "descricao": "Instalação de vidros refletivos # 10 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000105.MOE",
+    "descricao": "Instalação de vidros refletivos # 6 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.008.000107.MOE",
+    "descricao": "Instalação de vidros refletivos # 8 mm com gaxetas, mão de obra para execução",
+    "unidade": "un",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.009.000002.MOE",
+    "descricao": "Pintura em tinta látex em duas demãos, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.009.000003.MOE",
+    "descricao": "Pintura em tinta látex em três demãos, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.009.000004.MOE",
+    "descricao": "Pintura em tinta óleo em duas demãos, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.009.000001.MOE",
+    "descricao": "Pintura em tinta óleo em três demãos, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.004.000001.MOE",
+    "descricao": "Piso cimentado, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.014.000001.MOE",
+    "descricao": "Reboco em parede externa, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.014.000002.MOE",
+    "descricao": "Reboco em parede interna, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.014.000003.MOE",
+    "descricao": "Reboco em teto, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "03.005.000001.MOE",
+    "descricao": "Serviço de corte/dobra industrializado para aço CA 50/60",
+    "unidade": "kg",
+    "tipo": "MÃO DE OBRA EMPREITADA",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1.1
+  },
+  {
+    "codigo": "03.021.000001.MOE",
+    "descricao": "Textura acrílica em paredes, mão de obra para execução",
+    "unidade": "m²",
+    "tipo": "Mão de obra empreitada",
+    "categoria": "Mão de obra empreitada",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.015.000016.SET",
+    "descricao": "Arenito em placas 47 x 47 x 2,5 cm, colocado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 230
+  },
+  {
+    "codigo": "01.015.000017.SET",
+    "descricao": "Caco de mármore polido # 0,5 cm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 301
+  },
+  {
+    "codigo": "01.015.000024.SET",
+    "descricao": "Carpete de madeira, colocado, lâminas 20 x 120 cm # 8 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 147.46
+  },
+  {
+    "codigo": "01.006.000033.SET",
+    "descricao": "Corte em concreto com discos diamantados para paredes e muros espessura até 68 cm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2179.88
+  },
+  {
+    "codigo": "01.006.000030.SET",
+    "descricao": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 13 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 54.54
+  },
+  {
+    "codigo": "01.006.000031.SET",
+    "descricao": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 20 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 143.36
+  },
+  {
+    "codigo": "01.006.000035.SET",
+    "descricao": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 5 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 33.77
+  },
+  {
+    "codigo": "01.006.000032.SET",
+    "descricao": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 50 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 547.7
+  },
+  {
+    "codigo": "01.006.000034.SET",
+    "descricao": "Corte em concreto com fio diamantada para estruturas de concreto",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4386.61
+  },
+  {
+    "codigo": "01.002.000125.SET",
+    "descricao": "Custo de mobilização ou desmobilização, equipamento estaca escavada mecânicamente, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000124.SET",
+    "descricao": "Custo de mobilização ou desmobilização, equipamento estaca Franki, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000116.SET",
+    "descricao": "Custo de mobilização ou desmobilização, equipamento estaca hélice contínua, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000115.SET",
+    "descricao": "Custo de mobilização ou desmobilização, equipamento estaca raiz, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000123.SET",
+    "descricao": "Custo de mobilização ou desmobilização, equipamento estaca Strauss, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.015.000019.SET",
+    "descricao": "Degrau (piso) de granilite, executado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 38.31
+  },
+  {
+    "codigo": "01.015.000021.SET",
+    "descricao": "Degrau de arenito 30 x 3 cm, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 522.91
+  },
+  {
+    "codigo": "01.015.000004.SET",
+    "descricao": "Degrau de granito cinza andorinha 30 x 3 cm, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 318.63
+  },
+  {
+    "codigo": "01.015.000023.SET",
+    "descricao": "Degrau de mármore branco Espirito Santo 30 x 3 cm, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 242.93
+  },
+  {
+    "codigo": "01.009.000003.SET",
+    "descricao": "Divisória pré-moldada de granilite # 3 cm, instalada",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 370
+  },
+  {
+    "codigo": "06.302.000001.SET",
+    "descricao": "ECOSOLUTIONS - Muro painel pré-moldado 2,60 x 2,80 inclusive sapata base",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.028.000002.SET",
+    "descricao": "Elevador de serviço com porta de abertura lateral, 15 paradas, 12 passageiros, 1 m/s",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 441341.03
+  },
+  {
+    "codigo": "01.028.000003.SET",
+    "descricao": "Elevador de serviço com porta de abertura lateral, 15 paradas, 18 passageiros, 1 m/s",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 583243.59
+  },
+  {
+    "codigo": "01.028.000001.SET",
+    "descricao": "Elevador de serviço com porta de abertura lateral, 15 paradas, 6 passageiros, 1 m/s",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 335000
+  },
+  {
+    "codigo": "01.028.000005.SET",
+    "descricao": "Elevador social com porta de abertura central, corrimão de alumínio, espelho e acabamento em aço inoxidável escovado, 15 paradas, 12 passageiros, 1,6 m/s",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 517102.55
+  },
+  {
+    "codigo": "01.028.000006.SET",
+    "descricao": "Elevador social com porta de abertura central, corrimão de alumínio, espelho e acabamento em aço inoxidável escovado, 15 paradas, 18 passageiros, 1,6 m/s",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 721538.46
+  },
+  {
+    "codigo": "01.028.000004.SET",
+    "descricao": "Elevador social com porta de abertura central, corrimão de alumínio, espelho e acabamento em aço inoxidável escovado, 15 paradas, 6 passageiros, 1,6 m/s",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 390833.32
+  },
+  {
+    "codigo": "60.170.000003.SET",
+    "descricao": "Escavação de parede diafragma em solo com SPT até 50 golpes, contenção com lama bentonitica - equipamento, lama e mão de obra",
+    "unidade": "m³",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 642.45
+  },
+  {
+    "codigo": "01.015.000005.SET",
+    "descricao": "Espelho de arenito para degrau 20 x 3 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 205.52
+  },
+  {
+    "codigo": "01.015.000007.SET",
+    "descricao": "Espelho de granito cinza andorinha para degrau 20 x 2 cm, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 201.04
+  },
+  {
+    "codigo": "01.015.000006.SET",
+    "descricao": "Espelho de mármore branco Espírito Santo para degrau 20 x 2 cm, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 132.09
+  },
+  {
+    "codigo": "01.015.000022.SET",
+    "descricao": "Espelho para degrau de granilite, executado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 38.31
+  },
+  {
+    "codigo": "01.002.000126.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 250 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000127.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 300 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000128.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 350 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000129.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 400 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000130.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 500 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000131.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 600 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000132.SET",
+    "descricao": "Estaca escavada mecânicamente Ø 700 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000015.SET",
+    "descricao": "Estaca Franki Ø 35 cm, carga 55 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 260.58
+  },
+  {
+    "codigo": "01.002.000014.SET",
+    "descricao": "Estaca Franki Ø 40 cm, carga 75 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 281.76
+  },
+  {
+    "codigo": "01.002.000019.SET",
+    "descricao": "Estaca Franki Ø 45 cm, carga 95 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 321.39
+  },
+  {
+    "codigo": "01.002.000013.SET",
+    "descricao": "Estaca Franki Ø 52 cm, carga 130 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 355.98
+  },
+  {
+    "codigo": "01.002.000021.SET",
+    "descricao": "Estaca Franki Ø 60 cm, carga 170 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 404.94
+  },
+  {
+    "codigo": "01.002.000117.SET",
+    "descricao": "Estaca hélice contínua monitorada Ø 300 mm",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000118.SET",
+    "descricao": "Estaca hélice contínua monitorada Ø 400 mm",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000119.SET",
+    "descricao": "Estaca hélice contínua monitorada Ø 500 mm",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000120.SET",
+    "descricao": "Estaca hélice contínua monitorada Ø 600 mm",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000121.SET",
+    "descricao": "Estaca hélice contínua monitorada Ø 700 mm",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000122.SET",
+    "descricao": "Estaca hélice contínua monitorada Ø 800 mm",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000005.SET",
+    "descricao": "Estaca pré-moldada concreto armado seção octogonal vazada Ø 36 cm, carga 138 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 926.8
+  },
+  {
+    "codigo": "01.002.000016.SET",
+    "descricao": "Estaca pré-moldada concreto armado seção octogonal vazada Ø 42 cm, carga 158 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 529.6
+  },
+  {
+    "codigo": "01.002.000002.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção circular maciça Ø 15 cm, carga 18 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 331
+  },
+  {
+    "codigo": "01.002.000003.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção circular maciça Ø 17 cm, carga 25 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 347.55
+  },
+  {
+    "codigo": "01.002.000004.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção circular maciça Ø 20 cm, carga 36 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 364.1
+  },
+  {
+    "codigo": "01.002.000006.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção circular maciça Ø 23 cm, carga 50 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 479.95
+  },
+  {
+    "codigo": "01.002.000008.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção circular vazada Ø 33 cm, carga 75 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 860.6
+  },
+  {
+    "codigo": "01.002.000012.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção quadrada 17 x 17 cm, carga 40 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 397.2
+  },
+  {
+    "codigo": "01.002.000020.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção quadrada 23,5 x 23,5 cm, carga 82 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 744.75
+  },
+  {
+    "codigo": "01.002.000017.SET",
+    "descricao": "Estaca pré-moldada concreto protendido seção quadrada 26,5 x 26,5 cm, carga 106 t, cravada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 496.5
+  },
+  {
+    "codigo": "01.002.000110.SET",
+    "descricao": "Estaca raiz em rocha Ø 150 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000111.SET",
+    "descricao": "Estaca raiz em rocha Ø 200 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000112.SET",
+    "descricao": "Estaca raiz em rocha Ø 250 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000113.SET",
+    "descricao": "Estaca raiz em rocha Ø 310 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000114.SET",
+    "descricao": "Estaca raiz em rocha Ø 400 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000100.SET",
+    "descricao": "Estaca raiz em solo Ø 150 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000101.SET",
+    "descricao": "Estaca raiz em solo Ø 200 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000102.SET",
+    "descricao": "Estaca raiz em solo Ø 250 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000103.SET",
+    "descricao": "Estaca raiz em solo Ø 310 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000104.SET",
+    "descricao": "Estaca raiz em solo Ø 400 mm, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.002.000018.SET",
+    "descricao": "Estaca Strauss Ø 25 cm, carga 20 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 54.54
+  },
+  {
+    "codigo": "01.002.000009.SET",
+    "descricao": "Estaca Strauss Ø 32 cm, carga 30 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 63.59
+  },
+  {
+    "codigo": "01.002.000010.SET",
+    "descricao": "Estaca Strauss Ø 38 cm, carga 40 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 81.38
+  },
+  {
+    "codigo": "01.002.000011.SET",
+    "descricao": "Estaca Strauss Ø 45 cm, carga 60 t, mão de obra e equipamento",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 122.23
+  },
+  {
+    "codigo": "01.011.000001.SET",
+    "descricao": "Estrutura para cobertura em aço A36, inclusive montagem",
+    "unidade": "kg",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 24.24
+  },
+  {
+    "codigo": "01.020.000003.SET",
+    "descricao": "Forro de gesso acartonado em placas removíveis de 62 x 125 cm x 12,5 mm, estruturado com perfis \"T\" de aço galvanizado, instalado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 143.32
+  },
+  {
+    "codigo": "01.020.000002.SET",
+    "descricao": "Forro de gesso acartonado em placas removíveis de 62 x 62 cm x 12,5 mm, estruturado com perfis \"T\" de aço galvanizado, instalado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 166.06
+  },
+  {
+    "codigo": "01.020.000004.SET",
+    "descricao": "Forro de gesso acartonado fixo # 12,5 mm com acabamento monolítico fixado com pendurais de arame galavanizado 18, instalado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 108.13
+  },
+  {
+    "codigo": "01.020.000001.SET",
+    "descricao": "Forro de gesso acartonado fixo # 12,5 mm com acabamento monolítico fixado com perfis de aço galvanizado, instalado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 116.65
+  },
+  {
+    "codigo": "01.020.000005.SET",
+    "descricao": "Forro de gesso liso em placas de 60 x 60 x 3 cm encaixe macho-fêmea, instalado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 90.79
+  },
+  {
+    "codigo": "01.006.000022.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/2\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 30.24
+  },
+  {
+    "codigo": "01.006.000015.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/2\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 16.56
+  },
+  {
+    "codigo": "01.006.000027.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/2\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 30.3
+  },
+  {
+    "codigo": "01.006.000021.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/4\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 26.89
+  },
+  {
+    "codigo": "01.006.000014.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/4\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 13.13
+  },
+  {
+    "codigo": "01.006.000026.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/4\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 40.81
+  },
+  {
+    "codigo": "01.006.000020.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 21.53
+  },
+  {
+    "codigo": "01.006.000013.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 11.04
+  },
+  {
+    "codigo": "01.006.000025.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 32.39
+  },
+  {
+    "codigo": "01.006.000017.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1/2\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.12
+  },
+  {
+    "codigo": "01.006.000009.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1/2\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5.64
+  },
+  {
+    "codigo": "01.006.000012.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1/2\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15.9
+  },
+  {
+    "codigo": "01.006.000019.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/4\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15.82
+  },
+  {
+    "codigo": "01.006.000011.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/4\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 7.36
+  },
+  {
+    "codigo": "01.006.000024.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/4\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 23.28
+  },
+  {
+    "codigo": "01.006.000016.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/8\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 10.13
+  },
+  {
+    "codigo": "01.006.000008.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/8\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4.65
+  },
+  {
+    "codigo": "01.006.000001.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/8\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 13.32
+  },
+  {
+    "codigo": "01.006.000018.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 5/8\" profundidade 10 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.56
+  },
+  {
+    "codigo": "01.006.000010.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 5/8\" profundidade 5 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 6.41
+  },
+  {
+    "codigo": "01.006.000023.SET",
+    "descricao": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 5/8\" profundidade até 15 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 17.58
+  },
+  {
+    "codigo": "01.006.000002.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 2\" a 2 1/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 199.01
+  },
+  {
+    "codigo": "01.006.000003.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 3\" a 3 1/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 227.62
+  },
+  {
+    "codigo": "01.006.000028.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 3/8\" a 3/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 221.4
+  },
+  {
+    "codigo": "01.006.000004.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 4\" a 4 1/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 245.99
+  },
+  {
+    "codigo": "01.006.000005.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 5\" a 5 1/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 291.38
+  },
+  {
+    "codigo": "01.006.000006.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 6\" a 6 1/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 311.11
+  },
+  {
+    "codigo": "01.006.000029.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 7/8\" a 1 3/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 174.41
+  },
+  {
+    "codigo": "01.006.000007.SET",
+    "descricao": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 8\" a 8 1/4\" profundidade até 40 cm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 424.51
+  },
+  {
+    "codigo": "01.015.000008.SET",
+    "descricao": "Granito cinza andorinha para pisos # 3 cm, colocado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 803.73
+  },
+  {
+    "codigo": "01.015.000009.SET",
+    "descricao": "Mármore branco Espírito Santo para pisos # 2 cm, colocado",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 326.05
+  },
+  {
+    "codigo": "09.005.000001.SET",
+    "descricao": "N.DIDINI - Cobertura metálica em cobre ou zinco-titânio inclusive estrutura de apoio e isolamento acústico.",
+    "unidade": "m²",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "23.005.000050.SET",
+    "descricao": "N.DIDINI - Painel de fachada com revestimento em Revzinc (aço galvanizado), Alumínio, Cobre ou Zinco-Titânio.",
+    "unidade": "m²",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.007.000017.SET",
+    "descricao": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 100 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 295.04
+  },
+  {
+    "codigo": "01.007.000018.SET",
+    "descricao": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 125 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 324.1
+  },
+  {
+    "codigo": "01.007.000019.SET",
+    "descricao": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 150 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 353.15
+  },
+  {
+    "codigo": "01.007.000020.SET",
+    "descricao": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 200 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 411.36
+  },
+  {
+    "codigo": "01.007.000006.SET",
+    "descricao": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 50 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 236.29
+  },
+  {
+    "codigo": "01.007.000016.SET",
+    "descricao": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 75 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 265.97
+  },
+  {
+    "codigo": "01.007.000012.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 100 mm para revestimento de fachadas e coberturas, 10,54 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 214.32
+  },
+  {
+    "codigo": "01.007.000003.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 100 mm para revestimento de fachadas e coberturas, 9,54 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 220.39
+  },
+  {
+    "codigo": "01.007.000013.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 125 mm para revestimento de fachadas e coberturas, 10,9 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 227.01
+  },
+  {
+    "codigo": "01.007.000004.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 125 mm para revestimento de fachadas e coberturas, 9,90 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 233.09
+  },
+  {
+    "codigo": "01.007.000005.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 150 mm para revestimento de fachadas e coberturas, 10,26 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 248
+  },
+  {
+    "codigo": "01.007.000014.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 150 mm para revestimento de fachadas e coberturas, 11,27 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 241.93
+  },
+  {
+    "codigo": "01.007.000015.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 200 mm para revestimento de fachadas e coberturas, 11,99 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 269.53
+  },
+  {
+    "codigo": "01.007.000001.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 50 mm para revestimento de fachadas e coberturas, 10,63 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 192.79
+  },
+  {
+    "codigo": "01.007.000010.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 50 mm para revestimento de fachadas e coberturas, 9,82 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 186.71
+  },
+  {
+    "codigo": "01.007.000011.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 75 mm para revestimento de fachadas e coberturas, 10,18 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 200.54
+  },
+  {
+    "codigo": "01.007.000002.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 75 mm para revestimento de fachadas e coberturas, 10,99 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 206.59
+  },
+  {
+    "codigo": "01.007.000023.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 100 mm para revestimento de fachadas e coberturas, 19,09 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 295
+  },
+  {
+    "codigo": "01.007.000007.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 125 mm para revestimento de fachadas e coberturas, 21,59 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 324.08
+  },
+  {
+    "codigo": "01.007.000008.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 150 mm para revestimento de fachadas e coberturas, 24,09 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 353.15
+  },
+  {
+    "codigo": "01.007.000009.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 200 mm para revestimento de fachadas e coberturas, 29,09 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 411.34
+  },
+  {
+    "codigo": "01.007.000021.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 50 mm para revestimento de fachadas e coberturas, 14,9 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 239.39
+  },
+  {
+    "codigo": "01.007.000022.SET",
+    "descricao": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 75 mm para revestimento de fachadas e coberturas, 16,59 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 265.97
+  },
+  {
+    "codigo": "01.008.000004.SET",
+    "descricao": "Painel de gesso acartonado simples com bordas rebaixadas com colagem direta em alvenaria inclusive material de acabamento para locais secos 1,20 x 3,00 m x 12,5 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 78.42
+  },
+  {
+    "codigo": "01.023.000001.SET",
+    "descricao": "Papel de parede com superfície lisa - colocado, largura 0,50 m",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 73
+  },
+  {
+    "codigo": "01.008.000002.SET",
+    "descricao": "Parede de gesso acartonado dupla # 125 mm x 3,75 m de altura",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 242.41
+  },
+  {
+    "codigo": "01.008.000003.SET",
+    "descricao": "Parede de gesso acartonado simples # 100 mm x 3,15 m de altura",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 164.78
+  },
+  {
+    "codigo": "01.009.000002.SET",
+    "descricao": "Parede de gesso acartonado simples para ambiente sujeito a umidade # 100 mm x 3,15 m de altura",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 177.23
+  },
+  {
+    "codigo": "01.016.000006.SET",
+    "descricao": "Pedra mineira São Thomé serrada # 2 cm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 198.74
+  },
+  {
+    "codigo": "01.015.000010.SET",
+    "descricao": "Pedra portuguesa - mosaico português branco e preto, aplicado em pisos",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 70.2
+  },
+  {
+    "codigo": "01.016.000003.SET",
+    "descricao": "Peitoril de mármore Espirito Santo 15 x 2 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 137.34
+  },
+  {
+    "codigo": "01.016.000005.SET",
+    "descricao": "Peitoril de mármore Espirito Santo 25 x 2 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 174.1
+  },
+  {
+    "codigo": "01.016.000002.SET",
+    "descricao": "Peitoril reto de granito cinza andorinha 15 x 2 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 117
+  },
+  {
+    "codigo": "01.016.000004.SET",
+    "descricao": "Peitoril reto de granito cinza andorinha 25 x 2 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 195
+  },
+  {
+    "codigo": "01.016.000008.SET",
+    "descricao": "Piso de granilite granulometria nº 1, # 10 mm",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 62.97
+  },
+  {
+    "codigo": "01.016.000009.SET",
+    "descricao": "Piso elevado com placas de aço revestidas com laminado melamínico texturizado 620 x 620 x 28 mm para carga pontual de 450 kg e distribuída 1.250 kg/m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 395
+  },
+  {
+    "codigo": "01.015.000020.SET",
+    "descricao": "Piso elevado, fechamento lateral em chapa de aço galvanizado altura 15 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 592.5
+  },
+  {
+    "codigo": "01.013.000008.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 31058.2
+  },
+  {
+    "codigo": "01.013.000009.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 29277.86
+  },
+  {
+    "codigo": "01.013.000003.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, duas folhas fixas e quatro móveis para vão de 4,00 x 2,20 m, fluxo alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 59510.2
+  },
+  {
+    "codigo": "01.013.000004.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, duas folhas fixas e quatro móveis para vão de 4,00 x 2,20 m, fluxo baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 59510.2
+  },
+  {
+    "codigo": "01.013.000012.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e duas móveis para vão de 3,00 x 2,20 m, fluxo alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 52321.09
+  },
+  {
+    "codigo": "01.013.000002.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e duas móveis para vão de 3,00 x 2,20 m, fluxo baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 52321.09
+  },
+  {
+    "codigo": "01.013.000001.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo alto",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.013.000005.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 26965.81
+  },
+  {
+    "codigo": "01.013.000011.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 30183.46
+  },
+  {
+    "codigo": "01.013.000010.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 27878.28
+  },
+  {
+    "codigo": "01.013.000006.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 28852.5
+  },
+  {
+    "codigo": "01.013.000007.SET",
+    "descricao": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 26540.45
+  },
+  {
+    "codigo": "01.012.000003.SET",
+    "descricao": "Porta corta-fogo dupla, 2,10 x 1,60 m, isolação 90 min, instalada",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.012.000055.SET",
+    "descricao": "Porta corta-fogo industrial automática, de correr, com contrapeso, instalada, área até 2,5 m²",
+    "unidade": "m²",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 28384.63
+  },
+  {
+    "codigo": "01.012.000058.SET",
+    "descricao": "Porta corta-fogo, 2,10 x 0,80 m, isolação 90 min, instalada",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2555
+  },
+  {
+    "codigo": "01.012.000052.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12086.75
+  },
+  {
+    "codigo": "01.012.000053.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.012.000006.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 13185.54
+  },
+  {
+    "codigo": "01.012.000005.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 13185.54
+  },
+  {
+    "codigo": "01.012.000012.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12580.59
+  },
+  {
+    "codigo": "01.012.000057.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12765.78
+  },
+  {
+    "codigo": "01.012.000059.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 14407.8
+  },
+  {
+    "codigo": "01.012.000054.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 14407.8
+  },
+  {
+    "codigo": "01.012.000008.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15827.59
+  },
+  {
+    "codigo": "01.012.000007.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15827.59
+  },
+  {
+    "codigo": "01.012.000034.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 14963.37
+  },
+  {
+    "codigo": "01.012.000023.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15486.21
+  },
+  {
+    "codigo": "01.012.000056.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 23766.08
+  },
+  {
+    "codigo": "01.012.000004.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 23766.08
+  },
+  {
+    "codigo": "01.012.000010.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 26371.09
+  },
+  {
+    "codigo": "01.012.000009.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 24804.38
+  },
+  {
+    "codigo": "01.012.000051.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 22290.73
+  },
+  {
+    "codigo": "01.012.000045.SET",
+    "descricao": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 27130.37
+  },
+  {
+    "codigo": "01.012.000017.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.012.000018.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2587.85
+  },
+  {
+    "codigo": "01.012.000025.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2587.85
+  },
+  {
+    "codigo": "01.012.000024.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.012.000013.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3010.52
+  },
+  {
+    "codigo": "01.012.000019.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3185.27
+  },
+  {
+    "codigo": "01.012.000020.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3185.27
+  },
+  {
+    "codigo": "01.012.000027.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3185.27
+  },
+  {
+    "codigo": "01.012.000026.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.012.000050.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4693.02
+  },
+  {
+    "codigo": "01.012.000014.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3201.91
+  },
+  {
+    "codigo": "01.012.000021.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5015.87
+  },
+  {
+    "codigo": "01.012.000022.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5015.87
+  },
+  {
+    "codigo": "01.012.000029.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5015.87
+  },
+  {
+    "codigo": "01.012.000028.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5015.87
+  },
+  {
+    "codigo": "01.012.000016.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5015.87
+  },
+  {
+    "codigo": "01.012.000015.SET",
+    "descricao": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5015.87
+  },
+  {
+    "codigo": "01.012.000031.SET",
+    "descricao": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4956.96
+  },
+  {
+    "codigo": "01.012.000030.SET",
+    "descricao": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4956.96
+  },
+  {
+    "codigo": "01.012.000033.SET",
+    "descricao": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 6059.36
+  },
+  {
+    "codigo": "01.012.000032.SET",
+    "descricao": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 6059.36
+  },
+  {
+    "codigo": "01.012.000036.SET",
+    "descricao": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9497.43
+  },
+  {
+    "codigo": "01.012.000035.SET",
+    "descricao": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9524.1
+  },
+  {
+    "codigo": "01.012.000039.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5176.3
+  },
+  {
+    "codigo": "01.012.000038.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3987.62
+  },
+  {
+    "codigo": "01.012.000044.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4740.42
+  },
+  {
+    "codigo": "01.012.000043.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4173.87
+  },
+  {
+    "codigo": "01.012.000037.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4073.9
+  },
+  {
+    "codigo": "01.012.000040.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5059.63
+  },
+  {
+    "codigo": "01.012.000047.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5842.75
+  },
+  {
+    "codigo": "01.012.000046.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5276.24
+  },
+  {
+    "codigo": "01.012.000041.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 8640.99
+  },
+  {
+    "codigo": "01.012.000042.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 8524.37
+  },
+  {
+    "codigo": "01.012.000049.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos alto",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9310.48
+  },
+  {
+    "codigo": "01.012.000048.SET",
+    "descricao": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 8740.97
+  },
+  {
+    "codigo": "01.015.000018.SET",
+    "descricao": "Rodapé de arenito 10 x 1,5 cm, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 118.55
+  },
+  {
+    "codigo": "01.016.000007.SET",
+    "descricao": "Rodapé de granito cinza andorinha 15 x 2 cm",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 136.5
+  },
+  {
+    "codigo": "01.015.000011.SET",
+    "descricao": "Rodapé de mármore 10 x 1,5 cm, branco Espírito Santo, colocado",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 110.53
+  },
+  {
+    "codigo": "01.005.000001.SET",
+    "descricao": "Serviços de hidrossemeadura",
+    "unidade": "ha",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 110400
+  },
+  {
+    "codigo": "01.003.000005.SET",
+    "descricao": "Solda longitudinal em perfil de aço \"I\"",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 349.05
+  },
+  {
+    "codigo": "01.003.000003.SET",
+    "descricao": "Solda topo em perfil de aço \"I\" 10\" # 7,9 mm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 387.84
+  },
+  {
+    "codigo": "01.003.000004.SET",
+    "descricao": "Solda topo em perfil de aço \"I\" 12\" # 11,3 mm",
+    "unidade": "un",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 429.3
+  },
+  {
+    "codigo": "01.003.000001.SET",
+    "descricao": "Solda topo em perfil de aço duplo \"I\" 10\" # 7,9 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.003.000002.SET",
+    "descricao": "Solda topo em perfil de aço duplo \"I\" 12\" # 11,3 mm",
+    "unidade": "un",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.015.000012.SET",
+    "descricao": "Soleira de granito cinza andorinha 15 x 2 cm, colocada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 136.5
+  },
+  {
+    "codigo": "01.015.000013.SET",
+    "descricao": "Soleira de granito cinza andorinha 25 x 2 cm, colocada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 227.5
+  },
+  {
+    "codigo": "01.015.000014.SET",
+    "descricao": "Soleira mármore branco Espirito Santo 15 x 2 cm, colocada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 119.81
+  },
+  {
+    "codigo": "01.015.000015.SET",
+    "descricao": "Soleira mármore branco Espirito Santo 25 x 2 cm, colocada",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 167.55
+  },
+  {
+    "codigo": "14.004.000050.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água compacto Soletrol SPECIAL 200 Litros BP com 1 Coletor Solar 1,6 m² padrão MCMV (Minha Casa, Minha Vida) - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; DF; ES; GO; MA; MT; PA; PB; PE; PI; RN; RO; RR; SP; SE; TO",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000051.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água compacto Soletrol SPECIAL 200 Litros BP com 1 Coletor Solar 2,0 m² padrão MCMV (Minha Casa, Minha Vida) - custo médio de fornecimento em MS; MG; PR; RJ; RS; SC",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000052.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 300 Litros BP com 2 Coletores Solares 1,6 m² - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; MA; MT; PA; PB; PE; PI; RN; RO; RR; SE; TO",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000053.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 300 Litros BP com 2 Coletores Solares 2,0 m² - custo médio de fornecimento em DF; ES; GO; MS; MG; RJ; SP",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000054.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 300 Litros BP com 3 Coletores Solares 1,6 m² - custo médio de fornecimento em PR; RS; SC",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000055.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 2 Coletores Solares 1,6 m² - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; MA; MT; PA; PB; PE; PI; RN; RO; RR; SE; TO",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000056.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 2 Coletores Solares 2,0 m² - custo médio de fornecimento em DF; ES; GO; MS; MG",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000057.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 3 Coletores Solares 1,6 m² - custo médio de fornecimento em RJ; SP",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000058.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 4 Coletores Solares 1,6 m² - custo médio de fornecimento em PR; RS; SC",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000059.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 3 Coletores Solares 1,6 m² - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; MA; MT; PA; PB; PE; PI; RN; RO; RR; SE; TO",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000060.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 3 Coletores Solares 2,0 m² - custo médio de fornecimento em DF; ES; GO; MS; MG",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000061.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 4 Coletores Solares 1,6 m² - custo médio de fornecimento em RJ; SP",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.004.000062.SET",
+    "descricao": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 5 Coletores Solares 1,6 m² - custo médio de fornecimento em PR; RS; SC",
+    "unidade": "cj",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "01.001.000001.SET",
+    "descricao": "Sondagem a percussão SPT Ø 2 1/2\"",
+    "unidade": "m",
+    "tipo": "SERVIÇO",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 115.14
+  },
+  {
+    "codigo": "05.004.000070.SET",
+    "descricao": "Taxa de bombeamento para concreto",
+    "unidade": "m³",
+    "tipo": "Serviços terceirizados",
+    "categoria": "Serviços terceirizados",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.174.000015.EQA",
+    "descricao": "Aquecedor elétrico com comando digital para sauna seca 10 kW 220 V volume do ambiente 20 m³",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.174.000017.EQA",
+    "descricao": "Aquecedor elétrico com comando digital para sauna seca 12 kW 220 V volume do ambiente 30 m³",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.174.000013.EQA",
+    "descricao": "Aquecedor elétrico com comando digital para sauna seca 4 kW 220 V volume do ambiente 6 m³",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000035.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 1/2 hp h man. 16 m / 8,3 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000013.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 1/3 hp h man. 12 m / 6,8 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000017.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 10 hp h man. 60 m / 30,6 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000037.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 2 hp h man. 28 m / 11,9 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000015.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 3 hp h man. 33 m / 13,5 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000033.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 3/4 hp h man. 20 m / 10,8 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000039.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 5 hp h man. 39 m / 19 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.175.000041.EQA",
+    "descricao": "Conjunto motor-bomba centrífuga trifásico para recalque de água 7,5 hp h man. 45 m / 25,4 m³/h",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.174.000035.EQA",
+    "descricao": "Gerador de vapor com comando digital para sauna úmida 12 kW 220/380 V volume do ambiente 18 m³",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.174.000037.EQA",
+    "descricao": "Gerador de vapor com comando digital para sauna úmida 18 kW 220/380 V volume do ambiente 30 m³",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.174.000033.EQA",
+    "descricao": "Gerador de vapor com comando digital para sauna úmida 6 kW 220/380 V volume do ambiente 6 m³",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "33.133.000010.EQA",
+    "descricao": "Maçarico para corte e solda, com cabeça cortadora",
+    "unidade": "un",
+    "tipo": "Equipamentos - Aquisição",
+    "categoria": "Equipamentos - Aquisição",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000001.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 610 x 160",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000002.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 610 x 180",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000003.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 610 x 210",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000004.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 610 x 260",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000005.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 610 x 300",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000006.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 800 x 200",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000007.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 800 x 250",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000008.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 800 x 300",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000009.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 800 x 350",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000010.EQL",
+    "descricao": "ATEX - Anulador de nervura ATEX® 800 x 400",
+    "unidade": "loc/un/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000011.EQL",
+    "descricao": "ATEX - Elemento em aço para colocação de escoras fixas CABETEX 30 - larg. 3 cm",
+    "unidade": "loc/un/20d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000012.EQL",
+    "descricao": "ATEX - Elemento em aço para colocação de escoras fixas CABETEX 75 - larg. 7,5 cm",
+    "unidade": "loc/un/20d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000013.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 600 para laje nervurada 57 x 60 x 15 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000014.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 600 para laje nervurada 57 x 60 x 18 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000015.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 600U para laje nervurada 112,5 x 52,5 x 22,5 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000016.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 600U para laje nervurada 112,5 x 52,5 x 32,5 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000017.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 600U para laje nervurada 112,5 x 52,5 x 42,5 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000018.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 16 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000019.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 18 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000020.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 21 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000021.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 26 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000022.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 30 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000028.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 18 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000029.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 21 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000030.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 26 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000031.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 30 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000032.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 35 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000033.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 40 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000034.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 16 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000035.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 18 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000036.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 21 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000037.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 26 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000038.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 30 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000039.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 18 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000040.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 21 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000041.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 26 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000042.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 30 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000043.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 35 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000044.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 40 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000045.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 18 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000046.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 21 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000047.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 26 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000048.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 30 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000049.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 35 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000050.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 40 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000051.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 20 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000052.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 25 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000053.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 30 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000054.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 35 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000055.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 40 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000062.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 900 para laje nervurada 82,5 x 90 x 22,5 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000063.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 900 para laje nervurada 82,5 x 90 x 32,5 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000064.EQL",
+    "descricao": "ATEX - Forma de polipropileno ATEX® 900 para laje nervurada 82,5 x 90 x 42,5 cm",
+    "unidade": "loc/m²/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000065.EQL",
+    "descricao": "ATEX - Perfil cartola em chapa de aço galvanizada com abas de 2,5 cm x 3 cm de largura para sistema CABETEX 30",
+    "unidade": "loc/m/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.107.000066.EQL",
+    "descricao": "ATEX - Perfil cartola em chapa de aço galvanizada com abas de 2,5 cm x 7,5 cm de largura para sistema CABETEX 75",
+    "unidade": "loc/m/10d",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.006.000001.EQL",
+    "descricao": "Central de injeção de resina com tanque regulador de pressão e compressor de ar",
+    "unidade": "loc/un/h",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12
+  },
+  {
+    "codigo": "02.004.000002.EQL",
+    "descricao": "Elevador de obra com torre de 10 m tração a cabo de aco velocidade 22 m/min",
+    "unidade": "loc/mês",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5250
+  },
+  {
+    "codigo": "02.004.000001.EQL",
+    "descricao": "Elevador de obra com torre de 10 m, sistema cremalheira, velocidade 36/40 m/min",
+    "unidade": "loc/mês",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 9975
+  },
+  {
+    "codigo": "02.003.000020.EQL",
+    "descricao": "Escora aprumadora com regua de fixação e passarela para sistema de blocos de EPS",
+    "unidade": "m²",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.003.000001.EQL",
+    "descricao": "Escora metálica comprimento regulável 2 a 3,2 m",
+    "unidade": "loc/un/mês",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 27
+  },
+  {
+    "codigo": "02.002.000011.EQL",
+    "descricao": "Forma de polipropileno para laje nervurada 112,5 x 52,5 x 42,5 cm",
+    "unidade": "loc/un/dia",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1.33
+  },
+  {
+    "codigo": "02.002.000002.EQL",
+    "descricao": "Forma de polipropileno para laje nervurada 57 x 60 x 15 cm",
+    "unidade": "loc/un/dia",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 0.43
+  },
+  {
+    "codigo": "02.010.000001.EQL",
+    "descricao": "Fresadora e escarificadora mecânica",
+    "unidade": "loc/un/h",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 275
+  },
+  {
+    "codigo": "02.005.000001.EQL",
+    "descricao": "Lava-jato água fria e quente pressão 1700 psi",
+    "unidade": "loc/un/h",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 18
+  },
+  {
+    "codigo": "02.005.000002.EQL",
+    "descricao": "Lava-jato água fria pressão 1700 psi",
+    "unidade": "loc/un/h",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 17.2
+  },
+  {
+    "codigo": "02.007.000001.EQL",
+    "descricao": "Lixadeira angular manual elétrica Ø 7\" 2200 W 6600 rpm",
+    "unidade": "loc/un/dia",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 90
+  },
+  {
+    "codigo": "01.005.000015.EQL",
+    "descricao": "Maçarico de corte e solda com cabeça cortadora",
+    "unidade": "loc/un/mês",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 186.17
+  },
+  {
+    "codigo": "06.002.000213.EQL",
+    "descricao": "METRO MODULAR - Formas plásticas Metro Modular - painel completo locado com acessórios (20 utilizações/mês)",
+    "unidade": "m²",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.002.000015.EQL",
+    "descricao": "Perfil cartola de chapa #13 de aço galvanizado dobrada abas de 2,5 cm x 3 cm de largura",
+    "unidade": "loc/m/dia",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.002.000014.EQL",
+    "descricao": "Perfil cartola de chapa #13 de aço galvanizado dobrada abas de 2,5 cm x 7,5 cm de largura",
+    "unidade": "loc/m/dia",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "16.027.000100.EQL",
+    "descricao": "Pistola finca pinos - locação",
+    "unidade": "dia",
+    "tipo": "Equipamentos - Locação",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "02.009.000001.EQL",
+    "descricao": "Rebarbador elétrico inclusive ponteiros",
+    "unidade": "loc/un/h",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5.19
+  },
+  {
+    "codigo": "02.003.000002.EQL",
+    "descricao": "Tubo metálico equipado para cimbramento Ø 1 1/2\"",
+    "unidade": "loc/m/mês",
+    "tipo": "LOCAÇÃO",
+    "categoria": "Equipamentos - Locação",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 28
+  },
+  {
+    "codigo": "14.005.000009.MAT",
+    "descricao": "Abrigo de hidrante externo em chapa de aço carbono, profundidade 17 cm, largura 60 cm, altura 90 cm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 350.25
+  },
+  {
+    "codigo": "13.017.000020.MAT",
+    "descricao": "Acessórios para vidro temperado, puxador de madeira",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 54.93
+  },
+  {
+    "codigo": "12.001.000004.MAT",
+    "descricao": "Acetileno",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 120
+  },
+  {
+    "codigo": "12.001.000010.MAT",
+    "descricao": "Acetona pura (densidade 0,791 kg/l)",
+    "unidade": "l",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 66.75
+  },
+  {
+    "codigo": "12.001.000003.MAT",
+    "descricao": "Ácido muriático",
+    "unidade": "l",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15.5
+  },
+  {
+    "codigo": "16.001.000029.MAT",
+    "descricao": "Acionador manual de alarme de incêndio tensão 17 a 28 V",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 81.19
+  },
+  {
+    "codigo": "07.007.000005.MAT",
+    "descricao": "Aço CA-25 Ø 10,0 mm em barra, massa nominal 0,617 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 11
+  },
+  {
+    "codigo": "07.007.000007.MAT",
+    "descricao": "Aço CA-25 Ø 12,5 mm em barra, massa nominal 0,963 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 10.19
+  },
+  {
+    "codigo": "07.007.000022.MAT",
+    "descricao": "Aço CA-25 Ø 16,0 mm em barra, massa nominal 1,578 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 13.25
+  },
+  {
+    "codigo": "07.007.000006.MAT",
+    "descricao": "Aço CA-25 Ø 20,0 mm em barra, massa nominal 2,466 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 10.19
+  },
+  {
+    "codigo": "07.007.000019.MAT",
+    "descricao": "Aço CA-25 Ø 25,0 mm em barra, massa nominal 4,00 kg/m",
+    "unidade": "kg",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "07.007.000003.MAT",
+    "descricao": "Aço CA-25 Ø 6,3 mm em barra, massa nominal 0,245 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 12.99
+  },
+  {
+    "codigo": "07.007.000010.MAT",
+    "descricao": "Aço CA-50 Ø 10,0 mm em barra, massa nominal 0,617 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 7
+  },
+  {
+    "codigo": "07.007.000011.MAT",
+    "descricao": "Aço CA-50 Ø 12,5 mm em barra, massa nominal 0,963 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 6.65
+  },
+  {
+    "codigo": "07.007.000030.MAT",
+    "descricao": "Aço CA-50 Ø 16,0 mm em barra, massa nominal 1,578 kg/m",
+    "unidade": "kg",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "07.007.000031.MAT",
+    "descricao": "Aço CA-50 Ø 20,0 mm em barra, massa nominal 2,446 kg/m",
+    "unidade": "kg",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "07.007.000009.MAT",
+    "descricao": "Aço CA-50 Ø 25,0 mm em barra, massa nominal 4,00 kg/m",
+    "unidade": "kg",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "07.007.000008.MAT",
+    "descricao": "Aço CA-50 Ø 6,3 mm em barra, massa nominal 0,245 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 7.55
+  },
+  {
+    "codigo": "07.007.000013.MAT",
+    "descricao": "Aço CA-50 Ø 8,0 mm em barra, massa nominal 0,395 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 7.55
+  },
+  {
+    "codigo": "07.007.000016.MAT",
+    "descricao": "Aço CA-60 Ø 4,20 mm em barra, massa nominal 0,109 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 13.62
+  },
+  {
+    "codigo": "07.007.000014.MAT",
+    "descricao": "Aço CA-60 Ø 5,00 mm em barra, massa nominal 0,154 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 10.85
+  },
+  {
+    "codigo": "07.007.000015.MAT",
+    "descricao": "Aço CA-60 Ø 7,00 mm em barra, massa nominal 0,302 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 11.33
+  },
+  {
+    "codigo": "07.007.000017.MAT",
+    "descricao": "Aço CA-60 Ø 9,50 mm em barra, massa nominal 0,558 kg/m",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15.91
+  },
+  {
+    "codigo": "14.001.000817.MAT",
+    "descricao": "Adaptador CPVC soldável Ø 15 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5.3
+  },
+  {
+    "codigo": "14.001.000818.MAT",
+    "descricao": "Adaptador CPVC soldável Ø 22 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 5.94
+  },
+  {
+    "codigo": "16.022.000002.MAT",
+    "descricao": "Adaptador de encaixe para eletroduto PVC rígido Ø 1\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4.88
+  },
+  {
+    "codigo": "16.022.000001.MAT",
+    "descricao": "Adaptador de encaixe para eletroduto PVC rígido Ø 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2.99
+  },
+  {
+    "codigo": "14.005.000006.MAT",
+    "descricao": "Adaptador em latão para mangueira de incêndio Ø 2 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 69.58
+  },
+  {
+    "codigo": "14.001.001351.MAT",
+    "descricao": "Adaptador fixo rosca fêmea PEX gás Ø 16 mm x 1/2\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001352.MAT",
+    "descricao": "Adaptador fixo rosca fêmea PEX gás Ø 20 mm x 3/4\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001353.MAT",
+    "descricao": "Adaptador fixo rosca fêmea PEX gás Ø 26 mm x 3/4\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001354.MAT",
+    "descricao": "Adaptador fixo rosca fêmea PEX gás Ø 32 mm x 1\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001347.MAT",
+    "descricao": "Adaptador fixo rosca macho PEX gás Ø 16 mm x 1/2\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001348.MAT",
+    "descricao": "Adaptador fixo rosca macho PEX gás Ø 20 mm x 3/4\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001349.MAT",
+    "descricao": "Adaptador fixo rosca macho PEX gás Ø 26 mm x 3/4\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.001350.MAT",
+    "descricao": "Adaptador fixo rosca macho PEX gás Ø 32 mm x 1\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.000110.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 1 1/2\", soldável Ø 50 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 185.76
+  },
+  {
+    "codigo": "14.001.000098.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 1 1/4\", soldável Ø 40 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 146.8
+  },
+  {
+    "codigo": "14.001.000095.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 1/2\", soldável Ø 20 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 21.48
+  },
+  {
+    "codigo": "14.001.000109.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 2 1/2\", soldável Ø 75 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 828.05
+  },
+  {
+    "codigo": "14.001.000102.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 2\", soldável Ø 63 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 275.04
+  },
+  {
+    "codigo": "14.001.000099.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 3\", soldável Ø 90 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 883.15
+  },
+  {
+    "codigo": "14.001.000097.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 3/4\", soldável Ø 32 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 55.42
+  },
+  {
+    "codigo": "14.001.000111.MAT",
+    "descricao": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, soldável Ø 25 mm, roscável Ø 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 27.59
+  },
+  {
+    "codigo": "14.001.000101.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 1 1/2\", soldável Ø 50 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 199.62
+  },
+  {
+    "codigo": "14.001.000113.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 1 1/4\", soldável Ø 40 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 150.96
+  },
+  {
+    "codigo": "14.001.000100.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 1/2\", soldável Ø 20 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 25.75
+  },
+  {
+    "codigo": "14.001.000104.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 2 1/2\", soldável Ø 75 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 842.04
+  },
+  {
+    "codigo": "14.001.000103.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 2\", soldável Ø 63 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 278.7
+  },
+  {
+    "codigo": "14.001.000105.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 3\", soldável Ø 90 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1134.72
+  },
+  {
+    "codigo": "14.001.000106.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 4\", soldável Ø 110 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1948.52
+  },
+  {
+    "codigo": "14.001.000114.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, soldável Ø 25 mm, roscável Ø 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 38.06
+  },
+  {
+    "codigo": "14.001.000096.MAT",
+    "descricao": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, soldável Ø 32 mm, roscável Ø 1\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 55
+  },
+  {
+    "codigo": "14.001.000107.MAT",
+    "descricao": "Adaptador PPR de transição macho fêmea para drywall, roscável Ø 1/2\", soldável Ø 20 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 38.5
+  },
+  {
+    "codigo": "14.001.000108.MAT",
+    "descricao": "Adaptador PPR de transição macho fêmea para drywall, roscável Ø 1/2\", soldável Ø 25 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 34.59
+  },
+  {
+    "codigo": "14.001.000112.MAT",
+    "descricao": "Adaptador PPR de transição macho fêmea para drywall, roscável Ø 3/4\", soldável Ø 25 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 28.39
+  },
+  {
+    "codigo": "14.001.001003.MAT",
+    "descricao": "Adaptador PVC para sifão esgoto soldável Ø 40 mm, roscável Ø 1 1/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4.04
+  },
+  {
+    "codigo": "14.001.001004.MAT",
+    "descricao": "Adaptador PVC PBV para sifão metálico esgoto roscável Ø 1 1/2\", soldável Ø 40 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3.75
+  },
+  {
+    "codigo": "14.001.000563.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 110 mm x 4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 437.43
+  },
+  {
+    "codigo": "14.001.000556.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 25 mm x 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 23.55
+  },
+  {
+    "codigo": "14.001.000557.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 32 mm x 1\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 25.3
+  },
+  {
+    "codigo": "14.001.000558.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 40 mm x 1 1/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 32.94
+  },
+  {
+    "codigo": "14.001.000559.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 50 mm x 1 1/2\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.000560.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 60 mm x 2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 80.57
+  },
+  {
+    "codigo": "14.001.000561.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 75 mm x 2 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 280.32
+  },
+  {
+    "codigo": "14.001.000562.MAT",
+    "descricao": "Adaptador PVC soldável com flange livre Ø 85 mm x 3\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 390.17
+  },
+  {
+    "codigo": "14.001.000482.MAT",
+    "descricao": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 20 mm x 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 15.72
+  },
+  {
+    "codigo": "14.001.000483.MAT",
+    "descricao": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 25 mm x 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 19.1
+  },
+  {
+    "codigo": "14.001.000484.MAT",
+    "descricao": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 32 mm x 1\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 34.12
+  },
+  {
+    "codigo": "14.001.000485.MAT",
+    "descricao": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 40 mm x 1 1/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 42.77
+  },
+  {
+    "codigo": "14.001.000486.MAT",
+    "descricao": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 50 mm x 1 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 46.22
+  },
+  {
+    "codigo": "14.001.000487.MAT",
+    "descricao": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 60 mm x 2\"",
+    "unidade": "un",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "14.001.000421.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 110 mm x Ø 4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 471.36
+  },
+  {
+    "codigo": "14.001.000414.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 25 mm x Ø 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 22.38
+  },
+  {
+    "codigo": "14.001.000415.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 32 mm x Ø 1\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 27.54
+  },
+  {
+    "codigo": "14.001.000416.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 40 mm x Ø 1 1/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 33.13
+  },
+  {
+    "codigo": "14.001.000417.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 50 mm x Ø 1 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 60.44
+  },
+  {
+    "codigo": "14.001.000418.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 60 mm x Ø 2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 80.04
+  },
+  {
+    "codigo": "14.001.000419.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 75 mm x Ø 2 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 304.01
+  },
+  {
+    "codigo": "14.001.000420.MAT",
+    "descricao": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 85 mm x Ø 3\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 424.4
+  },
+  {
+    "codigo": "14.001.000552.MAT",
+    "descricao": "Adaptador PVC soldável Ø 110 mm para registro roscável Ø 4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 59.97
+  },
+  {
+    "codigo": "14.001.000545.MAT",
+    "descricao": "Adaptador PVC soldável Ø 20 mm para registro roscável Ø 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2.3
+  },
+  {
+    "codigo": "14.001.000553.MAT",
+    "descricao": "Adaptador PVC soldável Ø 25 mm para registro roscável Ø 3/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 2.3
+  },
+  {
+    "codigo": "14.001.000546.MAT",
+    "descricao": "Adaptador PVC soldável Ø 32 mm para registro roscável Ø 1\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 3.1
+  },
+  {
+    "codigo": "14.001.000547.MAT",
+    "descricao": "Adaptador PVC soldável Ø 40 mm para registro roscável Ø 1 1/4\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 4.95
+  },
+  {
+    "codigo": "14.001.000548.MAT",
+    "descricao": "Adaptador PVC soldável Ø 50 mm para registro roscável Ø 1 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 10.45
+  },
+  {
+    "codigo": "14.001.000549.MAT",
+    "descricao": "Adaptador PVC soldável Ø 60 mm para registro roscável Ø 2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 21.81
+  },
+  {
+    "codigo": "14.001.000550.MAT",
+    "descricao": "Adaptador PVC soldável Ø 75 mm para registro roscável Ø 2 1/2\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 41.9
+  },
+  {
+    "codigo": "14.001.000551.MAT",
+    "descricao": "Adaptador PVC soldável Ø 85 mm para registro roscável Ø 3\"",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 36.87
+  },
+  {
+    "codigo": "14.001.000554.MAT",
+    "descricao": "Adaptador PVC soldável para água fria Ø 20 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 0.76
+  },
+  {
+    "codigo": "14.001.000555.MAT",
+    "descricao": "Adaptador PVC soldável para água fria Ø 25 mm",
+    "unidade": "un",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 1.11
+  },
+  {
+    "codigo": "12.006.000012.MAT",
+    "descricao": "Adesivo auto vulcanizante para manta butilíca",
+    "unidade": "l",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 128.27
+  },
+  {
+    "codigo": "12.006.000004.MAT",
+    "descricao": "Adesivo de base acrílica compatível com cimento",
+    "unidade": "l",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 10.59
+  },
+  {
+    "codigo": "12.006.000010.MAT",
+    "descricao": "Adesivo de base epoxídica",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 76.12
+  },
+  {
+    "codigo": "12.006.000014.MAT",
+    "descricao": "Adesivo de base sintética compatível com cimentos",
+    "unidade": "l",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 19.8
+  },
+  {
+    "codigo": "12.006.000008.MAT",
+    "descricao": "Adesivo de contato a base de borracha sintética",
+    "unidade": "l",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 146.43
+  },
+  {
+    "codigo": "14.001.000835.MAT",
+    "descricao": "Adesivo para CPVC",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 289.14
+  },
+  {
+    "codigo": "14.001.000564.MAT",
+    "descricao": "Adesivo para PVC",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 72
+  },
+  {
+    "codigo": "12.006.000015.MAT",
+    "descricao": "Adesivo sintético para chapisco",
+    "unidade": "l",
+    "tipo": "Materiais",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "",
+    "preco": 0
+  },
+  {
+    "codigo": "12.003.000010.MAT",
+    "descricao": "Aditivo expansor para argamassa e concreto",
+    "unidade": "kg",
+    "tipo": "MATERIAL",
+    "categoria": "Materiais",
+    "regiao": "São Paulo",
+    "data_preco": "2026/02",
+    "preco": 26.26
+  }
+]

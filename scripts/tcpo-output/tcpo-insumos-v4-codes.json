@@ -1,0 +1,3230 @@
+[
+  {
+    "code": "01.001.000001.MOD",
+    "desc": "Ajudante",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000011.MOD",
+    "desc": "Ajudante de aplicador de impermeabilização",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000002.MOD",
+    "desc": "Ajudante de armador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000003.MOD",
+    "desc": "Ajudante de carpinteiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000004.MOD",
+    "desc": "Ajudante de eletricista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000005.MOD",
+    "desc": "Ajudante de encanador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000006.MOD",
+    "desc": "Ajudante de graniteiro/marmorista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000007.MOD",
+    "desc": "Ajudante de pintor",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000010.MOD",
+    "desc": "Ajudante de serralheiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.001.000008.MOD",
+    "desc": "Ajudante de telhadista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.002.000001.MOD",
+    "desc": "Aplicador de impermeabilização",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.002.000002.MOD",
+    "desc": "Aplicador de revestimento",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.011.000001.MOD",
+    "desc": "Armador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "60.170.000002.MOD",
+    "desc": "Auxiliar de topógrafo",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.003.000001.MOD",
+    "desc": "Azulejista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.004.000001.MOD",
+    "desc": "Cabo de fogo",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.005.000001.MOD",
+    "desc": "Calafetador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.006.000001.MOD",
+    "desc": "Calceteiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.007.000001.MOD",
+    "desc": "Carpinteiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.008.000001.MOD",
+    "desc": "Cavouqueiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.009.000001.MOD",
+    "desc": "Eletricista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.009.000002.MOD",
+    "desc": "Eletricista para alta tensão",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "60.130.000002.MOD",
+    "desc": "Eletricista para média tensão",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.010.000001.MOD",
+    "desc": "Encanador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.012.000001.MOD",
+    "desc": "Gesseiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.013.000001.MOD",
+    "desc": "Graniteiro / Marmorista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.014.000001.MOD",
+    "desc": "Jardineiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.015.000001.MOD",
+    "desc": "Jatista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.016.000001.MOD",
+    "desc": "Ladrilhista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.018.000001.MOD",
+    "desc": "Montador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.030.000001.MOD",
+    "desc": "Motorista de caminhão",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.019.000001.MOD",
+    "desc": "Operador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.019.000002.MOD",
+    "desc": "Operador de equipamento",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.019.000004.MOD",
+    "desc": "Operador de equipamentos",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.019.000003.MOD",
+    "desc": "Operador de terraplenagem",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.020.000001.MOD",
+    "desc": "Pastilheiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.021.000001.MOD",
+    "desc": "Pedreiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.022.000001.MOD",
+    "desc": "Pintor",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.023.000001.MOD",
+    "desc": "Poceiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.024.000001.MOD",
+    "desc": "Raspador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.025.000001.MOD",
+    "desc": "Serralheiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.026.000001.MOD",
+    "desc": "Servente",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.027.000001.MOD",
+    "desc": "Soldador",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.028.000001.MOD",
+    "desc": "Taqueiro",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "01.029.000001.MOD",
+    "desc": "Telhadista",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "60.170.000001.MOD",
+    "desc": "Topógrafo",
+    "unit": "h",
+    "categoria": "Mão de obra"
+  },
+  {
+    "code": "03.006.000007.MOE",
+    "desc": "Alvenaria com blocos de concreto 11,5 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000008.MOE",
+    "desc": "Alvenaria com blocos de concreto 14 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000009.MOE",
+    "desc": "Alvenaria com blocos de concreto 19 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000005.MOE",
+    "desc": "Alvenaria com blocos de concreto 6,5 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000006.MOE",
+    "desc": "Alvenaria com blocos de concreto 9 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000002.MOE",
+    "desc": "Alvenaria com tijolo comum 6 x 9 x 19 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000001.MOE",
+    "desc": "Alvenaria de vedação com blocos cerâmicos 9 x19 x19 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000003.MOE",
+    "desc": "Alvenaria estrutural com blocos cerâmicos 14 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000004.MOE",
+    "desc": "Alvenaria estrutural com blocos cerâmicos 19 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000010.MOE",
+    "desc": "Alvenaria estrutural com blocos de concreto 14 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.006.000011.MOE",
+    "desc": "Alvenaria estrutural com blocos de concreto 19 x 19 x 39 cm, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.010.000002.MOE",
+    "desc": "Aplicação de gesso em parede ou teto",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.010.000003.MOE",
+    "desc": "Aplicação de massa corrida com duas demãos",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.011.000005.MOE",
+    "desc": "Assentamento de azulejos",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.011.000003.MOE",
+    "desc": "Assentamento de pastilhas",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.011.000004.MOE",
+    "desc": "Assentamento de piso cerâmico",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.011.000002.MOE",
+    "desc": "Assentamento de piso porcelanato",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.015.000003.MOE",
+    "desc": "Chapisco em parede externa, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.015.000002.MOE",
+    "desc": "Chapisco em parede interna, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.015.000004.MOE",
+    "desc": "Chapisco em teto, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.002.000001.MOE",
+    "desc": "Corte de perfil de aço \"I\" 10\" # 7,9 mm",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.002.000002.MOE",
+    "desc": "Corte de perfil de aço \"I\" 12\" # 11,3 mm",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.002.000003.MOE",
+    "desc": "Corte de perfil de aço duplo \"I\" 10\" # 7,9 mm",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.002.000004.MOE",
+    "desc": "Corte de perfil de aço duplo \"I\" 12\" # 11,3 mm",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.023.000002.MOE",
+    "desc": "Elevador de obra a tração por cabo de aço, altura 10 m - montagem",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.024.000002.MOE",
+    "desc": "Elevador de obra com torre de 10 m de altura, tração a cabo de aço - desmontagem",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.024.000001.MOE",
+    "desc": "Elevador de obra, sistema de cremalheira, altura 10 m - desmontagem",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.023.000001.MOE",
+    "desc": "Elevador de obra, sistema de cremalheira, altura 10 m - montagem",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.016.000003.MOE",
+    "desc": "Emboço em parede externa, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.016.000002.MOE",
+    "desc": "Emboço em parede interna, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.016.000004.MOE",
+    "desc": "Emboço em teto, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.003.000001.MOE",
+    "desc": "Estaca em perfil de aço \"I\" 10\", cravação",
+    "unit": "m",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.003.000002.MOE",
+    "desc": "Estaca em perfil de aço \"I\" 12\", cravação",
+    "unit": "m",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.007.000001.MOE",
+    "desc": "Impermeabilização com emulsão asfáltica, mão de obra para execução",
+    "unit": "h",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.007.000002.MOE",
+    "desc": "Impermeabilização com manta asfáltica, mão de obra para execução",
+    "unit": "h",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000003.MOE",
+    "desc": "Instalação de divisórias # 35 mm estruturadas em perfis de alumínio, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.012.000001.MOE",
+    "desc": "Instalação de forro PVC, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000140.MOE",
+    "desc": "Instalação de vidro incolor laminado # 10 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000145.MOE",
+    "desc": "Instalação de vidro incolor laminado # 12 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000130.MOE",
+    "desc": "Instalação de vidro incolor laminado # 6 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000135.MOE",
+    "desc": "Instalação de vidro incolor laminado # 8 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000115.MOE",
+    "desc": "Instalação de vidros # 10 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000102.MOE",
+    "desc": "Instalação de vidros # 5 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000111.MOE",
+    "desc": "Instalação de vidros # 6 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000113.MOE",
+    "desc": "Instalação de vidros # 8 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000002.MOE",
+    "desc": "Instalação de vidros em esquadrias com massa de vidraceiro, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000109.MOE",
+    "desc": "Instalação de vidros refletivos # 10 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000105.MOE",
+    "desc": "Instalação de vidros refletivos # 6 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.008.000107.MOE",
+    "desc": "Instalação de vidros refletivos # 8 mm com gaxetas, mão de obra para execução",
+    "unit": "un",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.009.000002.MOE",
+    "desc": "Pintura em tinta látex em duas demãos, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.009.000003.MOE",
+    "desc": "Pintura em tinta látex em três demãos, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.009.000004.MOE",
+    "desc": "Pintura em tinta óleo em duas demãos, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.009.000001.MOE",
+    "desc": "Pintura em tinta óleo em três demãos, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.004.000001.MOE",
+    "desc": "Piso cimentado, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.014.000001.MOE",
+    "desc": "Reboco em parede externa, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.014.000002.MOE",
+    "desc": "Reboco em parede interna, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.014.000003.MOE",
+    "desc": "Reboco em teto, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.005.000001.MOE",
+    "desc": "Serviço de corte/dobra industrializado para aço CA 50/60",
+    "unit": "kg",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "03.021.000001.MOE",
+    "desc": "Textura acrílica em paredes, mão de obra para execução",
+    "unit": "m²",
+    "categoria": "Mão de obra empreitada"
+  },
+  {
+    "code": "01.015.000016.SET",
+    "desc": "Arenito em placas 47 x 47 x 2,5 cm, colocado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000017.SET",
+    "desc": "Caco de mármore polido # 0,5 cm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000024.SET",
+    "desc": "Carpete de madeira, colocado, lâminas 20 x 120 cm # 8 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000033.SET",
+    "desc": "Corte em concreto com discos diamantados para paredes e muros espessura até 68 cm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000030.SET",
+    "desc": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 13 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000031.SET",
+    "desc": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 20 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000035.SET",
+    "desc": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 5 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000032.SET",
+    "desc": "Corte em concreto com discos diamantados para pisos e lajes profundidade de corte 50 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000034.SET",
+    "desc": "Corte em concreto com fio diamantada para estruturas de concreto",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000125.SET",
+    "desc": "Custo de mobilização ou desmobilização, equipamento estaca escavada mecânicamente, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000124.SET",
+    "desc": "Custo de mobilização ou desmobilização, equipamento estaca Franki, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000116.SET",
+    "desc": "Custo de mobilização ou desmobilização, equipamento estaca hélice contínua, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000115.SET",
+    "desc": "Custo de mobilização ou desmobilização, equipamento estaca raiz, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000123.SET",
+    "desc": "Custo de mobilização ou desmobilização, equipamento estaca Strauss, movimentação da equipe e dos equipamentos dentro das regiões metropolitanas (serviço terceirizado)",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000019.SET",
+    "desc": "Degrau (piso) de granilite, executado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000021.SET",
+    "desc": "Degrau de arenito 30 x 3 cm, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000004.SET",
+    "desc": "Degrau de granito cinza andorinha 30 x 3 cm, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000023.SET",
+    "desc": "Degrau de mármore branco Espirito Santo 30 x 3 cm, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.009.000003.SET",
+    "desc": "Divisória pré-moldada de granilite # 3 cm, instalada",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "06.302.000001.SET",
+    "desc": "ECOSOLUTIONS - Muro painel pré-moldado 2,60 x 2,80 inclusive sapata base",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.028.000002.SET",
+    "desc": "Elevador de serviço com porta de abertura lateral, 15 paradas, 12 passageiros, 1 m/s",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.028.000003.SET",
+    "desc": "Elevador de serviço com porta de abertura lateral, 15 paradas, 18 passageiros, 1 m/s",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.028.000001.SET",
+    "desc": "Elevador de serviço com porta de abertura lateral, 15 paradas, 6 passageiros, 1 m/s",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.028.000005.SET",
+    "desc": "Elevador social com porta de abertura central, corrimão de alumínio, espelho e acabamento em aço inoxidável escovado, 15 paradas, 12 passageiros, 1,6 m/s",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.028.000006.SET",
+    "desc": "Elevador social com porta de abertura central, corrimão de alumínio, espelho e acabamento em aço inoxidável escovado, 15 paradas, 18 passageiros, 1,6 m/s",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.028.000004.SET",
+    "desc": "Elevador social com porta de abertura central, corrimão de alumínio, espelho e acabamento em aço inoxidável escovado, 15 paradas, 6 passageiros, 1,6 m/s",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "60.170.000003.SET",
+    "desc": "Escavação de parede diafragma em solo com SPT até 50 golpes, contenção com lama bentonitica - equipamento, lama e mão de obra",
+    "unit": "m³",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000005.SET",
+    "desc": "Espelho de arenito para degrau 20 x 3 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000007.SET",
+    "desc": "Espelho de granito cinza andorinha para degrau 20 x 2 cm, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000006.SET",
+    "desc": "Espelho de mármore branco Espírito Santo para degrau 20 x 2 cm, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000022.SET",
+    "desc": "Espelho para degrau de granilite, executado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000126.SET",
+    "desc": "Estaca escavada mecânicamente Ø 250 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000127.SET",
+    "desc": "Estaca escavada mecânicamente Ø 300 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000128.SET",
+    "desc": "Estaca escavada mecânicamente Ø 350 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000129.SET",
+    "desc": "Estaca escavada mecânicamente Ø 400 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000130.SET",
+    "desc": "Estaca escavada mecânicamente Ø 500 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000131.SET",
+    "desc": "Estaca escavada mecânicamente Ø 600 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000132.SET",
+    "desc": "Estaca escavada mecânicamente Ø 700 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000015.SET",
+    "desc": "Estaca Franki Ø 35 cm, carga 55 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000014.SET",
+    "desc": "Estaca Franki Ø 40 cm, carga 75 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000019.SET",
+    "desc": "Estaca Franki Ø 45 cm, carga 95 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000013.SET",
+    "desc": "Estaca Franki Ø 52 cm, carga 130 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000021.SET",
+    "desc": "Estaca Franki Ø 60 cm, carga 170 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000117.SET",
+    "desc": "Estaca hélice contínua monitorada Ø 300 mm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000118.SET",
+    "desc": "Estaca hélice contínua monitorada Ø 400 mm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000119.SET",
+    "desc": "Estaca hélice contínua monitorada Ø 500 mm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000120.SET",
+    "desc": "Estaca hélice contínua monitorada Ø 600 mm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000121.SET",
+    "desc": "Estaca hélice contínua monitorada Ø 700 mm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000122.SET",
+    "desc": "Estaca hélice contínua monitorada Ø 800 mm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000005.SET",
+    "desc": "Estaca pré-moldada concreto armado seção octogonal vazada Ø 36 cm, carga 138 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000016.SET",
+    "desc": "Estaca pré-moldada concreto armado seção octogonal vazada Ø 42 cm, carga 158 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000002.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção circular maciça Ø 15 cm, carga 18 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000003.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção circular maciça Ø 17 cm, carga 25 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000004.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção circular maciça Ø 20 cm, carga 36 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000006.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção circular maciça Ø 23 cm, carga 50 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000008.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção circular vazada Ø 33 cm, carga 75 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000012.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção quadrada 17 x 17 cm, carga 40 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000020.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção quadrada 23,5 x 23,5 cm, carga 82 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000017.SET",
+    "desc": "Estaca pré-moldada concreto protendido seção quadrada 26,5 x 26,5 cm, carga 106 t, cravada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000110.SET",
+    "desc": "Estaca raiz em rocha Ø 150 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000111.SET",
+    "desc": "Estaca raiz em rocha Ø 200 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000112.SET",
+    "desc": "Estaca raiz em rocha Ø 250 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000113.SET",
+    "desc": "Estaca raiz em rocha Ø 310 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000114.SET",
+    "desc": "Estaca raiz em rocha Ø 400 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000100.SET",
+    "desc": "Estaca raiz em solo Ø 150 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000101.SET",
+    "desc": "Estaca raiz em solo Ø 200 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000102.SET",
+    "desc": "Estaca raiz em solo Ø 250 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000103.SET",
+    "desc": "Estaca raiz em solo Ø 310 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000104.SET",
+    "desc": "Estaca raiz em solo Ø 400 mm, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000018.SET",
+    "desc": "Estaca Strauss Ø 25 cm, carga 20 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000009.SET",
+    "desc": "Estaca Strauss Ø 32 cm, carga 30 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000010.SET",
+    "desc": "Estaca Strauss Ø 38 cm, carga 40 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.002.000011.SET",
+    "desc": "Estaca Strauss Ø 45 cm, carga 60 t, mão de obra e equipamento",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.011.000001.SET",
+    "desc": "Estrutura para cobertura em aço A36, inclusive montagem",
+    "unit": "kg",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.020.000003.SET",
+    "desc": "Forro de gesso acartonado em placas removíveis de 62 x 125 cm x 12,5 mm, estruturado com perfis \"T\" de aço galvanizado, instalado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.020.000002.SET",
+    "desc": "Forro de gesso acartonado em placas removíveis de 62 x 62 cm x 12,5 mm, estruturado com perfis \"T\" de aço galvanizado, instalado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.020.000004.SET",
+    "desc": "Forro de gesso acartonado fixo # 12,5 mm com acabamento monolítico fixado com pendurais de arame galavanizado 18, instalado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.020.000001.SET",
+    "desc": "Forro de gesso acartonado fixo # 12,5 mm com acabamento monolítico fixado com perfis de aço galvanizado, instalado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.020.000005.SET",
+    "desc": "Forro de gesso liso em placas de 60 x 60 x 3 cm encaixe macho-fêmea, instalado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000022.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/2\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000015.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/2\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000027.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/2\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000021.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/4\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000014.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/4\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000026.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1 1/4\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000020.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000013.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000025.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000017.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1/2\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000009.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1/2\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000012.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 1/2\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000019.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/4\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000011.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/4\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000024.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/4\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000016.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/8\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000008.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/8\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000001.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 3/8\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000018.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 5/8\" profundidade 10 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000010.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 5/8\" profundidade 5 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000023.SET",
+    "desc": "Furo em concreto com broca de widia, utilizando martele elétrico Ø 5/8\" profundidade até 15 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000002.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 2\" a 2 1/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000003.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 3\" a 3 1/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000028.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 3/8\" a 3/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000004.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 4\" a 4 1/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000005.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 5\" a 5 1/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000006.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 6\" a 6 1/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000029.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 7/8\" a 1 3/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.006.000007.SET",
+    "desc": "Furo em concreto com coroa diamantada, utilizando perfuratriz elétrica Ø 8\" a 8 1/4\" profundidade até 40 cm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000008.SET",
+    "desc": "Granito cinza andorinha para pisos # 3 cm, colocado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000009.SET",
+    "desc": "Mármore branco Espírito Santo para pisos # 2 cm, colocado",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "09.005.000001.SET",
+    "desc": "N.DIDINI - Cobertura metálica em cobre ou zinco-titânio inclusive estrutura de apoio e isolamento acústico.",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "23.005.000050.SET",
+    "desc": "N.DIDINI - Painel de fachada com revestimento em Revzinc (aço galvanizado), Alumínio, Cobre ou Zinco-Titânio.",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000017.SET",
+    "desc": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 100 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000018.SET",
+    "desc": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 125 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000019.SET",
+    "desc": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 150 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000020.SET",
+    "desc": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 200 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000006.SET",
+    "desc": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 50 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000016.SET",
+    "desc": "Painel com duas faces em chapa de aço # 0,5 mm e miolo em lã de rocha para revestimento de fachadas, isolante # 75 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000012.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 100 mm para revestimento de fachadas e coberturas, 10,54 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000003.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 100 mm para revestimento de fachadas e coberturas, 9,54 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000013.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 125 mm para revestimento de fachadas e coberturas, 10,9 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000004.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 125 mm para revestimento de fachadas e coberturas, 9,90 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000005.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 150 mm para revestimento de fachadas e coberturas, 10,26 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000014.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 150 mm para revestimento de fachadas e coberturas, 11,27 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000015.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 200 mm para revestimento de fachadas e coberturas, 11,99 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000001.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 50 mm para revestimento de fachadas e coberturas, 10,63 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000010.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 50 mm para revestimento de fachadas e coberturas, 9,82 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000011.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 75 mm para revestimento de fachadas e coberturas, 10,18 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000002.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em EPS # 75 mm para revestimento de fachadas e coberturas, 10,99 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000023.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 100 mm para revestimento de fachadas e coberturas, 19,09 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000007.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 125 mm para revestimento de fachadas e coberturas, 21,59 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000008.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 150 mm para revestimento de fachadas e coberturas, 24,09 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000009.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 200 mm para revestimento de fachadas e coberturas, 29,09 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000021.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 50 mm para revestimento de fachadas e coberturas, 14,9 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.007.000022.SET",
+    "desc": "Painel com duas faces em chapa de aço zincada # 0,5 mm, pré-pintado, com miolo em lã de rocha # 75 mm para revestimento de fachadas e coberturas, 16,59 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.008.000004.SET",
+    "desc": "Painel de gesso acartonado simples com bordas rebaixadas com colagem direta em alvenaria inclusive material de acabamento para locais secos 1,20 x 3,00 m x 12,5 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.023.000001.SET",
+    "desc": "Papel de parede com superfície lisa - colocado, largura 0,50 m",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.008.000002.SET",
+    "desc": "Parede de gesso acartonado dupla # 125 mm x 3,75 m de altura",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.008.000003.SET",
+    "desc": "Parede de gesso acartonado simples # 100 mm x 3,15 m de altura",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.009.000002.SET",
+    "desc": "Parede de gesso acartonado simples para ambiente sujeito a umidade # 100 mm x 3,15 m de altura",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000006.SET",
+    "desc": "Pedra mineira São Thomé serrada # 2 cm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000010.SET",
+    "desc": "Pedra portuguesa - mosaico português branco e preto, aplicado em pisos",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000003.SET",
+    "desc": "Peitoril de mármore Espirito Santo 15 x 2 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000005.SET",
+    "desc": "Peitoril de mármore Espirito Santo 25 x 2 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000002.SET",
+    "desc": "Peitoril reto de granito cinza andorinha 15 x 2 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000004.SET",
+    "desc": "Peitoril reto de granito cinza andorinha 25 x 2 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000008.SET",
+    "desc": "Piso de granilite granulometria nº 1, # 10 mm",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000009.SET",
+    "desc": "Piso elevado com placas de aço revestidas com laminado melamínico texturizado 620 x 620 x 28 mm para carga pontual de 450 kg e distribuída 1.250 kg/m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000020.SET",
+    "desc": "Piso elevado, fechamento lateral em chapa de aço galvanizado altura 15 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000008.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000009.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000003.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, duas folhas fixas e quatro móveis para vão de 4,00 x 2,20 m, fluxo alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000004.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, duas folhas fixas e quatro móveis para vão de 4,00 x 2,20 m, fluxo baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000012.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e duas móveis para vão de 3,00 x 2,20 m, fluxo alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000002.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e duas móveis para vão de 3,00 x 2,20 m, fluxo baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000001.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000005.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm em caixilho de alumínio anodizado fosco, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000011.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000010.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura deslizante, duas folhas fixas e duas móveis para vão de 3,50 x 2,20 m, fluxo baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000006.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.013.000007.SET",
+    "desc": "Porta automática de vidro liso temperado # 10 mm, com sensor de aproximação para abertura, uma folha fixa e uma móvel para vão de 2,50 x 2,20 m, fluxo baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000003.SET",
+    "desc": "Porta corta-fogo dupla, 2,10 x 1,60 m, isolação 90 min, instalada",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000055.SET",
+    "desc": "Porta corta-fogo industrial automática, de correr, com contrapeso, instalada, área até 2,5 m²",
+    "unit": "m²",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000058.SET",
+    "desc": "Porta corta-fogo, 2,10 x 0,80 m, isolação 90 min, instalada",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000052.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000053.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000006.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000005.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000012.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000057.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000059.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000054.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000008.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000007.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000034.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000023.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000056.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000004.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000010.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000009.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000051.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000045.SET",
+    "desc": "Portão automático de madeira, com lâminas de madeira tipo assoalho em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000017.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000018.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000025.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000024.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000013.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000019.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000020.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000027.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000026.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000050.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000014.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000021.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000022.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000029.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000028.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000016.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000015.SET",
+    "desc": "Portão automático em chapa de aço galvanizada, tipo deck em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000031.SET",
+    "desc": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000030.SET",
+    "desc": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 1,80 x 3,50 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000033.SET",
+    "desc": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000032.SET",
+    "desc": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 2,10 x 4,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000036.SET",
+    "desc": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000035.SET",
+    "desc": "Portão automático em chapa de alumínio, duas folhas, lambril em posição vertical 3,00 x 5,00 m, sistema pivotante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000039.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000038.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000044.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000043.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 1,80 x 3,50 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000037.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000040.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000047.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000046.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 2,10 x 4,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000041.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000042.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema basculante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000049.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos alto",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.012.000048.SET",
+    "desc": "Portão automático em chapa de alumínio, lambril em posição vertical 3,00 x 5,00 m, sistema deslizante, fluxo de veículos baixo",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000018.SET",
+    "desc": "Rodapé de arenito 10 x 1,5 cm, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.016.000007.SET",
+    "desc": "Rodapé de granito cinza andorinha 15 x 2 cm",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000011.SET",
+    "desc": "Rodapé de mármore 10 x 1,5 cm, branco Espírito Santo, colocado",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.005.000001.SET",
+    "desc": "Serviços de hidrossemeadura",
+    "unit": "ha",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.003.000005.SET",
+    "desc": "Solda longitudinal em perfil de aço \"I\"",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.003.000003.SET",
+    "desc": "Solda topo em perfil de aço \"I\" 10\" # 7,9 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.003.000004.SET",
+    "desc": "Solda topo em perfil de aço \"I\" 12\" # 11,3 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.003.000001.SET",
+    "desc": "Solda topo em perfil de aço duplo \"I\" 10\" # 7,9 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.003.000002.SET",
+    "desc": "Solda topo em perfil de aço duplo \"I\" 12\" # 11,3 mm",
+    "unit": "un",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000012.SET",
+    "desc": "Soleira de granito cinza andorinha 15 x 2 cm, colocada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000013.SET",
+    "desc": "Soleira de granito cinza andorinha 25 x 2 cm, colocada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000014.SET",
+    "desc": "Soleira mármore branco Espirito Santo 15 x 2 cm, colocada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.015.000015.SET",
+    "desc": "Soleira mármore branco Espirito Santo 25 x 2 cm, colocada",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000050.SET",
+    "desc": "SOLETROL - Aquecedor solar de água compacto Soletrol SPECIAL 200 Litros BP com 1 Coletor Solar 1,6 m² padrão MCMV (Minha Casa, Minha Vida) - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; DF; ES; GO; MA; MT; PA; PB; PE; PI; RN; RO; RR; SP; SE; TO",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000051.SET",
+    "desc": "SOLETROL - Aquecedor solar de água compacto Soletrol SPECIAL 200 Litros BP com 1 Coletor Solar 2,0 m² padrão MCMV (Minha Casa, Minha Vida) - custo médio de fornecimento em MS; MG; PR; RJ; RS; SC",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000052.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 300 Litros BP com 2 Coletores Solares 1,6 m² - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; MA; MT; PA; PB; PE; PI; RN; RO; RR; SE; TO",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000053.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 300 Litros BP com 2 Coletores Solares 2,0 m² - custo médio de fornecimento em DF; ES; GO; MS; MG; RJ; SP",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000054.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 300 Litros BP com 3 Coletores Solares 1,6 m² - custo médio de fornecimento em PR; RS; SC",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000055.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 2 Coletores Solares 1,6 m² - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; MA; MT; PA; PB; PE; PI; RN; RO; RR; SE; TO",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000056.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 2 Coletores Solares 2,0 m² - custo médio de fornecimento em DF; ES; GO; MS; MG",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000057.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 3 Coletores Solares 1,6 m² - custo médio de fornecimento em RJ; SP",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000058.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 400 Litros BP com 4 Coletores Solares 1,6 m² - custo médio de fornecimento em PR; RS; SC",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000059.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 3 Coletores Solares 1,6 m² - custo médio de fornecimento em AC; AL; AP; AM; BA; CE; MA; MT; PA; PB; PE; PI; RN; RO; RR; SE; TO",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000060.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 3 Coletores Solares 2,0 m² - custo médio de fornecimento em DF; ES; GO; MS; MG",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000061.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 4 Coletores Solares 1,6 m² - custo médio de fornecimento em RJ; SP",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "14.004.000062.SET",
+    "desc": "SOLETROL - Aquecedor solar de água Soletrol MAX 500 Litros BP com 5 Coletores Solares 1,6 m² - custo médio de fornecimento em PR; RS; SC",
+    "unit": "cj",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "01.001.000001.SET",
+    "desc": "Sondagem a percussão SPT Ø 2 1/2\"",
+    "unit": "m",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "05.004.000070.SET",
+    "desc": "Taxa de bombeamento para concreto",
+    "unit": "m³",
+    "categoria": "Serviços terceirizados"
+  },
+  {
+    "code": "33.174.000015.EQA",
+    "desc": "Aquecedor elétrico com comando digital para sauna seca 10 kW 220 V volume do ambiente 20 m³",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.174.000017.EQA",
+    "desc": "Aquecedor elétrico com comando digital para sauna seca 12 kW 220 V volume do ambiente 30 m³",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.174.000013.EQA",
+    "desc": "Aquecedor elétrico com comando digital para sauna seca 4 kW 220 V volume do ambiente 6 m³",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000035.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 1/2 hp h man. 16 m / 8,3 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000013.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 1/3 hp h man. 12 m / 6,8 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000017.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 10 hp h man. 60 m / 30,6 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000037.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 2 hp h man. 28 m / 11,9 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000015.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 3 hp h man. 33 m / 13,5 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000033.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 3/4 hp h man. 20 m / 10,8 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000039.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 5 hp h man. 39 m / 19 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.175.000041.EQA",
+    "desc": "Conjunto motor-bomba centrífuga trifásico para recalque de água 7,5 hp h man. 45 m / 25,4 m³/h",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.174.000035.EQA",
+    "desc": "Gerador de vapor com comando digital para sauna úmida 12 kW 220/380 V volume do ambiente 18 m³",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.174.000037.EQA",
+    "desc": "Gerador de vapor com comando digital para sauna úmida 18 kW 220/380 V volume do ambiente 30 m³",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.174.000033.EQA",
+    "desc": "Gerador de vapor com comando digital para sauna úmida 6 kW 220/380 V volume do ambiente 6 m³",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "33.133.000010.EQA",
+    "desc": "Maçarico para corte e solda, com cabeça cortadora",
+    "unit": "un",
+    "categoria": "Equipamentos - Aquisição"
+  },
+  {
+    "code": "02.107.000001.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 610 x 160",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000002.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 610 x 180",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000003.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 610 x 210",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000004.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 610 x 260",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000005.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 610 x 300",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000006.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 800 x 200",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000007.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 800 x 250",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000008.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 800 x 300",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000009.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 800 x 350",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000010.EQL",
+    "desc": "ATEX - Anulador de nervura ATEX® 800 x 400",
+    "unit": "loc/un/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000011.EQL",
+    "desc": "ATEX - Elemento em aço para colocação de escoras fixas CABETEX 30 - larg. 3 cm",
+    "unit": "loc/un/20d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000012.EQL",
+    "desc": "ATEX - Elemento em aço para colocação de escoras fixas CABETEX 75 - larg. 7,5 cm",
+    "unit": "loc/un/20d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000013.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 600 para laje nervurada 57 x 60 x 15 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000014.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 600 para laje nervurada 57 x 60 x 18 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000015.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 600U para laje nervurada 112,5 x 52,5 x 22,5 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000016.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 600U para laje nervurada 112,5 x 52,5 x 32,5 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000017.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 600U para laje nervurada 112,5 x 52,5 x 42,5 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000018.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 16 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000019.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 18 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000020.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 21 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000021.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 26 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000022.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 610 para laje nervurada 58 x 61 x 30 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000028.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 18 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000029.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 21 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000030.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 26 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000031.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 30 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000032.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 35 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000033.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 650 para laje nervurada 62 x 65 x 40 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000034.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 16 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000035.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 18 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000036.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 21 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000037.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 26 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000038.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 660 para laje nervurada 63 x 66 x 30 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000039.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 18 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000040.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 21 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000041.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 26 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000042.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 30 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000043.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 35 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000044.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 700 para laje nervurada 62,5 x 70 x 40 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000045.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 18 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000046.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 21 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000047.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 26 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000048.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 30 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000049.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 35 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000050.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 740 para laje nervurada 66,5 x 74 x 40 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000051.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 20 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000052.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 25 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000053.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 30 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000054.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 35 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000055.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 800 para laje nervurada 72,5 x 80 x 40 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000062.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 900 para laje nervurada 82,5 x 90 x 22,5 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000063.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 900 para laje nervurada 82,5 x 90 x 32,5 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000064.EQL",
+    "desc": "ATEX - Forma de polipropileno ATEX® 900 para laje nervurada 82,5 x 90 x 42,5 cm",
+    "unit": "loc/m²/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000065.EQL",
+    "desc": "ATEX - Perfil cartola em chapa de aço galvanizada com abas de 2,5 cm x 3 cm de largura para sistema CABETEX 30",
+    "unit": "loc/m/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.107.000066.EQL",
+    "desc": "ATEX - Perfil cartola em chapa de aço galvanizada com abas de 2,5 cm x 7,5 cm de largura para sistema CABETEX 75",
+    "unit": "loc/m/10d",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.006.000001.EQL",
+    "desc": "Central de injeção de resina com tanque regulador de pressão e compressor de ar",
+    "unit": "loc/un/h",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.004.000002.EQL",
+    "desc": "Elevador de obra com torre de 10 m tração a cabo de aco velocidade 22 m/min",
+    "unit": "loc/mês",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.004.000001.EQL",
+    "desc": "Elevador de obra com torre de 10 m, sistema cremalheira, velocidade 36/40 m/min",
+    "unit": "loc/mês",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.003.000020.EQL",
+    "desc": "Escora aprumadora com regua de fixação e passarela para sistema de blocos de EPS",
+    "unit": "m²",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.003.000001.EQL",
+    "desc": "Escora metálica comprimento regulável 2 a 3,2 m",
+    "unit": "loc/un/mês",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.002.000011.EQL",
+    "desc": "Forma de polipropileno para laje nervurada 112,5 x 52,5 x 42,5 cm",
+    "unit": "loc/un/dia",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.002.000002.EQL",
+    "desc": "Forma de polipropileno para laje nervurada 57 x 60 x 15 cm",
+    "unit": "loc/un/dia",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.010.000001.EQL",
+    "desc": "Fresadora e escarificadora mecânica",
+    "unit": "loc/un/h",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.005.000001.EQL",
+    "desc": "Lava-jato água fria e quente pressão 1700 psi",
+    "unit": "loc/un/h",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.005.000002.EQL",
+    "desc": "Lava-jato água fria pressão 1700 psi",
+    "unit": "loc/un/h",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.007.000001.EQL",
+    "desc": "Lixadeira angular manual elétrica Ø 7\" 2200 W 6600 rpm",
+    "unit": "loc/un/dia",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "01.005.000015.EQL",
+    "desc": "Maçarico de corte e solda com cabeça cortadora",
+    "unit": "loc/un/mês",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "06.002.000213.EQL",
+    "desc": "METRO MODULAR - Formas plásticas Metro Modular - painel completo locado com acessórios (20 utilizações/mês)",
+    "unit": "m²",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.002.000015.EQL",
+    "desc": "Perfil cartola de chapa #13 de aço galvanizado dobrada abas de 2,5 cm x 3 cm de largura",
+    "unit": "loc/m/dia",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.002.000014.EQL",
+    "desc": "Perfil cartola de chapa #13 de aço galvanizado dobrada abas de 2,5 cm x 7,5 cm de largura",
+    "unit": "loc/m/dia",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "16.027.000100.EQL",
+    "desc": "Pistola finca pinos - locação",
+    "unit": "dia",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.009.000001.EQL",
+    "desc": "Rebarbador elétrico inclusive ponteiros",
+    "unit": "loc/un/h",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "02.003.000002.EQL",
+    "desc": "Tubo metálico equipado para cimbramento Ø 1 1/2\"",
+    "unit": "loc/m/mês",
+    "categoria": "Equipamentos - Locação"
+  },
+  {
+    "code": "14.005.000009.MAT",
+    "desc": "Abrigo de hidrante externo em chapa de aço carbono, profundidade 17 cm, largura 60 cm, altura 90 cm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "13.017.000020.MAT",
+    "desc": "Acessórios para vidro temperado, puxador de madeira",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.001.000004.MAT",
+    "desc": "Acetileno",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.001.000010.MAT",
+    "desc": "Acetona pura (densidade 0,791 kg/l)",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.001.000003.MAT",
+    "desc": "Ácido muriático",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "16.001.000029.MAT",
+    "desc": "Acionador manual de alarme de incêndio tensão 17 a 28 V",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000005.MAT",
+    "desc": "Aço CA-25 Ø 10,0 mm em barra, massa nominal 0,617 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000007.MAT",
+    "desc": "Aço CA-25 Ø 12,5 mm em barra, massa nominal 0,963 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000022.MAT",
+    "desc": "Aço CA-25 Ø 16,0 mm em barra, massa nominal 1,578 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000006.MAT",
+    "desc": "Aço CA-25 Ø 20,0 mm em barra, massa nominal 2,466 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000019.MAT",
+    "desc": "Aço CA-25 Ø 25,0 mm em barra, massa nominal 4,00 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000003.MAT",
+    "desc": "Aço CA-25 Ø 6,3 mm em barra, massa nominal 0,245 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000010.MAT",
+    "desc": "Aço CA-50 Ø 10,0 mm em barra, massa nominal 0,617 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000011.MAT",
+    "desc": "Aço CA-50 Ø 12,5 mm em barra, massa nominal 0,963 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000030.MAT",
+    "desc": "Aço CA-50 Ø 16,0 mm em barra, massa nominal 1,578 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000031.MAT",
+    "desc": "Aço CA-50 Ø 20,0 mm em barra, massa nominal 2,446 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000009.MAT",
+    "desc": "Aço CA-50 Ø 25,0 mm em barra, massa nominal 4,00 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000008.MAT",
+    "desc": "Aço CA-50 Ø 6,3 mm em barra, massa nominal 0,245 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000013.MAT",
+    "desc": "Aço CA-50 Ø 8,0 mm em barra, massa nominal 0,395 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000016.MAT",
+    "desc": "Aço CA-60 Ø 4,20 mm em barra, massa nominal 0,109 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000014.MAT",
+    "desc": "Aço CA-60 Ø 5,00 mm em barra, massa nominal 0,154 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000015.MAT",
+    "desc": "Aço CA-60 Ø 7,00 mm em barra, massa nominal 0,302 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "07.007.000017.MAT",
+    "desc": "Aço CA-60 Ø 9,50 mm em barra, massa nominal 0,558 kg/m",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000817.MAT",
+    "desc": "Adaptador CPVC soldável Ø 15 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000818.MAT",
+    "desc": "Adaptador CPVC soldável Ø 22 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "16.022.000002.MAT",
+    "desc": "Adaptador de encaixe para eletroduto PVC rígido Ø 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "16.022.000001.MAT",
+    "desc": "Adaptador de encaixe para eletroduto PVC rígido Ø 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.005.000006.MAT",
+    "desc": "Adaptador em latão para mangueira de incêndio Ø 2 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001351.MAT",
+    "desc": "Adaptador fixo rosca fêmea PEX gás Ø 16 mm x 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001352.MAT",
+    "desc": "Adaptador fixo rosca fêmea PEX gás Ø 20 mm x 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001353.MAT",
+    "desc": "Adaptador fixo rosca fêmea PEX gás Ø 26 mm x 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001354.MAT",
+    "desc": "Adaptador fixo rosca fêmea PEX gás Ø 32 mm x 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001347.MAT",
+    "desc": "Adaptador fixo rosca macho PEX gás Ø 16 mm x 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001348.MAT",
+    "desc": "Adaptador fixo rosca macho PEX gás Ø 20 mm x 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001349.MAT",
+    "desc": "Adaptador fixo rosca macho PEX gás Ø 26 mm x 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001350.MAT",
+    "desc": "Adaptador fixo rosca macho PEX gás Ø 32 mm x 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000110.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 1 1/2\", soldável Ø 50 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000098.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 1 1/4\", soldável Ø 40 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000095.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 1/2\", soldável Ø 20 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000109.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 2 1/2\", soldável Ø 75 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000102.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 2\", soldável Ø 63 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000099.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 3\", soldável Ø 90 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000097.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, roscável Ø 3/4\", soldável Ø 32 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000111.MAT",
+    "desc": "Adaptador PPR de transição fêmea fêmea com inserto metálico para drywall, soldável Ø 25 mm, roscável Ø 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000101.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 1 1/2\", soldável Ø 50 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000113.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 1 1/4\", soldável Ø 40 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000100.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 1/2\", soldável Ø 20 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000104.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 2 1/2\", soldável Ø 75 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000103.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 2\", soldável Ø 63 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000105.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 3\", soldável Ø 90 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000106.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, roscável Ø 4\", soldável Ø 110 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000114.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, soldável Ø 25 mm, roscável Ø 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000096.MAT",
+    "desc": "Adaptador PPR de transição fêmea macho com inserto metálico para drywall, soldável Ø 32 mm, roscável Ø 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000107.MAT",
+    "desc": "Adaptador PPR de transição macho fêmea para drywall, roscável Ø 1/2\", soldável Ø 20 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000108.MAT",
+    "desc": "Adaptador PPR de transição macho fêmea para drywall, roscável Ø 1/2\", soldável Ø 25 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000112.MAT",
+    "desc": "Adaptador PPR de transição macho fêmea para drywall, roscável Ø 3/4\", soldável Ø 25 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001003.MAT",
+    "desc": "Adaptador PVC para sifão esgoto soldável Ø 40 mm, roscável Ø 1 1/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.001004.MAT",
+    "desc": "Adaptador PVC PBV para sifão metálico esgoto roscável Ø 1 1/2\", soldável Ø 40 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000563.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 110 mm x 4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000556.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 25 mm x 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000557.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 32 mm x 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000558.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 40 mm x 1 1/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000559.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 50 mm x 1 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000560.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 60 mm x 2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000561.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 75 mm x 2 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000562.MAT",
+    "desc": "Adaptador PVC soldável com flange livre Ø 85 mm x 3\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000482.MAT",
+    "desc": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 20 mm x 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000483.MAT",
+    "desc": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 25 mm x 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000484.MAT",
+    "desc": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 32 mm x 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000485.MAT",
+    "desc": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 40 mm x 1 1/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000486.MAT",
+    "desc": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 50 mm x 1 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000487.MAT",
+    "desc": "Adaptador PVC soldável com flanges e anel para caixa d' água Ø 60 mm x 2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000421.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 110 mm x Ø 4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000414.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 25 mm x Ø 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000415.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 32 mm x Ø 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000416.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 40 mm x Ø 1 1/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000417.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 50 mm x Ø 1 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000418.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 60 mm x Ø 2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000419.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 75 mm x Ø 2 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000420.MAT",
+    "desc": "Adaptador PVC soldável longo com flange livre para caixa d' água Ø 85 mm x Ø 3\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000552.MAT",
+    "desc": "Adaptador PVC soldável Ø 110 mm para registro roscável Ø 4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000545.MAT",
+    "desc": "Adaptador PVC soldável Ø 20 mm para registro roscável Ø 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000553.MAT",
+    "desc": "Adaptador PVC soldável Ø 25 mm para registro roscável Ø 3/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000546.MAT",
+    "desc": "Adaptador PVC soldável Ø 32 mm para registro roscável Ø 1\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000547.MAT",
+    "desc": "Adaptador PVC soldável Ø 40 mm para registro roscável Ø 1 1/4\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000548.MAT",
+    "desc": "Adaptador PVC soldável Ø 50 mm para registro roscável Ø 1 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000549.MAT",
+    "desc": "Adaptador PVC soldável Ø 60 mm para registro roscável Ø 2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000550.MAT",
+    "desc": "Adaptador PVC soldável Ø 75 mm para registro roscável Ø 2 1/2\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000551.MAT",
+    "desc": "Adaptador PVC soldável Ø 85 mm para registro roscável Ø 3\"",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000554.MAT",
+    "desc": "Adaptador PVC soldável para água fria Ø 20 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000555.MAT",
+    "desc": "Adaptador PVC soldável para água fria Ø 25 mm",
+    "unit": "un",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.006.000012.MAT",
+    "desc": "Adesivo auto vulcanizante para manta butilíca",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.006.000004.MAT",
+    "desc": "Adesivo de base acrílica compatível com cimento",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.006.000010.MAT",
+    "desc": "Adesivo de base epoxídica",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.006.000014.MAT",
+    "desc": "Adesivo de base sintética compatível com cimentos",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.006.000008.MAT",
+    "desc": "Adesivo de contato a base de borracha sintética",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000835.MAT",
+    "desc": "Adesivo para CPVC",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "14.001.000564.MAT",
+    "desc": "Adesivo para PVC",
+    "unit": "kg",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.006.000015.MAT",
+    "desc": "Adesivo sintético para chapisco",
+    "unit": "l",
+    "categoria": "Materiais"
+  },
+  {
+    "code": "12.003.000010.MAT",
+    "desc": "Aditivo expansor para argamassa e concreto",
+    "unit": "kg",
+    "categoria": "Materiais"
+  }
+]
