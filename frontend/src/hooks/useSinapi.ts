@@ -22,25 +22,49 @@ export interface SinapiCounts {
   total: number;
 }
 
-export function useSinapiSearch(query: string, tipo: string | null, classe: string | null) {
-  return useQuery<SinapiComposicao[]>({
-    queryKey: ["sinapi-composicoes", query, tipo, classe],
+export interface SinapiSearchResult {
+  data: SinapiComposicao[];
+  count: number;
+  totalPages: number;
+}
+
+export function useSinapiSearch(
+  query: string,
+  tipo: string | null,
+  classe: string | null,
+  page: number = 1,
+  pageSize: number = 50,
+) {
+  return useQuery<SinapiSearchResult>({
+    queryKey: ["sinapi-composicoes", query, tipo, classe, page, pageSize],
     queryFn: async () => {
+      const from = (page - 1) * pageSize;
+      const to = from + pageSize - 1;
+
       let q = supabase
         .from("ob_sinapi_composicoes")
-        .select("*")
-        .order("codigo", { ascending: true });
+        .select("*", { count: "exact" })
+        .order("codigo", { ascending: true })
+        .range(from, to);
 
       if (tipo) q = q.eq("tipo", tipo);
       if (classe) q = q.eq("classe", classe);
 
       if (query.trim()) {
-        q = q.or(`descricao.ilike.%${query.trim()}%,codigo.ilike.%${query.trim()}%`);
+        q = q.or(
+          `descricao.ilike.%${query.trim()}%,codigo.ilike.%${query.trim()}%`,
+        );
       }
 
-      const { data, error } = await q.limit(100);
+      const { data, error, count } = await q;
       if (error) throw error;
-      return data ?? [];
+
+      const total = count ?? 0;
+      return {
+        data: data ?? [],
+        count: total,
+        totalPages: Math.max(1, Math.ceil(total / pageSize)),
+      };
     },
     placeholderData: (prev) => prev,
   });
@@ -55,7 +79,13 @@ export function useSinapiCounts() {
         .select("tipo, classe");
       if (error) throw error;
 
-      const counts: SinapiCounts = { material: 0, mao_obra: 0, equipamento: 0, composicao: 0, total: 0 };
+      const counts: SinapiCounts = {
+        material: 0,
+        mao_obra: 0,
+        equipamento: 0,
+        composicao: 0,
+        total: 0,
+      };
 
       for (const row of data ?? []) {
         counts.total++;
