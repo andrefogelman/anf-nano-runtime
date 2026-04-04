@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ChevronDown, ChevronRight, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BudgetCell } from "./BudgetCell";
@@ -26,6 +27,7 @@ export function BudgetRow({
   const { setActiveItemId } = useProjectContext();
   const isLevel1 = item.eap_level === 1;
   const isLevel3 = item.eap_level === 3;
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   return (
     <tr
@@ -121,7 +123,7 @@ export function BudgetRow({
         />
       </td>
 
-      {/* Adm% */}
+      {/* Adm% + Delete */}
       <td className="w-16 text-right">
         <div className="flex items-center justify-end gap-1">
           <BudgetCell
@@ -131,16 +133,40 @@ export function BudgetRow({
             className="text-right"
             readOnly={isLevel1}
           />
-          <button
-            className="invisible p-0.5 rounded hover:bg-destructive/10 group-hover:visible"
-            title="Excluir"
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(item);
-            }}
-          >
-            <Trash2 className="h-3.5 w-3.5 text-destructive/70 hover:text-destructive" />
-          </button>
+          {confirmDelete ? (
+            <div className="flex items-center gap-1 flex-shrink-0">
+              <button
+                className="h-6 px-2 text-[10px] font-medium rounded bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete(item);
+                  setConfirmDelete(false);
+                }}
+              >
+                Sim
+              </button>
+              <button
+                className="h-6 px-2 text-[10px] font-medium rounded border hover:bg-muted"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setConfirmDelete(false);
+                }}
+              >
+                Não
+              </button>
+            </div>
+          ) : (
+            <button
+              className="invisible p-0.5 rounded hover:bg-destructive/10 group-hover:visible"
+              title="Excluir"
+              onClick={(e) => {
+                e.stopPropagation();
+                setConfirmDelete(true);
+              }}
+            >
+              <Trash2 className="h-3.5 w-3.5 text-destructive/70 hover:text-destructive" />
+            </button>
+          )}
         </div>
       </td>
     </tr>

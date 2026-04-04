@@ -20,14 +20,6 @@ import { exportBudgetToExcel } from "@/lib/excel-export";
 import type { OrcamentoItem, BudgetRow as BudgetRowType } from "@/types/orcamento";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
@@ -40,11 +32,6 @@ interface ContextMenuState {
   x: number;
   y: number;
   item: OrcamentoItem;
-}
-
-interface DeleteConfirmState {
-  item: OrcamentoItem;
-  childrenCount: number;
 }
 
 export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
@@ -60,7 +47,6 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterDisciplina, setFilterDisciplina] = useState<string | null>(null);
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
-  const [deleteConfirm, setDeleteConfirm] = useState<DeleteConfirmState | null>(null);
   const [importOpen, setImportOpen] = useState(false);
 
   const filteredItems = useMemo(() => {
@@ -270,35 +256,17 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
     [items, projectId, createItem, undoStack]
   );
 
-  // ─── Delete Item ───────────────────────────────────────────────
+  // ─── Delete Item (called after inline Sim/Não confirmation in BudgetRow) ──
   const handleDeleteRequest = useCallback(
     (item: OrcamentoItem) => {
       if (!items) return;
 
       if (item.eap_level === 1) {
-        const children = items.filter(
-          (i) => i.eap_level > 1 && i.eap_code.startsWith(item.eap_code + ".")
-        );
-        setDeleteConfirm({ item, childrenCount: children.length });
-      } else {
-        setDeleteConfirm({ item, childrenCount: 0 });
-      }
-    },
-    [items]
-  );
-
-  const handleDeleteConfirm = useCallback(
-    (cascade: boolean) => {
-      if (!deleteConfirm || !items) return;
-      const { item } = deleteConfirm;
-
-      if (cascade && item.eap_level === 1) {
         // Delete all children + the item itself
         const toDelete = items.filter(
           (i) => i.id === item.id || i.eap_code.startsWith(item.eap_code + ".")
         );
 
-        // Push each deleted item to undo stack
         for (const d of toDelete) {
           const { id: _id, ...rest } = d;
           undoStack.push({
@@ -313,7 +281,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
         bulkDelete.mutate(
           { ids: toDelete.map((i) => i.id), projectId },
           {
-            onSuccess: () => toast.success(`${toDelete.length} item(ns) excluido(s)`),
+            onSuccess: () => toast.success(`${toDelete.length} item(ns) excluído(s)`),
             onError: () => toast.error("Erro ao excluir itens"),
           }
         );
@@ -331,15 +299,13 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
         deleteItem.mutate(
           { id: item.id, projectId },
           {
-            onSuccess: () => toast.success("Item excluido"),
+            onSuccess: () => toast.success("Item excluído"),
             onError: () => toast.error("Erro ao excluir item"),
           }
         );
       }
-
-      setDeleteConfirm(null);
     },
-    [deleteConfirm, items, projectId, deleteItem, bulkDelete, undoStack]
+    [items, projectId, deleteItem, bulkDelete, undoStack]
   );
 
   // ─── Context Menu ──────────────────────────────────────────────
@@ -679,51 +645,6 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
           onClose={() => setContextMenu(null)}
         />
       )}
-
-      {/* Delete Confirmation Dialog */}
-      <Dialog
-        open={deleteConfirm !== null}
-        onOpenChange={(open) => !open && setDeleteConfirm(null)}
-      >
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Excluir item</DialogTitle>
-            <DialogDescription>
-              {deleteConfirm?.childrenCount
-                ? `Este item possui ${deleteConfirm.childrenCount} subitem(ns). Deseja excluir todos?`
-                : `Tem certeza que deseja excluir "${deleteConfirm?.item.descricao}"?`}
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setDeleteConfirm(null)}>
-              Cancelar
-            </Button>
-            {deleteConfirm?.childrenCount ? (
-              <>
-                <Button
-                  variant="outline"
-                  onClick={() => handleDeleteConfirm(false)}
-                >
-                  Excluir apenas etapa
-                </Button>
-                <Button
-                  variant="destructive"
-                  onClick={() => handleDeleteConfirm(true)}
-                >
-                  Excluir tudo ({deleteConfirm.childrenCount + 1} itens)
-                </Button>
-              </>
-            ) : (
-              <Button
-                variant="destructive"
-                onClick={() => handleDeleteConfirm(false)}
-              >
-                Excluir
-              </Button>
-            )}
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       {/* Import Quantitativos Modal */}
       <ImportQuantitativos
