@@ -56,6 +56,12 @@ deploy_backend() {
   log "Building and restarting on W5..."
   ssh "$W5_USER@$W5_HOST" 'export PATH="$HOME/.local/share/fnm/aliases/default/bin:$HOME/.local/bin:$PATH" && cd ~/orcabot && npm install --silent 2>&1 | tail -1 && rm -rf dist && npx tsc 2>&1 | tail -2 && systemctl --user restart orcabot && sleep 3 && systemctl --user is-active orcabot'
 
+  # Build dwg-pipeline Docker image on W5
+  log "Building dwg-pipeline Docker image on W5..."
+  ssh "$W5_USER@$W5_HOST" 'cd ~/orcabot && docker build -f container/Dockerfile.dwg-pipeline -t orcabot-dwg-pipeline:latest ./container 2>&1 | tail -5' \
+    && ok "dwg-pipeline image built" \
+    || warn "dwg-pipeline image build failed (DXF processing will not work)"
+
   # Verify endpoints
   local health=$(ssh "$W5_USER@$W5_HOST" 'curl -s localhost:8300/api/health 2>/dev/null' || echo "")
   if echo "$health" | grep -q '"ok"'; then

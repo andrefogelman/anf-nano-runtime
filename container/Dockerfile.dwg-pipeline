@@ -1,0 +1,37 @@
+# DWG/DXF Pipeline Container
+# Lightweight container for geometric extraction, layer classification, and structured output.
+# Spawned by pdf-job-poller when a DXF/DWG job is detected.
+
+FROM node:20-slim
+
+# System deps: Python 3 for ezdxf
+# libredwg-tools (DWG→DXF conversion) not in bookworm; DWG files are rejected
+# with a "please convert to DXF" message via converter.ts fallback.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 \
+    python3-pip \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install ezdxf in a venv
+RUN python3 -m venv /opt/ezdxf && \
+    /opt/ezdxf/bin/pip install --no-cache-dir ezdxf>=0.19
+
+ENV PATH="/opt/ezdxf/bin:$PATH"
+
+WORKDIR /app
+
+# Copy pipeline package files for layer caching
+COPY skills/dwg-pipeline/package.json skills/dwg-pipeline/package-lock.json* ./
+RUN npm install
+
+# Copy pipeline source
+COPY skills/dwg-pipeline/tsconfig.json ./
+COPY skills/dwg-pipeline/src/ ./src/
+COPY skills/dwg-pipeline/python/ ./python/
+
+# Build TypeScript then remove dev deps
+RUN npx tsc && npm prune --omit=dev
+
+# Entry point: process --job-id <uuid>
+ENTRYPOINT ["node", "dist/index.js"]

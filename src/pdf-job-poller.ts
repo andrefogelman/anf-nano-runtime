@@ -1,8 +1,10 @@
 // src/pdf-job-poller.ts
 // Polls ob_pdf_jobs for pending jobs and dispatches them to the appropriate pipeline.
-// Pipeline skills run inside containers — this poller just updates job status.
+// DWG/DXF jobs are processed by spawning the dwg-pipeline Docker container.
 
 import { supabaseAdmin } from './supabase-client.js';
+import { processDwgJob } from './dwg-processor.js';
+import { logger } from './logger.js';
 
 const POLL_INTERVAL_MS = 10000;
 
@@ -10,7 +12,7 @@ let processing = false;
 
 /**
  * Process one pending job at a time.
- * For now, marks the job as "processing" — the actual pipeline runs inside a container.
+ * DWG/DXF jobs spawn the dwg-pipeline container which handles the full extraction.
  */
 async function processNextJob(): Promise<boolean> {
   if (processing) return false;
@@ -23,7 +25,7 @@ async function processNextJob(): Promise<boolean> {
     .limit(1);
 
   if (error) {
-    console.error('[pdf-job-poller] Failed to fetch jobs:', error.message);
+    logger.error({ error: error.message }, '[pdf-job-poller] Failed to fetch jobs');
     return false;
   }
 
@@ -31,7 +33,7 @@ async function processNextJob(): Promise<boolean> {
   if (!job) return false;
 
   processing = true;
-  console.log(`[pdf-job-poller] Found pending job ${job.id}`);
+  logger.info({ jobId: job.id }, '[pdf-job-poller] Found pending job');
 
   try {
     // Determine file type to route to correct pipeline
@@ -42,31 +44,51 @@ async function processNextJob(): Promise<boolean> {
       .single();
 
     const fileType = fileData?.file_type || 'pdf';
-    const pipeline =
-      fileType === 'dwg' || fileType === 'dxf'
-        ? 'dwg-pipeline'
-        : 'pdf-pipeline';
+    const isDwg = fileType === 'dwg' || fileType === 'dxf';
 
-    // Mark job as processing
-    await supabaseAdmin
-      .from('ob_pdf_jobs')
-      .update({
-        status: 'processing',
-        stage: 'ingestion',
-        progress: 5,
-        started_at: new Date().toISOString(),
-      })
-      .eq('id', job.id);
-
-    console.log(
-      `[pdf-job-poller] Job ${job.id} dispatched to ${pipeline} (file_type: ${fileType})`,
+    logger.info(
+      { jobId: job.id, fileType, pipeline: isDwg ? 'dwg-pipeline' : 'pdf-pipeline' },
+      '[pdf-job-poller] Job dispatched',
     );
 
-    // The actual processing is handled by the /api/process endpoint
-    // which is called from the frontend when the user clicks "Iniciar Orçamento"
+    if (isDwg) {
+      // Spawn dwg-pipeline container — it handles all stages:
+      // ingestion → conversion → extraction → classification → structured_output → done
+      const success = await processDwgJob(job.id);
+
+      if (!success) {
+        // Container failed but may not have updated the job status
+        const { data: jobCheck } = await supabaseAdmin
+          .from('ob_pdf_jobs')
+          .select('status')
+          .eq('id', job.id)
+          .single();
+
+        if (jobCheck && jobCheck.status !== 'error' && jobCheck.status !== 'done') {
+          await supabaseAdmin
+            .from('ob_pdf_jobs')
+            .update({
+              status: 'error',
+              error_message: 'dwg-pipeline container failed — check logs',
+            })
+            .eq('id', job.id);
+        }
+      }
+    } else {
+      // PDF pipeline: mark as processing (handled by /api/process endpoint)
+      await supabaseAdmin
+        .from('ob_pdf_jobs')
+        .update({
+          status: 'processing',
+          stage: 'ingestion',
+          progress: 5,
+          started_at: new Date().toISOString(),
+        })
+        .eq('id', job.id);
+    }
   } catch (err: unknown) {
     const msg = err instanceof Error ? err.message : String(err);
-    console.error(`[pdf-job-poller] Job ${job.id} failed:`, msg);
+    logger.error({ jobId: job.id, error: msg }, '[pdf-job-poller] Job failed');
 
     await supabaseAdmin
       .from('ob_pdf_jobs')
@@ -88,8 +110,9 @@ async function processNextJob(): Promise<boolean> {
  * Start the PDF/DWG job poller.
  */
 export function startPdfJobPoller(): NodeJS.Timeout {
-  console.log(
-    `[pdf-job-poller] Poller started (interval: ${POLL_INTERVAL_MS}ms)`,
+  logger.info(
+    { intervalMs: POLL_INTERVAL_MS },
+    '[pdf-job-poller] Poller started',
   );
 
   return setInterval(async () => {
@@ -97,7 +120,7 @@ export function startPdfJobPoller(): NodeJS.Timeout {
       await processNextJob();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      console.error('[pdf-job-poller] Poller error:', msg);
+      logger.error({ error: msg }, '[pdf-job-poller] Poller error');
     }
   }, POLL_INTERVAL_MS);
 }
