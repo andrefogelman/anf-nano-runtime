@@ -376,7 +376,7 @@ REGRAS:
     process.env.ANTHROPIC_BASE_URL || 'http://100.91.255.19:8100';
   const LLM_AUTH_TOKEN =
     process.env.ANTHROPIC_AUTH_TOKEN || 'sk-proxy-passthrough';
-  const LLM_MODEL = process.env.LLM_MODEL || 'gemini-3.1-pro-preview';
+  const LLM_MODEL = process.env.LLM_MODEL || 'claude-sonnet-4-6';
   const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
 
   async function callLlm(system: string, userContent: string): Promise<string> {
