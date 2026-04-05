@@ -657,11 +657,11 @@ REGRAS:
 7. Se os dados extraídos forem insuficientes (DWG binário complexo), informe no resumo: "Recomenda-se converter o arquivo DWG para DXF no AutoCAD (Salvar Como → DXF) e reenviar."
 8. O campo "resumo" deve ter NO MÁXIMO 3 frases curtas. Nunca incluir dados brutos no resumo.
 9. O campo "memorial_calculo" deve conter o cálculo detalhado por ambiente.
-10. CONSOLIDAR itens iguais: se o mesmo produto/serviço aparece em múltiplos ambientes, SOMAR as quantidades em uma ÚNICA linha. O memorial_calculo deve listar cada ambiente com sua parcela (ex: "Sala: 12m² + Quarto: 8m² + Cozinha: 6m² = 26m²"). NÃO criar linhas separadas para o mesmo item.
+10. Siga fielmente a instrução do usuário. Ela pode pedir consolidação, detalhamento por ambiente, filtros específicos, ou qualquer outro formato. Adapte o resultado conforme solicitado.
 
 FORMATO JSON OBRIGATÓRIO (responda APENAS com este JSON, sem texto antes ou depois):
 {
-  "itens": [{"descricao":"...","quantidade":0,"unidade":"m²","memorial_calculo":"Ambiente1: Xm² + Ambiente2: Ym² = Zm²","ambiente":"todos","disciplina":"arquitetonico","confidence":0.85}],
+  "itens": [{"descricao":"...","quantidade":0,"unidade":"m²","memorial_calculo":"...","ambiente":"...","disciplina":"arquitetonico","confidence":0.85}],
   "needs_review": [{"item":"...","motivo":"..."}],
   "resumo": "Frase curta sobre o levantamento realizado."
 }`;
