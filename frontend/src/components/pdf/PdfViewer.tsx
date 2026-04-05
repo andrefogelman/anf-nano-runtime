@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -19,6 +19,14 @@ export function PdfViewer({ storagePath }: PdfViewerProps) {
   const [scale, setScale] = useState(1.0);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
+  // Pan state
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isPanning, setIsPanning] = useState(false);
+  const [panStart, setPanStart] = useState({ x: 0, y: 0 });
+  const [scrollStart, setScrollStart] = useState({ x: 0, y: 0 });
+
+  const canPan = scale > 1;
+
   useEffect(() => {
     async function getUrl() {
       const { data } = await supabase.storage
@@ -28,6 +36,47 @@ export function PdfViewer({ storagePath }: PdfViewerProps) {
     }
     getUrl();
   }, [storagePath]);
+
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      if (!canPan || !containerRef.current) return;
+      setIsPanning(true);
+      setPanStart({ x: e.clientX, y: e.clientY });
+      setScrollStart({
+        x: containerRef.current.scrollLeft,
+        y: containerRef.current.scrollTop,
+      });
+      e.preventDefault();
+    },
+    [canPan],
+  );
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isPanning || !containerRef.current) return;
+      const dx = e.clientX - panStart.x;
+      const dy = e.clientY - panStart.y;
+      containerRef.current.scrollLeft = scrollStart.x - dx;
+      containerRef.current.scrollTop = scrollStart.y - dy;
+    },
+    [isPanning, panStart, scrollStart],
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsPanning(false);
+  }, []);
+
+  // Zoom with mouse wheel
+  const handleWheel = useCallback(
+    (e: React.WheelEvent) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.15 : 0.15;
+        setScale((s) => Math.min(5, Math.max(0.25, s + delta)));
+      }
+    },
+    [],
+  );
 
   if (!pdfUrl) {
     return (
@@ -67,7 +116,7 @@ export function PdfViewer({ storagePath }: PdfViewerProps) {
           <Button
             variant="outline"
             size="icon"
-            onClick={() => setScale((s) => Math.max(0.5, s - 0.25))}
+            onClick={() => setScale((s) => Math.max(0.25, s - 0.25))}
           >
             <ZoomOut className="h-4 w-4" />
           </Button>
@@ -75,15 +124,24 @@ export function PdfViewer({ storagePath }: PdfViewerProps) {
           <Button
             variant="outline"
             size="icon"
-            onClick={() => setScale((s) => Math.min(3, s + 0.25))}
+            onClick={() => setScale((s) => Math.min(5, s + 0.25))}
           >
             <ZoomIn className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
-      {/* PDF */}
-      <div className="flex-1 overflow-auto flex justify-center bg-muted/20 p-4">
+      {/* PDF with pan support */}
+      <div
+        ref={containerRef}
+        className="flex-1 overflow-auto flex justify-center bg-muted/20 p-4"
+        style={{ cursor: canPan ? (isPanning ? "grabbing" : "grab") : "default" }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onWheel={handleWheel}
+      >
         <Document
           file={pdfUrl}
           onLoadSuccess={({ numPages: n }) => setNumPages(n)}
