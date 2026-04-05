@@ -492,8 +492,7 @@ REGRAS:
         // DWG/DXF: extract geometry via Docker container (ezdxf)
         const decoder = new TextDecoder('utf-8', { fatal: false });
         const text = decoder.decode(buffer);
-        const isDxf =
-          text.includes('SECTION') && text.includes('ENTITIES');
+        const isDxf = text.includes('SECTION') && text.includes('ENTITIES');
 
         if (isDxf) {
           // DXF file — run full geometric extraction via ezdxf container
@@ -654,14 +653,69 @@ REGRAS:
         }
       }
 
+      // For DXF/DWG files: fetch previous PDF extraction data from the same project
+      // to complement geometry with room names, areas, and specs from PDFs.
+      let pdfContext = '';
+      if (fileType === 'dxf' || fileType === 'dwg') {
+        try {
+          const { data: pdfRuns } = await supabaseAdmin
+            .from('ob_processing_runs')
+            .select('summary, items, file_id')
+            .eq('project_id', body.project_id)
+            .eq('status', 'done')
+            .order('created_at', { ascending: false })
+            .limit(20);
+
+          if (pdfRuns?.length) {
+            // Get filenames for context
+            const fileIds = [
+              ...new Set(pdfRuns.map((r) => r.file_id).filter(Boolean)),
+            ];
+            const { data: projFiles } = await supabaseAdmin
+              .from('ob_project_files')
+              .select('id, filename, file_type')
+              .in('id', fileIds);
+            const fileMap = new Map(
+              projFiles?.map((f) => [f.id, f]) || [],
+            );
+
+            const pdfParts: string[] = [];
+            for (const run of pdfRuns) {
+              const file = fileMap.get(run.file_id);
+              if (!file || file.file_type !== 'pdf') continue;
+              const items = (run.items as Array<Record<string, unknown>>) || [];
+              if (items.length === 0) continue;
+              const itemLines = items
+                .slice(0, 30)
+                .map(
+                  (i) =>
+                    `  - ${i.descricao}: ${i.quantidade} ${i.unidade}${i.ambiente ? ` [${i.ambiente}]` : ''}`,
+                )
+                .join('\n');
+              pdfParts.push(
+                `[${file.filename}] ${run.summary?.slice(0, 150) || ''}\n${itemLines}`,
+              );
+            }
+            if (pdfParts.length > 0) {
+              pdfContext = `\n\nDADOS DE REFERÊNCIA (extraídos dos PDFs do mesmo projeto — use como apoio para identificar ambientes, áreas e especificações):\n${pdfParts.join('\n\n')}`;
+            }
+          }
+        } catch (e) {
+          logger.warn(
+            { error: e instanceof Error ? e.message : String(e) },
+            'Failed to fetch PDF context for DXF processing',
+          );
+        }
+      }
+
       logger.info(
-        { file_id: body.file_id, fileInfo },
+        { file_id: body.file_id, fileInfo, hasPdfContext: pdfContext.length > 0 },
         'File extracted for processing',
       );
 
       const systemPrompt = `Você é um engenheiro civil orçamentista senior especialista em levantamento de quantitativos.
 Você recebe dados extraídos de um arquivo de projeto (${fileType.toUpperCase()}) e uma instrução do usuário.
-
+${fileType === 'dxf' || fileType === 'dwg' ? '\nVocê também recebe DADOS DE REFERÊNCIA extraídos dos PDFs do mesmo projeto. Use esses dados para:\n- Identificar nomes e áreas dos ambientes\n- Correlacionar hatches/geometrias do DXF com ambientes conhecidos\n- Validar quantitativos calculados a partir da geometria\n- Quando a geometria DXF não contiver áreas explícitas, use as áreas dos PDFs como base\n' : ''}
 REGRAS:
 1. SEMPRE produza itens com quantidades numéricas > 0. Nunca lista vazia.
 2. Use dimensões/cotas quando disponíveis para calcular quantidades.
@@ -681,7 +735,8 @@ FORMATO JSON OBRIGATÓRIO (responda APENAS com este JSON, sem texto antes ou dep
   "resumo": "Frase curta sobre o levantamento realizado."
 }`;
 
-      const userMessage = `ARQUIVO: ${fileData.filename}\n${fileInfo}\nDISCIPLINA: ${fileData.disciplina || 'auto'}\n\nINSTRUÇÃO: ${body.prompt}\n\nDADOS EXTRAÍDOS:\n${extractedText.slice(0, 15000)}`;
+      const maxExtracted = pdfContext ? 12000 : 15000;
+      const userMessage = `ARQUIVO: ${fileData.filename}\n${fileInfo}\nDISCIPLINA: ${fileData.disciplina || 'auto'}\n\nINSTRUÇÃO: ${body.prompt}\n\nDADOS EXTRAÍDOS:\n${extractedText.slice(0, maxExtracted)}${pdfContext.slice(0, 8000)}`;
 
       const llmResponse = await callLlm(systemPrompt, userMessage);
       const parsed = parseJsonFromLlm(llmResponse);

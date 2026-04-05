@@ -309,9 +309,7 @@ export function formatDxfForLlm(data: DxfExtractionResult): string {
     }
     for (const [layer, hs] of hByLayer) {
       const totalArea = hs.reduce((sum, h) => sum + h.area, 0);
-      const areas = hs
-        .map((h) => h.area)
-        .sort((a, b) => b - a);
+      const areas = hs.map((h) => h.area).sort((a, b) => b - a);
       const patterns = [...new Set(hs.map((h) => h.pattern))].join(', ');
       parts.push(
         `  ${layer}: ${hs.length} hatches, área total=${totalArea.toFixed(4)}, padrões=[${patterns}], áreas individuais: [${areas
