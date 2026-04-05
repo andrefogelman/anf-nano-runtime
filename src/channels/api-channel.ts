@@ -718,6 +718,109 @@ FORMATO JSON OBRIGATÓRIO (responda APENAS com este JSON, sem texto antes ou dep
     }
   }
 
+  // ── Agent Chat — conversational AI per agent ────────────────────────────────
+
+  const AGENT_SYSTEM_PROMPTS: Record<string, string> = {
+    orcamentista: `Você é um engenheiro civil orçamentista senior. Auxilie o usuário com dúvidas sobre orçamento, quantitativos, composições SINAPI/TCPO e qualquer aspecto da obra. Responda em português, de forma técnica mas clara.`,
+    estrutural: `Você é um engenheiro estrutural senior. Auxilie com dúvidas sobre estrutura, fundações, lajes, vigas, pilares e cálculos estruturais. Responda em português, de forma técnica mas clara.`,
+    hidraulico: `Você é um engenheiro hidráulico senior. Auxilie com dúvidas sobre instalações hidrossanitárias, tubulações, esgoto, água fria/quente, pluvial. Responda em português, de forma técnica mas clara.`,
+    eletricista: `Você é um engenheiro eletricista senior. Auxilie com dúvidas sobre instalações elétricas, quadros, circuitos, iluminação, automação e SPDA. Responda em português, de forma técnica mas clara.`,
+  };
+
+  async function handleAgentChat(req: IncomingMessage, res: ServerResponse) {
+    const raw = await readBody(req);
+    const body = parseJson(raw) as {
+      project_id?: string;
+      agent_slug?: string;
+      message?: string;
+      context?: Record<string, unknown>;
+    } | null;
+
+    if (!body?.project_id || !body?.agent_slug || !body?.message) {
+      json(res, 400, { error: 'Missing required fields: project_id, agent_slug, message' });
+      return;
+    }
+
+    try {
+      // 1. Get project info
+      const { data: project } = await supabaseAdmin
+        .from('ob_projects')
+        .select('name, tipo_obra, area_total_m2, uf, cidade')
+        .eq('id', body.project_id)
+        .single();
+
+      // 2. Get conversation history (last 20 messages)
+      const { data: history } = await supabaseAdmin
+        .from('ob_agent_conversations')
+        .select('role, content')
+        .eq('project_id', body.project_id)
+        .eq('agent_slug', body.agent_slug)
+        .order('created_at', { ascending: true })
+        .limit(20);
+
+      // 3. Build context
+      let contextInfo = '';
+      if (project) {
+        contextInfo += `\nPROJETO: ${project.name} | ${project.tipo_obra} | ${project.area_total_m2}m² | ${project.cidade}/${project.uf}`;
+      }
+      if (body.context?.active_tab) {
+        contextInfo += `\nAba ativa: ${body.context.active_tab}`;
+      }
+      if (body.context?.active_prancha_id) {
+        const { data: fileData } = await supabaseAdmin
+          .from('ob_project_files')
+          .select('filename, file_type, disciplina')
+          .eq('id', body.context.active_prancha_id as string)
+          .single();
+        if (fileData) {
+          contextInfo += `\nArquivo selecionado: ${fileData.filename} (${fileData.file_type}, disciplina: ${fileData.disciplina || 'auto'})`;
+        }
+      }
+
+      // 4. Build system prompt
+      const basePrompt = AGENT_SYSTEM_PROMPTS[body.agent_slug] ?? AGENT_SYSTEM_PROMPTS.orcamentista;
+      const systemPrompt = contextInfo ? `${basePrompt}\n\nCONTEXTO ATUAL:${contextInfo}` : basePrompt;
+
+      // 5. Build messages from history (already includes the user message just inserted by frontend)
+      const llmMessages = (history ?? [])
+        .filter((m) => m.role === 'user' || m.role === 'assistant')
+        .map((m) => ({ role: m.role, content: m.content }));
+
+      // 6. Call LLM with multi-turn messages
+      const llmRes = await fetch(`${LLM_BASE_URL}/v1/messages`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': LLM_AUTH_TOKEN,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: LLM_MODEL,
+          max_tokens: 4096,
+          system: systemPrompt,
+          messages: llmMessages,
+        }),
+      });
+      if (!llmRes.ok) throw new Error(`LLM error: ${llmRes.status} ${await llmRes.text()}`);
+      const llmData = (await llmRes.json()) as { content?: Array<{ text?: string }> };
+      const response = llmData.content?.[0]?.text ?? '';
+
+      // 7. Save assistant response
+      await supabaseAdmin.from('ob_agent_conversations').insert({
+        project_id: body.project_id,
+        agent_slug: body.agent_slug,
+        role: 'assistant',
+        content: response,
+      });
+
+      json(res, 200, { ok: true, response });
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      logger.error({ error: msg }, 'Agent chat error');
+      json(res, 500, { error: msg });
+    }
+  }
+
   // ── Request router ─────────────────────────────────────────────────────────
 
   async function handleRequest(
@@ -811,6 +914,17 @@ FORMATO JSON OBRIGATÓRIO (responda APENAS com este JSON, sem texto antes ou dep
       segments[1] === 'caderno-query'
     ) {
       await handleCadernoQuery(req, res);
+      return;
+    }
+
+    // POST /api/agent-chat — conversational AI per agent
+    if (
+      req.method === 'POST' &&
+      segments.length === 2 &&
+      segments[0] === 'api' &&
+      segments[1] === 'agent-chat'
+    ) {
+      await handleAgentChat(req, res);
       return;
     }
 

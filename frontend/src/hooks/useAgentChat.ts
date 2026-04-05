@@ -3,6 +3,10 @@ import { supabase } from "@/lib/supabase";
 import { useRealtimeSubscription } from "./useRealtimeSubscription";
 import type { AgentConversation } from "@/types/orcamento";
 
+const ORCABOT_API =
+  import.meta.env.VITE_ORCABOT_API_URL || "http://100.66.83.22:8300";
+const API_SECRET = import.meta.env.VITE_ORCABOT_API_SECRET || "";
+
 export function useAgentChat(projectId: string, agentSlug = "orcamentista") {
   const queryClient = useQueryClient();
 
@@ -38,6 +42,7 @@ export function useAgentChat(projectId: string, agentSlug = "orcamentista") {
       content: string;
       context?: Record<string, unknown>;
     }) => {
+      // 1. Save user message to DB
       const { error: userMsgError } = await supabase
         .from("ob_agent_conversations")
         .insert({
@@ -50,19 +55,30 @@ export function useAgentChat(projectId: string, agentSlug = "orcamentista") {
 
       if (userMsgError) throw userMsgError;
 
-      const { error: fnError } = await supabase.functions.invoke("agent-chat", {
-        body: {
+      // 2. Call W5 backend for LLM response
+      const res = await fetch(`${ORCABOT_API}/api/agent-chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_SECRET}`,
+        },
+        body: JSON.stringify({
           project_id: projectId,
           agent_slug: agentSlug,
           message: content,
           context,
-        },
+        }),
       });
 
-      if (fnError) throw fnError;
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({ error: res.statusText }));
+        throw new Error(errBody.error || `HTTP ${res.status}`);
+      }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["agent-chat", projectId, agentSlug] });
+      queryClient.invalidateQueries({
+        queryKey: ["agent-chat", projectId, agentSlug],
+      });
     },
   });
 
