@@ -25,7 +25,7 @@ export function PdfViewer({ storagePath }: PdfViewerProps) {
   const [panStart, setPanStart] = useState({ x: 0, y: 0 });
   const [scrollStart, setScrollStart] = useState({ x: 0, y: 0 });
 
-  const canPan = scale > 1;
+  const canPan = true;
 
   useEffect(() => {
     async function getUrl() {
