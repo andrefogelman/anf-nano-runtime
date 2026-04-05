@@ -111,7 +111,11 @@ export function PdfViewer({ storagePath }: PdfViewerProps) {
 
   // The base width is the container width (fit-to-width).
   // Scale multiplies on top of that.
-  const pageWidth = containerWidth > 0 ? containerWidth * scale : undefined;
+  // Fallback: measure on render if ResizeObserver hasn't fired yet.
+  const effectiveWidth = containerWidth > 0
+    ? containerWidth
+    : (containerRef.current?.clientWidth ?? 800) - 32;
+  const pageWidth = effectiveWidth * scale;
 
   return (
     <div className="flex flex-col h-full">
