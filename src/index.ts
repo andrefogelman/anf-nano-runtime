@@ -4,6 +4,7 @@ import path from 'path';
 import { OneCLI } from './onecli-stub.js';
 
 import {
+  config,
   ASSISTANT_NAME,
   DEFAULT_TRIGGER,
   getTriggerPattern,
@@ -586,10 +587,14 @@ async function main(): Promise<void> {
   logger.info('Database initialized');
   await loadState();
 
-  // Start LLM proxy (Claude Max session, no API key fallback)
-  const { startLlmProxy } = await import('./llm-proxy.js');
-  startLlmProxy();
-  logger.info('LLM proxy started');
+  // Start LLM proxy only when using Anthropic provider
+  if (config.llmProvider === 'anthropic') {
+    const { startLlmProxy } = await import('./llm-proxy.js');
+    startLlmProxy();
+    logger.info('LLM proxy started (anthropic mode)');
+  } else {
+    logger.info(`LLM provider: ${config.llmProvider}, model: ${config.llmModel} — proxy skipped`);
+  }
 
   // Ensure OneCLI agents exist for all registered groups.
   // Recovers from missed creates (e.g. OneCLI was down at registration time).
