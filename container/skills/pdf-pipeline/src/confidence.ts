@@ -2,12 +2,11 @@
 import { CONFIDENCE_THRESHOLD, type Ambiente, type ReviewItem } from "./types.js";
 
 /**
- * Compute overall page confidence as the average of ambiente confidences.
+ * Compute overall page confidence as the minimum of ambiente confidences.
  */
 export function computePageConfidence(ambientes: Ambiente[]): number {
   if (ambientes.length === 0) return 0;
-  const sum = ambientes.reduce((acc, amb) => acc + amb.confidence, 0);
-  return sum / ambientes.length;
+  return Math.min(...ambientes.map((amb) => amb.confidence));
 }
 
 /**

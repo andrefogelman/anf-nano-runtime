@@ -3,33 +3,58 @@ import { computePageConfidence, flagLowConfidenceItems } from "../src/confidence
 import type { Ambiente, ReviewItem } from "../src/types.js";
 
 describe("computePageConfidence", () => {
-  it("returns average of ambiente confidences", () => {
+  it("returns 0 for empty ambientes", () => {
+    expect(computePageConfidence([])).toBe(0);
+  });
+
+  it("returns the minimum confidence, not average", () => {
     const ambientes: Ambiente[] = [
       {
         nome: "Sala",
-        area_m2: 18.5,
-        perimetro_m: 17.4,
+        area_m2: 20,
+        perimetro_m: 18,
         pe_direito_m: 2.8,
-        acabamentos: { piso: "x", parede: "x", forro: "x" },
+        acabamentos: { piso: "a", parede: "b", forro: "c" },
         aberturas: [],
-        confidence: 0.9,
+        confidence: 0.95,
       },
       {
         nome: "Cozinha",
-        area_m2: 12.0,
-        perimetro_m: 14.0,
+        area_m2: 10,
+        perimetro_m: 13,
         pe_direito_m: 2.8,
-        acabamentos: { piso: "x", parede: "x", forro: "x" },
+        acabamentos: { piso: "a", parede: "b", forro: "c" },
         aberturas: [],
-        confidence: 0.8,
+        confidence: 0.2,
+      },
+      {
+        nome: "Quarto",
+        area_m2: 12,
+        perimetro_m: 14,
+        pe_direito_m: 2.8,
+        acabamentos: { piso: "a", parede: "b", forro: "c" },
+        aberturas: [],
+        confidence: 0.9,
       },
     ];
-    const score = computePageConfidence(ambientes);
-    expect(score).toBeCloseTo(0.85, 2);
+    // With average: (0.95 + 0.20 + 0.90) / 3 = 0.683
+    // With minimum: 0.20
+    expect(computePageConfidence(ambientes)).toBe(0.2);
   });
 
-  it("returns 0 for empty ambientes", () => {
-    expect(computePageConfidence([])).toBe(0);
+  it("returns single ambiente confidence", () => {
+    const ambientes: Ambiente[] = [
+      {
+        nome: "Sala",
+        area_m2: 20,
+        perimetro_m: 18,
+        pe_direito_m: 2.8,
+        acabamentos: { piso: "a", parede: "b", forro: "c" },
+        aberturas: [],
+        confidence: 0.85,
+      },
+    ];
+    expect(computePageConfidence(ambientes)).toBe(0.85);
   });
 });
 
