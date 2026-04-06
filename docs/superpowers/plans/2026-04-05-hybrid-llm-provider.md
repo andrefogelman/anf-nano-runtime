@@ -1105,7 +1105,7 @@ Add/update these env vars:
 ```env
 LLM_PROVIDER=gemini
 LLM_MODEL=gemini-2.5-pro
-GOOGLE_API_KEY=AIzaSyD39pN0ZOgrmz5c3ngALPVelszC3605cHk
+GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
 ```
 
 The existing Anthropic env vars can stay — they're ignored when `LLM_PROVIDER=gemini`.
