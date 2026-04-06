@@ -366,21 +366,67 @@ def extract_hatches(msp: Any) -> list[dict]:
     return hatches
 
 
-def detect_units(doc: ezdxf.document.Drawing) -> str:
-    """Detect drawing units from the DXF header."""
+def _infer_units_from_bbox(msp: Any) -> str:
+    """Infer units by analyzing the bounding box of all entities.
+
+    Typical residential building footprints:
+    - In meters: bbox ~ 5-50 (both axes)
+    - In centimeters: bbox ~ 500-5000
+    - In millimeters: bbox ~ 5000-50000
+    """
+    min_x, min_y = float('inf'), float('inf')
+    max_x, max_y = float('-inf'), float('-inf')
+    count = 0
+
+    for entity in msp:
+        etype = entity.dxftype()
+        try:
+            if etype == "LINE":
+                for pt in [entity.dxf.start, entity.dxf.end]:
+                    min_x, min_y = min(min_x, pt.x), min(min_y, pt.y)
+                    max_x, max_y = max(max_x, pt.x), max(max_y, pt.y)
+                    count += 1
+            elif etype == "LWPOLYLINE":
+                for v in entity.get_points(format="xy"):
+                    min_x, min_y = min(min_x, v[0]), min(min_y, v[1])
+                    max_x, max_y = max(max_x, v[0]), max(max_y, v[1])
+                    count += 1
+            elif etype == "CIRCLE":
+                c = entity.dxf.center
+                r = entity.dxf.radius
+                min_x, min_y = min(min_x, c.x - r), min(min_y, c.y - r)
+                max_x, max_y = max(max_x, c.x + r), max(max_y, c.y + r)
+                count += 1
+        except Exception:
+            continue
+
+    if count < 10:
+        return "mm"
+
+    width = max_x - min_x
+    height = max_y - min_y
+    max_dim = max(width, height)
+
+    if max_dim < 1:
+        return "m"
+    elif max_dim <= 100:
+        return "m"
+    elif max_dim <= 10_000:
+        return "cm"
+    else:
+        return "mm"
+
+
+def detect_units(doc: ezdxf.document.Drawing, msp: Any) -> str:
+    """Detect drawing units from DXF header, with bbox fallback for unitless."""
     try:
         insunits = doc.header.get("$INSUNITS", 0)
-        unit_map = {
-            0: "unitless",
-            1: "in",
-            2: "ft",
-            4: "mm",
-            5: "cm",
-            6: "m",
-        }
-        return unit_map.get(insunits, "mm")
+        unit_map = {1: "in", 2: "ft", 4: "mm", 5: "cm", 6: "m"}
+        if insunits in unit_map:
+            return unit_map[insunits]
     except Exception:
-        return "mm"
+        pass
+    return _infer_units_from_bbox(msp)
 
 
 def main(dxf_path: str) -> None:
@@ -404,7 +450,7 @@ def main(dxf_path: str) -> None:
     dimensions = extract_dimensions(msp)
     texts = extract_texts(msp)
     hatches = extract_hatches(msp)
-    units = detect_units(doc)
+    units = detect_units(doc, msp)
 
     result = {
         "filename": path.name,
