@@ -25,12 +25,14 @@ describe("extractDxf", () => {
       texts: [
         { type: "TEXT", content: "Sala", position: [2500, 1850], height: 200, rotation: 0, layer: "ARQ-TEXTO" },
       ],
+      hatches: [],
       stats: {
         total_layers: 1,
         total_entities: 1,
         total_blocks: 1,
         total_dimensions: 1,
         total_texts: 1,
+        total_hatches: 0,
       },
     };
 

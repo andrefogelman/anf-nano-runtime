@@ -51,12 +51,14 @@ describe("assembleOutput", () => {
       texts: [
         { type: "TEXT", content: "Sala", position: [2500, 1850], height: 200, rotation: 0, layer: "ARQ-PAREDE" },
       ],
+      hatches: [],
       stats: {
         total_layers: 3,
         total_entities: 2,
         total_blocks: 1,
         total_dimensions: 0,
         total_texts: 1,
+        total_hatches: 0,
       },
     };
 
@@ -93,7 +95,8 @@ describe("assembleOutput", () => {
       blocks: [],
       dimensions: [],
       texts: [],
-      stats: { total_layers: 0, total_entities: 0, total_blocks: 0, total_dimensions: 0, total_texts: 0 },
+      hatches: [],
+      stats: { total_layers: 0, total_entities: 0, total_blocks: 0, total_dimensions: 0, total_texts: 0, total_hatches: 0 },
     };
 
     const classifiedLayers: ClassifiedLayer[] = [];

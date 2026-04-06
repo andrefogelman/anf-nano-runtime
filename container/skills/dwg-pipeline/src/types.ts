@@ -140,6 +140,19 @@ export const DxfTextSchema = z.object({
 });
 export type DxfText = z.infer<typeof DxfTextSchema>;
 
+// --- DXF Hatch ---
+
+export const DxfHatchSchema = z.object({
+  layer: z.string(),
+  pattern: z.string(),
+  area: z.number(),
+  vertices: z.array(z.array(z.number()).length(2)).optional(),
+});
+export type DxfHatch = z.infer<typeof DxfHatchSchema>;
+
+/** Minimum area in mm² to consider a closed polyline as a room boundary */
+export const MIN_ROOM_AREA_MM2 = 500_000; // 0.5 m²
+
 // --- Full extraction result from Python extractor ---
 
 export const ExtractedDxfDataSchema = z.object({
@@ -150,12 +163,14 @@ export const ExtractedDxfDataSchema = z.object({
   blocks: z.array(DxfBlockSchema),
   dimensions: z.array(DxfDimensionSchema),
   texts: z.array(DxfTextSchema),
+  hatches: z.array(DxfHatchSchema),
   stats: z.object({
     total_layers: z.number(),
     total_entities: z.number(),
     total_blocks: z.number(),
     total_dimensions: z.number(),
     total_texts: z.number(),
+    total_hatches: z.number(),
   }),
 });
 export type ExtractedDxfData = z.infer<typeof ExtractedDxfDataSchema>;

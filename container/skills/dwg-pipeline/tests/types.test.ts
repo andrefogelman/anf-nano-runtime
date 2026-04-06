@@ -5,7 +5,9 @@ import {
   DxfBlockSchema,
   DxfDimensionSchema,
   DxfTextSchema,
+  DxfHatchSchema,
   ExtractedDxfDataSchema,
+  MIN_ROOM_AREA_MM2,
   BlockMappingSchema,
   LayerMappingSchema,
   DwgPageOutputSchema,
@@ -111,6 +113,41 @@ describe("DxfTextSchema", () => {
   });
 });
 
+describe("DxfHatchSchema", () => {
+  it("validates correct hatch with vertices", () => {
+    const result = DxfHatchSchema.safeParse({
+      layer: "ARQ-HATCH",
+      pattern: "SOLID",
+      area: 18500000,
+      vertices: [[0, 0], [5000, 0], [5000, 3700], [0, 3700]],
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("validates hatch without vertices", () => {
+    const result = DxfHatchSchema.safeParse({
+      layer: "ARQ-HATCH",
+      pattern: "ANSI31",
+      area: 9250000,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects hatch missing layer", () => {
+    const result = DxfHatchSchema.safeParse({
+      pattern: "SOLID",
+      area: 18500000,
+    });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe("MIN_ROOM_AREA_MM2", () => {
+  it("is 500_000", () => {
+    expect(MIN_ROOM_AREA_MM2).toBe(500_000);
+  });
+});
+
 describe("ExtractedDxfDataSchema", () => {
   it("validates a complete extraction", () => {
     const result = ExtractedDxfDataSchema.safeParse({
@@ -123,15 +160,66 @@ describe("ExtractedDxfDataSchema", () => {
       blocks: [],
       dimensions: [],
       texts: [],
+      hatches: [],
       stats: {
         total_layers: 1,
         total_entities: 0,
         total_blocks: 0,
         total_dimensions: 0,
         total_texts: 0,
+        total_hatches: 0,
       },
     });
     expect(result.success).toBe(true);
+  });
+
+  it("accepts data with hatches and total_hatches in stats", () => {
+    const result = ExtractedDxfDataSchema.safeParse({
+      filename: "test.dxf",
+      units: "mm",
+      layers: [],
+      entities: [],
+      blocks: [],
+      dimensions: [],
+      texts: [],
+      hatches: [
+        { layer: "ARQ-HATCH", pattern: "SOLID", area: 18500000, vertices: [[0, 0], [5000, 0], [5000, 3700], [0, 3700]] },
+      ],
+      stats: {
+        total_layers: 0,
+        total_entities: 0,
+        total_blocks: 0,
+        total_dimensions: 0,
+        total_texts: 0,
+        total_hatches: 1,
+      },
+    });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.hatches).toHaveLength(1);
+      expect(result.data.stats.total_hatches).toBe(1);
+    }
+  });
+
+  it("rejects data without hatches field", () => {
+    const result = ExtractedDxfDataSchema.safeParse({
+      filename: "test.dxf",
+      units: "mm",
+      layers: [],
+      entities: [],
+      blocks: [],
+      dimensions: [],
+      texts: [],
+      stats: {
+        total_layers: 0,
+        total_entities: 0,
+        total_blocks: 0,
+        total_dimensions: 0,
+        total_texts: 0,
+        total_hatches: 0,
+      },
+    });
+    expect(result.success).toBe(false);
   });
 });
 
