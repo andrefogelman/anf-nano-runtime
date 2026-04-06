@@ -84,6 +84,62 @@ describe("assembleOutput", () => {
     expect(validation.success).toBe(true);
   });
 
+  it("uses hatch area when available instead of polyline area", async () => {
+    const { assembleOutput } = await import("../src/structured-output.js");
+
+    const data: ExtractedDxfData = {
+      filename: "test.dxf",
+      units: "mm",
+      layers: [
+        { name: "ARQ-PAREDE", color: 7, is_on: true, is_frozen: false, entity_counts: { LWPOLYLINE: 1 } },
+      ],
+      entities: [
+        {
+          type: "LWPOLYLINE",
+          layer: "ARQ-PAREDE",
+          vertices: [[0, 0], [5000, 0], [5000, 4000], [0, 4000]] as [number, number][],
+          is_closed: true,
+          length: 18000,
+          area: 20_000_000, // 20m² in mm²
+        },
+      ],
+      blocks: [],
+      dimensions: [],
+      texts: [
+        { type: "TEXT", content: "SALA", position: [2500, 2000] as [number, number], height: 200, rotation: 0, layer: "ARQ-PAREDE" },
+      ],
+      hatches: [
+        {
+          layer: "ARQ-PAREDE",
+          pattern: "SOLID",
+          area: 19_500_000, // 19.5m² in mm² (more precise from fill)
+          vertices: [[100, 100], [4900, 100], [4900, 3900], [100, 3900]],
+        },
+      ],
+      stats: {
+        total_layers: 1,
+        total_entities: 1,
+        total_blocks: 0,
+        total_dimensions: 0,
+        total_texts: 1,
+        total_hatches: 1,
+      },
+    };
+
+    const classifiedLayers: ClassifiedLayer[] = [
+      { name: "ARQ-PAREDE", disciplina: "arq", confidence: 0.95, method: "regex" },
+    ];
+
+    const result = await assembleOutput(data as any, classifiedLayers, []);
+
+    expect(result.ambientes.length).toBeGreaterThanOrEqual(1);
+    // Text association is mocked, so room may be named "Ambiente 1" instead of "SALA"
+    const room = result.ambientes[0];
+    expect(room).toBeDefined();
+    // Should use hatch area (19.5m²) not polyline area (20m²)
+    expect(room.area_m2).toBeCloseTo(19.5, 0);
+  });
+
   it("flags unknown blocks in needs_review", async () => {
     const { assembleOutput } = await import("../src/structured-output.js");
 

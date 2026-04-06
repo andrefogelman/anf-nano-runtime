@@ -10,6 +10,7 @@ import type {
   Abertura,
   DxfEntity,
   DxfText,
+  DxfHatch,
 } from "./types.js";
 import {
   DwgPageOutputSchema,
@@ -18,6 +19,7 @@ import {
   MIN_ROOM_AREA_MM2,
 } from "./types.js";
 import { associateTextsToRooms } from "./extractor.js";
+import { validateArea } from "../../shared/area-validator.js";
 
 /**
  * Normalize a value from drawing units to meters.
@@ -113,6 +115,58 @@ function detectTipo(
 }
 
 /**
+ * Compute the centroid of a set of vertices.
+ */
+function centroid(vertices: number[][]): [number, number] {
+  let cx = 0, cy = 0;
+  for (const v of vertices) {
+    cx += v[0];
+    cy += v[1];
+  }
+  return [cx / vertices.length, cy / vertices.length];
+}
+
+/**
+ * Ray-casting point-in-polygon test.
+ */
+function pointInPolygon(px: number, py: number, polygon: [number, number][]): boolean {
+  let inside = false;
+  const n = polygon.length;
+  for (let i = 0, j = n - 1; i < n; j = i++) {
+    const xi = polygon[i][0], yi = polygon[i][1];
+    const xj = polygon[j][0], yj = polygon[j][1];
+    if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+/**
+ * Find the first hatch whose centroid falls inside a polyline boundary.
+ */
+function findMatchingHatch(
+  poly: DxfEntity,
+  hatches: DxfHatch[],
+  usedHatches: Set<number>,
+): { hatch: DxfHatch; index: number } | undefined {
+  if (!poly.vertices || poly.vertices.length < 3) return undefined;
+  const polyVerts = poly.vertices as [number, number][];
+
+  for (let i = 0; i < hatches.length; i++) {
+    if (usedHatches.has(i)) continue;
+    const hatch = hatches[i];
+    if (!hatch.vertices || hatch.vertices.length < 3) continue;
+
+    const [cx, cy] = centroid(hatch.vertices);
+    if (pointInPolygon(cx, cy, polyVerts)) {
+      return { hatch, index: i };
+    }
+  }
+  return undefined;
+}
+
+/**
  * Build room environments from closed architectural polylines with associated texts.
  */
 async function buildAmbientes(
@@ -136,6 +190,12 @@ async function buildAmbientes(
   );
 
   if (roomPolylines.length === 0) return [];
+
+  // Filter hatches on architectural layers with meaningful area
+  const arqHatches = (data.hatches ?? []).filter(
+    (h) => arqLayers.has(h.layer) && toSquareMeters(h.area, data.units) > 0.5
+  );
+  const usedHatches = new Set<number>();
 
   // Find texts on architectural/annotation layers
   const relevantTexts = data.texts.filter(
@@ -182,6 +242,20 @@ async function buildAmbientes(
       ? roomTexts[0].content
       : `Ambiente ${ri + 1}`;
 
+    // Use hatch area when available (more precise than polyline boundary)
+    let final_area_m2 = area_m2;
+    const matchingHatch = findMatchingHatch(poly, arqHatches, usedHatches);
+    if (matchingHatch) {
+      usedHatches.add(matchingHatch.index);
+      const hatchArea = toSquareMeters(matchingHatch.hatch.area, data.units);
+      if (hatchArea > 0.5) {
+        final_area_m2 = hatchArea;
+      }
+    }
+
+    // Validate area against geometric and domain rules
+    const validation = validateArea(final_area_m2, perimetro_m, roomName, CONFIDENCE_DXF_GEOMETRY);
+
     // Try to find pe_direito from dimensions (default to 2.80)
     const peDireito = findPeDireito(data, 2.80);
 
@@ -190,7 +264,7 @@ async function buildAmbientes(
 
     ambientes.push({
       nome: roomName,
-      area_m2: Math.round(area_m2 * 100) / 100,
+      area_m2: Math.round(final_area_m2 * 100) / 100,
       perimetro_m: Math.round(perimetro_m * 100) / 100,
       pe_direito_m: peDireito,
       acabamentos: {
@@ -199,7 +273,7 @@ async function buildAmbientes(
         forro: extractAcabamento(roomTexts, "forro") || "a definir",
       },
       aberturas,
-      confidence: CONFIDENCE_DXF_GEOMETRY,
+      confidence: validation.adjusted_confidence,
     });
   }
 
