@@ -450,6 +450,66 @@ function buildBlocos(mappedBlocks: MappedBlock[]): DwgBloco[] {
 }
 
 /**
+ * Quality report summarising validation outcomes across all ambientes.
+ */
+export interface QualityReport {
+  total_ambientes: number;
+  valid_ambientes: number;
+  flagged_ambientes: number;
+  rejected_ambientes: number;
+  flags_summary: Record<string, number>;
+  quality_score: number; // 0.0-1.0
+}
+
+/**
+ * Compute a quality report by re-validating each ambiente.
+ */
+export function computeQualityReport(ambientes: Ambiente[]): QualityReport {
+  if (ambientes.length === 0) {
+    return {
+      total_ambientes: 0,
+      valid_ambientes: 0,
+      flagged_ambientes: 0,
+      rejected_ambientes: 0,
+      flags_summary: {},
+      quality_score: 0,
+    };
+  }
+
+  const flagsSummary: Record<string, number> = {};
+  let valid = 0;
+  let flagged = 0;
+  let rejected = 0;
+
+  for (const amb of ambientes) {
+    const validation = validateArea(amb.area_m2, amb.perimetro_m, amb.nome, amb.confidence);
+
+    if (validation.flags.length === 0) {
+      valid++;
+    } else if (validation.valid) {
+      flagged++;
+    } else {
+      rejected++;
+    }
+
+    for (const flag of validation.flags) {
+      flagsSummary[flag] = (flagsSummary[flag] ?? 0) + 1;
+    }
+  }
+
+  const quality_score = ambientes.length > 0 ? valid / ambientes.length : 0;
+
+  return {
+    total_ambientes: ambientes.length,
+    valid_ambientes: valid,
+    flagged_ambientes: flagged,
+    rejected_ambientes: rejected,
+    flags_summary: flagsSummary,
+    quality_score: Math.round(quality_score * 100) / 100,
+  };
+}
+
+/**
  * Assemble the complete DwgPageOutput from all pipeline results.
  */
 export async function assembleOutput(

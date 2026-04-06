@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import type { ExtractedDxfData, ClassifiedLayer, MappedBlock } from "../src/types.js";
+import { computeQualityReport } from "../src/structured-output.js";
 
 // Mock the extractor to avoid Python dependency in tests
 vi.mock("../src/extractor.js", () => ({
@@ -162,5 +163,35 @@ describe("assembleOutput", () => {
 
     const output = await assembleOutput(data, classifiedLayers, mappedBlocks);
     expect(output.needs_review).toContain("Block1");
+  });
+});
+
+describe("computeQualityReport", () => {
+  it("returns zero report for empty ambientes", () => {
+    const report = computeQualityReport([]);
+    expect(report.total_ambientes).toBe(0);
+    expect(report.quality_score).toBe(0);
+  });
+
+  it("scores 1.0 when all ambientes are valid", () => {
+    const ambientes = [
+      { nome: "Sala", area_m2: 25, perimetro_m: 20, pe_direito_m: 2.8, acabamentos: { piso: "a", parede: "b", forro: "c" }, aberturas: [], confidence: 0.95 },
+      { nome: "Quarto", area_m2: 12, perimetro_m: 14, pe_direito_m: 2.8, acabamentos: { piso: "a", parede: "b", forro: "c" }, aberturas: [], confidence: 0.90 },
+    ];
+    const report = computeQualityReport(ambientes as any);
+    expect(report.total_ambientes).toBe(2);
+    expect(report.valid_ambientes).toBe(2);
+    expect(report.quality_score).toBe(1);
+  });
+
+  it("counts flagged ambientes", () => {
+    const ambientes = [
+      { nome: "Sala", area_m2: 25, perimetro_m: 20, pe_direito_m: 2.8, acabamentos: { piso: "a", parede: "b", forro: "c" }, aberturas: [], confidence: 0.95 },
+      { nome: "Banheiro", area_m2: 50, perimetro_m: 28, pe_direito_m: 2.8, acabamentos: { piso: "a", parede: "b", forro: "c" }, aberturas: [], confidence: 0.90 },
+    ];
+    const report = computeQualityReport(ambientes as any);
+    expect(report.flagged_ambientes).toBeGreaterThan(0);
+    expect(report.flags_summary).toHaveProperty("area_fora_range_banheiro");
+    expect(report.quality_score).toBeLessThan(1);
   });
 });
