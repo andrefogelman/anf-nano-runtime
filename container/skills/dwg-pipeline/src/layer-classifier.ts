@@ -11,6 +11,7 @@ import {
   CONFIDENCE_LAYER_REGEX,
   CONFIDENCE_LAYER_CONTENT,
   CONFIDENCE_LAYER_LLM,
+  MIN_ROOM_AREA_MM2,
 } from "./types.js";
 import { getLayerMappings, saveLayerMapping } from "./supabase.js";
 import {
@@ -96,7 +97,7 @@ export function classifyByContent(
       e.type === "LWPOLYLINE" &&
       e.is_closed === true &&
       e.area !== undefined &&
-      e.area > 1_000_000 // > 1m2 in mm2
+      e.area > MIN_ROOM_AREA_MM2
   );
   if (largeClosedPolylines.length >= 2) {
     return {

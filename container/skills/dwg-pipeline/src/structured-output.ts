@@ -15,6 +15,7 @@ import {
   DwgPageOutputSchema,
   CONFIDENCE_DXF_GEOMETRY,
   CONFIDENCE_TEXT_POSITION,
+  MIN_ROOM_AREA_MM2,
 } from "./types.js";
 import { associateTextsToRooms } from "./extractor.js";
 
@@ -131,7 +132,7 @@ async function buildAmbientes(
       e.is_closed === true &&
       arqLayers.has(e.layer) &&
       e.area !== undefined &&
-      e.area > 500_000 // > 0.5m2 in mm2 (to skip small decorative shapes)
+      e.area > MIN_ROOM_AREA_MM2
   );
 
   if (roomPolylines.length === 0) return [];
