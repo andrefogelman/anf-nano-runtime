@@ -88,6 +88,7 @@ export function PdfUploader({ projectId }: PdfUploaderProps) {
             <SelectItem value="hid">Hidráulico</SelectItem>
             <SelectItem value="ele">Elétrico</SelectItem>
             <SelectItem value="memorial">Memorial</SelectItem>
+            <SelectItem value="proposta">Proposta</SelectItem>
           </SelectContent>
         </Select>
       </div>
