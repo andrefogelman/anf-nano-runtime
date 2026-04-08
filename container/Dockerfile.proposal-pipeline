@@ -1,0 +1,21 @@
+# Proposal Pipeline Container
+# Lightweight container for extracting supplier proposal items via Gemini Vision.
+# Spawned by pdf-job-poller when a file with disciplina='proposta' is detected.
+
+FROM node:20-slim
+
+WORKDIR /app
+
+# Copy pipeline package files for layer caching
+COPY skills/proposal-pipeline/package.json skills/proposal-pipeline/package-lock.json* ./
+RUN npm install
+
+# Copy pipeline source
+COPY skills/proposal-pipeline/tsconfig.json ./
+COPY skills/proposal-pipeline/src/ ./src/
+
+# Build TypeScript then remove dev deps
+RUN npx tsc && npm prune --omit=dev
+
+# Entry point: process --job-id <uuid>
+ENTRYPOINT ["node", "dist/index.js"]

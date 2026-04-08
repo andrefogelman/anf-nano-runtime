@@ -5,8 +5,8 @@ export async function extractProposalItems(
   pdfPath: string,
   _textContent: string
 ): Promise<ProposalOutput> {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) throw new Error("Missing GEMINI_API_KEY");
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+  if (!apiKey) throw new Error("Missing GEMINI_API_KEY or GOOGLE_API_KEY");
 
   const pdfBuffer = await readFile(pdfPath);
   const pdfBase64 = pdfBuffer.toString("base64");
