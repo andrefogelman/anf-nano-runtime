@@ -50,8 +50,10 @@ export function PdfUploader({ projectId }: PdfUploaderProps) {
             fileType,
           });
           toast.success(`${file.name} enviado com sucesso`);
-        } catch {
-          toast.error(`Erro ao enviar ${file.name}`);
+        } catch (err) {
+          const msg = err instanceof Error ? err.message : String(err);
+          console.error("Upload error:", err);
+          toast.error(`Erro ao enviar ${file.name}: ${msg}`);
         }
       }
     },
