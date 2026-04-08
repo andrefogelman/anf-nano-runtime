@@ -86,7 +86,8 @@ export function useUploadPdf() {
       disciplina: string | null;
       fileType?: "pdf" | "dwg" | "dxf";
     }) => {
-      const storagePath = `projects/${projectId}/${Date.now()}-${file.name}`;
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const storagePath = `projects/${projectId}/${Date.now()}-${safeName}`;
 
       const contentTypeMap: Record<string, string> = {
         pdf: "application/pdf",
