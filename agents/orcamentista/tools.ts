@@ -53,6 +53,18 @@ async function process_pdf_results(params: {
   };
 }
 
+const DISCIPLINA_MAP: Record<string, string> = {
+  arquitetonico: 'arq', arquitetônico: 'arq', arq: 'arq', architectural: 'arq',
+  estrutural: 'est', est: 'est', structural: 'est',
+  hidraulico: 'hid', hidráulico: 'hid', hid: 'hid', hydraulic: 'hid',
+  eletrico: 'ele', elétrico: 'ele', ele: 'ele', electrical: 'ele',
+  geral: 'geral', general: 'geral',
+};
+
+function normalizeDisciplina(raw: string): string {
+  return DISCIPLINA_MAP[raw.toLowerCase().trim()] || 'geral';
+}
+
 async function create_quantitativo(params: {
   project_id: string;
   disciplina: string;
@@ -61,19 +73,19 @@ async function create_quantitativo(params: {
   unidade: string;
   quantidade: number;
   calculo_memorial: string;
-  origem_prancha: string;
+  origem_prancha?: string;
   origem_ambiente: string;
   confidence: number;
 }): Promise<unknown> {
   const q: Quantitativo = {
     project_id: params.project_id,
-    disciplina: params.disciplina,
+    disciplina: normalizeDisciplina(params.disciplina),
     item_code: params.item_code,
     descricao: params.descricao,
     unidade: params.unidade,
     quantidade: params.quantidade,
     calculo_memorial: params.calculo_memorial,
-    origem_prancha: params.origem_prancha,
+    origem_prancha: params.origem_prancha || null,
     origem_ambiente: params.origem_ambiente,
     confidence: params.confidence,
     needs_review: params.confidence < 0.7,
@@ -405,11 +417,11 @@ export const toolDefinitions = [
         unidade: { type: 'string', description: 'Unidade de medida: m2, m3, m, kg, un, pt, vb' },
         quantidade: { type: 'number' },
         calculo_memorial: { type: 'string', description: 'Memorial de calculo mostrando como a quantidade foi obtida' },
-        origem_prancha: { type: 'string', description: 'ID da pdf_page de onde os dados foram extraidos' },
+        origem_prancha: { type: 'string', description: 'ID da pdf_page de onde os dados foram extraidos (opcional — omitir se nao houver page ID)' },
         origem_ambiente: { type: 'string', description: 'Nome do ambiente ou elemento (ex: Sala, Pilar P1)' },
         confidence: { type: 'number', description: 'Nivel de confianca 0.0 a 1.0. Abaixo de 0.7 marca automaticamente para revisao.' },
       },
-      required: ['project_id', 'disciplina', 'item_code', 'descricao', 'unidade', 'quantidade', 'calculo_memorial', 'origem_prancha', 'origem_ambiente', 'confidence'],
+      required: ['project_id', 'disciplina', 'item_code', 'descricao', 'unidade', 'quantidade', 'calculo_memorial', 'origem_ambiente', 'confidence'],
     },
   },
   {

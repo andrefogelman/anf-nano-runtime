@@ -11,7 +11,7 @@ export interface Quantitativo {
   unidade: string;
   quantidade: number;
   calculo_memorial: string;
-  origem_prancha: string;       // -> pdf_pages.id
+  origem_prancha: string | null; // -> pdf_pages.id (nullable when no page exists)
   origem_ambiente: string;
   confidence: number;
   needs_review: boolean;
