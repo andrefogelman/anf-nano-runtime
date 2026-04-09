@@ -95,9 +95,12 @@ export async function processNewMessages(): Promise<void> {
         `[chat] Error processing message for ${agentSlug}:`,
         err.message,
       );
-      await notifyAdmin(
-        `⚠️ Erro ao processar mensagem para ${agentSlug}: ${err.message}`,
-      );
+      // Don't spam WhatsApp with rate limit errors — the guard handles cooldown
+      if (!err.message?.includes('Rate limited')) {
+        await notifyAdmin(
+          `⚠️ Erro ao processar mensagem para ${agentSlug}: ${err.message}`,
+        );
+      }
     }
   }
 }

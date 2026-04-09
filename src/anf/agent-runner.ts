@@ -2,11 +2,14 @@ import Anthropic from '@anthropic-ai/sdk';
 import { anfConfig } from './anf-config.js';
 import { buildAgentContext } from './agent-context.js';
 import { logActivity } from './activity-log.js';
+import { RateLimitGuard } from './rate-limit-guard.js';
 
 const anthropic = new Anthropic({
   apiKey: anfConfig.anthropicApiKey,
   baseURL: anfConfig.anthropicBaseUrl,
 });
+
+export const rateLimitGuard = new RateLimitGuard();
 
 export interface AgentRunResult {
   response: string;
@@ -54,14 +57,31 @@ export async function runAgent(
   let totalOutputTokens = 0;
 
   while (true) {
-    const response = await anthropic.messages.create({
-      model: ctx.model,
-      max_tokens: 4096,
-      temperature: ctx.temperature,
-      system: systemPrompt,
-      tools: toolDefinitions,
-      messages,
-    });
+    // Circuit breaker: reject immediately if rate limited
+    rateLimitGuard.checkOrThrow();
+
+    let response: Anthropic.Message;
+    try {
+      response = await anthropic.messages.create({
+        model: ctx.model,
+        max_tokens: 4096,
+        temperature: ctx.temperature,
+        system: systemPrompt,
+        tools: toolDefinitions,
+        messages,
+      });
+    } catch (err: any) {
+      if (err?.status === 429 || err?.error?.type === 'rate_limit_error') {
+        const backoff = RateLimitGuard.extractBackoffSeconds(
+          err.message || err.error?.message || '',
+        );
+        rateLimitGuard.recordRateLimit(backoff);
+        throw new Error(
+          `Rate limited — cooling down for ${backoff}s. Will resume automatically.`,
+        );
+      }
+      throw err;
+    }
 
     totalInputTokens += response.usage.input_tokens;
     totalOutputTokens += response.usage.output_tokens;

@@ -45,9 +45,15 @@ async function tick(): Promise<void> {
           `[scheduler] Done: ${task.agent}/${task.name} — ${result.slice(0, 80)}`,
         );
       } catch (err: any) {
-        console.error(
-          `[scheduler] Error: ${task.agent}/${task.name} — ${err.message}`,
-        );
+        if (err.message?.includes('Rate limited')) {
+          console.warn(
+            `[scheduler] Skipped ${task.agent}/${task.name}: ${err.message}`,
+          );
+        } else {
+          console.error(
+            `[scheduler] Error: ${task.agent}/${task.name} — ${err.message}`,
+          );
+        }
       }
     }
   }
