@@ -5,6 +5,7 @@
 import { supabaseAdmin } from './supabase-client.js';
 import { processDwgJob } from './dwg-processor.js';
 import { processProposalJob } from './proposal-processor.js';
+import { triggerOrcamentista } from './orcamentista-trigger.js';
 import { logger } from './logger.js';
 
 const POLL_INTERVAL_MS = 10000;
@@ -43,7 +44,7 @@ async function processNextJob(): Promise<boolean> {
     // Determine file type to route to correct pipeline
     const { data: fileData } = await supabaseAdmin
       .from('ob_project_files')
-      .select('file_type, disciplina')
+      .select('file_type, disciplina, project_id')
       .eq('id', job.file_id)
       .single();
 
@@ -91,7 +92,35 @@ async function processNextJob(): Promise<boolean> {
       // ingestion → conversion → extraction → classification → structured_output → done
       const success = await processDwgJob(job.id);
 
-      if (!success) {
+      if (success) {
+        // Trigger orcamentista to process extracted geometry
+        try {
+          const { data: pages } = await supabaseAdmin
+            .from('ob_pdf_pages')
+            .select('structured_data, text_content, confidence')
+            .eq('file_id', job.file_id)
+            .order('page_number', { ascending: true });
+
+          const extractedText = (pages || [])
+            .map((p: any) => JSON.stringify(p.structured_data))
+            .join('\n');
+
+          await triggerOrcamentista({
+            projectId: fileData?.project_id || '',
+            runId: null,
+            fileId: job.file_id,
+            extractedText,
+            fileInfo: `DWG pipeline: ${(pages || []).length} páginas processadas`,
+            userPrompt: 'Processar dados extraídos do DWG e criar quantitativos para todas as disciplinas encontradas.',
+            pdfContext: '',
+          });
+
+          logger.info({ jobId: job.id }, '[pdf-job-poller] Orcamentista triggered after DWG pipeline');
+        } catch (triggerErr: unknown) {
+          const msg = triggerErr instanceof Error ? triggerErr.message : String(triggerErr);
+          logger.error({ jobId: job.id, error: msg }, '[pdf-job-poller] Orcamentista trigger failed');
+        }
+      } else {
         // Container failed but may not have updated the job status
         const { data: jobCheck } = await supabaseAdmin
           .from('ob_pdf_jobs')
