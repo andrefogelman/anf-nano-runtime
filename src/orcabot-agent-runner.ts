@@ -67,18 +67,24 @@ export async function runOrcabotAgent(
     }
 
     if (response.stopReason === 'tool_use') {
-      // Build assistant message with text + tool calls
-      const assistantBlocks: ContentBlock[] = [];
-      if (response.text) {
-        assistantBlocks.push({ type: 'text', text: response.text });
-      }
-      for (const tc of response.toolCalls) {
-        assistantBlocks.push({
-          type: 'tool_use',
-          id: tc.id,
-          name: tc.name,
-          input: tc.input,
-        });
+      // Build assistant message — use raw parts when available to preserve
+      // thought signatures required by Gemini 3.1+
+      let assistantBlocks: ContentBlock[];
+      if (response.rawAssistantParts?.length) {
+        assistantBlocks = [{ type: 'raw_parts', rawParts: response.rawAssistantParts }];
+      } else {
+        assistantBlocks = [];
+        if (response.text) {
+          assistantBlocks.push({ type: 'text', text: response.text });
+        }
+        for (const tc of response.toolCalls) {
+          assistantBlocks.push({
+            type: 'tool_use',
+            id: tc.id,
+            name: tc.name,
+            input: tc.input,
+          });
+        }
       }
       messages.push({ role: 'assistant', content: assistantBlocks });
 

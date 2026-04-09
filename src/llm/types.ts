@@ -7,13 +7,15 @@ export interface Message {
 }
 
 export interface ContentBlock {
-  type: 'text' | 'tool_use' | 'tool_result';
+  type: 'text' | 'tool_use' | 'tool_result' | 'raw_parts';
   text?: string;
   id?: string;
   name?: string;
   input?: unknown;
   content?: string;
   is_error?: boolean;
+  /** Opaque provider parts — passed through to preserve thought signatures etc. */
+  rawParts?: unknown[];
 }
 
 export interface ToolDef {
@@ -43,6 +45,9 @@ export interface ChatResult {
 export interface ToolChatResult extends ChatResult {
   stopReason: 'end' | 'tool_use';
   toolCalls: Array<{ id: string; name: string; input: unknown }>;
+  /** Raw provider-specific parts for the assistant turn — used to preserve
+   *  thought signatures and other opaque fields across tool-use iterations. */
+  rawAssistantParts?: unknown[];
 }
 
 export interface LlmProvider {

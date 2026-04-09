@@ -65,6 +65,10 @@ export class GeminiProvider implements LlmProvider {
 
     const functionCalls = response.functionCalls ?? [];
 
+    // Capture raw parts from the response to preserve thought signatures
+    const rawAssistantParts =
+      (response as any).candidates?.[0]?.content?.parts ?? [];
+
     if (functionCalls.length > 0) {
       return {
         text: response.text ?? '',
@@ -78,6 +82,7 @@ export class GeminiProvider implements LlmProvider {
             input: fc.args ?? {},
           }),
         ),
+        rawAssistantParts,
       };
     }
 
@@ -87,15 +92,26 @@ export class GeminiProvider implements LlmProvider {
       outputTokens: response.usageMetadata?.candidatesTokenCount ?? 0,
       stopReason: 'end',
       toolCalls: [],
+      rawAssistantParts,
     };
   }
 
-  private buildContents(messages: Message[]) {
+  private buildContents(messages: Message[]): any[] {
     return messages.map((msg) => {
       if (typeof msg.content === 'string') {
         return {
           role: msg.role === 'assistant' ? 'model' : 'user',
           parts: [{ text: msg.content }],
+        };
+      }
+
+      // If the first block carries raw provider parts, use them directly
+      // to preserve thought signatures and other opaque fields.
+      const firstBlock = msg.content[0];
+      if (firstBlock?.type === 'raw_parts' && firstBlock.rawParts) {
+        return {
+          role: msg.role === 'assistant' ? 'model' : 'user',
+          parts: firstBlock.rawParts as any[],
         };
       }
 
