@@ -115,7 +115,9 @@ export async function runOrcabotAgent(
             name: tc.name,
             content: JSON.stringify(result),
           });
+          console.log(`[agent-runner] ${slug} tool=${tc.name} OK`);
         } catch (err: any) {
+          console.error(`[agent-runner] ${slug} tool=${tc.name} ERROR: ${err.message}`);
           toolCalls.push({ name: tc.name, input: tc.input, output: { error: err.message } });
           resultBlocks.push({
             type: 'tool_result',
