@@ -331,10 +331,9 @@ async function get_extraction_data(params: {
       .eq('project_id', params.project_id)
       .eq('status', 'done')
       .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+      .limit(1);
     if (error) throw new Error(`get_extraction_data: ${error.message}`);
-    run = data;
+    run = data?.[0] || null;
   }
 
   if (!run) {
@@ -350,8 +349,12 @@ async function get_extraction_data(params: {
   if (pagesError) throw new Error(`get_extraction_data (pages): ${pagesError.message}`);
 
   const pdfPages = pages || [];
-  const hasItems = pdfPages.some((p: Record<string, unknown>) => Array.isArray(p.items) && (p.items as unknown[]).length > 0);
-  const hasGeometry = pdfPages.some((p: Record<string, unknown>) => p.geometry != null);
+  const runItems = Array.isArray(run.items) ? run.items as unknown[] : [];
+  const hasItems = runItems.length > 0;
+  const hasGeometry = pdfPages.some((p: Record<string, unknown>) => {
+    const sd = p.structured_data as Record<string, unknown> | null;
+    return sd?.ambientes != null && Array.isArray(sd.ambientes) && (sd.ambientes as unknown[]).length > 0;
+  });
 
   await logAgentActivity({
     project_id: params.project_id,
