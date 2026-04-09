@@ -310,6 +310,65 @@ async function export_budget(params: {
   };
 }
 
+async function get_extraction_data(params: {
+  project_id: string;
+  run_id?: string;
+}): Promise<unknown> {
+  let run: Record<string, unknown> | null = null;
+
+  if (params.run_id) {
+    const { data, error } = await supabase
+      .from('ob_processing_runs')
+      .select('*')
+      .eq('id', params.run_id)
+      .single();
+    if (error) throw new Error(`get_extraction_data: ${error.message}`);
+    run = data;
+  } else {
+    const { data, error } = await supabase
+      .from('ob_processing_runs')
+      .select('*')
+      .eq('project_id', params.project_id)
+      .eq('status', 'done')
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .single();
+    if (error) throw new Error(`get_extraction_data: ${error.message}`);
+    run = data;
+  }
+
+  if (!run) {
+    return { processing_run: null, pdf_pages: [], has_items: false, has_geometry: false };
+  }
+
+  const fileId = run.file_id as string;
+  const { data: pages, error: pagesError } = await supabase
+    .from('ob_pdf_pages')
+    .select('*')
+    .eq('file_id', fileId)
+    .order('page_number', { ascending: true });
+  if (pagesError) throw new Error(`get_extraction_data (pages): ${pagesError.message}`);
+
+  const pdfPages = pages || [];
+  const hasItems = pdfPages.some((p: Record<string, unknown>) => Array.isArray(p.items) && (p.items as unknown[]).length > 0);
+  const hasGeometry = pdfPages.some((p: Record<string, unknown>) => p.geometry != null);
+
+  await logAgentActivity({
+    project_id: params.project_id,
+    agent_slug: AGENT_SLUG,
+    action: 'get_extraction_data',
+    description: `Leu dados de extração: run ${run.id}, ${pdfPages.length} páginas, items=${hasItems}, geometry=${hasGeometry}`,
+    output: { run_id: run.id, pages_count: pdfPages.length, has_items: hasItems, has_geometry: hasGeometry },
+  });
+
+  return {
+    processing_run: run,
+    pdf_pages: pdfPages,
+    has_items: hasItems,
+    has_geometry: hasGeometry,
+  };
+}
+
 async function get_project_context_handler(params: {
   project_id: string;
 }): Promise<unknown> {
@@ -448,6 +507,18 @@ export const toolDefinitions = [
       required: ['project_id'],
     },
   },
+  {
+    name: 'get_extraction_data',
+    description: 'Lê dados extraídos de um arquivo DXF/PDF — inclui items da LLM extraction e dados geométricos estruturados do DWG pipeline (ambientes, blocos, tubulações). Usar como primeira ação ao processar um arquivo.',
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        project_id: { type: 'string', description: 'ID do projeto' },
+        run_id: { type: 'string', description: 'ID da processing run (opcional — se não fornecido, pega a mais recente)' },
+      },
+      required: ['project_id'],
+    },
+  },
 ] as const;
 
 export const toolHandlers: Record<string, (params: any) => Promise<unknown>> = {
@@ -460,4 +531,5 @@ export const toolHandlers: Record<string, (params: any) => Promise<unknown>> = {
   flag_for_review: flag_for_review_handler,
   get_project_context: get_project_context_handler,
   export_budget,
+  get_extraction_data,
 };
