@@ -27,7 +27,7 @@ describe('GeminiProvider', () => {
       });
 
       const result = await provider.chat({
-        model: 'gemini-2.5-pro',
+        model: 'gemini-3.1-pro-preview',
         system: 'You are helpful',
         messages: [{ role: 'user', content: 'Hi' }],
         maxTokens: 1024,
@@ -39,7 +39,7 @@ describe('GeminiProvider', () => {
       expect(result.outputTokens).toBe(5);
       expect(mockGenerateContent).toHaveBeenCalledWith(
         expect.objectContaining({
-          model: 'gemini-2.5-pro',
+          model: 'gemini-3.1-pro-preview',
           config: expect.objectContaining({
             maxOutputTokens: 1024,
             temperature: 0.2,
@@ -60,7 +60,7 @@ describe('GeminiProvider', () => {
       });
 
       const result = await provider.chatWithTools({
-        model: 'gemini-2.5-pro',
+        model: 'gemini-3.1-pro-preview',
         system: 'You are helpful',
         messages: [{ role: 'user', content: 'Weather in SP?' }],
         tools: [
@@ -90,7 +90,7 @@ describe('GeminiProvider', () => {
       });
 
       const result = await provider.chatWithTools({
-        model: 'gemini-2.5-pro',
+        model: 'gemini-3.1-pro-preview',
         system: 'You are helpful',
         messages: [{ role: 'user', content: 'Thanks' }],
         tools: [],
