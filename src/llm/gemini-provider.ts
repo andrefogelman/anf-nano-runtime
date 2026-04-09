@@ -68,6 +68,9 @@ export class GeminiProvider implements LlmProvider {
         temperature: opts.temperature ?? 0.2,
         systemInstruction: opts.system,
         tools,
+        toolConfig: tools
+          ? { functionCallingConfig: { mode: 'AUTO' as any } }
+          : undefined,
       },
     });
 

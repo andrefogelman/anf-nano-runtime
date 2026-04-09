@@ -47,7 +47,7 @@ export async function runOrcabotAgent(
 
     const response = await provider.chatWithTools({
       model,
-      maxTokens: 4096,
+      maxTokens: 16384,
       temperature: 0.2,
       system: systemPrompt,
       tools: toolDefinitions,
@@ -56,6 +56,8 @@ export async function runOrcabotAgent(
 
     totalInputTokens += response.inputTokens;
     totalOutputTokens += response.outputTokens;
+
+    console.log(`[agent-runner] ${slug} iter=${iteration} stop=${response.stopReason} tools=${response.toolCalls.length} text=${response.text.slice(0, 200)}`);
 
     if (response.stopReason === 'end') {
       return {
