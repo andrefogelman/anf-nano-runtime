@@ -89,8 +89,8 @@ function RunCard({
       descricao: i?.descricao || "Item sem descrição",
       quantidade: typeof i?.quantidade === "number" ? i.quantidade : 0,
       unidade: i?.unidade || "un",
-      memorial_calculo: i?.memorial_calculo || "",
-      ambiente: i?.ambiente || "",
+      memorial_calculo: i?.memorial_calculo || i?.calculo_memorial || "",
+      ambiente: i?.ambiente || i?.origem_ambiente || "",
       disciplina: i?.disciplina || "",
       confidence: typeof i?.confidence === "number" ? i.confidence : 0.5,
       selected: true,
@@ -302,7 +302,12 @@ function RunCard({
                           <input type="checkbox" checked={item.selected} readOnly className="rounded" />
                         </td>
                         <td className="p-1">
-                          <div>{item.descricao}</div>
+                          <div>
+                            {item.descricao}
+                            {item.ambiente && (
+                              <span className="ml-1 text-muted-foreground">— {item.ambiente}</span>
+                            )}
+                          </div>
                           {item.memorial_calculo && (
                             <div className="text-[10px] text-muted-foreground">
                               {item.memorial_calculo}
