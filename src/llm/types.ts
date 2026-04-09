@@ -7,7 +7,7 @@ export interface Message {
 }
 
 export interface ContentBlock {
-  type: 'text' | 'tool_use' | 'tool_result' | 'raw_parts';
+  type: 'text' | 'tool_use' | 'tool_result' | 'raw_parts' | 'inline_data';
   text?: string;
   id?: string;
   name?: string;
@@ -16,6 +16,10 @@ export interface ContentBlock {
   is_error?: boolean;
   /** Opaque provider parts — passed through to preserve thought signatures etc. */
   rawParts?: unknown[];
+  /** For inline_data blocks: MIME type (e.g. 'application/pdf', 'image/png') */
+  mimeType?: string;
+  /** For inline_data blocks: base64-encoded file data */
+  data?: string;
 }
 
 export interface ToolDef {

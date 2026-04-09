@@ -8,6 +8,8 @@ import { config } from './config.js';
 import { getProvider } from './llm/index.js';
 import type { Message, ContentBlock, ToolDef } from './llm/types.js';
 
+export type TaskContent = string | ContentBlock[];
+
 export interface AgentRunResult {
   response: string;
   tokens_used: number;
@@ -22,7 +24,7 @@ async function loadSystemPrompt(slug: string): Promise<string> {
 
 export async function runOrcabotAgent(
   slug: string,
-  taskDescription: string,
+  taskContent: TaskContent,
   toolDefinitions: ToolDef[],
   toolHandlers: Record<string, (params: any) => Promise<unknown>>,
 ): Promise<AgentRunResult> {
@@ -32,7 +34,7 @@ export async function runOrcabotAgent(
   const systemPrompt = await loadSystemPrompt(slug);
 
   const messages: Message[] = [
-    { role: 'user', content: taskDescription },
+    { role: 'user', content: taskContent },
   ];
 
   const toolCalls: AgentRunResult['tool_calls'] = [];

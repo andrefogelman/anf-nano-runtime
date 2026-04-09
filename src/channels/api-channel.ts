@@ -679,7 +679,12 @@ REGRAS:
         'File extracted for processing',
       );
 
-      // Invoke orcamentista agent instead of direct LLM call
+      // Encode PDF as base64 for Gemini vision analysis
+      const pdfBase64 = fileType === 'pdf'
+        ? Buffer.from(buffer).toString('base64')
+        : undefined;
+
+      // Invoke orcamentista agent with vision (PDF) + text
       const result = await triggerOrcamentista({
         projectId: body.project_id,
         runId: runId,
@@ -688,6 +693,7 @@ REGRAS:
         fileInfo,
         userPrompt: body.prompt,
         pdfContext,
+        pdfBase64,
       });
 
       const quantCount = result.tool_calls.filter((tc) => tc.name === 'create_quantitativo').length;

@@ -134,7 +134,9 @@ export class GeminiProvider implements LlmProvider {
       }> = [];
 
       for (const block of msg.content) {
-        if (block.type === 'text' && block.text) {
+        if (block.type === 'inline_data' && block.mimeType && block.data) {
+          parts.push({ inlineData: { mimeType: block.mimeType, data: block.data } } as any);
+        } else if (block.type === 'text' && block.text) {
           parts.push({ text: block.text });
         } else if (block.type === 'tool_use' && block.name) {
           parts.push({
