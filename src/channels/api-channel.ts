@@ -387,30 +387,6 @@ REGRAS:
     return result.text;
   }
 
-  function parseJsonFromLlm(text: string): Record<string, unknown> | null {
-    try {
-      return JSON.parse(text);
-    } catch {
-      /* */
-    }
-    const m = text.match(/```(?:json)?\s*([\s\S]*?)```/);
-    if (m) {
-      try {
-        return JSON.parse(m[1]);
-      } catch {
-        /* */
-      }
-    }
-    const b = text.match(/\{[\s\S]*\}/);
-    if (b) {
-      try {
-        return JSON.parse(b[0]);
-      } catch {
-        /* */
-      }
-    }
-    return null;
-  }
 
   async function handleProcess(req: IncomingMessage, res: ServerResponse) {
     const raw = await readBody(req);
