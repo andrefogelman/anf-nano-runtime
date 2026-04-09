@@ -749,6 +749,34 @@ FORMATO JSON OBRIGATÓRIO (responda APENAS com este JSON, sem texto antes ou dep
           .eq('id', runId);
       }
 
+      // Persist items to ob_quantitativos
+      if (items.length > 0) {
+        const discMap: Record<string, string> = {
+          arquitetonico: 'arq', estrutural: 'est', hidraulico: 'hid',
+          eletrico: 'ele', arq: 'arq', est: 'est', hid: 'hid', ele: 'ele',
+          geral: 'geral',
+        };
+        const rows = items.map((it: any, idx: number) => ({
+          project_id: body.project_id,
+          disciplina: discMap[it.disciplina?.toLowerCase()] || 'geral',
+          item_code: String(idx + 1).padStart(3, '0'),
+          descricao: it.descricao || 'Item sem descrição',
+          unidade: it.unidade || 'vb',
+          quantidade: Number(it.quantidade) || 0,
+          calculo_memorial: it.memorial_calculo || null,
+          origem_ambiente: it.ambiente || null,
+          confidence: Math.min(1, Math.max(0, Number(it.confidence) || 0)),
+          needs_review: (Number(it.confidence) || 0) < 0.7,
+          created_by: 'api-pipeline',
+        }));
+        const { error: qError } = await supabaseAdmin
+          .from('ob_quantitativos')
+          .insert(rows);
+        if (qError) {
+          logger.warn({ error: qError.message }, 'Failed to insert quantitativos');
+        }
+      }
+
       await supabaseAdmin
         .from('ob_project_files')
         .update({ status: 'done' })

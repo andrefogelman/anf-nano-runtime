@@ -145,6 +145,36 @@ export async function runPipeline(jobId: string): Promise<void> {
           : null,
     });
 
+    // Persist ambientes as ob_quantitativos
+    if (output.ambientes.length > 0) {
+      const { getSupabase } = await import("./supabase.js");
+      const sb = getSupabase();
+      const tipoToDisc: Record<string, string> = {
+        "arquitetonico-planta-baixa": "arq", "arquitetonico-corte": "arq",
+        "arquitetonico-fachada": "arq", "arquitetonico-cobertura": "arq",
+        "estrutural-forma": "est", "estrutural-armacao": "est",
+        "hidraulico-agua-fria": "hid", "hidraulico-esgoto": "hid",
+        "eletrico-pontos": "ele", "eletrico-caminhamento": "ele",
+      };
+      const disc = tipoToDisc[output.tipo] || "geral";
+      const rows = output.ambientes.map((amb, idx) => ({
+        project_id: fileInfo.project_id,
+        disciplina: disc,
+        item_code: String(idx + 1).padStart(3, "0"),
+        descricao: `${amb.nome} — ${amb.acabamentos?.piso || "piso"}`,
+        unidade: "m²",
+        quantidade: amb.area_m2,
+        calculo_memorial: `Área: ${amb.area_m2} m², Perímetro: ${amb.perimetro_m} m, Pé-direito: ${amb.pe_direito_m} m`,
+        origem_ambiente: amb.nome,
+        confidence: amb.confidence,
+        needs_review: amb.confidence < 0.7,
+        created_by: "dwg-pipeline",
+      }));
+      const { error: qErr } = await sb.from("ob_quantitativos").insert(rows);
+      if (qErr) console.error(`[${jobId}] Failed to insert quantitativos:`, qErr.message);
+      else console.log(`[${jobId}] Inserted ${rows.length} quantitativos`);
+    }
+
     // --- Done ---
     await updateJob(jobId, {
       status: "done",
