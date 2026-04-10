@@ -210,7 +210,7 @@ export async function query_tracking(params: {
     .select('*')
     .order('created_at', { ascending: false });
 
-  if (params.requisicao_id) query = query.eq('requisicao_id', params.requisicao_id);
+  if (params.requisicao_id) query = query.eq('id_requisicao', params.requisicao_id);
   if (params.status) query = query.eq('status', params.status);
 
   const { data, error } = await query;
