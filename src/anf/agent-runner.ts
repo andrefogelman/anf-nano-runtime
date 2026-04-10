@@ -3,6 +3,7 @@
 
 import { getProvider } from '../llm/index.js';
 import type { Message, ContentBlock, ToolDef } from '../llm/types.js';
+import { config } from '../config.js';
 import { buildAgentContext } from './agent-context.js';
 import { logActivity } from './activity-log.js';
 import { RateLimitGuard } from './rate-limit-guard.js';
@@ -79,7 +80,7 @@ export async function runAgent(
 
     try {
       const response = await provider.chatWithTools({
-        model: ctx.model,
+        model: config.llmModel,
         maxTokens: 16384,
         temperature: ctx.temperature,
         system: systemPrompt,
