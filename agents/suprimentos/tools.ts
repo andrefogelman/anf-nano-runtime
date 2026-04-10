@@ -262,7 +262,7 @@ export const toolDefinitions = [
     input_schema: {
       type: 'object' as const,
       properties: {
-        status: { type: 'string', description: 'Filtrar por status (nova, assistente, enviado, propostas, cotacao, pedido)' },
+        status: { type: 'string', description: 'Filtrar por status: recebida, aprovada, cotacao, pedido, recusada' },
         obra_id: { type: 'number', description: 'Filtrar por ID da obra' },
         limit: { type: 'number', description: 'Máximo de resultados (default 20)' },
       },
@@ -295,12 +295,12 @@ export const toolDefinitions = [
   },
   {
     name: 'query_cotacoes',
-    description: 'Consulta cotações com filtros opcionais',
+    description: 'Consulta cotações com filtros opcionais. Cotações com status "aberta" têm tracking ativo.',
     input_schema: {
       type: 'object' as const,
       properties: {
         requisicao_id: { type: 'number', description: 'Filtrar por requisição' },
-        status: { type: 'string', description: 'Filtrar por status' },
+        status: { type: 'string', description: 'Filtrar por status: aberta, aprovada, concluida, pedido, recusada' },
         limit: { type: 'number', description: 'Máximo de resultados (default 20)' },
       },
     },
