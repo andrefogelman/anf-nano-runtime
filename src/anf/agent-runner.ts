@@ -1,13 +1,11 @@
-import Anthropic from '@anthropic-ai/sdk';
-import { anfConfig } from './anf-config.js';
+// src/anf/agent-runner.ts
+// Runs ANF agents using the unified LLM provider (Gemini by default, Anthropic as fallback).
+
+import { getProvider } from '../llm/index.js';
+import type { Message, ContentBlock, ToolDef } from '../llm/types.js';
 import { buildAgentContext } from './agent-context.js';
 import { logActivity } from './activity-log.js';
 import { RateLimitGuard } from './rate-limit-guard.js';
-
-const anthropic = new Anthropic({
-  apiKey: anfConfig.anthropicApiKey,
-  baseURL: anfConfig.anthropicBaseUrl,
-});
 
 export const rateLimitGuard = new RateLimitGuard();
 
@@ -19,14 +17,26 @@ export interface AgentRunResult {
   tool_calls: Array<{ name: string; input: unknown; output: unknown }>;
 }
 
+/** Convert Anthropic-style tool definitions to unified ToolDef */
+function toUnifiedTools(
+  defs: readonly { readonly name: string; readonly description: string; readonly input_schema: Record<string, unknown> }[],
+): ToolDef[] {
+  return defs.map((t) => ({
+    name: t.name,
+    description: t.description,
+    parameters: t.input_schema,
+  }));
+}
+
 export async function runAgent(
   slug: string,
   taskDescription: string,
-  toolDefinitions: Anthropic.Tool[],
+  toolDefinitions: readonly { readonly name: string; readonly description: string; readonly input_schema: Record<string, unknown> }[],
   toolHandlers: Record<string, (params: any) => Promise<unknown>>,
 ): Promise<AgentRunResult> {
   const startTime = Date.now();
   const ctx = await buildAgentContext(slug, taskDescription);
+  const provider = await getProvider();
 
   console.log(`[agent-runner] Starting ${slug}: ${taskDescription.slice(0, 80)}`);
 
@@ -50,7 +60,7 @@ export async function runAgent(
     ...ctx.pending_messages.map((m) => `- ${m.content}`),
   ].join('\n');
 
-  const messages: Anthropic.MessageParam[] = [
+  const messages: Message[] = [
     { role: 'user', content: taskDescription },
   ];
 
@@ -58,27 +68,140 @@ export async function runAgent(
   let totalInputTokens = 0;
   let totalOutputTokens = 0;
 
-  const MAX_LLM_TIMEOUT_MS = 120_000; // 2 min per LLM call
+  const MAX_ITERATIONS = 30;
+  let iteration = 0;
 
-  while (true) {
+  while (iteration < MAX_ITERATIONS) {
+    iteration++;
+
     // Circuit breaker: reject immediately if rate limited
     rateLimitGuard.checkOrThrow();
 
-    let response: Anthropic.Message;
     try {
-      response = await Promise.race([
-        anthropic.messages.create({
-          model: ctx.model,
-          max_tokens: 16384,
-          temperature: ctx.temperature,
-          system: systemPrompt,
-          tools: toolDefinitions,
-          messages,
-        }),
-        new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error('LLM request timed out after 120s')), MAX_LLM_TIMEOUT_MS),
-        ),
-      ]);
+      const response = await provider.chatWithTools({
+        model: ctx.model,
+        maxTokens: 16384,
+        temperature: ctx.temperature,
+        system: systemPrompt,
+        tools: toUnifiedTools(toolDefinitions),
+        messages,
+      });
+
+      rateLimitGuard.recordSuccess();
+      totalInputTokens += response.inputTokens;
+      totalOutputTokens += response.outputTokens;
+
+      console.log(`[agent-runner] ${slug} iter=${iteration} stop=${response.stopReason} tokens=${response.inputTokens}+${response.outputTokens}`);
+
+      if (response.stopReason === 'end') {
+        const duration_ms = Date.now() - startTime;
+        const tokens_used = totalInputTokens + totalOutputTokens;
+        const cost_usd =
+          (totalInputTokens * 3) / 1_000_000 +
+          (totalOutputTokens * 15) / 1_000_000;
+
+        await logActivity({
+          agent_id: ctx.agent_id,
+          action: 'decision',
+          description: `Agent ${slug} completou tarefa: ${taskDescription.slice(0, 100)}`,
+          tokens_used,
+          cost_usd,
+          duration_ms,
+          output: { response: response.text?.slice(0, 500) },
+        });
+
+        return {
+          response: response.text || '',
+          tokens_used,
+          cost_usd,
+          duration_ms,
+          tool_calls: toolCalls,
+        };
+      }
+
+      if (response.stopReason === 'tool_use') {
+        // Build assistant message — use raw parts when available to preserve
+        // thought signatures required by Gemini 3.1+
+        let assistantBlocks: ContentBlock[];
+        if (response.rawAssistantParts?.length) {
+          assistantBlocks = [{ type: 'raw_parts', rawParts: response.rawAssistantParts }];
+        } else {
+          assistantBlocks = [];
+          if (response.text) {
+            assistantBlocks.push({ type: 'text', text: response.text });
+          }
+          for (const tc of response.toolCalls) {
+            assistantBlocks.push({
+              type: 'tool_use',
+              id: tc.id,
+              name: tc.name,
+              input: tc.input,
+            });
+          }
+        }
+        messages.push({ role: 'assistant', content: assistantBlocks });
+
+        // Execute tools and build results
+        const resultBlocks: ContentBlock[] = [];
+
+        for (const tc of response.toolCalls) {
+          const handler = toolHandlers[tc.name];
+          if (!handler) {
+            resultBlocks.push({
+              type: 'tool_result',
+              id: tc.id,
+              name: tc.name,
+              content: `Erro: ferramenta "${tc.name}" não encontrada`,
+              is_error: true,
+            });
+            continue;
+          }
+
+          console.log(`[agent-runner] ${slug} calling tool: ${tc.name}`);
+          try {
+            const result = await handler(tc.input as any);
+            console.log(`[agent-runner] ${slug} tool ${tc.name}: OK`);
+            toolCalls.push({
+              name: tc.name,
+              input: tc.input,
+              output: result,
+            });
+            resultBlocks.push({
+              type: 'tool_result',
+              id: tc.id,
+              name: tc.name,
+              content: JSON.stringify(result),
+            });
+          } catch (err: any) {
+            console.error(`[agent-runner] ${slug} tool ${tc.name}: FAILED — ${err.message}`);
+            toolCalls.push({
+              name: tc.name,
+              input: tc.input,
+              output: { error: err.message },
+            });
+            resultBlocks.push({
+              type: 'tool_result',
+              id: tc.id,
+              name: tc.name,
+              content: `Erro: ${err.message}`,
+              is_error: true,
+            });
+
+            await logActivity({
+              agent_id: ctx.agent_id,
+              action: 'error',
+              description: `Tool ${tc.name} failed: ${err.message}`,
+              input: tc.input as Record<string, unknown>,
+            });
+          }
+        }
+
+        messages.push({ role: 'user', content: resultBlocks });
+        continue;
+      }
+
+      // Unknown stop reason — break
+      break;
     } catch (err: any) {
       if (err?.status === 429 || err?.error?.type === 'rate_limit_error') {
         const backoff = RateLimitGuard.extractBackoffSeconds(
@@ -93,102 +216,6 @@ export async function runAgent(
       rateLimitGuard.recordError();
       throw err;
     }
-
-    rateLimitGuard.recordSuccess();
-    totalInputTokens += response.usage.input_tokens;
-    totalOutputTokens += response.usage.output_tokens;
-
-    console.log(`[agent-runner] ${slug} response: stop_reason=${response.stop_reason}, tokens=${response.usage.input_tokens}+${response.usage.output_tokens}`);
-
-    if (response.stop_reason === 'end_turn') {
-      const textBlock = response.content.find((b) => b.type === 'text');
-      const duration_ms = Date.now() - startTime;
-      const tokens_used = totalInputTokens + totalOutputTokens;
-      const cost_usd =
-        (totalInputTokens * 3) / 1_000_000 +
-        (totalOutputTokens * 15) / 1_000_000;
-
-      await logActivity({
-        agent_id: ctx.agent_id,
-        action: 'decision',
-        description: `Agent ${slug} completou tarefa: ${taskDescription.slice(0, 100)}`,
-        tokens_used,
-        cost_usd,
-        duration_ms,
-        output: { response: (textBlock as any)?.text?.slice(0, 500) },
-      });
-
-      return {
-        response: (textBlock as any)?.text || '',
-        tokens_used,
-        cost_usd,
-        duration_ms,
-        tool_calls: toolCalls,
-      };
-    }
-
-    if (response.stop_reason === 'tool_use') {
-      const assistantContent = response.content;
-      messages.push({ role: 'assistant', content: assistantContent });
-
-      const toolResults: Anthropic.Messages.ToolResultBlockParam[] = [];
-
-      for (const block of assistantContent) {
-        if (block.type !== 'tool_use') continue;
-
-        const handler = toolHandlers[block.name];
-        if (!handler) {
-          toolResults.push({
-            type: 'tool_result',
-            tool_use_id: block.id,
-            content: `Erro: ferramenta "${block.name}" não encontrada`,
-            is_error: true,
-          });
-          continue;
-        }
-
-        console.log(`[agent-runner] ${slug} calling tool: ${block.name}`);
-        try {
-          const result = await handler(block.input as any);
-          console.log(`[agent-runner] ${slug} tool ${block.name}: OK`);
-          toolCalls.push({
-            name: block.name,
-            input: block.input,
-            output: result,
-          });
-          toolResults.push({
-            type: 'tool_result',
-            tool_use_id: block.id,
-            content: JSON.stringify(result),
-          });
-        } catch (err: any) {
-          console.error(`[agent-runner] ${slug} tool ${block.name}: FAILED — ${err.message}`);
-          toolCalls.push({
-            name: block.name,
-            input: block.input,
-            output: { error: err.message },
-          });
-          toolResults.push({
-            type: 'tool_result',
-            tool_use_id: block.id,
-            content: `Erro: ${err.message}`,
-            is_error: true,
-          });
-
-          await logActivity({
-            agent_id: ctx.agent_id,
-            action: 'error',
-            description: `Tool ${block.name} failed: ${err.message}`,
-            input: block.input as Record<string, unknown>,
-          });
-        }
-      }
-
-      messages.push({ role: 'user', content: toolResults });
-      continue;
-    }
-
-    break;
   }
 
   return {

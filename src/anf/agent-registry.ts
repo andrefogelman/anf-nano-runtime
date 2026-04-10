@@ -1,5 +1,3 @@
-import type Anthropic from '@anthropic-ai/sdk';
-
 import {
   toolDefinitions as suprimentosDefs,
   toolHandlers as suprimentosHandlers,
@@ -21,30 +19,36 @@ import {
   toolHandlers as orcamentistaHandlers,
 } from '../../agents/orcamentista/tools.js';
 
+export interface AgentToolDef {
+  readonly name: string;
+  readonly description: string;
+  readonly input_schema: Record<string, unknown>;
+}
+
 export interface AgentToolset {
-  definitions: Anthropic.Tool[];
+  definitions: readonly AgentToolDef[];
   handlers: Record<string, (params: any) => Promise<unknown>>;
 }
 
 const registry: Record<string, AgentToolset> = {
   suprimentos: {
-    definitions: suprimentosDefs as unknown as Anthropic.Tool[],
+    definitions: suprimentosDefs,
     handlers: suprimentosHandlers,
   },
   financeiro: {
-    definitions: financeiroDefs as unknown as Anthropic.Tool[],
+    definitions: financeiroDefs,
     handlers: financeiroHandlers,
   },
   engenharia: {
-    definitions: engenhariaDefs as unknown as Anthropic.Tool[],
+    definitions: engenhariaDefs,
     handlers: engenhariaHandlers,
   },
   orquestrador: {
-    definitions: orquestradorDefs as unknown as Anthropic.Tool[],
+    definitions: orquestradorDefs,
     handlers: orquestradorHandlers,
   },
   orcamentista: {
-    definitions: orcamentistaDefs as unknown as Anthropic.Tool[],
+    definitions: orcamentistaDefs,
     handlers: orcamentistaHandlers,
   },
 };

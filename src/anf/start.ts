@@ -7,7 +7,6 @@ import { loadFlows } from './flow-engine.js';
 import { runAgent } from './agent-runner.js';
 import { getAgentTools, getAllAgentSlugs } from './agent-registry.js';
 import { notifyAdmin } from './whatsapp.js';
-import type Anthropic from '@anthropic-ai/sdk';
 
 function registerAgentTask(
   agent: string,
