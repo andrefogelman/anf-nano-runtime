@@ -85,6 +85,42 @@ function computeInsertPatch(items: OrcamentoItem[], op: InsertOperation): EapPat
   return patch;
 }
 
-function computeDeletePatch(_items: OrcamentoItem[], _op: DeleteOperation): EapPatch[] {
-  throw new Error("delete not implemented yet");
+function computeDeletePatch(items: OrcamentoItem[], op: DeleteOperation): EapPatch[] {
+  // Derive parentPrefix from deletedCode
+  const parts = op.deletedCode.split(".");
+  const parentPrefix = parts.slice(0, -1).join(".");
+  const deletedLastSegment = parseInt(parts[parts.length - 1], 10);
+
+  // Same-level siblings under same parent (excluding the deleted item itself)
+  const siblings = items.filter((i) => {
+    if (i.eap_level !== op.level) return false;
+    if (i.eap_code === op.deletedCode) return false;
+    if (op.level === 1) return true;
+    return i.eap_code.startsWith(parentPrefix + ".");
+  });
+
+  // Siblings with last-segment > deletedLastSegment need shift -1
+  const toShift = siblings.filter((s) => lastSegmentOf(s.eap_code) > deletedLastSegment);
+  if (toShift.length === 0) return [];
+
+  const patch: EapPatch[] = [];
+
+  for (const sibling of toShift) {
+    const oldLast = lastSegmentOf(sibling.eap_code);
+    const newLast = oldLast - 1;
+    const newCode = formatEapCode(parentPrefix, newLast, op.level);
+    patch.push({ id: sibling.id, eap_code: newCode });
+
+    // Cascade to descendants
+    const oldPrefix = sibling.eap_code;
+    const newPrefix = newCode;
+    for (const desc of items) {
+      if (desc.eap_code.startsWith(oldPrefix + ".")) {
+        const suffix = desc.eap_code.slice(oldPrefix.length);
+        patch.push({ id: desc.id, eap_code: newPrefix + suffix });
+      }
+    }
+  }
+
+  return patch;
 }

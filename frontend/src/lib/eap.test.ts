@@ -179,3 +179,109 @@ describe("computeRenumberPatch - insert level 3", () => {
     ]);
   });
 });
+
+describe("computeRenumberPatch - delete level 1", () => {
+  test("delete last etapa returns empty patch", () => {
+    const items = [item("01", 1), item("02", 1), item("03", 1)];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "03", level: 1 };
+    expect(computeRenumberPatch(items, op)).toEqual([]);
+  });
+
+  test("delete first etapa shifts all others -1", () => {
+    const items = [item("01", 1), item("02", 1), item("03", 1)];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "01", level: 1 };
+    expect(computeRenumberPatch(items, op)).toEqual([
+      { id: "02", eap_code: "01" },
+      { id: "03", eap_code: "02" },
+    ]);
+  });
+
+  test("delete in middle shifts only subsequent", () => {
+    const items = [item("01", 1), item("02", 1), item("03", 1), item("04", 1)];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "02", level: 1 };
+    const patch = computeRenumberPatch(items, op);
+    expect(patch).toEqual([
+      { id: "03", eap_code: "02" },
+      { id: "04", eap_code: "03" },
+    ]);
+  });
+
+  test("delete cascades rename to descendants of subsequent siblings", () => {
+    const items = [
+      item("01", 1),
+      item("02", 1),
+      item("02.01", 2),
+      item("03", 1),
+      item("03.01", 2),
+      item("03.01.001", 3),
+      item("03.02", 2),
+    ];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "02", level: 1 };
+    const patch = computeRenumberPatch(items, op);
+    // Items being deleted (02 and its children) must NOT be in the patch
+    expect(patch.find((p) => p.id === "02")).toBeUndefined();
+    expect(patch.find((p) => p.id === "02.01")).toBeUndefined();
+    // 03 → 02 and entire subtree follows
+    expect(patch).toContainEqual({ id: "03", eap_code: "02" });
+    expect(patch).toContainEqual({ id: "03.01", eap_code: "02.01" });
+    expect(patch).toContainEqual({ id: "03.01.001", eap_code: "02.01.001" });
+    expect(patch).toContainEqual({ id: "03.02", eap_code: "02.02" });
+    expect(patch).toHaveLength(4);
+  });
+});
+
+describe("computeRenumberPatch - delete level 2", () => {
+  test("delete middle item in etapa shifts subsequent siblings", () => {
+    const items = [
+      item("01", 1),
+      item("01.01", 2),
+      item("01.02", 2),
+      item("01.03", 2),
+      item("02", 1),
+      item("02.01", 2),
+    ];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "01.02", level: 2 };
+    const patch = computeRenumberPatch(items, op);
+    expect(patch).toEqual([{ id: "01.03", eap_code: "01.02" }]);
+    // 02 and 02.01 should not be touched (different parent)
+    expect(patch.find((p) => p.id === "02")).toBeUndefined();
+  });
+
+  test("delete level 2 cascades to level 3 descendants", () => {
+    const items = [
+      item("01", 1),
+      item("01.01", 2),
+      item("01.02", 2),
+      item("01.02.001", 3),
+      item("01.02.002", 3),
+      item("01.03", 2),
+      item("01.03.001", 3),
+    ];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "01.01", level: 2 };
+    const patch = computeRenumberPatch(items, op);
+    expect(patch).toContainEqual({ id: "01.02", eap_code: "01.01" });
+    expect(patch).toContainEqual({ id: "01.02.001", eap_code: "01.01.001" });
+    expect(patch).toContainEqual({ id: "01.02.002", eap_code: "01.01.002" });
+    expect(patch).toContainEqual({ id: "01.03", eap_code: "01.02" });
+    expect(patch).toContainEqual({ id: "01.03.001", eap_code: "01.02.001" });
+    expect(patch).toHaveLength(5);
+  });
+});
+
+describe("computeRenumberPatch - delete level 3", () => {
+  test("uses 3-digit padding when renumbering", () => {
+    const items = [
+      item("01", 1),
+      item("01.01", 2),
+      item("01.01.001", 3),
+      item("01.01.002", 3),
+      item("01.01.003", 3),
+    ];
+    const op: DeleteOperation = { kind: "delete", deletedCode: "01.01.001", level: 3 };
+    const patch = computeRenumberPatch(items, op);
+    expect(patch).toEqual([
+      { id: "01.01.002", eap_code: "01.01.001" },
+      { id: "01.01.003", eap_code: "01.01.002" },
+    ]);
+  });
+});
