@@ -18,6 +18,7 @@ import {
   type PreviousPriceData,
 } from "@/hooks/useApplyPriceSource";
 import { useSinapiSearch } from "@/hooks/useSinapi";
+import { useTcpoSearch } from "@/hooks/useTcpo";
 import { Badge } from "@/components/ui/badge";
 import { unitsMatch } from "@/lib/unit";
 import { cn } from "@/lib/utils";
@@ -117,9 +118,12 @@ export function PriceSourceDialog({
             />
           </TabsContent>
           <TabsContent value="tcpo" className="mt-2">
-            <div className="text-sm text-muted-foreground py-8 text-center">
-              Lista TCPO — a ser implementada
-            </div>
+            <TcpoResultsList
+              query={query}
+              itemUnit={item.unidade}
+              selected={selected}
+              onSelect={setSelected}
+            />
           </TabsContent>
         </Tabs>
 
@@ -256,6 +260,100 @@ function SinapiResultsList({
               Próxima
             </Button>
           </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+interface TcpoResultsListProps {
+  query: string;
+  itemUnit: string | null;
+  selected: PriceSelection | null;
+  onSelect: (sel: PriceSelection) => void;
+}
+
+function TcpoResultsList({
+  query,
+  itemUnit,
+  selected,
+  onSelect,
+}: TcpoResultsListProps) {
+  const { data, isLoading, error } = useTcpoSearch(query, null);
+
+  if (isLoading && !data) {
+    return (
+      <div className="py-8 text-center text-sm text-muted-foreground">
+        Buscando...
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className="py-8 text-center text-sm text-destructive">
+        Erro ao buscar TCPO
+      </div>
+    );
+  }
+
+  const results = data ?? [];
+  const sorted = [...results].sort((a, b) => {
+    const am = unitsMatch(a.unidade, itemUnit) ? 0 : 1;
+    const bm = unitsMatch(b.unidade, itemUnit) ? 0 : 1;
+    return am - bm;
+  });
+
+  return (
+    <div className="max-h-[420px] overflow-y-auto">
+      <table className="w-full text-sm">
+        <thead className="sticky top-0 bg-background border-b">
+          <tr className="text-left text-xs text-muted-foreground">
+            <th className="w-24 px-2 py-2">Código</th>
+            <th className="px-2 py-2">Descrição</th>
+            <th className="w-16 px-2 py-2">Unid</th>
+            <th className="w-28 px-2 py-2 text-right">Custo c/ taxas</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((comp) => {
+            const isSelected =
+              selected?.kind === "tcpo" && selected.composicao.id === comp.id;
+            const isMatch = unitsMatch(comp.unidade, itemUnit);
+            return (
+              <tr
+                key={comp.id}
+                className={cn(
+                  "cursor-pointer border-b hover:bg-accent",
+                  isSelected && "bg-primary/10"
+                )}
+                onClick={() => onSelect({ kind: "tcpo", composicao: comp })}
+                onDoubleClick={() =>
+                  onSelect({ kind: "tcpo", composicao: comp })
+                }
+              >
+                <td className="px-2 py-1.5 font-mono text-xs">{comp.codigo}</td>
+                <td className="px-2 py-1.5">{comp.descricao}</td>
+                <td className="px-2 py-1.5">
+                  <div className="flex items-center gap-1">
+                    <span>{comp.unidade}</span>
+                    {isMatch && (
+                      <Badge variant="outline" className="text-[10px] px-1 py-0">
+                        ✓
+                      </Badge>
+                    )}
+                  </div>
+                </td>
+                <td className="px-2 py-1.5 text-right font-mono">
+                  R$ {(comp.custo_com_taxas ?? 0).toFixed(2)}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {sorted.length === 0 && (
+        <div className="py-8 text-center text-sm text-muted-foreground">
+          Nenhum resultado
         </div>
       )}
     </div>
