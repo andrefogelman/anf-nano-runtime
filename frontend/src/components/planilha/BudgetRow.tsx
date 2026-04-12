@@ -136,7 +136,7 @@ export function BudgetRow({
             readOnly={isLevel1}
           />
           <button
-            className="invisible p-0.5 rounded hover:bg-accent group-hover:visible"
+            className="p-0.5 rounded hover:bg-accent"
             title="Buscar preço SINAPI/TCPO"
             onClick={(e) => {
               e.stopPropagation();
