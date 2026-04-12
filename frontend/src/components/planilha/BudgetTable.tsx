@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { Copy, ArrowUp, ArrowDown, Trash2 } from "lucide-react";
 import { BudgetRow } from "./BudgetRow";
 import { BudgetFooter } from "./BudgetFooter";
@@ -49,6 +50,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   const bulkDelete = useBulkDeleteOrcamentoItems();
   const bulkCreate = useBulkCreateOrcamentoItems();
   const undoStack = useUndoStack();
+  const queryClient = useQueryClient();
 
   const [expandedMap, setExpandedMap] = useState<Record<string, boolean>>({});
   const [searchQuery, setSearchQuery] = useState("");
@@ -161,7 +163,8 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
 
   const handleUpdate = useCallback(
     (itemId: string, field: keyof OrcamentoItem, value: string | number) => {
-      const item = items?.find((i) => i.id === itemId);
+      if (!items) return;
+      const item = items.find((i) => i.id === itemId);
       if (!item) return;
 
       // Push to undo stack
@@ -194,6 +197,43 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
         previousData.custo_total = item.custo_total;
       }
 
+      // ── eap_code change: cascade rename to all descendants ──
+      if (field === "eap_code" && typeof value === "string" && value !== item.eap_code) {
+        const oldPrefix = item.eap_code;
+        const newPrefix = value;
+        const patch: { id: string; eap_code: string }[] = [
+          { id: item.id, eap_code: newPrefix },
+        ];
+        const snapshot: { id: string; eap_code: string }[] = [
+          { id: item.id, eap_code: oldPrefix },
+        ];
+        for (const desc of items) {
+          if (desc.eap_code.startsWith(oldPrefix + ".")) {
+            const suffix = desc.eap_code.slice(oldPrefix.length);
+            patch.push({ id: desc.id, eap_code: newPrefix + suffix });
+            snapshot.push({ id: desc.id, eap_code: desc.eap_code });
+          }
+        }
+        undoStack.push({
+          type: "delete-with-renumber" as const,
+          projectId,
+          deletedItems: [],
+          snapshot,
+        });
+        supabase.rpc("renumber_eap_items", {
+          p_project_id: projectId,
+          p_patches: patch,
+        }).then(({ error }) => {
+          if (error) {
+            console.error("eap_code cascade rename failed:", error);
+            toast.error("Erro ao renumerar");
+          } else {
+            queryClient.invalidateQueries({ queryKey: ["orcamento", projectId] });
+          }
+        });
+        return;
+      }
+
       undoStack.push({
         type: "update",
         table: "ob_orcamento_items",
@@ -216,7 +256,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
         }
       );
     },
-    [items, projectId, updateItem, undoStack, recalculateParentTotals]
+    [items, projectId, updateItem, undoStack, recalculateParentTotals, supabase, queryClient]
   );
 
   // ─── Insert Item at Position ───────────────────────────────────
