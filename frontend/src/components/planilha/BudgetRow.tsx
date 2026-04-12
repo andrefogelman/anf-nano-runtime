@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronRight, Trash2 } from "lucide-react";
+import { ChevronDown, ChevronRight, Trash2, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BudgetCell } from "./BudgetCell";
 import { useProjectContext } from "@/contexts/ProjectContext";
@@ -13,6 +13,7 @@ interface BudgetRowProps {
   onUpdate: (field: keyof OrcamentoItem, value: string | number) => void;
   onDelete: (item: OrcamentoItem) => void;
   onContextMenu: (e: React.MouseEvent, item: OrcamentoItem) => void;
+  onFindPriceSource: (item: OrcamentoItem) => void;
 }
 
 export function BudgetRow({
@@ -23,6 +24,7 @@ export function BudgetRow({
   onUpdate,
   onDelete,
   onContextMenu,
+  onFindPriceSource,
 }: BudgetRowProps) {
   const { setActiveItemId } = useProjectContext();
   const isLevel1 = item.eap_level === 1;
@@ -133,6 +135,16 @@ export function BudgetRow({
             className="text-right"
             readOnly={isLevel1}
           />
+          <button
+            className="invisible p-0.5 rounded hover:bg-accent group-hover:visible"
+            title="Buscar preço SINAPI/TCPO"
+            onClick={(e) => {
+              e.stopPropagation();
+              onFindPriceSource(item);
+            }}
+          >
+            <BookOpen className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
+          </button>
           {confirmDelete ? (
             <div className="flex items-center gap-1 flex-shrink-0">
               <button

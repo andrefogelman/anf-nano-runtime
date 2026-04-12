@@ -6,6 +6,8 @@ import { BudgetToolbar } from "./BudgetToolbar";
 import { ContextMenu, type ContextMenuAction } from "./ContextMenu";
 import { ImportQuantitativos } from "./ImportQuantitativos";
 import { ImportPropostas } from "./ImportPropostas";
+import { PriceSourceDialog } from "./PriceSourceDialog";
+import type { PreviousPriceData } from "@/hooks/useApplyPriceSource";
 import {
   buildBudgetTree,
   calculateFooterTotals,
@@ -54,6 +56,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
   const [importOpen, setImportOpen] = useState(false);
   const [importPropostasOpen, setImportPropostasOpen] = useState(false);
+  const [priceSourceItem, setPriceSourceItem] = useState<OrcamentoItem | null>(null);
 
   const filteredItems = useMemo(() => {
     if (!items) return [];
@@ -565,6 +568,20 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
     [projectId, bulkCreate, undoStack]
   );
 
+  // ─── Price Source Applied ──────────────────────────────────────
+  const handlePriceApplied = useCallback(
+    (args: { item: OrcamentoItem; previousData: PreviousPriceData }) => {
+      undoStack.push({
+        type: "update",
+        table: "ob_orcamento_items",
+        itemId: args.item.id,
+        projectId,
+        previousData: args.previousData as Record<string, unknown>,
+      });
+    },
+    [projectId, undoStack]
+  );
+
   // ─── Export Excel ──────────────────────────────────────────────
   const handleExportExcel = useCallback(async () => {
     if (!items) return;
@@ -591,6 +608,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
           onUpdate={(field, value) => handleUpdate(row.item.id, field, value)}
           onDelete={handleDeleteRequest}
           onContextMenu={handleContextMenu}
+          onFindPriceSource={setPriceSourceItem}
         />
       );
       if (expanded && row.children.length > 0) {
@@ -669,6 +687,16 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
         projectId={projectId}
         existingItems={items ?? []}
         onImport={handleImportPropostas}
+      />
+
+      {/* Price Source Dialog */}
+      <PriceSourceDialog
+        item={priceSourceItem}
+        open={!!priceSourceItem}
+        onOpenChange={(open) => {
+          if (!open) setPriceSourceItem(null);
+        }}
+        onApplied={handlePriceApplied}
       />
     </div>
   );
