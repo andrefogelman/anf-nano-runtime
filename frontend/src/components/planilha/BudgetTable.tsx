@@ -299,13 +299,10 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
     async (item: OrcamentoItem) => {
       if (!items) return;
 
-      // Determine what will be removed
-      const toDelete =
-        item.eap_level === 1
-          ? items.filter(
-              (i) => i.id === item.id || i.eap_code.startsWith(item.eap_code + ".")
-            )
-          : [item];
+      // Determine what will be removed (item + all descendants)
+      const toDelete = items.filter(
+        (i) => i.id === item.id || i.eap_code.startsWith(item.eap_code + ".")
+      );
 
       // Compute patch for subsequent sibling renumbering (+ descendants)
       const patch = computeRenumberPatch(items, {
