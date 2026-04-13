@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Input } from "@/components/ui/input";
 import { Plus, Download, Filter, Search, Upload, Undo2, X } from "lucide-react";
 import { useState } from "react";
@@ -41,36 +42,51 @@ export function BudgetToolbar({
     <div className="flex items-center gap-3 border-b px-4 py-2">
       {/* Add item buttons */}
       <div className="flex items-center gap-1">
-        <InsertPositionPopover
-          level={1}
-          items={items}
-          onSelect={(prefix, pos) => onInsertAt(1, prefix, pos)}
-        >
-          <Button variant="outline" size="sm">
-            <Plus className="mr-1 h-3 w-3" />
-            Etapa
-          </Button>
-        </InsertPositionPopover>
-        <InsertPositionPopover
-          level={2}
-          items={items}
-          onSelect={(prefix, pos) => onInsertAt(2, prefix, pos)}
-        >
-          <Button variant="outline" size="sm">
-            <Plus className="mr-1 h-3 w-3" />
-            Item
-          </Button>
-        </InsertPositionPopover>
-        <InsertPositionPopover
-          level={3}
-          items={items}
-          onSelect={(prefix, pos) => onInsertAt(3, prefix, pos)}
-        >
-          <Button variant="outline" size="sm">
-            <Plus className="mr-1 h-3 w-3" />
-            Subitem
-          </Button>
-        </InsertPositionPopover>
+        <Tooltip>
+          <InsertPositionPopover
+            level={1}
+            items={items}
+            onSelect={(prefix, pos) => onInsertAt(1, prefix, pos)}
+          >
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Plus className="mr-1 h-3 w-3" />
+                Etapa
+              </Button>
+            </TooltipTrigger>
+          </InsertPositionPopover>
+          <TooltipContent>Adicionar nova etapa ao orçamento</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <InsertPositionPopover
+            level={2}
+            items={items}
+            onSelect={(prefix, pos) => onInsertAt(2, prefix, pos)}
+          >
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Plus className="mr-1 h-3 w-3" />
+                Item
+              </Button>
+            </TooltipTrigger>
+          </InsertPositionPopover>
+          <TooltipContent>Adicionar item dentro de uma etapa</TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <InsertPositionPopover
+            level={3}
+            items={items}
+            onSelect={(prefix, pos) => onInsertAt(3, prefix, pos)}
+          >
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Plus className="mr-1 h-3 w-3" />
+                Subitem
+              </Button>
+            </TooltipTrigger>
+          </InsertPositionPopover>
+          <TooltipContent>Adicionar subitem dentro de um item</TooltipContent>
+        </Tooltip>
       </div>
 
       {/* Separator */}
@@ -121,32 +137,52 @@ export function BudgetToolbar({
 
       {/* Import Quantitativos */}
       {onImportQuantitativos && (
-        <Button variant="outline" size="sm" onClick={onImportQuantitativos}>
-          <Upload className="mr-1 h-3 w-3" />
-          Importar Quantitativos
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="sm" onClick={onImportQuantitativos}>
+              <Upload className="mr-1 h-3 w-3" />
+              Importar Quantitativos
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Importar quantitativos extraídos dos projetos</TooltipContent>
+        </Tooltip>
       )}
 
       {/* Import Propostas */}
       {onImportPropostas && (
-        <Button variant="outline" size="sm" onClick={onImportPropostas}>
-          <Upload className="mr-1 h-3 w-3" />
-          Importar Proposta
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline" size="sm" onClick={onImportPropostas}>
+              <Upload className="mr-1 h-3 w-3" />
+              Importar Proposta
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Importar proposta de fornecedor (PDF)</TooltipContent>
+        </Tooltip>
       )}
 
       {/* Undo */}
       {onUndo && (
-        <Button variant="ghost" size="sm" onClick={onUndo} title="Desfazer (Ctrl+Z)">
-          <Undo2 className="h-3.5 w-3.5" />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost" size="sm" onClick={onUndo}>
+              <Undo2 className="h-3.5 w-3.5" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Desfazer (Ctrl+Z)</TooltipContent>
+        </Tooltip>
       )}
 
       {/* Export */}
-      <Button variant="outline" size="sm" onClick={onExportExcel}>
-        <Download className="mr-1 h-3 w-3" />
-        Excel
-      </Button>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button variant="outline" size="sm" onClick={onExportExcel}>
+            <Download className="mr-1 h-3 w-3" />
+            Excel
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>Exportar planilha para Excel</TooltipContent>
+      </Tooltip>
     </div>
   );
 }

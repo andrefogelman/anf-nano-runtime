@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronRight, Trash2, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BudgetCell, type NavigateDirection } from "./BudgetCell";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { useProjectContext } from "@/contexts/ProjectContext";
 import type { OrcamentoItem } from "@/types/orcamento";
 
@@ -132,13 +133,17 @@ export function BudgetRow({
       <td className="w-16 text-right px-0 py-0">
         <div className="flex items-center justify-end gap-1">
           <BudgetCell {...cellProps(7)} className="text-right" />
-          <button
-            className="p-0.5 rounded hover:bg-accent flex-shrink-0"
-            title="Buscar preco SINAPI/TCPO"
-            onClick={(e) => { e.stopPropagation(); onFindPriceSource(item); }}
-          >
-            <BookOpen className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
-          </button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                className="p-0.5 rounded hover:bg-accent flex-shrink-0"
+                onClick={(e) => { e.stopPropagation(); onFindPriceSource(item); }}
+              >
+                <BookOpen className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>Buscar preço SINAPI/TCPO</TooltipContent>
+          </Tooltip>
           {confirmDelete ? (
             <div className="flex items-center gap-1 flex-shrink-0">
               <button
@@ -151,13 +156,17 @@ export function BudgetRow({
               >Nao</button>
             </div>
           ) : (
-            <button
-              className="invisible p-0.5 rounded hover:bg-destructive/10 group-hover:visible flex-shrink-0"
-              title="Excluir"
-              onClick={(e) => { e.stopPropagation(); setConfirmDelete(true); }}
-            >
-              <Trash2 className="h-3.5 w-3.5 text-destructive/70 hover:text-destructive" />
-            </button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className="invisible p-0.5 rounded hover:bg-destructive/10 group-hover:visible flex-shrink-0"
+                  onClick={(e) => { e.stopPropagation(); setConfirmDelete(true); }}
+                >
+                  <Trash2 className="h-3.5 w-3.5 text-destructive/70 hover:text-destructive" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>Excluir item e renumerar</TooltipContent>
+            </Tooltip>
           )}
         </div>
       </td>
