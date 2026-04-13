@@ -4,19 +4,37 @@ import { formatBRL, formatNumber, formatPercent, parseBRNumber } from "@/lib/for
 
 type CellType = "text" | "number" | "currency" | "percent" | "unit" | "readonly-currency" | "readonly-number";
 
+export type NavigateDirection = "up" | "down" | "left" | "right" | "tab" | "shift-tab";
+
 interface BudgetCellProps {
   value: string | number | null;
   type: CellType;
   onChange: (value: string | number) => void;
   className?: string;
   readOnly?: boolean;
+  focused?: boolean;
+  onFocus?: () => void;
+  onNavigate?: (direction: NavigateDirection) => void;
 }
 
-export function BudgetCell({ value, type, onChange, className, readOnly }: BudgetCellProps) {
+export function BudgetCell({
+  value,
+  type,
+  onChange,
+  className,
+  readOnly,
+  focused,
+  onFocus,
+  onNavigate,
+}: BudgetCellProps) {
   const [editing, setEditing] = useState(false);
   const [editValue, setEditValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const cellRef = useRef<HTMLDivElement>(null);
 
+  const isReadOnly = readOnly || type.startsWith("readonly");
+
+  // Focus input when entering edit mode
   useEffect(() => {
     if (editing && inputRef.current) {
       inputRef.current.focus();
@@ -24,10 +42,15 @@ export function BudgetCell({ value, type, onChange, className, readOnly }: Budge
     }
   }, [editing]);
 
-  const isReadOnly = readOnly || type.startsWith("readonly");
+  // Focus cell div when focused externally
+  useEffect(() => {
+    if (focused && !editing && cellRef.current) {
+      cellRef.current.focus();
+    }
+  }, [focused, editing]);
 
   function displayValue(): string {
-    if (value === null || value === undefined || value === "") return "—";
+    if (value === null || value === undefined || value === "") return "\u2014";
     switch (type) {
       case "currency":
       case "readonly-currency":
@@ -44,25 +67,10 @@ export function BudgetCell({ value, type, onChange, className, readOnly }: Budge
     }
   }
 
-  function handleDoubleClick() {
+  function startEditing() {
     if (isReadOnly) return;
     setEditing(true);
     setEditValue(value !== null && value !== undefined ? String(value) : "");
-  }
-
-  function handleBlur() {
-    setEditing(false);
-    commitValue();
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === "Enter") {
-      setEditing(false);
-      commitValue();
-    }
-    if (e.key === "Escape") {
-      setEditing(false);
-    }
   }
 
   function commitValue() {
@@ -74,6 +82,55 @@ export function BudgetCell({ value, type, onChange, className, readOnly }: Budge
     }
   }
 
+  function handleBlur() {
+    if (editing) {
+      setEditing(false);
+      commitValue();
+    }
+  }
+
+  function handleInputKeyDown(e: React.KeyboardEvent) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      setEditing(false);
+      commitValue();
+      onNavigate?.("down");
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      setEditing(false);
+      commitValue();
+      onNavigate?.(e.shiftKey ? "shift-tab" : "tab");
+    } else if (e.key === "Escape") {
+      setEditing(false);
+    }
+  }
+
+  // Cell div handles keyboard when focused but NOT editing
+  function handleCellKeyDown(e: React.KeyboardEvent) {
+    if (editing) return;
+
+    if (e.key === "ArrowUp") { e.preventDefault(); onNavigate?.("up"); return; }
+    if (e.key === "ArrowDown") { e.preventDefault(); onNavigate?.("down"); return; }
+    if (e.key === "ArrowLeft") { e.preventDefault(); onNavigate?.("left"); return; }
+    if (e.key === "ArrowRight") { e.preventDefault(); onNavigate?.("right"); return; }
+    if (e.key === "Tab") { e.preventDefault(); onNavigate?.(e.shiftKey ? "shift-tab" : "tab"); return; }
+    if (e.key === "Enter") { e.preventDefault(); startEditing(); return; }
+
+    // Any printable character starts editing (like Excel)
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !isReadOnly) {
+      e.preventDefault();
+      setEditing(true);
+      setEditValue(e.key);
+    }
+
+    // Delete/Backspace clears the cell
+    if ((e.key === "Delete" || e.key === "Backspace") && !isReadOnly) {
+      e.preventDefault();
+      setEditing(true);
+      setEditValue("");
+    }
+  }
+
   if (editing) {
     return (
       <input
@@ -82,9 +139,9 @@ export function BudgetCell({ value, type, onChange, className, readOnly }: Budge
         value={editValue}
         onChange={(e) => setEditValue(e.target.value)}
         onBlur={handleBlur}
-        onKeyDown={handleKeyDown}
+        onKeyDown={handleInputKeyDown}
         className={cn(
-          "w-full border-none bg-transparent px-2 py-1 text-sm outline-none budget-cell-editing",
+          "w-full border-none bg-transparent px-2 py-1 text-sm outline-none ring-2 ring-primary/50",
           className
         )}
       />
@@ -93,10 +150,16 @@ export function BudgetCell({ value, type, onChange, className, readOnly }: Budge
 
   return (
     <div
-      onDoubleClick={handleDoubleClick}
+      ref={cellRef}
+      tabIndex={focused ? 0 : -1}
+      onClick={() => onFocus?.()}
+      onDoubleClick={startEditing}
+      onKeyDown={handleCellKeyDown}
       className={cn(
-        "cursor-default select-none truncate px-2 py-1 text-sm",
-        !isReadOnly && "cursor-cell hover:bg-accent/30",
+        "cursor-default select-none truncate px-2 py-1 text-sm outline-none",
+        !isReadOnly && "cursor-cell",
+        focused && "ring-2 ring-primary/60 bg-primary/5",
+        !focused && !isReadOnly && "hover:bg-accent/30",
         className
       )}
       title={displayValue()}

@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { Copy, ArrowUp, ArrowDown, Trash2 } from "lucide-react";
 import { BudgetRow } from "./BudgetRow";
+import type { NavigateDirection } from "./BudgetCell";
 import { BudgetFooter } from "./BudgetFooter";
 import { BudgetToolbar } from "./BudgetToolbar";
 import { ContextMenu, type ContextMenuAction } from "./ContextMenu";
@@ -53,6 +54,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   const queryClient = useQueryClient();
 
   const [expandedMap, setExpandedMap] = useState<Record<string, boolean>>({});
+  const [focusedCell, setFocusedCell] = useState<{ row: number; col: number } | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterDisciplina, setFilterDisciplina] = useState<string | null>(null);
   const [contextMenu, setContextMenu] = useState<ContextMenuState | null>(null);
@@ -109,6 +111,75 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   const isExpanded = useCallback(
     (eapCode: string) => expandedMap[eapCode] !== false,
     [expandedMap]
+  );
+
+  // ─── Flat row list for keyboard navigation ─────────────────────
+  const flatRows = useMemo(() => {
+    if (!tree) return [] as OrcamentoItem[];
+    const flat: OrcamentoItem[] = [];
+    function walk(rows: BudgetRowType[]) {
+      for (const row of rows) {
+        flat.push(row.item);
+        if (isExpanded(row.item.eap_code) && row.children.length > 0) {
+          walk(row.children);
+        }
+      }
+    }
+    walk(tree);
+    return flat;
+  }, [tree, isExpanded]);
+
+  const TOTAL_COLS = 8;
+
+  const handleCellFocus = useCallback(
+    (rowIndex: number, colIndex: number) => {
+      setFocusedCell({ row: rowIndex, col: colIndex });
+    },
+    []
+  );
+
+  const handleCellNavigate = useCallback(
+    (_rowIndex: number, colIndex: number, direction: NavigateDirection) => {
+      setFocusedCell((prev) => {
+        const rowIndex = prev?.row ?? 0;
+        let newRow = rowIndex;
+        let newCol = colIndex;
+
+        switch (direction) {
+          case "up":
+            newRow = Math.max(0, rowIndex - 1);
+            break;
+          case "down":
+            newRow = Math.min(flatRows.length - 1, rowIndex + 1);
+            break;
+          case "left":
+            newCol = Math.max(0, colIndex - 1);
+            break;
+          case "right":
+            newCol = Math.min(TOTAL_COLS - 1, colIndex + 1);
+            break;
+          case "tab":
+            if (colIndex < TOTAL_COLS - 1) {
+              newCol = colIndex + 1;
+            } else {
+              newRow = Math.min(flatRows.length - 1, rowIndex + 1);
+              newCol = 0;
+            }
+            break;
+          case "shift-tab":
+            if (colIndex > 0) {
+              newCol = colIndex - 1;
+            } else if (rowIndex > 0) {
+              newRow = rowIndex - 1;
+              newCol = TOTAL_COLS - 1;
+            }
+            break;
+        }
+
+        return { row: newRow, col: newCol };
+      });
+    },
+    [flatRows.length]
   );
 
   // ─── Recalculate totals automatically ──────────────────────────
@@ -646,6 +717,7 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
   function renderTree(rows: BudgetRowType[]): React.ReactNode[] {
     const result: React.ReactNode[] = [];
     for (const row of rows) {
+      const rowIndex = flatRows.indexOf(row.item);
       const expanded = isExpanded(row.item.eap_code);
       result.push(
         <BudgetRow
@@ -658,6 +730,10 @@ export function BudgetTable({ projectId, projectName }: BudgetTableProps) {
           onDelete={handleDeleteRequest}
           onContextMenu={handleContextMenu}
           onFindPriceSource={setPriceSourceItem}
+          rowIndex={rowIndex}
+          focusedCol={focusedCell?.row === rowIndex ? focusedCell.col : null}
+          onCellFocus={handleCellFocus}
+          onCellNavigate={handleCellNavigate}
         />
       );
       if (expanded && row.children.length > 0) {
