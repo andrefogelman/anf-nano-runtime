@@ -154,7 +154,7 @@ function SinapiResultsList({
   onSelect,
 }: SinapiResultsListProps) {
   const [page, setPage] = useState(1);
-  const { data, isLoading, error } = useSinapiSearch(query, null, null, page, 50);
+  const { data, isLoading, error } = useSinapiSearch(query, "composicao", null, page, 50);
 
   // Reset page when query changes
   useEffect(() => {
@@ -200,6 +200,7 @@ function SinapiResultsList({
             const isSelected =
               selected?.kind === "sinapi" && selected.composicao.id === comp.id;
             const isMatch = unitsMatch(comp.unidade, itemUnit);
+            const preco = comp.custo_sem_desoneracao || comp.custo_com_desoneracao || 0;
             return (
               <tr
                 key={comp.id}
@@ -225,7 +226,7 @@ function SinapiResultsList({
                   </div>
                 </td>
                 <td className="px-2 py-1.5 text-right font-mono">
-                  R$ {(comp.custo_sem_desoneracao ?? 0).toFixed(2)}
+                  R$ {preco.toFixed(2)}
                 </td>
               </tr>
             );

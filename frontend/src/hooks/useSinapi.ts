@@ -51,9 +51,11 @@ export function useSinapiSearch(
       if (classe) q = q.eq("classe", classe);
 
       if (query.trim()) {
-        q = q.or(
-          `descricao.ilike.%${query.trim()}%,codigo.ilike.%${query.trim()}%`,
-        );
+        // Hybrid: each word must match descricao (SINAPI uses uppercase, ilike is case-insensitive)
+        const words = query.trim().split(/\s+/).filter(Boolean);
+        for (const word of words) {
+          q = q.ilike("descricao", `%${word}%`);
+        }
       }
 
       const { data, error, count } = await q;

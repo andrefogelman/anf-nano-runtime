@@ -43,7 +43,7 @@ export function useApplyPriceSource() {
       let fonte_data_base: string;
 
       if (selection.kind === "sinapi") {
-        custo_unitario = selection.composicao.custo_sem_desoneracao ?? 0;
+        custo_unitario = selection.composicao.custo_sem_desoneracao || selection.composicao.custo_com_desoneracao || 0;
         custo_material = 0;
         custo_mao_obra = 0;
         fonte = "sinapi";
