@@ -58,7 +58,11 @@ async function processNextJob(): Promise<boolean> {
         jobId: job.id,
         fileType,
         disciplina,
-        pipeline: isProposta ? 'proposal-pipeline' : isDwg ? 'dwg-pipeline' : 'pdf-pipeline',
+        pipeline: isProposta
+          ? 'proposal-pipeline'
+          : isDwg
+            ? 'dwg-pipeline'
+            : 'pdf-pipeline',
       },
       '[pdf-job-poller] Job dispatched',
     );
@@ -111,14 +115,24 @@ async function processNextJob(): Promise<boolean> {
             fileId: job.file_id,
             extractedText,
             fileInfo: `DWG pipeline: ${(pages || []).length} páginas processadas`,
-            userPrompt: 'Processar dados extraídos do DWG e criar quantitativos para todas as disciplinas encontradas.',
+            userPrompt:
+              'Processar dados extraídos do DWG e criar quantitativos para todas as disciplinas encontradas.',
             pdfContext: '',
           });
 
-          logger.info({ jobId: job.id }, '[pdf-job-poller] Orcamentista triggered after DWG pipeline');
+          logger.info(
+            { jobId: job.id },
+            '[pdf-job-poller] Orcamentista triggered after DWG pipeline',
+          );
         } catch (triggerErr: unknown) {
-          const msg = triggerErr instanceof Error ? triggerErr.message : String(triggerErr);
-          logger.error({ jobId: job.id, error: msg }, '[pdf-job-poller] Orcamentista trigger failed');
+          const msg =
+            triggerErr instanceof Error
+              ? triggerErr.message
+              : String(triggerErr);
+          logger.error(
+            { jobId: job.id, error: msg },
+            '[pdf-job-poller] Orcamentista trigger failed',
+          );
         }
       } else {
         // Container failed but may not have updated the job status

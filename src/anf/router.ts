@@ -27,7 +27,15 @@ const AGENT_KEYWORDS: Record<string, string[]> = {
     'fornecedor',
   ],
   engenharia: ['engenharia', 'obra', 'medição', 'cronograma'],
-  orcamentista: ['orçamento', 'orcamento', 'quantitativo', 'sinapi', 'bdi', 'eap', 'planilha orçamentária'],
+  orcamentista: [
+    'orçamento',
+    'orcamento',
+    'quantitativo',
+    'sinapi',
+    'bdi',
+    'eap',
+    'planilha orçamentária',
+  ],
   orquestrador: ['orquestrador', 'geral', 'todos'],
 };
 

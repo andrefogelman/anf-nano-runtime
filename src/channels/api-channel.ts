@@ -387,7 +387,6 @@ REGRAS:
     return result.text;
   }
 
-
   async function handleProcess(req: IncomingMessage, res: ServerResponse) {
     const raw = await readBody(req);
     const body = parseJson(raw) as {
@@ -680,9 +679,8 @@ REGRAS:
       );
 
       // Encode PDF as base64 for Gemini vision analysis
-      const pdfBase64 = fileType === 'pdf'
-        ? Buffer.from(buffer).toString('base64')
-        : undefined;
+      const pdfBase64 =
+        fileType === 'pdf' ? Buffer.from(buffer).toString('base64') : undefined;
 
       // Invoke orcamentista agent with vision (PDF) + text
       const result = await triggerOrcamentista({
@@ -696,8 +694,12 @@ REGRAS:
         pdfBase64,
       });
 
-      const quantCount = result.tool_calls.filter((tc) => tc.name === 'create_quantitativo').length;
-      const delegations = result.tool_calls.filter((tc) => tc.name === 'delegate_to_specialist').length;
+      const quantCount = result.tool_calls.filter(
+        (tc) => tc.name === 'create_quantitativo',
+      ).length;
+      const delegations = result.tool_calls.filter(
+        (tc) => tc.name === 'delegate_to_specialist',
+      ).length;
 
       await supabaseAdmin
         .from('ob_project_files')

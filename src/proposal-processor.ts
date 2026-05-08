@@ -71,7 +71,10 @@ export async function processProposalJob(jobId: string): Promise<boolean> {
 
     proc.on('error', (err) => {
       clearTimeout(timer);
-      logger.error({ jobId, error: err.message }, 'Failed to spawn proposal-pipeline');
+      logger.error(
+        { jobId, error: err.message },
+        'Failed to spawn proposal-pipeline',
+      );
       resolve(false);
     });
   });

@@ -99,7 +99,10 @@ export async function processNewMessages(): Promise<void> {
       const errKey = `${agentSlug}:${err.message?.slice(0, 50)}`;
       if (!lastNotifiedError || lastNotifiedError !== errKey) {
         lastNotifiedError = errKey;
-        if (!err.message?.includes('Rate limited') && !err.message?.includes('cooldown')) {
+        if (
+          !err.message?.includes('Rate limited') &&
+          !err.message?.includes('cooldown')
+        ) {
           await notifyAdmin(
             `⚠️ Erro ao processar mensagem para ${agentSlug}: ${err.message?.slice(0, 200)}`,
           );

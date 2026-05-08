@@ -2,7 +2,11 @@
 // Triggers the orcamentista agent after DXF/PDF extraction.
 
 import { getAgentTools } from './agent-registry.js';
-import { runOrcabotAgent, type AgentRunResult, type TaskContent } from './orcabot-agent-runner.js';
+import {
+  runOrcabotAgent,
+  type AgentRunResult,
+  type TaskContent,
+} from './orcabot-agent-runner.js';
 import { supabaseAdmin } from './supabase-client.js';
 import { logger } from './logger.js';
 
@@ -18,7 +22,9 @@ export interface TriggerParams {
   pdfBase64?: string;
 }
 
-export async function triggerOrcamentista(params: TriggerParams): Promise<AgentRunResult> {
+export async function triggerOrcamentista(
+  params: TriggerParams,
+): Promise<AgentRunResult> {
   const tools = getAgentTools('orcamentista');
   if (!tools) throw new Error('Orcamentista agent not found in registry');
 
@@ -75,7 +81,11 @@ ${params.pdfContext ? `\n### Dados de Referência (PDFs do mesmo projeto)\n${par
   let taskContent: TaskContent;
   if (params.pdfBase64) {
     taskContent = [
-      { type: 'inline_data' as const, mimeType: 'application/pdf', data: params.pdfBase64 },
+      {
+        type: 'inline_data' as const,
+        mimeType: 'application/pdf',
+        data: params.pdfBase64,
+      },
       { type: 'text' as const, text: taskText },
     ];
   } else {
@@ -83,7 +93,11 @@ ${params.pdfContext ? `\n### Dados de Referência (PDFs do mesmo projeto)\n${par
   }
 
   logger.info(
-    { projectId: params.projectId, runId: params.runId, hasVision: !!params.pdfBase64 },
+    {
+      projectId: params.projectId,
+      runId: params.runId,
+      hasVision: !!params.pdfBase64,
+    },
     '[orcamentista-trigger] Invoking orcamentista agent',
   );
 
@@ -109,19 +123,28 @@ ${params.pdfContext ? `\n### Dados de Referência (PDFs do mesmo projeto)\n${par
     const quantitativos = result.tool_calls
       .filter((tc) => tc.name === 'create_quantitativo')
       .map((tc) => tc.output)
-      .filter((item: any) =>
-        item && item.descricao && item.descricao.trim() !== '' && (item.quantidade ?? 0) > 0
+      .filter(
+        (item: any) =>
+          item &&
+          item.descricao &&
+          item.descricao.trim() !== '' &&
+          (item.quantidade ?? 0) > 0,
       );
 
     await supabaseAdmin
       .from('ob_processing_runs')
       .update({
         status: 'done',
-        summary: result.response || `Orçamentista processou: ${quantitativos.length} quantitativos criados`,
+        summary:
+          result.response ||
+          `Orçamentista processou: ${quantitativos.length} quantitativos criados`,
         items: quantitativos,
         raw_response: {
           agent_response: result.response,
-          tool_calls: result.tool_calls.map((tc) => ({ name: tc.name, input: tc.input })),
+          tool_calls: result.tool_calls.map((tc) => ({
+            name: tc.name,
+            input: tc.input,
+          })),
           tokens_used: result.tokens_used,
           duration_ms: result.duration_ms,
         },

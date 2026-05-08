@@ -17,7 +17,8 @@ function safeJsonParse(text: string): Record<string, unknown> {
     const parsed = JSON.parse(text);
     // Gemini requires functionResponse.response to be an object, not an array
     if (Array.isArray(parsed)) return { result: parsed };
-    if (typeof parsed !== 'object' || parsed === null) return { result: parsed };
+    if (typeof parsed !== 'object' || parsed === null)
+      return { result: parsed };
     return parsed;
   } catch {
     return { result: text };
@@ -139,7 +140,9 @@ export class GeminiProvider implements LlmProvider {
 
       for (const block of msg.content) {
         if (block.type === 'inline_data' && block.mimeType && block.data) {
-          parts.push({ inlineData: { mimeType: block.mimeType, data: block.data } } as any);
+          parts.push({
+            inlineData: { mimeType: block.mimeType, data: block.data },
+          } as any);
         } else if (block.type === 'text' && block.text) {
           parts.push({ text: block.text });
         } else if (block.type === 'tool_use' && block.name) {
@@ -153,7 +156,9 @@ export class GeminiProvider implements LlmProvider {
           parts.push({
             functionResponse: {
               name: block.name,
-              response: (block.content ? safeJsonParse(block.content) : {}) as Record<string, unknown>,
+              response: (block.content
+                ? safeJsonParse(block.content)
+                : {}) as Record<string, unknown>,
             },
           });
         }

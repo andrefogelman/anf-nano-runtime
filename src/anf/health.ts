@@ -24,7 +24,9 @@ export function startHealthServer(): void {
 
   server.on('error', (err: NodeJS.ErrnoException) => {
     if (err.code === 'EADDRINUSE') {
-      console.warn(`[health] Port ${anfConfig.port} in use — health endpoint disabled`);
+      console.warn(
+        `[health] Port ${anfConfig.port} in use — health endpoint disabled`,
+      );
     } else {
       console.error('[health] Server error:', err);
     }

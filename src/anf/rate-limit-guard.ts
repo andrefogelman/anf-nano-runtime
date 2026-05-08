@@ -21,7 +21,9 @@ export class RateLimitGuard {
   recordRateLimit(backoffSeconds: number): void {
     this.consecutiveErrors++;
     this.blockedUntil = Date.now() + backoffSeconds * 1000;
-    console.log(`[rate-limit-guard] Blocked for ${backoffSeconds}s (429 rate limit, streak=${this.consecutiveErrors})`);
+    console.log(
+      `[rate-limit-guard] Blocked for ${backoffSeconds}s (429 rate limit, streak=${this.consecutiveErrors})`,
+    );
   }
 
   /** Record any LLM error (502, timeout, network, etc.) with exponential backoff. */
@@ -30,13 +32,17 @@ export class RateLimitGuard {
     // Exponential backoff: 30s, 60s, 120s, 240s, max 300s
     const backoff = Math.min(30 * Math.pow(2, this.consecutiveErrors - 1), 300);
     this.blockedUntil = Date.now() + backoff * 1000;
-    console.log(`[rate-limit-guard] Blocked for ${backoff}s (LLM error, streak=${this.consecutiveErrors})`);
+    console.log(
+      `[rate-limit-guard] Blocked for ${backoff}s (LLM error, streak=${this.consecutiveErrors})`,
+    );
   }
 
   /** Call on success to reset the streak. */
   recordSuccess(): void {
     if (this.consecutiveErrors > 0) {
-      console.log(`[rate-limit-guard] Reset after ${this.consecutiveErrors} consecutive errors`);
+      console.log(
+        `[rate-limit-guard] Reset after ${this.consecutiveErrors} consecutive errors`,
+      );
     }
     this.consecutiveErrors = 0;
   }

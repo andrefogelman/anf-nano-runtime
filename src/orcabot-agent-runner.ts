@@ -33,9 +33,7 @@ export async function runOrcabotAgent(
   const model = config.llmModel;
   const systemPrompt = await loadSystemPrompt(slug);
 
-  const messages: Message[] = [
-    { role: 'user', content: taskContent },
-  ];
+  const messages: Message[] = [{ role: 'user', content: taskContent }];
 
   const toolCalls: AgentRunResult['tool_calls'] = [];
   let totalInputTokens = 0;
@@ -59,7 +57,9 @@ export async function runOrcabotAgent(
     totalInputTokens += response.inputTokens;
     totalOutputTokens += response.outputTokens;
 
-    console.log(`[agent-runner] ${slug} iter=${iteration} stop=${response.stopReason} tools=${response.toolCalls.length} text=${response.text.slice(0, 200)}`);
+    console.log(
+      `[agent-runner] ${slug} iter=${iteration} stop=${response.stopReason} tools=${response.toolCalls.length} text=${response.text.slice(0, 200)}`,
+    );
 
     if (response.stopReason === 'end') {
       return {
@@ -75,7 +75,9 @@ export async function runOrcabotAgent(
       // thought signatures required by Gemini 3.1+
       let assistantBlocks: ContentBlock[];
       if (response.rawAssistantParts?.length) {
-        assistantBlocks = [{ type: 'raw_parts', rawParts: response.rawAssistantParts }];
+        assistantBlocks = [
+          { type: 'raw_parts', rawParts: response.rawAssistantParts },
+        ];
       } else {
         assistantBlocks = [];
         if (response.text) {
@@ -119,8 +121,14 @@ export async function runOrcabotAgent(
           });
           console.log(`[agent-runner] ${slug} tool=${tc.name} OK`);
         } catch (err: any) {
-          console.error(`[agent-runner] ${slug} tool=${tc.name} ERROR: ${err.message}`);
-          toolCalls.push({ name: tc.name, input: tc.input, output: { error: err.message } });
+          console.error(
+            `[agent-runner] ${slug} tool=${tc.name} ERROR: ${err.message}`,
+          );
+          toolCalls.push({
+            name: tc.name,
+            input: tc.input,
+            output: { error: err.message },
+          });
           resultBlocks.push({
             type: 'tool_result',
             id: tc.id,

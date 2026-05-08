@@ -20,7 +20,11 @@ export interface AgentRunResult {
 
 /** Convert Anthropic-style tool definitions to unified ToolDef */
 function toUnifiedTools(
-  defs: readonly { readonly name: string; readonly description: string; readonly input_schema: Record<string, unknown> }[],
+  defs: readonly {
+    readonly name: string;
+    readonly description: string;
+    readonly input_schema: Record<string, unknown>;
+  }[],
 ): ToolDef[] {
   return defs.map((t) => ({
     name: t.name,
@@ -32,14 +36,20 @@ function toUnifiedTools(
 export async function runAgent(
   slug: string,
   taskDescription: string,
-  toolDefinitions: readonly { readonly name: string; readonly description: string; readonly input_schema: Record<string, unknown> }[],
+  toolDefinitions: readonly {
+    readonly name: string;
+    readonly description: string;
+    readonly input_schema: Record<string, unknown>;
+  }[],
   toolHandlers: Record<string, (params: any) => Promise<unknown>>,
 ): Promise<AgentRunResult> {
   const startTime = Date.now();
   const ctx = await buildAgentContext(slug, taskDescription);
   const provider = await getProvider();
 
-  console.log(`[agent-runner] Starting ${slug}: ${taskDescription.slice(0, 80)}`);
+  console.log(
+    `[agent-runner] Starting ${slug}: ${taskDescription.slice(0, 80)}`,
+  );
 
   const systemPrompt = [
     ctx.system_prompt,
@@ -61,9 +71,7 @@ export async function runAgent(
     ...ctx.pending_messages.map((m) => `- ${m.content}`),
   ].join('\n');
 
-  const messages: Message[] = [
-    { role: 'user', content: taskDescription },
-  ];
+  const messages: Message[] = [{ role: 'user', content: taskDescription }];
 
   const toolCalls: AgentRunResult['tool_calls'] = [];
   let totalInputTokens = 0;
@@ -92,7 +100,9 @@ export async function runAgent(
       totalInputTokens += response.inputTokens;
       totalOutputTokens += response.outputTokens;
 
-      console.log(`[agent-runner] ${slug} iter=${iteration} stop=${response.stopReason} tokens=${response.inputTokens}+${response.outputTokens}`);
+      console.log(
+        `[agent-runner] ${slug} iter=${iteration} stop=${response.stopReason} tokens=${response.inputTokens}+${response.outputTokens}`,
+      );
 
       if (response.stopReason === 'end') {
         const duration_ms = Date.now() - startTime;
@@ -125,7 +135,9 @@ export async function runAgent(
         // thought signatures required by Gemini 3.1+
         let assistantBlocks: ContentBlock[];
         if (response.rawAssistantParts?.length) {
-          assistantBlocks = [{ type: 'raw_parts', rawParts: response.rawAssistantParts }];
+          assistantBlocks = [
+            { type: 'raw_parts', rawParts: response.rawAssistantParts },
+          ];
         } else {
           assistantBlocks = [];
           if (response.text) {
@@ -174,7 +186,9 @@ export async function runAgent(
               content: JSON.stringify(result),
             });
           } catch (err: any) {
-            console.error(`[agent-runner] ${slug} tool ${tc.name}: FAILED — ${err.message}`);
+            console.error(
+              `[agent-runner] ${slug} tool ${tc.name}: FAILED — ${err.message}`,
+            );
             toolCalls.push({
               name: tc.name,
               input: tc.input,
