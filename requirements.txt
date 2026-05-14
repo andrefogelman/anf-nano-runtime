@@ -1,0 +1,35 @@
+# Orcamentista IA — runtime Python (Vercel @vercel/python@5.x, Python 3.13)
+# Bundle target: <250MB. Cold start: <2s.
+
+# --- Web framework ---
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+pydantic>=2.10
+
+# --- HTTP / utils ---
+httpx>=0.27
+python-dotenv>=1.0
+
+# --- LLM vision (multi-provider) ---
+# Sprint 1+ implementation. Stub-friendly: import on-demand inside routers.
+gaik[vision-extract]>=0.5.11
+markdown-it-py>=3.0
+
+# --- DXF parser (Sprint 2) ---
+ezdxf>=1.3
+
+# --- Excel export (Sprint 4) ---
+openpyxl>=3.1
+
+# --- Supabase ---
+supabase>=2.7
+
+# --- Auth (JWT verification) ---
+python-jose[cryptography]>=3.3
+
+# --- SINAPI matcher (Sprint 3) ---
+# CONFIRMADO: torch + sentence-transformers explode pra ~5GB no bundle Vercel
+# (puxa CUDA libs nvidia-cublas-cu12 etc) e estoura limite de 500MB de Lambda ephemeral.
+# Sprint 3 vai usar OpenAI text-embedding-3-small com dimensions=384 (mantém schema
+# vector(384) atual; re-embedar 13597 ob_sinapi_chunks single-shot custa ~$1.36).
