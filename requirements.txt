@@ -29,7 +29,7 @@ supabase>=2.7
 python-jose[cryptography]>=3.3
 
 # --- SINAPI matcher (Sprint 3) ---
-# 384-dim embeddings via sentence-transformers MiniLM-L6-v2.
-# WARN: torch + sentence-transformers ~150MB. May force migration to OpenAI embeddings if Vercel bundle exceeds 250MB.
-sentence-transformers>=2.6
-numpy>=2.0
+# CONFIRMADO: torch + sentence-transformers explode pra ~5GB no bundle Vercel
+# (puxa CUDA libs nvidia-cublas-cu12 etc) e estoura limite de 500MB de Lambda ephemeral.
+# Sprint 3 vai usar OpenAI text-embedding-3-small com dimensions=384 (mantém schema
+# vector(384) atual; re-embedar 13597 ob_sinapi_chunks single-shot custa ~$1.36).
