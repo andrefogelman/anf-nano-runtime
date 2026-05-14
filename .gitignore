@@ -1,43 +1,48 @@
-# Dependencies
+# --- Node / Bun ---
 node_modules/
 .npm-cache/
-# Build output
+.bun/
+/bun.lock                           # raiz não tem deps Node; frontend/bun.lock é tracked
+
+# --- Python (api/) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Build output ---
 dist/
+build/
 
-# Local data & auth
-store/
-data/
-logs/
-
-# Groups - only track base structure and specific CLAUDE.md files
-groups/*
-!groups/main/
-!groups/global/
-groups/main/*
-groups/global/*
-!groups/main/CLAUDE.md
-!groups/global/CLAUDE.md
-
-# Secrets
-*.keys.json
+# --- Local secrets ---
 .env
+.env.local
+.env.prod
+*.keys.json
 
-# Temp files
+# --- Temp ---
 .tmp-*
+*.log
 
-# OS
+# --- OS ---
 .DS_Store
 
-# IDE
+# --- IDE ---
 .idea/
 .vscode/
 
-# Skills system (local per-installation state)
-.nanoclaw/
-.agents/
-skills/
-skills-lock.json
-
-agents-sdk-docs
+# --- Vercel ---
 .vercel
-.superpowers/
+!.vercel/project.json
+
+# --- Playwright ---
+.playwright-mcp/
+
+# --- Untracked screenshots na raiz (debug artifacts) ---
+/*.png
+/*.jpg
+/*.jpeg
