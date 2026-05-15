@@ -11,6 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from ..engines.bdi import calcular_bdi
 from ..engines.memorial import render_memorial_pdf
 from ..engines.xlsx import render_orcamento_xlsx
+from ..lib.audit import log_action
 from ..lib.auth import require_user_jwt
 
 logger = logging.getLogger(__name__)
@@ -61,7 +62,7 @@ def calc_bdi_endpoint(
 @router.post("/xlsx")
 def export_xlsx(
     payload: XlsxRenderInput,
-    auth: dict[str, Any] = Depends(require_user_jwt),  # noqa: ARG001
+    auth: dict[str, Any] = Depends(require_user_jwt),
 ) -> Response:
     bdi_dict = (
         calcular_bdi(**payload.bdi.model_dump()) if payload.bdi else calcular_bdi()
@@ -80,6 +81,14 @@ def export_xlsx(
             detail=f"xlsx render falhou: {exc}",
         ) from exc
 
+    log_action(
+        action="export.xlsx",
+        user_id=auth.get("user_id"),
+        org_id=auth.get("org_id"),
+        target_type="project",
+        target_id=payload.project_id,
+        metadata={"bdi_pct": bdi_dict["bdi_pct"], "size_bytes": len(xlsx_bytes)},
+    )
     return Response(
         content=xlsx_bytes,
         media_type=(
@@ -96,7 +105,7 @@ def export_xlsx(
 @router.post("/memorial")
 def export_memorial(
     payload: MemorialRenderInput,
-    auth: dict[str, Any] = Depends(require_user_jwt),  # noqa: ARG001
+    auth: dict[str, Any] = Depends(require_user_jwt),
 ) -> Response:
     try:
         pdf_bytes = render_memorial_pdf(payload.project_id)
@@ -112,6 +121,14 @@ def export_memorial(
             detail=f"memorial render falhou: {exc}",
         ) from exc
 
+    log_action(
+        action="export.memorial",
+        user_id=auth.get("user_id"),
+        org_id=auth.get("org_id"),
+        target_type="project",
+        target_id=payload.project_id,
+        metadata={"size_bytes": len(pdf_bytes)},
+    )
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",

@@ -12,6 +12,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, ConfigDict, Field
 
 from ..engines.sinapi import search_sinapi
+from ..lib.audit import log_action
 from ..lib.auth import require_user_jwt
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ class SinapiMatchInput(BaseModel):
 @router.post("/match")
 def sinapi_match(
     payload: SinapiMatchInput,
-    auth: dict[str, Any] = Depends(require_user_jwt),  # noqa: ARG001
+    auth: dict[str, Any] = Depends(require_user_jwt),
 ) -> dict[str, Any]:
     try:
         result = search_sinapi(
@@ -42,7 +43,6 @@ def sinapi_match(
             match_threshold=payload.match_threshold,
         )
     except RuntimeError as exc:
-        # OPENAI_API_KEY missing
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail=str(exc),
@@ -54,6 +54,16 @@ def sinapi_match(
             detail=f"upstream falhou: {exc}",
         ) from exc
 
+    log_action(
+        action="sinapi.match",
+        user_id=auth.get("user_id"),
+        org_id=auth.get("org_id"),
+        metadata={
+            "uf": payload.uf.upper(),
+            "n_candidates": result["n_candidates"],
+            "n_returned": result["n_returned"],
+        },
+    )
     return {
         "descricao": payload.descricao,
         "uf": payload.uf.upper(),
