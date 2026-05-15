@@ -63,16 +63,16 @@
 
 ## Sprints (roadmap)
 
-| Sprint | Escopo                                        | Status             |
-| ------ | --------------------------------------------- | ------------------ |
-| 0      | Reset + Bootstrap FastAPI + migration cache   | ✅ em conclusão    |
-| 1      | `/api/ask` Vision Q&A livre + cache + log     | pendente           |
-| 2      | `/api/extract` schema + `/api/dxf/*`          | pendente           |
-| 3      | `/api/sinapi/match` (embedding + rerank)      | pendente           |
-| 4      | `/api/xlsx/render` + memorial PDF + curva ABC | pendente           |
-| 5      | Polish + onboarding + LGPD + Playwright E2E   | pendente           |
+| Sprint | Escopo | Status |
+| ------ | ------ | ------ |
+| 0 | Reset NanoClaw + Bootstrap FastAPI + Vercel + migration cache | ✅ |
+| 1 | `/api/ask` Vision Q&A + cache + log + tab Q&A Plantas | ✅ |
+| 2 | `/api/extract/{disciplina}` (5 schemas) + `/api/dxf/*` + DXF viewer 3D | ✅ |
+| 3 | `/api/sinapi/match` (vector + LLM rerank) + cotações CRUD + cron stub | ✅ |
+| 4 | `/api/export/{xlsx,memorial,bdi}` + Curva ABC RPC | ✅ |
+| 5 | Audit log + LGPD + onboarding + Playwright + docs finais | ✅ |
 
-Total estimado: ~70h.
+Beta-ready em ~70h efetivas.
 
 ## Arquivos críticos
 

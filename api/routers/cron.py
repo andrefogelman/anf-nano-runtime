@@ -12,6 +12,8 @@ from typing import Annotated, Any
 
 from fastapi import APIRouter, Header, HTTPException, status
 
+from ..lib.audit import log_action
+
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
@@ -45,6 +47,10 @@ def sinapi_refresh(
     """
     _require_cron_secret(authorization)
     logger.info("cron sinapi/refresh chamado (stub Sprint 3)")
+    log_action(
+        action="cron.sinapi.refresh",
+        metadata={"status": "stub"},
+    )
     return {
         "status": "stub",
         "message": "Refresh SINAPI completo será implementado no Sprint 4.",

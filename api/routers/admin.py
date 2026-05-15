@@ -20,6 +20,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter, Header, HTTPException, Query, status
 
 from ..engines.sinapi import EMBEDDING_DIM, embed_batch
+from ..lib.audit import log_action
 from ..lib.supabase import get_supabase
 
 logger = logging.getLogger(__name__)
@@ -124,6 +125,15 @@ def sinapi_reembed(
                 "embedding_dim": EMBEDDING_DIM,
             }
 
+    log_action(
+        action="admin.reembed",
+        metadata={
+            "offset": offset,
+            "processed": processed,
+            "next_offset": cursor,
+            "elapsed_s": round(time.perf_counter() - started, 2),
+        },
+    )
     return {
         "processed": processed,
         "next_offset": cursor,
