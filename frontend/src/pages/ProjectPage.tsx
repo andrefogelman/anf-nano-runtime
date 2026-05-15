@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useProject } from "@/hooks/useProjects";
 import { useOrcamentoItems, calculateFooterTotals } from "@/hooks/useOrcamento";
@@ -22,16 +22,23 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {
   ArrowLeft,
   Download,
+  FileSpreadsheet,
+  FileText as FileTextIcon,
+  Loader2,
   MessageSquare,
 } from "lucide-react";
 import { formatNumber } from "@/lib/format";
 import { toast } from "sonner";
+import { BdiDialog } from "@/components/planilha/BdiDialog";
+import { useExportMemorial } from "@/hooks/useExport";
 
 function ProjectPageInner() {
   const { projectId } = useParams<{ projectId: string }>();
   const { data: project, isLoading } = useProject(projectId!);
   const { data: orcamentoItems } = useOrcamentoItems(projectId!);
   const { setProject, activeTab, chatOpen, setChatOpen } = useProjectContext();
+  const [bdiDialogOpen, setBdiDialogOpen] = useState(false);
+  const exportMemorial = useExportMemorial();
   useEffect(() => {
     if (project) setProject(project);
     return () => setProject(null);
@@ -103,14 +110,46 @@ function ProjectPageInner() {
                 try {
                   const totals = calculateFooterTotals(orcamentoItems);
                   await exportBudgetToExcel(orcamentoItems, totals, project.name);
-                  toast.success("Planilha exportada com sucesso");
+                  toast.success("Planilha exportada (local)");
                 } catch {
-                  toast.error("Erro ao exportar planilha");
+                  toast.error("Erro ao exportar planilha local");
                 }
               }}
+              title="Export rápido client-side (sem BDI)"
             >
               <Download className="mr-2 h-4 w-4" />
-              Exportar Excel
+              Excel rápido
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setBdiDialogOpen(true)}
+              title="Configurar BDI e gerar XLSX completo (Resumo, Planilha, BDI, Levantamento, Curva ABC)"
+            >
+              <FileSpreadsheet className="mr-2 h-4 w-4" />
+              XLSX + BDI
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={exportMemorial.isPending}
+              onClick={async () => {
+                if (!project) return;
+                try {
+                  await exportMemorial.mutateAsync({ project_id: project.id });
+                  toast.success("Memorial PDF gerado");
+                } catch (e) {
+                  toast.error(`Erro: ${(e as Error).message}`);
+                }
+              }}
+              title="Gerar memorial de cálculo PDF (todos os itens com fonte e origem)"
+            >
+              {exportMemorial.isPending ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <FileTextIcon className="mr-2 h-4 w-4" />
+              )}
+              Memorial PDF
             </Button>
             <Button
               variant={chatOpen ? "default" : "outline"}
@@ -145,6 +184,15 @@ function ProjectPageInner() {
 
       {/* Agent chat sidebar */}
       {chatOpen && <AgentChatSidebar />}
+
+      {/* Dialog BDI + export XLSX server-side */}
+      {project && (
+        <BdiDialog
+          projectId={project.id}
+          open={bdiDialogOpen}
+          onOpenChange={setBdiDialogOpen}
+        />
+      )}
     </div>
   );
 }
