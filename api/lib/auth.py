@@ -15,6 +15,7 @@ Sprint 5+ remove o caminho legado.
 """
 from __future__ import annotations
 
+import logging
 import os
 from typing import Annotated, Any
 
@@ -22,6 +23,8 @@ from fastapi import Depends, Header, HTTPException, status
 from jose import JWTError, jwt
 
 from .supabase import get_supabase
+
+logger = logging.getLogger(__name__)
 
 
 class AuthContext:
@@ -46,13 +49,28 @@ def _try_api_secret(token: str) -> AuthContext | None:
 def _try_supabase_jwt(token: str) -> AuthContext | None:
     secret = os.environ.get("SUPABASE_JWT_SECRET")
     if not secret:
+        logger.warning("SUPABASE_JWT_SECRET ausente — _try_supabase_jwt sempre retorna None")
         return None
     try:
-        payload = jwt.decode(token, secret, algorithms=["HS256"], audience="authenticated")
-    except JWTError:
+        # Sem audience claim required — Supabase issuer pode ou não incluir
+        payload = jwt.decode(
+            token,
+            secret,
+            algorithms=["HS256"],
+            options={"verify_aud": False},
+        )
+    except JWTError as exc:
+        # Log detalhado pra diagnosticar (token preview só os últimos 8 chars)
+        token_tail = token[-8:] if len(token) > 8 else "<curto>"
+        logger.warning(
+            "JWT decode falhou (token …%s): %s",
+            token_tail,
+            exc,
+        )
         return None
     user_id = payload.get("sub")
     if not user_id:
+        logger.warning("JWT sem 'sub' claim: %s", list(payload.keys()))
         return None
     return AuthContext(user_id=user_id, mode="jwt", org_id=_lookup_org(user_id))
 
