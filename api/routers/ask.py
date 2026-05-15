@@ -76,9 +76,13 @@ async def ask(
         resposta, meta = run_vision(tmp_path, parsed)
     except Exception as exc:
         logger.exception("vision extractor falhou")
+        # Inclui tipo da exception pra ajudar a diagnosticar (e.g.,
+        # RateLimitError, AuthenticationError, BadRequestError, APITimeoutError, etc.)
+        exc_type = type(exc).__name__
+        exc_msg = str(exc)[:500]  # trunca mensagens muito longas
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
-            detail=f"vision provider falhou: {exc}",
+            detail=f"vision provider falhou ({exc_type}): {exc_msg}",
         ) from exc
     finally:
         tmp_path.unlink(missing_ok=True)

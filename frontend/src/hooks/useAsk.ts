@@ -89,19 +89,17 @@ export function useAsk() {
             "Timeout 504 — modelo demorou >300s ou plano Hobby ainda ativo (60s). Verifique upgrade Pro no Vercel dashboard.",
           );
         }
-        if (res.status === 502) {
-          throw new Error(
-            "502 — provider externo (OpenAI/Claude/Gemini) falhou. Tente outro provider ou reasoning mais baixo.",
-          );
-        }
+        // Pra outros status (incluindo 502 do FastAPI), mostra o detail
+        // do backend que tem a causa real (ex: 'vision provider falhou: ...')
         const err = await res
           .json()
           .catch(() => ({ detail: `HTTP ${res.status}` }));
-        throw new Error(
+        const detail =
           typeof err.detail === "string"
             ? err.detail
-            : JSON.stringify(err.detail),
-        );
+            : JSON.stringify(err.detail);
+        const prefix = res.status === 502 ? "502 — " : `HTTP ${res.status} — `;
+        throw new Error(prefix + detail);
       }
       return (await res.json()) as AskResult;
     },
