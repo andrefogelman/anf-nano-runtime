@@ -52,8 +52,10 @@ def hash_question(payload: PerguntaInput) -> str:
 
 
 def _build_requirements() -> ExtractionRequirements:
+    # use_case_name precisa ser CURTO — OpenAI Responses API limita
+    # text.format.name a 64 chars e gaik adiciona sufixos (~30 chars).
     return ExtractionRequirements(
-        use_case_name="pergunta_planta_orcamentista",
+        use_case_name="qa_planta",
         fields=[
             FieldSpec(
                 field_name="valor_numerico",
