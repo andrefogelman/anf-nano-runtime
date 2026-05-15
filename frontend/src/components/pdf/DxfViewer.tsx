@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DxfViewer as DxfViewerLib } from "dxf-viewer";
+import { Color } from "three";
 
 interface Props {
   /** DXF file as Blob (from upload or storage download). */
@@ -29,7 +30,8 @@ export function DxfViewer({ blob, className, background = 0xffffff }: Props) {
 
     try {
       viewer = new DxfViewerLib(el, {
-        clearColor: background,
+        // dxf-viewer chama .getHex() — precisa ser THREE.Color, não número
+        clearColor: new Color(background),
         autoResize: true,
         canvasAlpha: false,
         canvasPremultipliedAlpha: false,
