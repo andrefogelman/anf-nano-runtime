@@ -117,6 +117,25 @@ export interface DxfTextResult {
 
 export type DxfAction = "parse" | "areas" | "count" | "text";
 
+// Vercel limita body de Function Python a ~4.5MB. DXFs reais podem passar disso.
+// Threshold abaixo: arquivos menores vão direto via multipart; maiores sobem
+// pro Supabase Storage primeiro e o backend baixa via service-role.
+const DXF_INLINE_THRESHOLD = 4 * 1024 * 1024; // 4MB margem segura
+const DXF_BUCKET = "project-pdfs";
+
+async function uploadDxfToStorage(blob: Blob, filename: string): Promise<string> {
+  const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const path = `tmp-dxf/${Date.now()}-${safeName}`;
+  const { error } = await supabase.storage
+    .from(DXF_BUCKET)
+    .upload(path, blob, {
+      contentType: "application/dxf",
+      upsert: false,
+    });
+  if (error) throw new Error(`upload Storage falhou: ${error.message}`);
+  return path;
+}
+
 export function useDxfAction<R>() {
   return useMutation<
     R,
@@ -132,7 +151,15 @@ export function useDxfAction<R>() {
     mutationFn: async ({ action, dxf, filename = "drawing.dxf", block_name, layer_filter }) => {
       const auth = await authHeader();
       const fd = new FormData();
-      fd.append("dxf", dxf, filename);
+
+      // Decisão upload: inline se pequeno, via Storage se grande
+      if (dxf.size > DXF_INLINE_THRESHOLD) {
+        const storagePath = await uploadDxfToStorage(dxf, filename);
+        fd.append("storage_path", storagePath);
+      } else {
+        fd.append("dxf", dxf, filename);
+      }
+
       if (block_name) fd.append("block_name", block_name);
       if (layer_filter) fd.append("layer_filter", layer_filter);
 
