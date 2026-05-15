@@ -7,6 +7,7 @@ import { ProjectProvider, useProjectContext } from "@/contexts/ProjectContext";
 import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { PlanilhaTab } from "@/components/workspace/PlanilhaTab";
 import { PdfsTab } from "@/components/workspace/PdfsTab";
+import { QaPlantasTab } from "@/components/workspace/QaPlantasTab";
 import { QuantitativosTab } from "@/components/workspace/QuantitativosTab";
 import { PremissasTab } from "@/components/workspace/PremissasTab";
 import { CurvaAbcTab } from "@/components/workspace/CurvaAbcTab";
@@ -128,6 +129,7 @@ function ProjectPageInner() {
         <div className="flex-1 overflow-auto">
           {activeTab === "planilha" && <PlanilhaTab />}
           {activeTab === "pdfs" && <PdfsTab />}
+          {activeTab === "qa-plantas" && <QaPlantasTab />}
           {activeTab === "quantitativos" && <QuantitativosTab />}
           {activeTab === "propostas" && <PropostasTab />}
           {activeTab === "premissas" && <PremissasTab />}
