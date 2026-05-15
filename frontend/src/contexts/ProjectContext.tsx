@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { Project } from "@/types/orcamento";
 
-type WorkspaceTab = "planilha" | "pdfs" | "quantitativos" | "propostas" | "premissas" | "curva-abc" | "qa-plantas";
+type WorkspaceTab = "planilha" | "pdfs" | "quantitativos" | "propostas" | "premissas" | "curva-abc" | "qa-plantas" | "extracao" | "dxf";
 
 interface ProjectContextType {
   project: Project | null;

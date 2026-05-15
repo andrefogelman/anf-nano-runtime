@@ -8,6 +8,8 @@ import { WorkspaceTabs } from "@/components/workspace/WorkspaceTabs";
 import { PlanilhaTab } from "@/components/workspace/PlanilhaTab";
 import { PdfsTab } from "@/components/workspace/PdfsTab";
 import { QaPlantasTab } from "@/components/workspace/QaPlantasTab";
+import { ExtracaoTab } from "@/components/workspace/ExtracaoTab";
+import { DxfTab } from "@/components/workspace/DxfTab";
 import { QuantitativosTab } from "@/components/workspace/QuantitativosTab";
 import { PremissasTab } from "@/components/workspace/PremissasTab";
 import { CurvaAbcTab } from "@/components/workspace/CurvaAbcTab";
@@ -130,6 +132,8 @@ function ProjectPageInner() {
           {activeTab === "planilha" && <PlanilhaTab />}
           {activeTab === "pdfs" && <PdfsTab />}
           {activeTab === "qa-plantas" && <QaPlantasTab />}
+          {activeTab === "extracao" && <ExtracaoTab />}
+          {activeTab === "dxf" && <DxfTab />}
           {activeTab === "quantitativos" && <QuantitativosTab />}
           {activeTab === "propostas" && <PropostasTab />}
           {activeTab === "premissas" && <PremissasTab />}

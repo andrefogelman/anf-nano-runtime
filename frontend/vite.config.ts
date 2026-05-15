@@ -11,6 +11,12 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // dxf-viewer faz `import opentype from "opentype.js"` (default import).
+      // O .mjs do opentype.js v1.3 só tem named exports; aliar para o CJS resolve.
+      "opentype.js": path.resolve(
+        __dirname,
+        "./node_modules/opentype.js/dist/opentype.js",
+      ),
     },
   },
   build: {
@@ -31,6 +37,7 @@ export default defineConfig({
           "vendor-charts": ["recharts"],
           "vendor-excel": ["exceljs"],
           "vendor-supabase": ["@supabase/supabase-js"],
+          "vendor-dxf": ["dxf-viewer", "opentype.js"],
         },
       },
     },
