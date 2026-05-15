@@ -16,6 +16,9 @@ python-dotenv>=1.0
 gaik[vision-extract]>=0.5.11
 markdown-it-py>=3.0
 
+# --- OpenAI direct (Sprint 3 SINAPI matcher: embeddings + rerank) ---
+openai>=1.50
+
 # --- DXF parser (Sprint 2) ---
 ezdxf>=1.3
 

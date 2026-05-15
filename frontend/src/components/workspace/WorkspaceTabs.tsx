@@ -1,6 +1,6 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useProjectContext } from "@/contexts/ProjectContext";
-import { Table2, FileText, Calculator, Settings2, BarChart3, Receipt, Brain, Layers, Box } from "lucide-react";
+import { Table2, FileText, Calculator, Settings2, BarChart3, Receipt, Brain, Layers, Box, Tag } from "lucide-react";
 
 const TABS = [
   { value: "planilha" as const, label: "Planilha", icon: Table2 },
@@ -9,6 +9,7 @@ const TABS = [
   { value: "extracao" as const, label: "Extração", icon: Layers },
   { value: "dxf" as const, label: "DXF", icon: Box },
   { value: "quantitativos" as const, label: "Quantitativos", icon: Calculator },
+  { value: "cotacoes" as const, label: "Cotações", icon: Tag },
   { value: "propostas" as const, label: "Propostas", icon: Receipt },
   { value: "premissas" as const, label: "Premissas", icon: Settings2 },
   { value: "curva-abc" as const, label: "Curva ABC", icon: BarChart3 },

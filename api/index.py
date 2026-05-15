@@ -10,7 +10,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routers import ask, dxf, extract, sinapi
+from api.routers import admin, ask, cron, dxf, extract, sinapi
 
 app = FastAPI(
     title="Orcamentista IA Engine",
@@ -39,3 +39,5 @@ app.include_router(ask.router, prefix="/api/ask", tags=["ask"])
 app.include_router(extract.router, prefix="/api/extract", tags=["extract"])
 app.include_router(dxf.router, prefix="/api/dxf", tags=["dxf"])
 app.include_router(sinapi.router, prefix="/api/sinapi", tags=["sinapi"])
+app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
+app.include_router(cron.router, prefix="/api/cron", tags=["cron"])
