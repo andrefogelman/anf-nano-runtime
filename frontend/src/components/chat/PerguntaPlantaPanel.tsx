@@ -217,15 +217,15 @@ export function PerguntaPlantaPanel({ projectId }: Props) {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="low">low (rápido)</SelectItem>
-                      <SelectItem value="medium">medium</SelectItem>
-                      <SelectItem value="high">high (~60s)</SelectItem>
+                      <SelectItem value="low">low (rápido, ~10-20s)</SelectItem>
+                      <SelectItem value="medium">medium (~30-60s)</SelectItem>
+                      <SelectItem value="high">high (~60-180s, mais preciso)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                {reasoning === "high" && (
+                {reasoning === "high" && includeVerification && (
                   <p className="text-xs text-yellow-700">
-                    Pode estourar o limite de 60s no Vercel Hobby.
+                    high + verificação pode demorar &gt;3min. Use só quando for crítico.
                   </p>
                 )}
               </div>

@@ -58,13 +58,42 @@ export function useAsk() {
       formData.append("pdf", pdf, filename);
       formData.append("payload", JSON.stringify(payload));
 
-      const res = await fetch(`${ORCABOT_API}/api/ask`, {
-        method: "POST",
-        headers: auth,
-        body: formData,
-      });
+      // Vercel Pro = 300s (Fluid Compute). Damos 310s pro client cancelar antes
+      // de pendurar caso edge tenha algum problema chegar resposta.
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 310_000);
+
+      let res: Response;
+      try {
+        res = await fetch(`${ORCABOT_API}/api/ask`, {
+          method: "POST",
+          headers: auth,
+          body: formData,
+          signal: controller.signal,
+        });
+      } catch (e) {
+        if ((e as Error).name === "AbortError") {
+          throw new Error(
+            "Timeout cliente (>310s). Provider deve ter pendurado — tente outro modelo ou reasoning mais baixo.",
+          );
+        }
+        throw e;
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
 
       if (!res.ok) {
+        // 504 do Vercel devolve HTML, não JSON
+        if (res.status === 504) {
+          throw new Error(
+            "Timeout 504 — modelo demorou >300s ou plano Hobby ainda ativo (60s). Verifique upgrade Pro no Vercel dashboard.",
+          );
+        }
+        if (res.status === 502) {
+          throw new Error(
+            "502 — provider externo (OpenAI/Claude/Gemini) falhou. Tente outro provider ou reasoning mais baixo.",
+          );
+        }
         const err = await res
           .json()
           .catch(() => ({ detail: `HTTP ${res.status}` }));
